@@ -1,34 +1,19 @@
 import express from "express";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from 'mongoose';
-import { profesor } from "./models/profesor.js";
+import profesorRoute from "./routes/profesorRoute.js";
 
 const app = express();
+
+app.use(express.json());
+
+app.use(cors());
 
 app.get('/' , (req, res) => {
     res.send('Hello World');
 });
 
-// Save a new person
-app.post('/person', (req, res) => {
-    try {
-        if (
-            !request.body.title 
-        ) {
-            return response.status(400).send({
-                message: "Send all required fields: title, author, publishYear",
-            })
-        }
-        const newPerson = new Person({
-            name: request.body.title,
-        });
-
-
-    } catch (error) {
-        console.log(error.message);
-        response.status(500).send({message: error.message});  
-    }
-});
+app.use('/books', profesorRoute);
 
 mongoose
     .connect(mongoDBURL)
