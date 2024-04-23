@@ -7,12 +7,12 @@
   --error: #e7195a;
 }
 body {
-  background: #f1f1f1;
+  background: #333333;
   margin: 0;
   font-family: "Poppins";
 }
 header {
-  background: #fff;
+  background: #2C3E50;
 }
 header .container {
   max-width: 1400px;
@@ -31,3 +31,11 @@ header a {
   padding: 20px;
   margin: 0 auto;
 }
+
+.container{
+  background-color: #2C3E50;
+}
+
+  .container h1 {
+    color: #CCCCCC;
+  }
