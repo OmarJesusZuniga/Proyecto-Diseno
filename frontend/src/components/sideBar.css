@@ -1,0 +1,36 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+.sidebar {
+    width: 170px;
+    height: 500px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    font-family: "Poppins";
+    border-radius: 30px;
+    position: fixed; /* Fixed positioning */
+    top: 10; /* Position from the top */
+    left: 15px; /* Position from the left */
+    margin: 0; /* Reset margin */
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+    font-family: "Poppins";
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    font-family: "Poppins";
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .sidebar li:hover {
+    color: #ffcc00;
+  }

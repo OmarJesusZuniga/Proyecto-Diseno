@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Sidebar from "../components/sideBar";
 
 const Home = () => {
     
@@ -8,7 +9,7 @@ const Home = () => {
     
     return (
         <div className="home"> 
-        <h2>Home</h2>
+        <Sidebar/>
         </div>
     )
 }
