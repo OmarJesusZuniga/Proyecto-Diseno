@@ -4,7 +4,7 @@ import '../components/sideBar.css'; // You can define your sidebar styles in thi
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <h2>Sidebar</h2>
+      <h2>Menú</h2>
       <ul>
         <li>Option 1</li>
         <li>Option 2</li>
