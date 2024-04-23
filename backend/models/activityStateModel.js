@@ -4,28 +4,24 @@ const Schema = mongoose.Schema
 
 const activityStateSchema = new Schema ({
     type: {
-        type: Number, // 1 Planeada, 2 Notificada, ...
+        type: String,
+        enum: ['Planeada', 'Notificada', 'Realizada', 'Cancelada'], // Valores validos
+        default: 'Planeada', 
         required: true
     }, 
-    attendence: {       // Tambien se puede hacer un schema por cada tipo 
-        type: [Number], // Id de las imagenes 
-        required: false
-    },  
-    evidence: {
-        type: [Number], // Id de las imagenes 
+    imageCollection: [{ // . Una colección de imágenes
+        type: Schema.Types.ObjectId,
+        ref: 'image',
+        required: true
+    }],  
+    evidence: { // Una imagen de los participantes...
+        type: Schema.Types.ObjectId,
+        ref: 'image',
         required: false
     },  
     recordingLink: {
         type: String, 
         required: false
-    },
-    observations: {
-        type: Number, // Id a un documento de comentarios? O array de strings aqui mismo?
-        required: true // Creo que clase de comentarios, ya que tienen respuestas
-    },
-    cancelationDate: {
-        type: Date, 
-        required: true
     }
 })
 

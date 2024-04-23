@@ -11,7 +11,11 @@ const activitiesSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'comment',
         required: true
-    }]
+    }], 
+    profesor: {
+        type: mongoose.Schema.Types.ObjectId, // Id del profesor guia
+        ref: 'professor' 
+    }
 }, { timestamps: true })
 
-module.exports = mongoose.model('observation', activitiesSchema)
+module.exports = mongoose.model('comment', activitiesSchema)

@@ -2,8 +2,12 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
-const workoutRoutes = require('./routes/workouts')
-const testRoutes = require('./routes/testroutes')
+
+const planRoutes = require('./routes/planRoutes')
+const observationRoutes = require('./routes/observationRoutes')
+const commentRoutes = require('./routes/commentRoutes')
+const activityStateRoutes = require('./routes/activityStateRoutes')
+const activityRoutes = require('./routes/activityRoutes')
 
 // express app
 const app = express()
@@ -17,9 +21,11 @@ app.use((req, res, next) => {
 })
 
 // routes
-app.use('/api/workouts', workoutRoutes)
-
-app.use('/tests/', testRoutes)
+app.use('/api/plan', planRoutes) 
+app.use('/api/observation', observationRoutes) 
+app.use('/api/comment', commentRoutes) 
+app.use('/api/activitystate', activityStateRoutes) 
+app.use('/api/activity', activityRoutes) 
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
