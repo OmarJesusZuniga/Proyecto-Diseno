@@ -35,6 +35,6 @@ const studentSchema = new Schema ({
         type: mongoose.Schema.Types.ObjectId, // Id del campus
         ref: 'campus' 
     }
-})
+}, {timestamps:true} )
 
 module.exports = mongoose.model('student', studentSchema)
