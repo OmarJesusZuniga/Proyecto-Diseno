@@ -1,23 +1,21 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Router} from 'react-router-dom'
 
 //pages & components
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import LoginForm from './pages/LoginForm';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-      <Navbar/>
-      <div className='pages'>
+    <BrowserRouter>
+      <div className="App">
+        
         <Routes>
-          <Route path="/" element={<Home />}>
-  
-          </Route>
+          <Route exact path="/" element={<LoginForm/>} />
+          <Route exact path="/home" element={<Home/>}/>
         </Routes>
       </div>
-      </BrowserRouter>
-    </div>
+    </BrowserRouter>
   );
 }
 
