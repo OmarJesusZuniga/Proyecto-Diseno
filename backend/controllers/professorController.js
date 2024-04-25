@@ -31,7 +31,11 @@ const createProfessor = async (req, res) => {
     const {code, firstLastname, secondLastname, firstname, middlename, email, officeNumer, phoneNumber, campus, image} = req.body
 
     if (!mongoose.Types.ObjectId.isValid(officeNumer)) {
-        return res.status(400).json({error: "Invalid office number."})
+        return res.status(400).json({error: "Invalid office number id."})
+    }
+
+    if (image && !mongoose.Types.ObjectId.isValid(image)) {
+        return res.status(400).json({error: "Invalid image id."})
     }
 
     try {
@@ -63,13 +67,18 @@ const deleteProfessor = async (req, res) => {
 const updateProfessor = async (req, res) => {
     const {id} = req.params
     const { officeNumber } = req.body
+    const { image } = req.body
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such professor"})
     }
 
-    if (!mongoose.Types.ObjectId.isValid(officeNumber)) {
+    if (officeNumber && !mongoose.Types.ObjectId.isValid(officeNumber)) {
         return res.status(404).json({error: "Invalid office number."})
+    }
+
+    if (image && !mongoose.Types.ObjectId.isValid(image)) {
+        return res.status(404).json({error: "Invalid image id."})
     }
     
     const professor = await Professor.findOneAndUpdate({_id: id}, {
