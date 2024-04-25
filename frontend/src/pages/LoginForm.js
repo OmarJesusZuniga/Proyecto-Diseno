@@ -4,9 +4,17 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
+
+    
+
+    const submitLogIn = (e) => {
+
+    }
+
+
     return (
         <div className="wrapper">
-            <form action="">
+            <form onSubmit={submitLogIn}>
                 <h1>Login</h1>
                 <div className="input-box">
                     <input type="text" placeholder='Username' required />

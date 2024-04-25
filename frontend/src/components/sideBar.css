@@ -8,13 +8,14 @@
 .sidebar {
     width: 170px;
     height: 100%;
-    background-color: #404040;
+    background-color: #1d1c1c;
     color: white;
     padding: 20px;
     font-family: "Poppins";
     border-radius: 30px;
-    margin-right: 10px; /* Adjust margin on the right side */
-  margin-left: -50px; /* Adjust margin on the left side */
+    margin-right: 10px; 
+    margin-left: 20px;
+    margin-top: 10px;
   }
   
   .sidebar h2 {

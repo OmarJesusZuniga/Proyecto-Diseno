@@ -9,7 +9,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        
         <Routes>
           <Route exact path="/" element={<LoginForm/>} />
           <Route exact path="/home" element={<Home/>}/>

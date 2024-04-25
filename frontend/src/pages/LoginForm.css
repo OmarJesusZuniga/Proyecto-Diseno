@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
 * {
     margin: 0;
@@ -7,15 +7,16 @@
 }
 
 .wrapper {
-    width: 1000px;;
+    width:fit-content;
     background: slateblue;
     color: #fff;
     border-radius: 10px;
     padding: 30px 40px;
-    margin-top: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin:auto;
+    margin-top: calc(50vh - 200px);
 }
 
 .wrapper h1 {
@@ -70,7 +71,7 @@
 }
 
 .login {
-    width: 10%;
+    width: auto;
     height: 45px;
     background: #fff;
     border: none;
@@ -82,9 +83,9 @@
     color: #333;
     font-weight: 700;
     text-align: center;
-    grid-column: 1;
+    
 }
-
+/*
 
 body {
     margin: 0;
@@ -94,11 +95,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 100vh;
-    background: #000;
+    width: 100%;
+    background: #bab3b3;
 }
 
 code { 
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
-}
+} */

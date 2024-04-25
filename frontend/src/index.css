@@ -1,27 +1,21 @@
 /* google font */
-/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 /* layout */
+.App{
+  width: 100%;
+}
 :root {
   --primary: #1aac83;
   --error: #e7195a;
 }
 body {
-  background: #333333;
+  background: #414040;
   margin: 0;
-  font-family: "Roboto";
+  font-family: "Poppins";
+  width: 100%;
 }
-header {
-  background: #2C3E50;
-}
-header .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+
 
 .button-40 {
   background-color: #111827;
@@ -46,6 +40,8 @@ header .container {
   -webkit-user-select: none;
   touch-action: manipulation;
   width: auto;
+  height: 50px;
+ 
 }
 
 .button-40:hover {
@@ -64,20 +60,37 @@ header .container {
   }
 }
 
-header a {
-  color: #333;
-  text-decoration: none;
-}
+
 .pages{
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
 }
 
-.container{
+.container {
   background-color: #2C3E50;
+  display: flex;
+  justify-content: space-between; /* Add this line */
+  padding: 10px 20px; /* Adjust padding as needed */
+  align-items: center;
+  width: 100%;
 }
-
-  .container h1 {
+ .container h1 {
     color: #FFFFFF;
   }
+
+  .home{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .horizontal-container {
+    display: flex;
+    flex-direction: row;
+    align-items:center; /* Optional: Align items vertically */
+    justify-content: center; /* Optional: Align items horizontally */
+    
+}
+
+
+
