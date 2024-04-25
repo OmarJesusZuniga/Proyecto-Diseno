@@ -1,4 +1,3 @@
-
 import "../components/infoProfesor.css"
 
 const InfoProfesor = () => {
