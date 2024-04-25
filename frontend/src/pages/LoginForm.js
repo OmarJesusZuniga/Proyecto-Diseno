@@ -1,14 +1,14 @@
 import React from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-
+    const navigate = useNavigate();
     
 
     const submitLogIn = (e) => {
-
+        navigate("/home/"+"123");
     }
 
 
@@ -25,9 +25,7 @@ const LoginForm = () => {
                     <FaLock className='icon' />
                 </div>
 
-                <div className="login" type="submit">
-                    <Link to="/home" style={{textDecoration:"none"}}>Login</Link>
-                </div>
+                <button>Login</button>
 
             </form> 
 

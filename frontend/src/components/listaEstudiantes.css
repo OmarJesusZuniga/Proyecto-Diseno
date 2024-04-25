@@ -1,0 +1,9 @@
+.listaEstudiantes{
+    flex:1;
+}
+
+.listaEstudiantes{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

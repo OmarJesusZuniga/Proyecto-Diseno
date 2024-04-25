@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/sideBar";
 import Navbar from "../components/Navbar";
+import ListaEstudiantes from "../components/listaEstudiantes";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
-    const [workouts, setWorkouts] = useState(null);
-    const [option1, setOption1] = useState(true);
-    const [option2, setOption2] = useState(false);
-    const [option3, setOption3] = useState(false);
+    const {id} = useParams();
+    const [todosLosProfes, setTodosLosProfes] = useState(true);
+    const [profesLista, setProfesLista] = useState(false);
+    const [estudiantesLista, setEstudiantesLista] = useState(false);
+    const [siguienteActividad, setSiguienteActividad] = useState(false);
+    
     
     return (
         <div className="home"> 
-            <Navbar/>
+            <Navbar id={id}/>
             <div className="horizontal-container"> {/* This div is added */}
-                <Sidebar s1={setOption1} s2={setOption2} s3={setOption3}/>
-                {option1 && <div className="contenido"><p>1</p></div>}
-                {option2 && <div className="contenido"><p>2</p></div>}
+                <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad}/>
+                {todosLosProfes && <div className="contenido"><p>Todos los profesores</p></div>}
+                {profesLista && <div className="contenido"><p>Profes equipo guia</p></div>}
+                {estudiantesLista && <ListaEstudiantes/>}
+                {siguienteActividad && <div className="contenido"><p>Siguiente Actividad</p></div>}
             </div>
             
         </div>
