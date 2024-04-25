@@ -1,4 +1,4 @@
-const Student = require('../models/professorModel.js')
+const Professor = require('../models/professorModel.js')
 const mongoose = require('mongoose')
 
 // Get all
@@ -17,7 +17,7 @@ const getProfessor = async (req, res) => {
         return res.status(404).json({error: "No such professor"})
     }
     
-    const professor = await Professor.findById(id)
+    const professor = await Professor.findById(id).populate('campus')
 
     if (!professor) {
         return res.status(404).json({error: "No such professor"})
@@ -66,8 +66,8 @@ const deleteProfessor = async (req, res) => {
 // Update a professor
 const updateProfessor = async (req, res) => {
     const {id} = req.params
-    const { officeNumber } = req.body
-    const { image } = req.body
+    const { officeNumber } = req.params
+    const { image } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such professor"})
