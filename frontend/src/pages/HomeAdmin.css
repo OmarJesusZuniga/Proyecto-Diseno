@@ -50,7 +50,7 @@
     margin-bottom: 2px;
     width:fit-content;
     align-self: center;*/
-    background-color: #d46911;
+    background-color: #fb8500;
     border: 1px solid transparent;
     border-radius: .75rem;
     box-sizing: border-box;
@@ -76,7 +76,7 @@
   }
 
   .section button:hover {
-    background-color: #333; /* Change to the desired hover color */
+    background-color: #da6602; /* Change to the desired hover color */
   }
   
   /* This is to style the button that says "Ver todos los profesores" differently */
