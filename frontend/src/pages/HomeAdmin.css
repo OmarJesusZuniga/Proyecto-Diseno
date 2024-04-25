@@ -1,0 +1,45 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .dropdown {
+    margin-bottom: 20px;
+  }
+  
+  .dropdown select {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+    background-color: #eaeaea;
+    padding: 20px;
+  }
+  
+  .section h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .section button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    text-transform: uppercase;
+  }
+  
+  /* This is to style the button that says "Ver todos los profesores" differently */
+  .section button:first-of-type {
+    background-color: #00aaff;
+  }
+  
+  /* Add media queries and other responsive design elements as needed */
+  
