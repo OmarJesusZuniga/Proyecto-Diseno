@@ -1,0 +1,9 @@
+.listaProfesores{
+    flex:1;
+}
+
+.listaProfesores{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

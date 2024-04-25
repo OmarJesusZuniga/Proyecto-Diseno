@@ -1,0 +1,18 @@
+.cartaProfesor{
+    
+    width: auto;
+    background-color: azure;
+    border-radius: 15px;
+    padding: 10px;
+    flex:1;
+    margin-right: 200px;
+}
+
+.cartaProfesor:hover {
+    box-shadow: 0 4px 8px rgb(0, 0, 0); /* Add shadow on hover */
+    cursor: pointer;
+}
+
+.cartaProfesor h4{
+    font-size: 30px;
+}

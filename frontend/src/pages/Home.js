@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/sideBar";
 import Navbar from "../components/Navbar";
 import ListaEstudiantes from "../components/listaEstudiantes";
+import ListaProfesores from "../components/listaProfesores";
 import { useParams } from "react-router-dom";
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
             <div className="horizontal-container"> {/* This div is added */}
                 <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad}/>
                 {todosLosProfes && <div className="contenido"><p>Todos los profesores</p></div>}
-                {profesLista && <div className="contenido"><p>Profes equipo guia</p></div>}
+                {profesLista && <ListaProfesores/>}
                 {estudiantesLista && <ListaEstudiantes/>}
                 {siguienteActividad && <div className="contenido"><p>Siguiente Actividad</p></div>}
             </div>
