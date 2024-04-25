@@ -7,3 +7,9 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.listaEstudiantes h2 {
+    margin-top: 0;
+    font-family: "Poppins";
+    color: white;
+  }
