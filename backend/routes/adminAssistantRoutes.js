@@ -15,14 +15,14 @@ router.get('/', getAdminAssistants)
 // Get one
 router.get('/:id', getAdminAssistant)
 
-// Post a professor
+// Post a admin assistant
 router.post('/', createAdminAssistant)
 
 
-// Delete a professor
+// Delete a admin assistant
 router.delete('/:id', deleteAdminAssistant)
 
-// Update a professor
+// Update a admin assistant
 router.patch('/:id', updateAdminAssistant)
  
 module.exports = router
