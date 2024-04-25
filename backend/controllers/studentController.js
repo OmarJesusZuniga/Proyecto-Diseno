@@ -34,7 +34,7 @@ const createStudent = async (req, res) => {
         const student = await Student.create({studentCard, firstLastname, secondLastname, firstname, middlename, email, phoneNumber, campus})
         res.status(200).json(student)
     } catch (err) {
-        res.status(400).json({error: err.message})
+        res.status(400).json({error: "Please fill in all the required fields."})
     }  
 }
 

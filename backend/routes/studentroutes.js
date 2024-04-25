@@ -18,7 +18,6 @@ router.get('/:id', getStudent)
 // Post a student
 router.post('/', createStudent)
 
-
 // Delete a student
 router.delete('/:id', deleteStudent)
 

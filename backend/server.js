@@ -8,6 +8,8 @@ const observationRoutes = require('./routes/observationRoutes')
 const commentRoutes = require('./routes/commentRoutes')
 const activityStateRoutes = require('./routes/activityStateRoutes')
 const activityRoutes = require('./routes/activityRoutes')
+const studentRoutes = require('./routes/studentroutes')
+const professorRoutes = require('./routes/professorRoutes')
 
 // express app
 const app = express()
@@ -26,6 +28,8 @@ app.use('/api/observation', observationRoutes)
 app.use('/api/comment', commentRoutes) 
 app.use('/api/activitystate', activityStateRoutes) 
 app.use('/api/activity', activityRoutes) 
+app.use('/api/students', studentRoutes)
+app.use('/api/professors', professorRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
