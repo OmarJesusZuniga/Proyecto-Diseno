@@ -87,10 +87,21 @@ body {
   .horizontal-container {
     display: flex;
     flex-direction: row;
-    align-items:center; /* Optional: Align items vertically */
+    align-items: top; /* Optional: Align items vertically */
     justify-content: center; /* Optional: Align items horizontally */
     
 }
 
+
+.contenedorListas{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenedorListas h2{
+  color: #FFFFFF;
+  
+}
 
 

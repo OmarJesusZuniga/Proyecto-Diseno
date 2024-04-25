@@ -18,10 +18,12 @@ const Home = () => {
             <Navbar id={id}/>
             <div className="horizontal-container"> {/* This div is added */}
                 <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad}/>
-                {todosLosProfes && <div className="contenido"><p>Todos los profesores</p></div>}
-                {profesLista && <ListaProfesores/>}
-                {estudiantesLista && <ListaEstudiantes/>}
-                {siguienteActividad && <div className="contenido"><p>Siguiente Actividad</p></div>}
+                <div className="contenedorListas">
+                    {todosLosProfes && <div className="contenido"><p>Todos los profesores</p></div>}
+                    {profesLista && <ListaProfesores/>}
+                    {estudiantesLista && <><ListaEstudiantes /></>}
+                    {siguienteActividad && <div className="contenido"><p>Siguiente Actividad</p></div>}
+                </div>
             </div>
             
         </div>

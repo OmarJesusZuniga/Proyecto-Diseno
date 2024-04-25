@@ -1,11 +1,10 @@
-.listaEstudiantes{
-    flex:1;
-}
+
 
 .listaEstudiantes{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    height: 100px;
 }
 
 .listaEstudiantes h2 {

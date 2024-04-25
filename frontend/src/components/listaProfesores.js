@@ -4,7 +4,7 @@ import InfoProfesor from "./infoProfesor";
 const ListaProfesores = () => {
     return ( 
         <div className="listaProfesores">
-            <h2>Profesores de la sede</h2>
+            <h2>Profesores del Equipo guía</h2>
             <InfoProfesor/>
             <InfoProfesor/>
         </div>
