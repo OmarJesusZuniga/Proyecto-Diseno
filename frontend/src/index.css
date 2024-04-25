@@ -17,8 +17,8 @@ body {
 }
 
 
-.button-40 {
-  background-color: #111827;
+.logout {
+  background-color: #FFF;
   border: 1px solid transparent;
   border-radius: .75rem;
   box-sizing: border-box;
@@ -44,18 +44,18 @@ body {
  
 }
 
-.button-40:hover {
-  background-color: #374151;
+.logout:hover {
+  background-color: #9C9998;
 }
 
-.button-40:focus {
+.logout:focus {
   box-shadow: none;
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
 @media (min-width: 768px) {
-  .button-40 {
+  .logout {
     padding: .75rem 1.5rem;
   }
 }

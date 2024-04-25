@@ -5,7 +5,10 @@ const Navbar = () => {
         
             <div className="container">
                 <h1>Sistema de equipo guía</h1>
-                <button className="button-40" role="button">Log out</button>
+                
+                <div className="logout" type="submit">
+                    <Link to="/" style={{textDecoration:"none"}}>Logout</Link>
+                </div>
             </div>
         
     );

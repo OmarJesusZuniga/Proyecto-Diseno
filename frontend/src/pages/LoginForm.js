@@ -26,7 +26,7 @@ const LoginForm = () => {
                 </div>
 
                 <div className="login" type="submit">
-                    <Link to="/home" style={{textDecoration:"none"}}>LogIn</Link>
+                    <Link to="/home" style={{textDecoration:"none"}}>Login</Link>
                 </div>
 
             </form> 
