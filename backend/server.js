@@ -13,6 +13,7 @@ const professorRoutes = require('./routes/professorRoutes')
 const adminAssistantRoutes = require('./routes/adminAssistantRoutes')
 const campusRoutes = require('./routes/campusRoutes')
 const representantRoutes = require('./routes/representantRoutes')
+const guideTeamRoutes = require('./routes/guideTeamRoutes')
 
 // express app
 const app = express()
@@ -36,6 +37,7 @@ app.use('/api/professors', professorRoutes)
 app.use('/api/adminAssistants', adminAssistantRoutes)
 app.use('/api/campus', campusRoutes)
 app.use('/api/representants', representantRoutes)
+app.use('/api/guideTeam', guideTeamRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
