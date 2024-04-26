@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/sideBar";
 import Navbar from "../components/Navbar";
+import ListaActividades from "../components/listaActividades";
 import ListaEstudiantes from "../components/listaEstudiantes";
 import ListaProfesores from "../components/listaProfesores";
 import { useParams } from "react-router-dom";
@@ -22,7 +23,7 @@ const Home = () => {
                     {todosLosProfes && <div className="contenido"><p>Todos los profesores</p></div>}
                     {profesLista && <ListaProfesores/>}
                     {estudiantesLista && <><ListaEstudiantes /></>}
-                    {siguienteActividad && <div className="contenido"><p>Siguiente Actividad</p></div>}
+                    {siguienteActividad && <><ListaActividades/></>}
                 </div>
             </div>
             

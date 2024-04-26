@@ -1,11 +1,11 @@
-.listaEstudiantes{
+.listaActividades{
     display: flex;
     flex-direction: column;
     gap: 10px;
     height: 100px;
 }
 
-.listaEstudiantes h2 {
+.listaActividades h2 {
     margin-top: 0;
     font-family: "Poppins";
     color: white;
