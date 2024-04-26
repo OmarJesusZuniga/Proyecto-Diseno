@@ -21,8 +21,11 @@ const LoginForm = () => {
                     <FaUser className='icon' />
                 </div>
                 <div className="input-box">
-                    <input type="password" placeholder='Password' required />
+                    <input type="password" placeholder='Password' pattern="^\d{8}$" title="Must be numeric and  8 characters long." required />
                     <FaLock className='icon' />
+                </div>
+                <div className="forgot">
+                    <a href="#">¿Olvidó su contraseña?</a>               
                 </div>
 
                 <button>Login</button>

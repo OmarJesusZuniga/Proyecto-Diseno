@@ -10,7 +10,8 @@
   --error: #e7195a;
 }
 body {
-  background: #414040;
+  /*background: #414040;*/
+  background: #0a090f;
   margin: 0;
   font-family: "Poppins";
   width: 100%;
