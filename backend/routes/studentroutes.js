@@ -1,33 +1,27 @@
 const express = require('express')
 const {
     getStudents,
-    createStudent
+    getStudent,
+    createStudent,
+    deleteStudent,
+    updateStudent
 } = require('../controllers/studentController')
 
 const router = express.Router()
 
 // Get all
-router.get('/', (req, res)  => {
-    res.json({mssg: "GET all students"})
-})
+router.get('/', getStudents)
 
 // Get one
-router.get('/:id', (req, res)  => {
-    res.json({mssg: "GET a single student"})
-})
+router.get('/:id', getStudent)
 
 // Post a student
 router.post('/', createStudent)
 
-
 // Delete a student
-router.delete('/:id', (req, res)  => {
-    res.json({mssg: "DELETE a student"})
-})
+router.delete('/:id', deleteStudent)
 
 // Update a student
-router.patch('/:id', (req, res)  => {
-    res.json({mssg: "PATCH a student"})
-})
+router.patch('/:id', updateStudent)
  
 module.exports = router

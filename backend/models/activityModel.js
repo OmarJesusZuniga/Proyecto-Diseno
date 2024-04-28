@@ -32,7 +32,7 @@ const activitiesSchema = new Schema ({
     },
     reminders: {
         type: [Date],
-        required: true
+        required: false
     },
     modality: {
         type: String,
