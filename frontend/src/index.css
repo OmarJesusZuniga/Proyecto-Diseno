@@ -31,6 +31,7 @@ body {
   font-weight: 600;
   line-height: 1.5rem;
   padding: .75rem 1.2rem;
+  border-radius: 40px;
   text-align: center;
   text-decoration: none #6B7280 solid;
   text-decoration-thickness: auto;
