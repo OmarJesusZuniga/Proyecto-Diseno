@@ -2,6 +2,11 @@
 import "../components/infoEstudiante.css"
 
 const InfoEstudiante = () => {
+    
+    const dejarPrimera = () =>{
+        
+    }
+
     return(
         <div className="cartaEstudiante">
             <div className="infoEspecifica">
@@ -11,7 +16,7 @@ const InfoEstudiante = () => {
                 <h2>Celular: </h2> 
             </div>
             <div className="botonesEstudiante">
-                <button>hola</button>
+                <button onClick={dejarPrimera}> Modificar información</button>
             </div>        
         </div>
         
