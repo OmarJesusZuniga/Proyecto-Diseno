@@ -42,6 +42,10 @@ const professorSchema = new Schema ({
     image: { // NUEVO 
         type: mongoose.Schema.Types.ObjectId, // Id de la foto 
         ref: 'image' 
+    },
+    password: {
+        type: Number,
+        required: true
     }
 })
 

@@ -22,6 +22,10 @@ const adminAssistantSchema = new Schema ({
     campus: { 
         type: mongoose.Schema.Types.ObjectId, // Id del campus
         ref: 'campus' 
+    },
+    password:{
+        type: Number,
+        required: true
     }
 })
 

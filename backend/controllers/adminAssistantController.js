@@ -26,6 +26,16 @@ const getAdminAssistant = async (req, res) => {
     res.status(200).json(adminAssistant)
 }
 
+//Get by name and password
+const getAdminAssitantNamePassword = async (req, res) => {
+
+    const {name, password} = req.params;
+
+    const query = {
+
+    }
+}
+
 // Create new
 const createAdminAssistant = async (req, res) => {
     const {firstLastname, secondLastname, firstname, middlename, campus} = req.body
