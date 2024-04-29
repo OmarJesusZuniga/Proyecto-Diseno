@@ -17,7 +17,7 @@ const LoginForm = () => {
             password: pass
         }
 
-        const response = await fetch('https://localhost:4000/api/adminAssistants/', {
+        const response = await fetch('https://localhost:4000/api/adminAssistants/namepass/get', {
             method: 'GET',
             body: JSON.stringify(data)
         });
@@ -25,7 +25,7 @@ const LoginForm = () => {
 
         console.log(json);
 
-        navigate("/home/"+"123");
+        
     }
 
 

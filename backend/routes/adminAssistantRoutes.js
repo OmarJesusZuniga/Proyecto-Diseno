@@ -17,7 +17,7 @@ router.get('/', getAdminAssistants)
 router.get('/:id', getAdminAssistant)
 
 //Get by name and password
-router.get('/namepass',getAdminAssistantNamePassword)
+router.get('/namepass/get',getAdminAssistantNamePassword)
 
 // Post a admin assistant
 router.post('/', createAdminAssistant)

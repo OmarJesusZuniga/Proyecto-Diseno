@@ -30,10 +30,11 @@ const getAdminAssistant = async (req, res) => {
 //Get by name and password
 const getAdminAssistantNamePassword = async (req, res) => {
 
-    const {name} = req.body;
+    const {name, password} = req.body;
     console.log(req.body)
     const query = {
-        firstname: name
+        firstname: name,
+        password: password
     }
 
     AdminAssistant.find(query, function(err, result){
