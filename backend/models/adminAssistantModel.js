@@ -29,4 +29,4 @@ const adminAssistantSchema = new Schema ({
     }
 })
 
-module.exports = mongoose.model('adminAssistant', adminAssistantSchema)
+module.exports = mongoose.model('adminassistants', adminAssistantSchema)

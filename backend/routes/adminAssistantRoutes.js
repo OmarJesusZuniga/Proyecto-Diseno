@@ -2,6 +2,7 @@ const express = require('express')
 const {
     getAdminAssistants,
     getAdminAssistant,
+    getAdminAssistantNamePassword,
     createAdminAssistant,
     deleteAdminAssistant,
     updateAdminAssistant
@@ -14,6 +15,9 @@ router.get('/', getAdminAssistants)
 
 // Get one
 router.get('/:id', getAdminAssistant)
+
+//Get by name and password
+router.get('/namepass',getAdminAssistantNamePassword)
 
 // Post a admin assistant
 router.post('/', createAdminAssistant)

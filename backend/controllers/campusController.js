@@ -4,9 +4,7 @@ const mongoose = require('mongoose')
 
 // Get all
 const getCampuses = async (req, res) => {
-    const campus = await Campus.find({}).sort({})
-
-    
+    const campus = await Campus.find({}).sort({createdAt: -1})
     res.status(200).json(campus)
 }
 

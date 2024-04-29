@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 
+mongoose.set("strictQuery", true)
+
 const planRoutes = require('./routes/planRoutes')
 const observationRoutes = require('./routes/observationRoutes')
 const commentRoutes = require('./routes/commentRoutes')

@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 
 // Get all
 const getAdminAssistants = async (req, res) => {
-    const adminAssistant = await AdminAssistant.find({}).sort({})
+    
+    const adminAssistant = await AdminAssistant.find({})
 
     
     res.status(200).json(adminAssistant)
@@ -27,13 +28,24 @@ const getAdminAssistant = async (req, res) => {
 }
 
 //Get by name and password
-const getAdminAssitantNamePassword = async (req, res) => {
+const getAdminAssistantNamePassword = async (req, res) => {
 
-    const {name, password} = req.params;
-
+    const {name} = req.body;
+    console.log(req.body)
     const query = {
-
+        firstname: name
     }
+
+    AdminAssistant.find(query, function(err, result){
+        if (err){
+            return 
+        }
+
+        const queryResult = result;
+        res.status(200).json(queryResult);
+
+    })
+
 }
 
 // Create new
@@ -96,6 +108,7 @@ const updateAdminAssistant = async (req, res) => {
 module.exports = {
     getAdminAssistants,
     getAdminAssistant,
+    getAdminAssistantNamePassword,
     createAdminAssistant,
     deleteAdminAssistant,
     updateAdminAssistant
