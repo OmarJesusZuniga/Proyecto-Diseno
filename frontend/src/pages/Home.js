@@ -20,7 +20,7 @@ const Home = (req, res) => {
     return (
         <div className="home"> 
             <Navbar id = {usuario.firstname} apellido = {usuario.firstLastname}/>
-            <div className="horizontal-container"> {/* This div is added */}
+            <div className="horizontal-container">
                 <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad}/>
                 <div className="contenedorListas">
                     {todosLosProfes && <ListaProfesores campus={usuario.campus}/>}

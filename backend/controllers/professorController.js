@@ -26,6 +26,32 @@ const getProfessor = async (req, res) => {
     res.status(200).json(professor)
 }
 
+//Get usando correo y password
+const getProfessorUserPass = async (req, res) => {
+    const {user, password} = req.body;
+
+    const query = {
+        email: user,
+        password: password
+    }
+
+
+    try {
+
+        const queryResult = await Professor.find(query);
+
+        if (queryResult){
+            res.status(200).json(queryResult)
+        }
+
+    } catch{
+        res.status(404).json("error fetching data");
+    }
+
+}
+
+
+
 // Create new
 const createProfessor = async (req, res) => {
     const {code, firstLastname, secondLastname, firstname, middlename, email, officeNumber, phoneNumber, campus, image, password} = req.body
@@ -96,6 +122,7 @@ const updateProfessor = async (req, res) => {
 module.exports = {
     getProfessors,
     getProfessor,
+    getProfessorUserPass,
     createProfessor,
     deleteProfessor,
     updateProfessor

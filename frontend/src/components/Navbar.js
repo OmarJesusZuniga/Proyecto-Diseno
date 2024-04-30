@@ -5,7 +5,7 @@ const Navbar = ({id, apellido}) => {
     return (
         
         <div className="container">
-            <h1>Sistema de equipo guía - {id}</h1>
+            <h1>Sistema de equipo guía - {id} {apellido}</h1>
             
             <div className="logout" type="submit">
                 <Link to="/" className="logout-link" >Logout</Link>

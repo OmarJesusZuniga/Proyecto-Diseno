@@ -34,7 +34,7 @@ const LoginForm = () => {
                 })
     
                 const dataArray = response.data
-                console.log(dataArray[0])
+                
                 if (dataArray.length === 0 ){
                     navigate('/');
                 } else{
@@ -44,6 +44,26 @@ const LoginForm = () => {
                 
                 
             }catch{
+                navigate('/')
+            }
+        } else if (selectedOption === 'Profesor'){
+            try {
+
+                const response = await axios.post('http://localhost:4000/api/professors/namepass/get/', {
+                    user: user,
+                    password: pass
+                })
+
+                const dataArray = response.data;
+                if(dataArray.length === 0){
+                    navigate('/')
+                } else {
+                    const usuario = dataArray[0];
+                    navigate('/homeProfe', {state: {usuario}})
+                }
+
+
+            } catch {
                 navigate('/')
             }
         }

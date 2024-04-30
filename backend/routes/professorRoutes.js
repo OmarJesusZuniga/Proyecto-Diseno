@@ -2,6 +2,7 @@ const express = require('express')
 const {
     getProfessors,
     getProfessor,
+    getProfessorUserPass,
     createProfessor,
     deleteProfessor,
     updateProfessor
@@ -14,6 +15,9 @@ router.get('/', getProfessors)
 
 // Get one
 router.get('/:id', getProfessor)
+
+//Get by name and password
+router.post('/namepass/get/',getProfessorUserPass)
 
 // Post a professor
 router.post('/', createProfessor)
