@@ -40,6 +40,9 @@
     flex: 1;
     margin: 20px
 }
+.contenido h1{
+  color: #eaeaea;
+}
 
 .sidebar li h2 {
   /* color: #D3D9D4; */
