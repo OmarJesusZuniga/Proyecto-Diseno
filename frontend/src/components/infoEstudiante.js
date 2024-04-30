@@ -23,9 +23,7 @@ const InfoEstudiante = ({estudiante}) => {
                 </div>
 
             </div>
-            <div className="botonesEstudiante" type="submit">
-                <Link to="/modEstudiante" className="botonesEstudiante-button">Modificar información</Link>
-            </div>        
+                   
         </div>
         
     );
