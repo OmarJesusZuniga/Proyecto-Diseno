@@ -7,9 +7,10 @@ const ListaEstudiantes = () => {
             <h2>Estudiantes de la sede</h2>
             <div className="dropdown">
                 <select>
-                    <option value="team1">Orden alfabético</option>
-                    <option value="team2">Carné</option>
-                    <option value="team1">Campus</option>
+                    <option value="team1">Ordenar por....</option>
+                    <option value="team2">Orden alfabético</option>
+                    <option value="team3">Carné</option>
+                    <option value="team4">Campus</option>
                 </select>
             </div>
             <InfoEstudiante/>
