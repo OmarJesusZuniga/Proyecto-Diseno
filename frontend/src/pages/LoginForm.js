@@ -64,12 +64,13 @@ const LoginForm = () => {
                     <input type={showPass ? "text" : "password"}
                             placeholder='Password'
                             title="Must be numeric and 8 characters long."
+                            pattern="^[0-9]{8}$"
                             onChange={(e) => setPass(e.target.value)} />
                         <span className='icon' onClick={() => setShowPass(!showPass)}>
                             {showPass ? <FaEyeSlash /> : <FaEye />}
                         </span>
                     
-                    {/* <input type="password" placeholder='Password'  title="Must be numeric and  8 characters long."  onChange={(e) => setPass(e.target.value)}/> <FaLock className='icon' /> pattern="^[0-9]{8}$" */}
+                    {/* <input type="password" placeholder='Password'  title="Must be numeric and  8 characters long."  onChange={(e) => setPass(e.target.value)}/> <FaLock className='icon' />  */}
                 </div>
                 <div className="dropdown-container">
                     <div className="dropdown-top-text">Tipo de usuario</div>

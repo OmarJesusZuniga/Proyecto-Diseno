@@ -66,4 +66,11 @@
 
 .principal button:hover {
     background-color: #9C9998;
-  }
+}
+
+.principal .image-container {
+    width: 30%; /* Asigna un ancho al contenedor de la imagen */
+    display: flex;
+    align-items: center; /* Centra verticalmente la imagen */
+    justify-content: center; /* Centra horizontalmente la imagen */
+}
