@@ -26,7 +26,7 @@
 
 .botonesEstudiante {
     margin-left: auto;
-    background-color: #FFF;
+    background-color: #0a090f;
     border: 1px solid transparent;
     border-radius: .75rem;
     box-sizing: border-box;
@@ -55,3 +55,7 @@
 .botonesEstudiante:hover {
     background-color: #9C9998;
   }
+
+.botonesEstudiante .a {
+    color :"#FFF";
+}

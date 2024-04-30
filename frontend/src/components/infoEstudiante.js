@@ -12,7 +12,7 @@ const InfoEstudiante = () => {
                 <h2>Celular: </h2> 
             </div>
             <div className="botonesEstudiante" type="submit">
-                <Link to="/modEstudiante" style={{textDecoration:"none"}}>Modificar información</Link>
+                <Link to="/modEstudiante" style={{textDecoration:"none"} }>Modificar información</Link>
             </div>        
         </div>
         
