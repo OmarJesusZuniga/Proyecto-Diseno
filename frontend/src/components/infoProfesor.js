@@ -1,4 +1,5 @@
 import "../components/infoProfesor.css"
+import { Link } from "react-router-dom";
 
 const InfoProfesor = ({professor}) => {
     
@@ -23,6 +24,10 @@ const InfoProfesor = ({professor}) => {
                 <h3>Código: </h3>
                 <h5>{professor.code}</h5>
             </div>
+
+            <div className="botonesProfesor" type="submit">
+                <Link to="/modProfesor" className="botonesProfesor-button">Modificar información</Link>
+            </div>    
 
         </div>
         

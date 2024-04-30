@@ -6,6 +6,8 @@
     flex:1;
     margin-right: 200px;
     height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .cartaProfesor:hover {
@@ -36,4 +38,44 @@
     display: flex;
     align-items: center; 
     /* justify-content: space-between; */
+}
+
+.botonesProfesor {
+    margin-left: auto;
+    background-color: var(--secondary);
+    border: 1px solid transparent;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #FFF;
+    cursor: pointer;
+    display: flex;
+    font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 0.65rem;
+    padding: .75rem 1.2rem;
+    border-radius: 40px;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+
+}
+
+.botonesProfesor:hover {
+    background-color: var(--secondary-hover);
+}
+
+.botonesProfesor-button {
+    text-decoration: none;
+    color: var(--secondary-text);
+  
+    padding: 0px;
+    font-weight: 500;
 }
