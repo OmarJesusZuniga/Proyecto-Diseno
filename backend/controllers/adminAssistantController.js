@@ -34,19 +34,18 @@ const getAdminAssistantNamePassword = async (req, res) => {
     console.log(req.body)
     const query = {
         firstname: name,
-        password: password
+        password: parseInt(password)
     }
 
-    AdminAssistant.find(query, function(err, result){
-        if (err){
-            return 
+    try {
+        const queryResult =  await AdminAssistant.find(query)
+       
+        if (queryResult){
+            res.status(200).json(queryResult)
         }
-
-        const queryResult = result;
-        res.status(200).json(queryResult);
-
-    })
-
+    } catch (e){
+        res.status(404)
+    }
 }
 
 // Create new
