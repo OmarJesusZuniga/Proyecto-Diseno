@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Sidebar from "../components/sideBar";
 import Navbar from "../components/Navbar";
 import ListaActividades from "../components/listaActividades";
 import ListaEstudiantes from "../components/listaEstudiantes";
 import ListaProfesores from "../components/listaProfesores";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Home = (req, res) => {
-    const {id} = useParams();
+    const {state} = useLocation();
+    const {usuario} = state || {};
+
+
     const [todosLosProfes, setTodosLosProfes] = useState(true);
     const [profesLista, setProfesLista] = useState(false);
     const [estudiantesLista, setEstudiantesLista] = useState(false);
@@ -16,12 +19,12 @@ const Home = (req, res) => {
     
     return (
         <div className="home"> 
-            <Navbar id={id}/>
+            <Navbar id = {usuario.firstname} apellido = {usuario.firstLastname}/>
             <div className="horizontal-container"> {/* This div is added */}
                 <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad}/>
                 <div className="contenedorListas">
                     {todosLosProfes && <div className="contenido"><p>Todos los profesores</p></div>}
-                    {profesLista && <ListaProfesores/>}
+                    {profesLista && <ListaProfesores campus={usuario.campus}/>}
                     {estudiantesLista && <><ListaEstudiantes /></>}
                     {siguienteActividad && <><ListaActividades/></>}
                 </div>

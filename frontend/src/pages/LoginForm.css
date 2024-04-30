@@ -36,6 +36,7 @@
     justify-content: space-between;
     font-size: 14.5px;
     margin: -15px 0 15px;
+    margin-top: 2vh;
 }
 
 .forgot a {
@@ -101,3 +102,66 @@
     color: #333;
     font-weight: 700;
 }
+
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    justify-content: center; 
+    align-items: center; 
+  }
+  
+  .dropdown-header {
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dropdown-header:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .arrow {
+    margin-left: 10px;
+  }
+  
+  .arrow.up {
+    transform: rotate(180deg);
+  }
+  
+  .dropdown-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .dropdown-list li {
+    padding: 10px;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .dropdown-list li:hover {
+    background-color: #f0f0f0;
+  }
+  .dropdown-top-text {
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 5px; /* Add some space between the top text and the dropdown header */
+  }

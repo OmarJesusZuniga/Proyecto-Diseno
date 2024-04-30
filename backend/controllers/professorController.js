@@ -28,9 +28,9 @@ const getProfessor = async (req, res) => {
 
 // Create new
 const createProfessor = async (req, res) => {
-    const {code, firstLastname, secondLastname, firstname, middlename, email, officeNumer, phoneNumber, campus, image} = req.body
-
-    if (!mongoose.Types.ObjectId.isValid(officeNumer)) {
+    const {code, firstLastname, secondLastname, firstname, middlename, email, officeNumber, phoneNumber, campus, image, password} = req.body
+    console.log(req.body)
+    if (!mongoose.Types.ObjectId.isValid(officeNumber)) {
         return res.status(400).json({error: "Invalid office number id."})
     }
 
@@ -39,9 +39,10 @@ const createProfessor = async (req, res) => {
     }
 
     try {
-        const professor = await Student.create({code, firstLastname, secondLastname, firstname, middlename, email, officeNumer, phoneNumber, campus, image})
+        const professor = await Professor.create({code, firstLastname, secondLastname, firstname, middlename, email, officeNumber, phoneNumber, campus, password})
         res.status(200).json(professor)
     } catch (err) {
+        console.log(err)
         res.status(400).json({error: "Please fill in all the required fields."})
     }  
 }
