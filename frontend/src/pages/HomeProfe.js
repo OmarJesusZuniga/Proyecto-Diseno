@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
 import React, { useState } from 'react';
 import SideBarProfe from "../components/sideBarProfe";
+import ListaEstudiantesProfe from "../components/listaEstudiantesProfe";
 
 const HomeProfe = () => {
     const {state} = useLocation();
@@ -21,7 +22,7 @@ const HomeProfe = () => {
                 <SideBarProfe sP = {setProfes} sA = {setActividades} sE={setEstudiantes} sB ={setBienvenida}/>
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
-                    {}
+                    {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
                     {}
                     {}
                 </div>
