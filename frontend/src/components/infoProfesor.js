@@ -7,7 +7,7 @@ const InfoProfesor = () => {
             <h2>Teléfono-Celular: </h2>
             <h2>Teléfono-Oficina: </h2>
             <h2>Correo</h2>
-            <h2>Carné: </h2>
+            <h2>Código: </h2>
         </div>
         
     );
