@@ -23,9 +23,9 @@ const Home = (req, res) => {
             <div className="horizontal-container"> {/* This div is added */}
                 <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad}/>
                 <div className="contenedorListas">
-                    {todosLosProfes && <div className="contenido"><p>Todos los profesores</p></div>}
-                    {profesLista && <ListaProfesores campus={usuario.campus}/>}
-                    {estudiantesLista && <><ListaEstudiantes /></>}
+                    {todosLosProfes && <ListaProfesores campus={usuario.campus}/>}
+                    {profesLista && <div className="contenido"><p>Todos los profesores</p></div>}
+                    {estudiantesLista && <ListaEstudiantes campus={usuario.campus}/>}
                     {siguienteActividad && <><ListaActividades/></>}
                 </div>
             </div>

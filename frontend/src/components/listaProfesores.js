@@ -11,6 +11,7 @@ const ListaProfesores = ({ campus }) => {
             try {
                 const response = await axios.get('http://localhost:4000/api/professors/');
                 setProfessors(response.data);
+                
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -21,7 +22,7 @@ const ListaProfesores = ({ campus }) => {
     
     return ( 
         <div className="listaProfesores">
-            <h2>Profesores del Equipo guía </h2>
+            <h2>Profesores de la sede </h2>
             {professors && professors.map((professor, index) => (
                 
                 professor.campus.includes(campus) && (
