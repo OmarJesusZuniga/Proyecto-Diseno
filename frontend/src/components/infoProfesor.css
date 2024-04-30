@@ -38,8 +38,8 @@
     align-items: center; 
 }
 
-.cartaProfesor button {
-    margin-left: auto;
+.botonesProfesor button {
+    margin-left: 10px;
     background-color: var(--secondary);
     border: 1px solid transparent;
     border-radius: .5rem;
@@ -68,4 +68,9 @@
 
 .cartaProfesor button:hover {
     background-color: var(--secondary-hover);
+}
+
+.botonesProfesor {
+    align-items: right;
+    margin-left: auto;
 }

@@ -7,9 +7,13 @@ const InfoProfesor = ({professor , usuario}) => {
     const submitModify = async (e) => {
         navigate("/modProfesor", {state: {usuario}});
     }
+    const registroProfesor = async (e) => {
+        navigate("/home/", {state: {usuario}});
+    }
+
 
     return(
-        <form onSubmit={submitModify}>
+        <form>
             <div className="cartaProfesor">
 
                 <h2>{professor.firstname} {professor.firstLastname}</h2>
@@ -31,7 +35,10 @@ const InfoProfesor = ({professor , usuario}) => {
                     <h5>{professor.code}</h5>
                 </div>
 
-                <button>Modificar información</button>  
+                <div className="botonesProfesor">
+                    <button onClick={submitModify}>Modificar información</button>
+                    <button onClick={registroProfesor}>Registrar al equipo</button>    
+                </div>
 
             </div>
             </form>
