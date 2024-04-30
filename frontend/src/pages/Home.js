@@ -6,7 +6,7 @@ import ListaEstudiantes from "../components/listaEstudiantes";
 import ListaProfesores from "../components/listaProfesores";
 import { useParams } from "react-router-dom";
 
-const Home = () => {
+const Home = (req, res) => {
     const {id} = useParams();
     const [todosLosProfes, setTodosLosProfes] = useState(true);
     const [profesLista, setProfesLista] = useState(false);

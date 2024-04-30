@@ -1,14 +1,22 @@
-import './modificarEstudiante.css';
+import './modificarProfesor.css';
 import Navbar from "../components/Navbar";
+import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
-const ModificarEstudiante = () => {
+const ModificarProfesor = () => {
     const {id} = useParams();
     const navigate = useNavigate();
 
     const submitModify = async (e) => {
         navigate("/home/"+"123");
+    }
+
+    const [file, setFile] = useState();
+
+        function handleChange(e) {
+            console.log(e.target.files);
+            setFile(URL.createObjectURL(e.target.files[0]));
     }
     
     return (       
@@ -28,6 +36,14 @@ const ModificarEstudiante = () => {
                 <div className="input-box">
                     <input type="text" placeholder='Teléfono celular' required />
                 </div>
+                <h4>Escriba el teléfono oficina</h4>
+                <div className="input-box">
+                    <input type="text" placeholder='Teléfono oficina' required />
+                </div>
+                <div className="input-box">
+                    <input type="file" onChange={handleChange} />
+                    <img src={file} />
+                </div>
 
                 <button>Guardar Cambios</button>
 
@@ -38,4 +54,4 @@ const ModificarEstudiante = () => {
     );
 }
 
-export default ModificarEstudiante;
+export default ModificarProfesor;

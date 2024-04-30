@@ -1,51 +1,66 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginForm = () => {
     const navigate = useNavigate();
 
     const [user, setUser] = useState("");
-    const [pass, setPass] = useState(""); 
-    
+    const [pass, setPass] = useState("");
+    const [showPass, setShowPass] = useState(false);    
 
-    const submitLogIn = async (e) => {
+    async function submit(e){
+        e.preventDefault();
+        
+        try{
+            const response = await axios.post('http://localhost:4000/api/adminAssistants/namepass/get/', {
+                name: user,
+                password: pass
+            })
 
-        const data = {
-            name: user,
-            password: pass
+            const dataArray = response.data
+            console.log(dataArray[0])
+            if (dataArray.length === 0 ){
+                navigate('/');
+            } else{
+                navigate('/home/123456');
+            }
+            
+            
+        }catch{
+            navigate('/')
         }
 
-        const response = await fetch('https://localhost:4000/api/adminAssistants/', {
-            method: 'GET',
-            body: JSON.stringify(data)
-        });
-        const json = await response.json();
 
-        console.log(json);
-
-        navigate("/home/"+"123");
     }
 
 
     return (
         <div className="wrapper">
-            <form onSubmit={submitLogIn}>
+            <form action='POST'>
                 <h1>Login</h1>
                 <div className="input-box">
                     <input type="text" placeholder='Username' onChange={(e) => setUser(e.target.value)} />
                     {/* <FaUser className='icon' /> */}
                 </div>
                 <div className="input-box">
-                    <input type="password" placeholder='Password'  title="Must be numeric and  8 characters long."  onChange={(e) => setPass(e.target.value)}/>
-                    {/* <FaLock className='icon' /> */}
+                    <input type={showPass ? "text" : "password"}
+                            placeholder='Password'
+                            title="Must be numeric and 8 characters long."
+                            onChange={(e) => setPass(e.target.value)} />
+                        <span className='icon' onClick={() => setShowPass(!showPass)}>
+                            {showPass ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    
+                    {/* <input type="password" placeholder='Password'  title="Must be numeric and  8 characters long."  onChange={(e) => setPass(e.target.value)}/> <FaLock className='icon' /> pattern="^[0-9]{8}$" */}
                 </div>
                 <div className="forgot">
                     <a href="#">¿Olvidó su contraseña?</a>               
                 </div>
 
-                <button>Login</button>
+                <button onClick={submit}>Login </button>
 
             </form> 
 
