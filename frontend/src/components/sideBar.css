@@ -2,28 +2,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
 .home {
-    display: flex;
+  display: flex;
 }
 
 .sidebar {
     width: auto;
     height: 100%;
-    background-color: #1d1c1c;
-    color: white;
-    padding: 20px;
+    background-color: var(--background-sidebar);
+    padding: 5px;
     font-family: "Poppins";
-    border-radius: 30px;
-    margin-right: 10px; 
-    margin-left: 20px;
-    margin-top: 10px;
     flex: 0;
-    
+    border-right: 2px solid var(--background-accent); 
   }
   
   .sidebar h2 {
     margin-top: 0;
     font-family: "Poppins";
     text-align: center;
+    color: var(--text);
   }
   
   .sidebar ul {
@@ -34,7 +30,6 @@
   
   .sidebar li {
     margin-bottom: 10px;
-
   }
   
   .sidebar li:hover {
@@ -45,3 +40,84 @@
     flex: 1;
     margin: 20px
 }
+
+.sidebar li h2 {
+  /* color: #D3D9D4; */
+  font-size: var(--font-size-h4);
+  
+}
+
+.dropdown {
+  margin-bottom: 20px;
+  background-color: none;
+  font-family: "Poppins";
+}
+
+.dropdown option{
+  font-family: "Poppins";
+}
+
+.dropdown select {
+  padding: 7px;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  background-color: #eaeaea;
+  font-family: "Poppins";
+}
+
+.section {
+  margin-bottom: 20px;
+  background-color: none;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.section h2 {
+  margin-bottom: 10px;
+}
+
+.section button {
+  background-color: var(--secondary) ;
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: var(--text);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none #6B7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  height: auto;
+
+  margin-bottom: 10px;
+}
+
+.section button:hover {
+  background-color: var(--secondary-hover); /* Change to the desired hover color */
+}
+
+/* This is to style the button that says "Ver todos los profesores" differently */
+.section .botonAzul{
+  background-color: var(--primary);
+  color: var(--primary-text);
+}
+
+.section .botonAzul:hover {
+  background-color: var(--primary-hover); /* Darker blue color on hover */
+}
+
+/* Add media queries and other responsive design elements as needed */
