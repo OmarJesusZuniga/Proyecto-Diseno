@@ -1,17 +1,18 @@
 import './modificarProfesor.css';
 import Navbar from "../components/Navbar";
-import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const ModificarProfesor = () => {
-    const {id} = useParams();
     const navigate = useNavigate();
     const [file, setFile] = useState();
     const [officePhone, setOfficePhone] = useState('');
+    const {state} = useLocation();
+    const {usuario} = state || {};
 
     const submitModify = async (e) => {
-        navigate("/home/"+"123");
+        navigate("/home/", {state: {usuario}});
     }
 
     function handleChange(e) {
@@ -35,7 +36,7 @@ const ModificarProfesor = () => {
     return (       
         <div className="principal">
             <form onSubmit={submitModify}>
-                <Navbar id={id}/>
+                <Navbar id={usuario.firstname} apellido={usuario.firstLastname}/>
                 <h2>Información estudiante</h2>
                 <h4>Escriba el nombre completo</h4>
                 <div className="input-box">

@@ -33,14 +33,12 @@
     margin-left: 10px;
 }
 
-
 .cartaProfesor div {
     display: flex;
     align-items: center; 
-    /* justify-content: space-between; */
 }
 
-.botonesProfesor {
+.cartaProfesor button {
     margin-left: auto;
     background-color: var(--secondary);
     border: 1px solid transparent;
@@ -68,14 +66,6 @@
 
 }
 
-.botonesProfesor:hover {
+.cartaProfesor button:hover {
     background-color: var(--secondary-hover);
-}
-
-.botonesProfesor-button {
-    text-decoration: none;
-    color: var(--secondary-text);
-  
-    padding: 0px;
-    font-weight: 500;
 }

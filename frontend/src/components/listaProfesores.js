@@ -3,7 +3,7 @@ import "../components/listaProfesores.css";
 import InfoProfesor from "./infoProfesor";
 import axios from 'axios';
 
-const ListaProfesores = ({ campus }) => {
+const ListaProfesores = ({ campus , usuario }) => {
     const [professors, setProfessors] = useState([]);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const ListaProfesores = ({ campus }) => {
             {professors && professors.map((professor, index) => (
                 
                 professor.campus.includes(campus) && (
-                    <InfoProfesor key={index} professor={professor} />
+                    <InfoProfesor key={index} professor={professor} usuario={usuario}/>
                 )
             ))}
         </div>

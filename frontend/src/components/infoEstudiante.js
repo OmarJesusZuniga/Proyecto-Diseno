@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "../components/infoEstudiante.css"
 
 const InfoEstudiante = ({estudiante}) => {
@@ -22,10 +21,7 @@ const InfoEstudiante = ({estudiante}) => {
                     <h5>{estudiante.phoneNumber}</h5>
                 </div>
 
-            </div>
-            <div className="botonesEstudiante" type="submit">
-                <Link to="/modEstudiante" className="botonesEstudiante-button">Modificar información</Link>
-            </div>        
+            </div>     
         </div>
         
     );

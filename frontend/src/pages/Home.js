@@ -23,7 +23,7 @@ const Home = (req, res) => {
             <div className="horizontal-container">
                 <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad}/>
                 <div className="contenedorListas">
-                    {todosLosProfes && <ListaProfesores campus={usuario.campus}/>}
+                    {todosLosProfes && <ListaProfesores campus={usuario.campus} usuario={usuario}/>}
                     {profesLista && <div className="contenido"><p>Todos los profesores</p></div>}
                     {estudiantesLista && <ListaEstudiantes campus={usuario.campus}/>}
                     {siguienteActividad && <><ListaActividades/></>}
