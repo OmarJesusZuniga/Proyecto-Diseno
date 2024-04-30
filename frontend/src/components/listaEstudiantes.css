@@ -8,5 +8,9 @@
 .listaEstudiantes h2 {
     margin-top: 0;
     font-family: "Poppins";
-    color: white;
-  }
+    color: white;  
+}
+
+.listaEstudiantes .dropdown {
+    width: 13%;
+}
