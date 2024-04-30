@@ -24,15 +24,19 @@ const ModificarProfesor = () => {
             <form onSubmit={submitModify}>
                 <Navbar id={id}/>
                 <h2>Información estudiante</h2>
+                <h4>Escriba el nombre completo</h4>
                 <div className="input-box">
                     <input type="text" placeholder='Nombre completo' required />
                 </div>
+                <h4>Escriba el correo</h4>
                 <div className="input-box">
                     <input type="text" placeholder='Correo' required />
                 </div>
+                <h4>Escriba el teléfono celular</h4>
                 <div className="input-box">
                     <input type="text" placeholder='Teléfono celular' required />
                 </div>
+                <h4>Escriba el teléfono oficina</h4>
                 <div className="input-box">
                     <input type="text" placeholder='Teléfono oficina' required />
                 </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,7 +9,7 @@ const LoginForm = () => {
 
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
-    
+    const [showPass, setShowPass] = useState(false);    
 
     async function submit(e){
         e.preventDefault();
@@ -46,8 +46,15 @@ const LoginForm = () => {
                     {/* <FaUser className='icon' /> */}
                 </div>
                 <div className="input-box">
-                    <input type="password" placeholder='Password'  title="Must be numeric and  8 characters long."  onChange={(e) => setPass(e.target.value)}/>
-                    {/* <FaLock className='icon' /> */}
+                    <input type={showPass ? "text" : "password"}
+                            placeholder='Password'
+                            title="Must be numeric and 8 characters long."
+                            onChange={(e) => setPass(e.target.value)} />
+                        <span className='icon' onClick={() => setShowPass(!showPass)}>
+                            {showPass ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    
+                    {/* <input type="password" placeholder='Password'  title="Must be numeric and  8 characters long."  onChange={(e) => setPass(e.target.value)}/> <FaLock className='icon' /> pattern="^[0-9]{8}$" */}
                 </div>
                 <div className="forgot">
                     <a href="#">¿Olvidó su contraseña?</a>               
