@@ -1,4 +1,5 @@
 .listaEstudiantes{
+    padding: 10px 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -8,5 +9,6 @@
 .listaEstudiantes h2 {
     margin-top: 0;
     font-family: "Poppins";
-    color: white;
+    color: var(--text);
+    font-size: var(--font-size-h2);
   }

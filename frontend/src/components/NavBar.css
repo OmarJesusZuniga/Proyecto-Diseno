@@ -1,0 +1,58 @@
+
+.logout {
+    background-color: var(--primary);
+    padding: 10px 20px;
+    margin-bottom: 5px;
+  
+    border-radius: 10%;
+  }
+  
+  .logout-link {
+    text-decoration: none;
+    color: var(--primary-text);
+  
+    padding: 0px;
+    font-weight: 500;
+  }
+  
+  .logout:hover {
+    background-color: var(--primary-hover);
+  }
+  
+  .logout:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  @media (min-width: 768px) {
+    .logout {
+      padding: .75rem 1.5rem;
+    }
+  }
+  
+  .pages{
+    max-width: 1400px;
+    padding: 20px;
+    margin: 0 auto;
+  }
+  
+  .container {
+    /* Siempre arriba */
+    position: sticky;
+    top: 0; 
+    z-index: 1000; 
+  
+    background-color: var(--background);
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px 20px; 
+    align-items: center; 
+    width: 100%; 
+    border-bottom: 2px solid var(--background-accent); 
+  }
+  
+  .container h1 {
+    color: var(--text);
+    font-size: var(--font-size-h2);
+  }

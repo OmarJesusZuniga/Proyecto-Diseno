@@ -1,7 +1,6 @@
 .cartaProfesor{
-    
     width: auto;
-    background-color: azure;
+    background-color: var(--background-slide);
     border-radius: 15px;
     padding: 10px;
     flex:1;
@@ -14,11 +13,27 @@
     cursor: pointer;
 }
 
-.cartaProfesor h4{
-    font-size: 30px;
+.cartaProfesor h2{
+    color: var(--accent-secondary);
+    font-size: var(--font-size-h3);
+    font-weight: 600;
 }
 
-.cartaProfesor h2{
-    font-size: 20px;
-    color: #000000;
+.cartaProfesor h3{
+    font-size: var(--font-size-h4);
+    font-weight: 500;
+    color: var(--text-secondary)
+}
+.cartaProfesor h5 {
+    color: var(--accent-secondary);
+    font-size: var(--font-size-h4);
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+
+.cartaProfesor div {
+    display: flex;
+    align-items: center; 
+    /* justify-content: space-between; */
 }

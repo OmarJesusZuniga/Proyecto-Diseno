@@ -1,7 +1,6 @@
 .cartaActividad{
-    
     width: auto;
-    background-color: azure;
+    background-color: var(--background-slide);
     border-radius: 15px;
     padding: 10px;
     flex:1;
@@ -14,11 +13,38 @@
     cursor: pointer;
 }
 
-.cartaActividad h4{
-    font-size: 30px;
+.cartaActividad h2{
+    color: var(--accent-secondary);
+    font-size: var(--font-size-h3);
+    font-weight: 600;
 }
 
-.cartaActividad h2{
-    font-size: 20px;
-    color: #000000;
+.cartaActividad h3{
+    font-size: var(--font-size-h4);
+    font-weight: 500;
+    color: var(--accent-secondary)
+}
+
+.cartaActividad h4{
+    font-size: var(--font-size-h4);
+    font-weight: 500;
+    color: var(--text-secondary)
+}
+
+.cartaActividad h5 {
+    color: var(--accent-secondary);
+    font-size: var(--font-size-h4);
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.cartaActividad div {
+    display: flex;
+    padding: 5px;
+}
+
+.cartaActividad-Multiple {
+    flex-direction: column;
+    align-items: left; 
+    border: 2px solid var(--background-accent);
 }

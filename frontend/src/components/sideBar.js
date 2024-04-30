@@ -1,6 +1,5 @@
 import React from 'react';
 import '../components/sideBar.css'; // You can define your sidebar styles in this file
-import '../pages/HomeAdmin.css';
 
 const Sidebar = ({s1, s2, s3, s4}) => {
 
@@ -32,10 +31,10 @@ const Sidebar = ({s1, s2, s3, s4}) => {
 
   return (
     <div className="sidebar">
-      <h2>Menú</h2>
       <ul>
         <li>
             <div className="dropdown">
+                <h2>Equipo Guía</h2>
                 <select>
                     <option value="team1">Equipo guía primer ingreso</option>
                 </select>
