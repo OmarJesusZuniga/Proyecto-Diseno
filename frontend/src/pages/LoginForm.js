@@ -24,7 +24,7 @@ const LoginForm = () => {
     };
 
     const forgot = async (e) => {
-        navigate("/forgotPassword/");
+        navigate("/forgotPassword");
     }
 
     async function submit(e){

@@ -1,27 +1,25 @@
 import React, {  useState } from 'react';
 import './forgotPassword.css';
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
 
-    const [user, setUser] = useState("");
-    const [pass, setPass] = useState("");
-    const [showPass, setShowPass] = useState(false);    
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
-    const options = ['Asistente Administrativa', 'Profesor'];
-
-    
-    const handleOptionClick = (option) => {
-      setSelectedOption(option);
-      setIsOpen(false);
-    };
+    const [email, setEmail] = useState("");
 
     const enviar = async (e) => {
-        navigate("/forgotPassword/");
+        e.preventDefault()
+        axios.post('http://localhost:4000/api/logIn', {email})
+        .then(res => {
+            if(res.data.Status === "Not") {
+                navigate("/forgotPassword")
+            }
+            else {
+                navigate('/')
+            }
+        }).catch(err => console.log(err))
+        
     }
 
     async function submit(e){
@@ -78,7 +76,7 @@ const ForgotPassword = () => {
             <form action='POST'>
                 <h1>Forgot Password</h1>
                 <div className="input-box">
-                    <input type="text" placeholder='Enter Email' onChange={(e) => setUser(e.target.value)} required />
+                    <input type="text" placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} required />
                 </div>
   
                 <div className='botonEnviar'>
