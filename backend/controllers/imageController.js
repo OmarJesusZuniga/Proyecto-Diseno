@@ -3,7 +3,19 @@ const mongoose = require('mongoose')
 
 // Get a single image
 const getImage = async (req, res) => {  
+    const {id} = req.params
 
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: "No such file"})
+    }
+    
+    const image = await Image.findById(id)
+
+    if (!image) {
+        return res.status(404).json({error: "No such file"})
+    }
+
+    res.status(200).json(image)
 }
 
 // Create new image
@@ -25,46 +37,21 @@ const deleteImage = async (req, res) => {
     const {id} = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: "No such campus"})
+        return res.status(404).json({error: "No such file"})
     }
     
-    const adminAssistants = await AdminAssistant.find({ campus:id })
+    const image = await Image.findOneAndDelete({_id: id})
 
-    if (adminAssistants >  0) {
-        return res.status(400).json({error: "Cannot delete the campu because it has admin assistants assigned to it"})
+    if (!image) {
+        return res.status(404).json({error: "No such image"})
     }
 
-    const campus = await Campus.findOneAndDelete({_id: id})
-
-    if (!campus) {
-        return res.status(404).json({error: "No such campus"})
-    }
-
-    res.status(200).json(campus)
+    res.status(200).json(image)
 }
 
-// Update a professor
-const updateImage = async (req, res) => {
-    const {id} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: "No such campus"})
-    }
-    
-    const campus = await Campus.findOneAndUpdate({_id: id}, {
-        ...req.body
-    })
-
-    if (!campus) {
-        return res.status(404).json({error: "No such campus"})
-    }
-
-    res.status(200).json(campus)
-}
 
 module.exports = {
     getImage,
     createImage,
-    deleteImage,
-    updateImage
+    deleteImage
 }

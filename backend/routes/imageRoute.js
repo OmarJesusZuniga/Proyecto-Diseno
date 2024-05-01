@@ -3,22 +3,19 @@ const upload = require('../controllers/imageUploadController'); // adjust the pa
 const {
     getImage,
     createImage,
-    deleteImage,
-    updateImage
+    deleteImage
 } = require('../controllers/imageController')
 
 const router = express.Router()
 
-// GET a single Plan
+// GET a single image
 router.get('/:id', getImage)
 
-// POST a new Plan
+// POST a new image
 router.post('/', upload.single('file'), createImage);
 
-// DELETE a Plan
+// DELETE a image
 router.delete('/:id', deleteImage)
 
-// UPDATE a Plan
-router.patch('/:id', updateImage)
 
 module.exports = router
