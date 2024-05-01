@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import './HomeAdmin.css';
-import Navbar from "../components/Navbar";
 
 const HomeAdmin = () => {
     return (       

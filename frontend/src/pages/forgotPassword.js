@@ -1,10 +1,10 @@
 import React, {  useState } from 'react';
-import './LoginForm.css';
+import './forgotPassword.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const LoginForm = () => {
+const ForgotPassword = () => {
     const navigate = useNavigate();
 
     const [user, setUser] = useState("");
@@ -14,16 +14,13 @@ const LoginForm = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const options = ['Asistente Administrativa', 'Profesor'];
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-      };
     
     const handleOptionClick = (option) => {
       setSelectedOption(option);
       setIsOpen(false);
     };
 
-    const forgot = async (e) => {
+    const enviar = async (e) => {
         navigate("/forgotPassword/");
     }
 
@@ -77,45 +74,16 @@ const LoginForm = () => {
 
 
     return (
-        <div className="wrapper">
+        <div className="forgot-password">
             <form action='POST'>
-                <h1>Login</h1>
+                <h1>Forgot Password</h1>
                 <div className="input-box">
-                    <input type="text" placeholder='Username' onChange={(e) => setUser(e.target.value)} required />
+                    <input type="text" placeholder='Enter Email' onChange={(e) => setUser(e.target.value)} required />
                 </div>
-                <div className="input-box">
-                    <input type={showPass ? "text" : "password"}
-                            placeholder='Password'
-                            title="Must be numeric and 8 characters long."
-                            pattern="^[0-9]{8}$"
-                            onChange={(e) => setPass(e.target.value)} 
-                            required/>
-                        <span className='icon' onClick={() => setShowPass(!showPass)}>
-                            {showPass ? <FaEyeSlash /> : <FaEye />}
-                        </span>
-                                      
+  
+                <div className='botonEnviar'>
+                    <button onClick={enviar}>Enviar </button>
                 </div>
-                <div className="dropdown-container">
-                    <div className="dropdown-top-text">Tipo de usuario</div>
-                    <div className="dropdown-header" onClick={toggleDropdown}>
-                    {selectedOption || 'Select an option'}
-                    <i className={`arrow ${isOpen ? 'up' : 'down'}`} />
-                  </div>
-                  {isOpen && (
-                    <ul className="dropdown-list">
-                      {options.map((option, index) => (
-                        <li key={index} onClick={() => handleOptionClick(option)}>
-                          {option}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                <div className='botonOlvidar'>
-                    <button onClick={forgot}>¿Olvidó su contraseña? </button>
-                </div>
-                
-                <button onClick={submit}>Login </button>
 
             </form> 
 
@@ -123,4 +91,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm;
+export default ForgotPassword;

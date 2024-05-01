@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 //pages & components
 import Home from './pages/Home';
 import LoginForm from './pages/LoginForm';
+import ForgotPassword from './pages/forgotPassword';
 import ModificarEstudiante from './pages/modificarEstudiante';
 import ModificarProfesor from './pages/modificarProfesor';
 import HomeProfe from './pages/HomeProfe';
@@ -19,7 +20,7 @@ function App() {
           <Route exact path="/homeProfe" element={<HomeProfe/>}/>
           <Route path="/modEstudiante" element={<ModificarEstudiante/>} />
           <Route path="/modProfesor" element={<ModificarProfesor/>} />
-
+          <Route path="/forgotPassword" element={<ForgotPassword/>} /> 
           <Route path="/file" element={<FilePrueba/>} /> // Borrar
 
         </Routes>
