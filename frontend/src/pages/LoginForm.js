@@ -24,7 +24,7 @@ const LoginForm = () => {
     };
 
     const forgot = async (e) => {
-        navigate("/forgotPassword");
+        navigate("/forgotPassword", {state :{selectedOption, user, pass}});
     }
 
     async function submit(e){

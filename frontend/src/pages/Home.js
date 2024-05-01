@@ -15,6 +15,7 @@ const Home = (req, res) => {
     const [profesLista, setProfesLista] = useState(false);
     const [estudiantesLista, setEstudiantesLista] = useState(false);
     const [siguienteActividad, setSiguienteActividad] = useState(false);
+    const [agregarEstudiante, setAgregEstu] = useState(false);
     
     
     return (

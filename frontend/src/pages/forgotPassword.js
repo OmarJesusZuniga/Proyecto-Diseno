@@ -2,8 +2,13 @@ import React, {  useState } from 'react';
 import './forgotPassword.css';
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { useLocation } from "react-router-dom";
 const ForgotPassword = () => {
+
+    const {state} = useLocation();
+    const {selectedOption, user, pass} = state || {};
+
+
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
