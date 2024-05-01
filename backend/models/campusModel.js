@@ -13,6 +13,6 @@ const campusSchema = new Schema ({
         required: true,
         unique: true
     }
-})
+}, {timestamps:true})
 
 module.exports = mongoose.model('campus', campusSchema)

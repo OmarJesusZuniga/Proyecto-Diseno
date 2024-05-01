@@ -31,6 +31,6 @@ const guideTeamSchema = new Schema ({
         ref: 'professor',
         required: true
     }]
-})
+}, {timestamps:true})
 
 module.exports = mongoose.model('guideTeam', guideTeamSchema)

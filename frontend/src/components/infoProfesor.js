@@ -5,7 +5,7 @@ const InfoProfesor = ({professor , usuario}) => {
     const navigate = useNavigate();
 
     const submitModify = async (e) => {
-        navigate("/modProfesor", {state: {usuario}});
+        navigate("/modProfesor", {state: {usuario, professor}});
     }
     const registroProfesor = async (e) => {
         navigate("/home/", {state: {usuario}});

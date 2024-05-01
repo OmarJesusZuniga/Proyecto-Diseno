@@ -7,6 +7,6 @@ const professorSchema = new Schema ({
         type: mongoose.Schema.Types.ObjectId, // Id a sus atributos de profesor
         ref: 'professor'
     }]
-})
+}, {timestamps:true})
 
 module.exports = mongoose.model('guideProfessor', professorSchema)

@@ -29,6 +29,7 @@ const ListaEstudiantes = ({ campus }) => {
     return ( 
         <div className="listaEstudiantes">
             <h2>Estudiantes de la sede</h2>
+            <button className="btnAgregarEstudiante">Agregar Estudiante</button>
             <div className="dropdown">
                 <select>
                     <option value="team1">Ordenar por....</option>

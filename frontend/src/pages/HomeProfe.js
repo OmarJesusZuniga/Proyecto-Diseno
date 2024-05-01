@@ -19,7 +19,7 @@ const HomeProfe = () => {
         <div className="home"> 
             <Navbar  id={usuario.firstname} apellido={usuario.firstLastname}/>
             <div className="horizontal-container">
-                <SideBarProfe sP = {setProfes} sA = {setActividades} sE={setEstudiantes} sB ={setBienvenida}/>
+                <SideBarProfe usuario={usuario} sP = {setProfes} sA = {setActividades} sE={setEstudiantes} sB ={setBienvenida}/>
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }

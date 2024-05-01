@@ -60,8 +60,9 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    width: 10%;
+    width: auto;
     height: 35px;
+    margin-bottom: 15px;
 }
 
 .principal button:hover {

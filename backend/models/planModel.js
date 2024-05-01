@@ -13,6 +13,6 @@ const planSchema = new Schema ({
         ref: 'activity',
         required: true
     }]
-})
+}, {timestamps:true})
 
 module.exports = mongoose.model('plan', planSchema)

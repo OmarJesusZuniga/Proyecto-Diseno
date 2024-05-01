@@ -9,7 +9,13 @@ const ModificarProfesor = () => {
     const [file, setFile] = useState();
     const [officePhone, setOfficePhone] = useState('');
     const {state} = useLocation();
-    const {usuario} = state || {};
+    const {usuario, professor} = state || {};
+
+
+    const volver = () =>{
+        navigate("/home/", {state: {usuario}});
+    }
+
 
     const submitModify = async (e) => {
         navigate("/home/", {state: {usuario}});
@@ -35,24 +41,36 @@ const ModificarProfesor = () => {
 
     return (       
         <div className="principal">
-            <form onSubmit={submitModify}>
+            <form >
                 <Navbar id={usuario.firstname} apellido={usuario.firstLastname}/>
-                <h2>Información estudiante</h2>
-                <h4>Escriba el nombre completo</h4>
+                <h2>Información profesor</h2>
+                <h4>Escriba el nombre</h4>
                 <div className="input-box">
-                    <input type="text" placeholder='Nombre completo' required />
+                    <input type="text" placeholder='Nombre' value={professor.firstname} required />
+                </div>
+                <h4>Escriba el segundo nombre </h4>
+                <div className="input-box">
+                    <input type="text" placeholder='Segundo Nombre' value={professor.middlename} required />
+                </div>
+                <h4>Escriba el apellido</h4>
+                <div className="input-box">
+                    <input type="text" placeholder='Primer Apellido' value={professor.firstLastname} required />
+                </div>
+                <h4>Escriba el segundo apellido</h4>
+                <div className="input-box">
+                    <input type="text" placeholder='Segundo Apellido' value={professor.secondLastname} required />
                 </div>
                 <h4>Escriba el correo</h4>
                 <div className="input-box">
-                    <input type="text" placeholder='Correo' required />
+                    <input type="text" placeholder='Correo' value={professor.email} required />
                 </div>
                 <h4>Escriba el teléfono celular</h4>
                 <div className="input-box">
-                    <input type="text" placeholder='Teléfono celular' required />
+                    <input type="text" placeholder='Teléfono celular' value={professor.phoneNumber} required />
                 </div>
                 <h4>Escriba el teléfono oficina</h4>
                 <div className="input-box">
-                    <input type="text" value={officePhone} onChange={handleOfficePhoneChange} placeholder='Teléfono oficina' required />
+                    <input type="text" value={professor.officeNumber} onChange={handleOfficePhoneChange} placeholder='Teléfono oficina' required />
                 </div>
                 <h4>Añada imagen (opcional)</h4>
                 <div className="input-box">
@@ -62,7 +80,8 @@ const ModificarProfesor = () => {
                     {file && <img src={file} />}
                 </div>
 
-                <button>Guardar Cambios</button>
+                <button onClick={volver}>Volver</button>
+                <button onClick={submitModify}>Guardar Cambios</button>
 
             </form>
 

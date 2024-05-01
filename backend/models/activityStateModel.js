@@ -23,6 +23,6 @@ const activityStateSchema = new Schema ({
         type: String, 
         required: false
     }
-})
+}, {timestamps:true})
 
 module.exports = mongoose.model('activityState', activityStateSchema)
