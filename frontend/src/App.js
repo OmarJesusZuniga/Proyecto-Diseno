@@ -7,6 +7,7 @@ import ModificarEstudiante from './pages/modificarEstudiante';
 import ModificarProfesor from './pages/modificarProfesor';
 import HomeProfe from './pages/HomeProfe';
 
+import FilePrueba from './pages/borrar'; // Borrar
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           <Route exact path="/homeProfe" element={<HomeProfe/>}/>
           <Route path="/modEstudiante" element={<ModificarEstudiante/>} />
           <Route path="/modProfesor" element={<ModificarProfesor/>} />
+
+          <Route path="/file" element={<FilePrueba/>} /> // Borrar
+
         </Routes>
       </div>
     </BrowserRouter>

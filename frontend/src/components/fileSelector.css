@@ -1,0 +1,61 @@
+.File-Selector-ImgPDF {
+    padding: 10px;
+}
+
+.File-Selector-ImgPDF input {
+    background-color: var(--text);
+    padding: 5px 10px; 
+
+    font-family: "Poppins";
+    font-weight: 400;
+
+    width: 250px;
+    height: auto;
+}
+
+.File-Selector-ImgPDF button {
+    background-color: var(--primary);
+    color: var(--primary-text);
+
+    padding: 10px 15px;
+    border: none; 
+    
+    margin-left: 10px;
+
+    font-family: "Poppins";
+    font-weight: 500;
+}
+
+.File-Selector-ImgPDF button:hover {
+    background-color: var(--primary-hover)
+}
+
+
+.File-Selector-ImgPDF input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--secondary);
+    color: var(--secondary-text);
+    padding: 7px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.File-Selector-ImgPDF img {
+    opacity: 0; 
+    visibility: hidden; 
+    position: absolute;
+
+    display: block;
+    width: 324px; 
+    height: auto; 
+    border: 1px solid var(--accent); 
+    margin-top: 10px;
+    transition: opacity 0.5s ease, visibility 0.5s ease; 
+}
+
+.File-Selector-ImgPDF:hover img {
+    opacity: 1; 
+    visibility: visible; 
+}
+
+
