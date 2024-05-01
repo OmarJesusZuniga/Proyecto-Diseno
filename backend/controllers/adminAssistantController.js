@@ -1,6 +1,8 @@
 const AdminAssistant = require('../models/adminAssistantModel.js')
 const mongoose = require('mongoose')
 
+// /api/adminAssistants/:id
+
 // Get all
 const getAdminAssistants = async (req, res) => {
     

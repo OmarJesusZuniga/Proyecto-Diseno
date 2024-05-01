@@ -9,6 +9,8 @@ const {
 
 const router = express.Router()
 
+// Localhost:3000/api// - post
+
 // GET all Plans
 router.get('/', getComments)
 

@@ -19,6 +19,7 @@ const campusRoutes = require('./routes/campusRoutes')
 const representantRoutes = require('./routes/representantRoutes')
 const guideTeamRoutes = require('./routes/guideTeamRoutes')
 const imageRoutes = require('./routes/imageRoute')
+const logInRoutes = require('./routes/logInRoutes')
 
 // express app
 const app = express()
@@ -34,7 +35,7 @@ app.use((req, res, next) => {
 
 
 
-// routes
+// routes 
 app.use('/api/plan', planRoutes) 
 app.use('/api/observation', observationRoutes) 
 app.use('/api/comment', commentRoutes) 
@@ -47,6 +48,7 @@ app.use('/api/campus', campusRoutes)
 app.use('/api/representants', representantRoutes)
 app.use('/api/guideTeam', guideTeamRoutes)
 app.use('/api/image', imageRoutes)
+app.use('/api/logIn', logInRoutes)
 
 
 // connect to db
