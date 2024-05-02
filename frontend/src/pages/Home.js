@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import React, {  useState } from "react";
 import Sidebar from "../components/sideBar";
 import Navbar from "../components/Navbar";
 import ListaActividades from "../components/listaActividades";
@@ -11,17 +11,26 @@ import {  useNavigate } from 'react-router-dom';
 
 // Para el excel
 import * as XLSX from "xlsx";
+import ListaEquipoGuia from "../components/listaEquipoGuia";
 
 const Home = (req, res) => {
     const {state} = useLocation();
     const {usuario} = state || {};
 
 
-    const [todosLosProfes, setTodosLosProfes] = useState(true);
+    const [todosLosProfes, setTodosLosProfes] = useState(false);
     const [profesLista, setProfesLista] = useState(false);
     const [estudiantesLista, setEstudiantesLista] = useState(false);
     const [siguienteActividad, setSiguienteActividad] = useState(false);
     const [agregarEstudiante, setAgregEstu] = useState(false);
+    
+
+    //Equipos guia y equipo seleccionado
+
+    const [equipoSeleccionado, setEquipoSeleccionado] = useState(null)
+    const [equipos, setEquipos] = useState([])
+
+
     
     // Excel
     const [data, setData] = useState([])
@@ -67,11 +76,22 @@ const Home = (req, res) => {
         <div className="home"> 
             <Navbar id = {usuario.firstname} apellido = {usuario.firstLastname}/>
             <div className="horizontal-container">
-                <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad} sAE={setAgregEstu}/>
+                <Sidebar 
+                s1={setTodosLosProfes} 
+                s2={setProfesLista} 
+                s3={setEstudiantesLista} 
+                s4={setSiguienteActividad} 
+                sAE={setAgregEstu} 
+                sE={setEquipos} 
+                sES={setEquipoSeleccionado} 
+                id={usuario._id}
+                equipos={equipos}/>
+
+
                 {/* <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/> */}
                 <div className="contenedorListas">
-                    {todosLosProfes && <ListaProfesores campus={usuario.campus} usuario={usuario}/>}
-                    {profesLista && <div className="contenido"><p>Todos los profesores</p></div>}
+                    {todosLosProfes && <ListaProfesores campus={usuario.campus} usuario={usuario} equipo={equipoSeleccionado}/>}
+                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado}/>}
                     {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} sAE={setAgregEstu}/>}
                     {siguienteActividad && <><ListaActividades/></>}
                     {agregarEstudiante && <AgregarEstudiante campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} sAE={setAgregEstu}/>}

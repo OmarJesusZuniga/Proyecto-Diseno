@@ -1,3 +1,4 @@
+const adminAssistant = require('../models/adminAssistantModel')
 const GuideTeam = require('../models/guideTeamModel')
 const Professor = require('../models/professorModel')
 const mongoose = require('mongoose')
@@ -22,6 +23,37 @@ const getGuideTeams = async (req, res) => {
   }
 
   res.status(200).json(guideTeams)
+}
+
+//get teams by assitant
+const getGuideTeamsAssis = async (req, res) => {
+  
+  const {id} = req.body
+  
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such assistant'})
+  }
+
+  const assistant = await adminAssistant.findById(id)
+  
+
+  if(!assistant){
+    return res.status(404).json({error: 'No such assistant'})
+  }
+
+  const teams = await GuideTeam.find({ adminAssistants: id })
+    .populate('professors')
+    .populate('students');
+  console.log(teams)
+  
+  
+
+  if (teams.length === 0) {
+    return res.status(404).json({ error: 'No guide teams found for this assitant' });
+  }
+
+  res.status(200).json(teams)
+
 }
 
 const getGuideTeam = async (req, res) => {
@@ -121,6 +153,7 @@ const updateGuideTeam = async (req, res) => {
 
 module.exports = {
   getGuideTeams,
+  getGuideTeamsAssis,
   getGuideTeam,
   createGuideTeam,
   deleteGuideTeam,

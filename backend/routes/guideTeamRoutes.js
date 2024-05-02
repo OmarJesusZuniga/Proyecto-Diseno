@@ -2,6 +2,7 @@ const express = require('express')
 const {
     getGuideTeams,
     getGuideTeam,
+    getGuideTeamsAssis,
     createGuideTeam,
     deleteGuideTeam,
     updateGuideTeam
@@ -9,8 +10,12 @@ const {
 
 const router = express.Router()
 
+router.post('/assistant/get', getGuideTeamsAssis)
+
 // Get all por professor
 router.post('/', getGuideTeams)
+
+
 
 // Get one
 router.get('/:id', getGuideTeam)

@@ -1,7 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../components/sideBar.css'; // You can define your sidebar styles in this file
+import axios from 'axios';
 
-const Sidebar = ({s1, s2, s3, s4, sAE}) => {
+const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
+
+    useEffect(() => {
+        const fetchTeams = () => {
+            axios.post('http://localhost:4000/api/guideTeam/assistant/get', {id: id})
+                .then(response => {
+                    sE(response.data);
+                    sES(response.data[0]);
+                    dejarPrimera();
+                    
+                })
+                .catch(err => {
+                    console.error('Error fetching data:', err);
+                });
+        };
+    
+        fetchTeams();
+    }, []);
+
+    const changeEquipo = (e) => {
+        sE(e.target.value);
+        s1(false);
+        s2(false);
+        s3(false);
+        s4(false);
+        sAE(false);
+        dejarPrimera();
+
+    }
+
 
     const dejarPrimera = () =>{
         s1(true);
@@ -39,8 +69,12 @@ const Sidebar = ({s1, s2, s3, s4, sAE}) => {
         <li>
             <div className="dropdown">
                 <h2>Equipo Guía</h2>
-                <select>
-                    <option value="team1">Equipo guía primer ingreso</option>
+                <select onChange={changeEquipo}>
+                {equipos.map((equipo) => (
+                    <option key={equipo._id} value={equipo._id}>
+                        Equipo guía 20{equipo.generation}
+                    </option>
+                ))}
                 </select>
             </div>
         </li>

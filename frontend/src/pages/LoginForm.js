@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, {  useState, useEffect } from 'react';
 import './LoginForm.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {  useNavigate } from 'react-router-dom';
@@ -98,6 +98,8 @@ const LoginForm = () => {
                 navigate('/')
             }
         }
+
+
     }
 
 
@@ -120,22 +122,7 @@ const LoginForm = () => {
                         </span>
                                       
                 </div>
-                <div className="dropdown-container">
-                    <div className="dropdown-top-text">Tipo de usuario</div>
-                    <div className="dropdown-header" onClick={toggleDropdown}>
-                    {selectedOption || 'Select an option'}
-                    <i className={`arrow ${isOpen ? 'up' : 'down'}`} />
-                  </div>
-                  {isOpen && (
-                    <ul className="dropdown-list">
-                      {options.map((option, index) => (
-                        <li key={index} onClick={() => handleOptionClick(option)}>
-                          {option}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
+                
                 <div className='botonOlvidar'>
                     <button onClick={forgot}>¿Olvidó su contraseña? </button>
                 </div>

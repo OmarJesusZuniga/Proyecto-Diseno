@@ -1,9 +1,9 @@
 import "../components/infoProfesor.css"
 import {  useNavigate } from 'react-router-dom';
 
-const InfoProfesor = ({professor , usuario}) => {
+const InfoProfesor = ({professor , usuario, equipo}) => {
     const navigate = useNavigate();
-
+    
     const submitModify = async (e) => {
         navigate("/modProfesor", {state: {usuario, professor}});
     }
@@ -36,8 +36,12 @@ const InfoProfesor = ({professor , usuario}) => {
                 </div>
 
                 <div className="botonesProfesor">
-                    <button onClick={submitModify}>Modificar información</button>
-                    <button onClick={registroProfesor}>Registrar al equipo</button>    
+                    <button onClick={submitModify}>Modificar informacion</button>
+                    {equipo.professors.map((professorM) => {
+                        if(professorM._id === professor._id){
+                            <button onClick={registroProfesor}>Registrar al equipo</button>
+                        }
+                    })}
                 </div>
 
             </div>

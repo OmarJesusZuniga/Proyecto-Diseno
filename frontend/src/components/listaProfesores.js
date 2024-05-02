@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../components/listaProfesores.css";
 import InfoProfesor from "./infoProfesor";
 import axios from 'axios';
 
-const ListaProfesores = ({ campus , usuario }) => {
+const ListaProfesores = ({ campus , usuario, equipo }) => {
     const [professors, setProfessors] = useState([]);
 
     useEffect(() => {
@@ -19,6 +19,7 @@ const ListaProfesores = ({ campus , usuario }) => {
 
         fetchData();
     }, []);
+
     
     return ( 
         <div className="listaProfesores">
@@ -26,7 +27,7 @@ const ListaProfesores = ({ campus , usuario }) => {
             {professors && professors.map((professor, index) => (
                 
                 professor.campus.includes(campus) && (
-                    <InfoProfesor key={index} professor={professor} usuario={usuario}/>
+                    <InfoProfesor equipo={equipo} key={index} professor={professor} usuario={usuario}/>
                 )
             ))}
         </div>

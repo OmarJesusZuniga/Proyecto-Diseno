@@ -21,10 +21,7 @@ const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA, sAE }) => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(estudiantes);
     
-    }, [estudiantes]);
 
     const agregarEstudiante = () => {
         sTP(false);

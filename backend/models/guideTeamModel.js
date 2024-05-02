@@ -7,9 +7,13 @@ const guideTeamSchema = new Schema ({
         type: Number, 
         required: true
     },
+    guideProfessor:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'professor'
+    },
     students: [{ // NUEVO
         type: mongoose.Schema.Types.ObjectId, // Array de Id estudiantes
-        ref: 'students',
+        ref: 'student',
         required: true
     }],
     adminAssistants: [{ // NUEVO
