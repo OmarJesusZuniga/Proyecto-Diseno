@@ -3,7 +3,7 @@ import "../components/listaEstudiantes.css"
 import InfoEstudiante from "./infoEstudiante";
 import axios from 'axios';
 
-const ListaEstudiantes = ({ campus }) => {
+const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA, sAE }) => {
     
     const [estudiantes, setEstudiantes] = useState([]);
 
@@ -25,11 +25,19 @@ const ListaEstudiantes = ({ campus }) => {
         console.log(estudiantes);
     
     }, [estudiantes]);
+
+    const agregarEstudiante = () => {
+        sTP(false);
+        sPL(false);
+        sEL(false);
+        sA(false);
+        sAE(true);
+    }
     
     return ( 
         <div className="listaEstudiantes">
             <h2>Estudiantes de la sede</h2>
-            <button className="btnAgregarEstudiante">Agregar Estudiante</button>
+            <button onClick={agregarEstudiante} className="btnAgregarEstudiante">Agregar Estudiante</button>
             <div className="dropdown">
                 <select>
                     <option value="team1">Ordenar por....</option>

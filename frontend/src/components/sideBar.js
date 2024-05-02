@@ -1,31 +1,35 @@
 import React from 'react';
 import '../components/sideBar.css'; // You can define your sidebar styles in this file
 
-const Sidebar = ({s1, s2, s3, s4}) => {
+const Sidebar = ({s1, s2, s3, s4, sAE}) => {
 
     const dejarPrimera = () =>{
         s1(true);
         s2(false);
         s3(false);
         s4(false);
+        sAE(false);
     }
     const dejarSegunda = () =>{
         s1(false);
         s2(true);
         s3(false);
         s4(false);
+        sAE(false);
     }
     const dejarTercera = () =>{
         s1(false);
         s2(false);
         s3(true);
         s4(false);
+        sAE(false);
     }
     const dejarCuarta = () => {
         s1(false);
         s2(false);
         s3(false);
         s4(true);
+        sAE(false);
     }
 
 
