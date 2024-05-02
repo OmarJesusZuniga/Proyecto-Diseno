@@ -21,6 +21,10 @@ const activitiesSchema = new Schema ({
         type: Date,
         required: true
     },
+    programmedHour: {
+        type: Number, 
+        required: true
+    },
     managers: [{ // Cambio a lista de Id profes
         type: Schema.Types.ObjectId,
         ref: 'professor',
@@ -44,20 +48,15 @@ const activitiesSchema = new Schema ({
         type: String, // Link al zoom
         required: false
     }, 
-    /*
-    pdf: {              // Creo que esto no se ocupa porque se podria generar cuando se pida 
-        type: String,   // No estoy muy seguro de como se guardaria, vi que se usa GridFs
-        required: false // Creo que mas bien es un pdf que dice que es la actividad (algo por el estilo )
-    }*/
+    pdf: {          
+        type: String,  
+        required: false 
+    },
     state: {
         type: Schema.Types.ObjectId,
         ref: 'activityState',
     },
-    observations: [{ 
-        type: Schema.Types.ObjectId,
-        ref: 'observation',
-        required: true
-    }]
+ 
 }, { timestamps: true })
 
 module.exports = mongoose.model('activity', activitiesSchema)

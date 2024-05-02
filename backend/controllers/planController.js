@@ -1,5 +1,5 @@
 const Plan = require('../models/planModel')
-const Profesor = require('../models/guideProfessorModel')
+const Profesor = require('../models/professorModel')
 const mongoose = require('mongoose')
 
 const getPlans = async (req, res) => {
@@ -28,18 +28,18 @@ const createPlan = async (req, res) => {
   const { profesorId } = req.body
 
   if (!mongoose.Types.ObjectId.isValid(profesorId)) {
-    return res.status(404).json({error: 'No such guide profesor'})
+    return res.status(404).json({error: 'No such profesor 1'})
   }
 
   const profesor = await Profesor.findById(profesorId)
 
   if (!profesor) {
-    return res.status(404).json({error: 'No such guide profesor'})
+    return res.status(404).json({error: 'No such profesor'})
   }
 
   // add to the database
   try {
-    const plan = await Plan.create({ profesorId })
+    const plan = await Plan.create({ professor: profesorId })
     res.status(200).json(plan)
   } catch (error) {
     res.status(400).json({ error: error.message })

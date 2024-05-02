@@ -9,15 +9,14 @@ const {
 
 const router = express.Router()
 
-// Get all
-router.get('/', getGuideTeams)
+// Get all por professor
+router.post('/', getGuideTeams)
 
 // Get one
 router.get('/:id', getGuideTeam)
 
 // Post a campus
-router.post('/', createGuideTeam)
-
+// router.post('/', createGuideTeam)
 
 // Delete a campus
 router.delete('/:id', deleteGuideTeam)

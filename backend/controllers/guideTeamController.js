@@ -1,10 +1,25 @@
 const GuideTeam = require('../models/guideTeamModel')
-const State = require('../controllers/activityStateController')
+const Professor = require('../models/professorModel')
 const mongoose = require('mongoose')
-const { GridFSBucketWriteStream } = require('mongodb')
 
 const getGuideTeams = async (req, res) => {
-  const guideTeams = await GuideTeam.find({}).sort({})
+  const { id } = req.body
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such professor'})
+  }
+
+  const professor = await Professor.findById(id)
+
+  if (!professor) {
+    return res.status(404).json({error: 'No such professor team'})
+  }
+
+  const guideTeams = await GuideTeam.find({ professors: id }).populate('professors');
+
+  if (guideTeams.length === 0) {
+    return res.status(404).json({ error: 'No guide teams found for this professor' });
+  }
 
   res.status(200).json(guideTeams)
 }
@@ -18,7 +33,6 @@ const getGuideTeam = async (req, res) => {
 
   const guideTeam = await GuideTeam.findById(id)
     .populate('students')
-    .populate('representants')
     .populate('adminAssistants')
     .populate('professors');
 
@@ -42,9 +56,6 @@ const createGuideTeam = async (req, res) => {
   }
   if (!students || students.length === 0) {
     emptyFields.push('students');
-  }
-  if (!representants || representants.length === 0) {
-    emptyFields.push('representants');
   }
   if (!adminAssistants || adminAssistants.length === 0) { // Ensure there is at least one manager
     emptyFields.push('managers');

@@ -4,9 +4,9 @@ const activities = require('./activityModel')
 const Schema = mongoose.Schema
 
 const planSchema = new Schema ({
-    guideProfessor: {
+    professor: {
         type: mongoose.Schema.Types.ObjectId, // Id del profesor guia
-        ref: 'guideProfessor' 
+        ref: 'professor' 
     }, 
     activities: [{
         type: Schema.Types.ObjectId,

@@ -1,8 +1,31 @@
 import React from 'react';
 import '../components/sideBar.css';
+import axios from 'axios';
+import { useState, useEffect } from "react";
 
+const SideBarProfe = ({sA, sE, sB, sP, id}) => {
 
-const SideBarProfe = ({sA, sE, sB, sP}) => {
+    const [equipos, setEquipo] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+
+                const response = await axios.post('http://localhost:4000/api/guideTeam/', { id: id });
+                setEquipo(response.data)
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        console.log(equipos);
+    
+    }, [equipos]);
 
     const dejarProfes = () => {
         sB(false);
@@ -34,7 +57,11 @@ const SideBarProfe = ({sA, sE, sB, sP}) => {
                     <div className="dropdown">
                         <h2>Equipo Guía</h2>
                         <select>
-                            <option  value="team1">Equipo guía primer ingreso</option>
+                        {equipos.map((equipo) => (
+                            <option key={equipo._id} value={equipo._id}>
+                                Generation {equipo.generation}
+                            </option>
+                        ))}
                         </select>
                     </div>
                 </li>
