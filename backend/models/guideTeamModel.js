@@ -12,11 +12,6 @@ const guideTeamSchema = new Schema ({
         ref: 'students',
         required: true
     }],
-    representants: [{ // NUEVO
-        type: mongoose.Schema.Types.ObjectId, // Array de Id representantes
-        ref: 'representant',
-        required: true
-    }],
     adminAssistants: [{ // NUEVO
         type: mongoose.Schema.Types.ObjectId, // Array de Id asistentes adiministrativas
         ref: 'adminAssistant',
