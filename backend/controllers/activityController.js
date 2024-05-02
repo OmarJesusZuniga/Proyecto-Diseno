@@ -1,5 +1,5 @@
 const Activity = require('../models/activityModel')
-const State = require('../controllers/activityStateController')
+const ActivityState = require('../models/activityStateModel')
 const mongoose = require('mongoose')
 
 const getActivities = async (req, res) => {
@@ -29,7 +29,7 @@ const getActivity = async (req, res) => {
 
 const createActivity = async (req, res) => {
   const {
-    week, name, type, programmedDate, managers, publishDate, reminders, modality, link
+    week, name, type, programmedDate, programmedHour, managers, publishDate, reminders, modality, link
   } = req.body;
 
   let emptyFields = [];
@@ -46,6 +46,9 @@ const createActivity = async (req, res) => {
   }
   if (!programmedDate) {
     emptyFields.push('programmedDate');
+  }
+  if (!programmedHour) {
+    emptyFields.push('programmedHour');
   }
   if (!managers || managers.length === 0) { // Ensure there is at least one manager
     emptyFields.push('managers');
@@ -65,10 +68,12 @@ const createActivity = async (req, res) => {
   // Add to the database
   try {
 
-    const newState = await State.createActivityState();
+    const newState = await ActivityState.create({
+      type: 'Notificada'
+    })
 
     if (!newState) {
-      return res.status(404).json({error: 'Could not create State for Activity'});
+      return res.status(404).json({error: 'Could not create State for Activity'})
     }
 
     const state = newState._id;
@@ -78,6 +83,7 @@ const createActivity = async (req, res) => {
       name,
       type,
       programmedDate,
+      programmedHour,
       managers,
       publishDate,
       reminders,
@@ -89,6 +95,8 @@ const createActivity = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+
+  res.status(400).json({result: "finish"})
 };
 
 const deleteActivity = async (req, res) => {

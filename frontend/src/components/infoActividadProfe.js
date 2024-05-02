@@ -1,6 +1,6 @@
 import "../components/infoActividad.css"
 
-const InfoActividad = ({ actividad }) => {
+const InfoActividadProfe = () => {
     return(
         <div className="cartaActividad">
             <h2>Juegos al aire libre</h2>
@@ -57,4 +57,4 @@ const InfoActividad = ({ actividad }) => {
     );
 }
  
-export default InfoActividad;
+export default InfoActividadProfe;

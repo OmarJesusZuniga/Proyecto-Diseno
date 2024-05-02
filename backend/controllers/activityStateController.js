@@ -26,13 +26,15 @@ const getActivityState = async (req, res) => {
 }
 
 const createActivityState = async (req, res) => {
-  const newState = await State.create({
-    type: 'Planeada'
+  const newState = await ActivityState.create({
+    type: 'Notificada'
   })
 
   if (!newState) {
     return res.status(404).json({error: 'Could not create State for Activity'})
   }
+
+  res.status(200).json(newState)
 };
 
 const deleteActivityState = async (req, res) => {

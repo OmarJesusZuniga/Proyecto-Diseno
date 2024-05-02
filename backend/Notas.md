@@ -43,7 +43,6 @@ Esto considera Fase 1 y Fase 2
 - Tener acceso a la lista total de estudiantes organizada tanto por orden alfabético, por número de carné o por campus.
 - Modificar alguna información particular de un estudiante en específico si y sólo si pertenece a su sede.
 - Generar un nuevo archivo en Excel con la información de los estudiantes de su campus o centro académico, o bien de todos los campus o centros académicos, pero cada uno de ellos separados en pestañas u hojas independientes dentro del mismo archivo.
-- Registrar plan de trabajo
 - Registrar comentarios a una actividad del plan de trabajo.
 - Replicar o contestar a un mensaje asociado a una actividad del plan de trabajo.
 - Visualizar el plan de trabajo registrado por el coordinador tanto con comentarios o sin ellos.

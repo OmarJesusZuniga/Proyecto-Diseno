@@ -34,10 +34,10 @@ const activitiesSchema = new Schema ({
         type: Date,
         required: true
     },
-    reminders: {
-        type: [Date],
+    reminders: [{
+        type: Date,
         required: false
-    },
+    }],
     modality: {
         type: String,
         enum: ['Presencial', 'Remota'],

@@ -32,9 +32,6 @@ const getGuideTeam = async (req, res) => {
   }
 
   const guideTeam = await GuideTeam.findById(id)
-    .populate('students')
-    .populate('adminAssistants')
-    .populate('professors');
 
   if (!guideTeam) {
     return res.status(404).json({error: 'No such guide team'})
