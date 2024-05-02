@@ -27,6 +27,33 @@ const LoginForm = () => {
         navigate("/forgotPassword", {state :{selectedOption, user, pass}});
     }
 
+    async function submitX(e){
+        e.preventDefault();
+
+            
+        try {
+            const response = await axios.post('http://localhost:4000/api/logIn/namepass/get/', {
+                name: user,
+                password: pass
+            })
+            const { Status, Data } = response.data;
+    
+            if (Status === "Professor" || Status === "Admin Assistant") {
+                const usuario = Data[0];
+                const route = Status === "Professor" ? '/homeProfe' : '/home/';
+                navigate(route, { state: { usuario } });
+            } else {
+                // Navigate to root if Status is "Not Found" or any other unexpected Status
+                navigate('/')
+            }
+        } catch (error){
+            
+            console.log(error)
+            navigate('/')
+        }
+    }
+    
+
     async function submit(e){
         e.preventDefault();
         
@@ -113,7 +140,7 @@ const LoginForm = () => {
                     <button onClick={forgot}>¿Olvidó su contraseña? </button>
                 </div>
                 
-                <button onClick={submit}>Login </button>
+                <button onClick={submitX}>Login </button>
 
             </form> 
 

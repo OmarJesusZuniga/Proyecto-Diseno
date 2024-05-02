@@ -1,6 +1,7 @@
 const express = require('express')
 const {
-    forgotPassword
+    forgotPassword,
+    loginUser
 } = require('../controllers/logInController')
 
 const router = express.Router()
@@ -9,6 +10,8 @@ const router = express.Router()
 router.get('/', forgotPassword)
 
 router.get('/:id', forgotPassword)
+
+router.post('/namepass/get/', loginUser)
 
 
 module.exports = router
