@@ -67,7 +67,7 @@ const Home = (req, res) => {
         <div className="home"> 
             <Navbar id = {usuario.firstname} apellido = {usuario.firstLastname}/>
             <div className="horizontal-container">
-                <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad}/>
+                <Sidebar s1={setTodosLosProfes} s2={setProfesLista} s3={setEstudiantesLista} s4={setSiguienteActividad} sAE={setAgregEstu}/>
                 <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/>
                 <div className="contenedorListas">
                     {todosLosProfes && <ListaProfesores campus={usuario.campus} usuario={usuario}/>}
