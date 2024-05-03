@@ -43,7 +43,6 @@ const LoginForm = () => {
                 const route = Status === "Professor" ? '/homeProfe' : '/home/';
                 navigate(route, { state: { usuario } });
             } else {
-                // Navigate to root if Status is "Not Found" or any other unexpected Status
                 navigate('/')
             }
         } catch (error){
@@ -53,56 +52,6 @@ const LoginForm = () => {
         }
     }
     
-
-    async function submit(e){
-        e.preventDefault();
-        
-        if (selectedOption === 'Asistente Administrativa'){
-            try{
-                const response = await axios.post('http://localhost:4000/api/adminAssistants/namepass/get/', {
-                    name: user,
-                    password: pass
-                })
-    
-                const dataArray = response.data
-                
-                if (dataArray.length === 0 ){
-                    navigate('/');
-                } else{
-                    const usuario = dataArray[0]
-                    navigate('/home/', {state: {usuario}});
-                }
-                
-                
-            }catch{
-                navigate('/')
-            }
-        } else if (selectedOption === 'Profesor'){
-            try {
-
-                const response = await axios.post('http://localhost:4000/api/professors/namepass/get/', {
-                    user: user,
-                    password: pass
-                })
-
-                const dataArray = response.data;
-                if(dataArray.length === 0){
-                    navigate('/')
-                } else {
-                    const usuario = dataArray[0];
-                    navigate('/homeProfe', {state: {usuario}})
-                }
-
-
-            } catch {
-                navigate('/')
-            }
-        }
-
-
-    }
-
-
     return (
         <div className="wrapper">
             <form action='POST'>
@@ -122,7 +71,6 @@ const LoginForm = () => {
                         </span>
                                       
                 </div>
-                
                 <div className='botonOlvidar'>
                     <button onClick={forgot}>¿Olvidó su contraseña? </button>
                 </div>

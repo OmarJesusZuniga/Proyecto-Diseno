@@ -7,9 +7,8 @@ const {
 const router = express.Router()
 
 // GET all Plans
-router.get('/', forgotPassword)
 
-router.get('/:id', forgotPassword)
+router.post('/:id', forgotPassword)
 
 router.post('/namepass/get/', loginUser)
 
