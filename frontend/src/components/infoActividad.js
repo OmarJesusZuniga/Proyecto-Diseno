@@ -1,6 +1,16 @@
 import "../components/infoActividad.css"
+import { useNavigate , useLocation } from 'react-router-dom';
+
 
 const InfoActividad = ({ actividad }) => {
+    const navigate = useNavigate();
+    const {state} = useLocation();
+    const {usuario} = state || {};
+
+    const submitModify = async (e) => {
+        navigate("/homeProfe", {state: {usuario}});
+    }
+
     return(
         <div className="cartaActividad">
             <h2>Juegos al aire libre</h2>
@@ -52,6 +62,8 @@ const InfoActividad = ({ actividad }) => {
                 <h4>Estado: </h4>
                 <h5>Completado</h5>
             </div>
+
+            <button onClick={submitModify}> Observaciones</button>
         </div>
         
     );

@@ -10,18 +10,9 @@ const LoginForm = () => {
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
     const [showPass, setShowPass] = useState(false);    
-    const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
     const options = ['Asistente Administrativa', 'Profesor'];
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-      };
-    
-    const handleOptionClick = (option) => {
-      setSelectedOption(option);
-      setIsOpen(false);
-    };
 
     const forgot = async (e) => {
         navigate("/forgotPassword", {state :{selectedOption, user, pass}});
