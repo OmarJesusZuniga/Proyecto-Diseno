@@ -26,7 +26,7 @@ const HomeProfe = () => {
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
                     {}
-                    {listaActividades && <ListaActividadesProfe grupo={grupo} />}
+                    {listaActividades && <ListaActividadesProfe grupo={grupo} usuario={usuario} />}
                 </div>
 
             </div>

@@ -6,6 +6,10 @@ const activitiesSchema = new Schema ({
     text: {
         type: String,
         required: true
+    }, 
+    profesor: {
+        type: mongoose.Schema.Types.ObjectId, // Id del profesor guia
+        ref: 'professor' 
     },
     comments: [{
         type: Schema.Types.ObjectId,

@@ -8,7 +8,7 @@ const InfoActividad = ({ actividad }) => {
     const {usuario} = state || {};
 
     const submitModify = async (e) => {
-        navigate("/homeProfe", {state: {usuario}});
+        navigate("/agregarObservacion", {state: {usuario}});
     }
 
     return(
