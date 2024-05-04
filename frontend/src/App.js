@@ -6,6 +6,7 @@ import LoginForm from './pages/LoginForm';
 import ForgotPassword from './pages/forgotPassword';
 import ModificarEstudiante from './pages/modificarEstudiante';
 import ModificarProfesor from './pages/modificarProfesor';
+import AgregarObservacion from './pages/agregarObservacion';
 import HomeProfe from './pages/HomeProfe';
 
 import FilePrueba from './pages/borrar'; // Borrar
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/homeProfe" element={<HomeProfe/>}/>
           <Route path="/modEstudiante" element={<ModificarEstudiante/>} />
           <Route path="/modProfesor" element={<ModificarProfesor/>} />
+          <Route path="/agregarObservacion" element={<AgregarObservacion/>} />
           <Route path="/forgotPassword" element={<ForgotPassword/>} /> 
           <Route path="/file" element={<FilePrueba/>} /> // Borrar
 

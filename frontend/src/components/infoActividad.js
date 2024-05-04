@@ -2,13 +2,13 @@ import "../components/infoActividad.css"
 import { useNavigate , useLocation } from 'react-router-dom';
 
 
-const InfoActividad = ({ actividad, observaciones  }) => {
+const InfoActividad = ({ actividad }) => {
     const navigate = useNavigate();
     const {state} = useLocation();
     const {usuario} = state || {};
 
-    const dejarObservaciones = () => {
-        observaciones(true); // This will set the state to show observations
+    const submitModify = async (e) => {
+        navigate("/agregarObservacion", {state: {usuario}});
     }
 
     return(

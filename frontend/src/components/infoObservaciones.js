@@ -1,7 +1,7 @@
 import "../components/infoObservaciones.css"
 import {  useNavigate } from 'react-router-dom';
 
-const InfoObservaciones = ({professor, observacion}) => {
+const InfoObservaciones = ({observacion}) => {
     const navigate = useNavigate();
 
     
