@@ -1,6 +1,11 @@
 import "../components/infoActividad.css"
 
 const InfoActividadProfe = () => {
+
+    const dejarObservaciones = async (e) => {
+        const observacion = null
+    }
+
     return(
         <div className="cartaActividad">
             <h2>Juegos al aire libre</h2>
@@ -52,6 +57,9 @@ const InfoActividadProfe = () => {
                 <h4>Estado: </h4>
                 <h5>Completado</h5>
             </div>
+
+            <button onClick={dejarObservaciones}> Observaciones </button>
+
         </div>
         
     );

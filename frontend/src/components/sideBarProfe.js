@@ -3,7 +3,7 @@ import '../components/sideBar.css';
 import axios from 'axios';
 import { useState, useEffect } from "react";
 
-const SideBarProfe = ({sA, sE, sB, sP, id, grupo}) => {
+const SideBarProfe = ({sA, sE, sO, sB, sP, id, grupo}) => {
     const [equipos, setEquipo] = useState([]);
 
 
@@ -32,6 +32,7 @@ const SideBarProfe = ({sA, sE, sB, sP, id, grupo}) => {
     const dejarProfes = () => {
         sB(false);
         sA(false);
+        sO(false);
         sE(false);
         sP(true);
     }
@@ -39,6 +40,7 @@ const SideBarProfe = ({sA, sE, sB, sP, id, grupo}) => {
     const dejarEstudiantes = () => {
         sB(false);
         sA(false);
+        sO(false);
         sP(false);
         sE(true);
     }
@@ -48,9 +50,8 @@ const SideBarProfe = ({sA, sE, sB, sP, id, grupo}) => {
         sP(false);
         sE(false);
         sA(true);
+        sO(false);
     }
-
-
 
     return (
         <div className='sidebar'>

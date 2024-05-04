@@ -3,13 +3,8 @@ import InfoActividadProfe from "./infoActividadProfe";
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from "react-router-dom";
 
-const ListaActividadesProfe = ({ grupo }) => {
-    const navigate = useNavigate();
-    const {state} = useLocation();
-    const {usuario} = state || {};
+const ListaActividadesProfe = ({ grupo, usuario }) => {
 
     const [plan, setPlan] = useState([]);
     const [actividades, setActividad] = useState([]);
@@ -36,20 +31,12 @@ const ListaActividadesProfe = ({ grupo }) => {
         fetchData();
     }, []);
 
-    const submitModify = async (e) => {
-        const observacion = null
-        navigate("/agregarObservacion", {state: {usuario, observacion}});
-    }
-
     return ( 
         <div className="listaActividades">
-
-
             <h2>Actividades del Equipo guía</h2>
             {actividades && actividades.map((actividad) => (
                 <InfoActividadProfe actividad={actividad}/>
             ))}
-            <button onClick={submitModify}> Observaciones </button>
         </div>
     );
 }

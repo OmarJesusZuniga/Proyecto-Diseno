@@ -7,7 +7,7 @@ const InfoActividad = ({ actividad }) => {
     const {state} = useLocation();
     const {usuario} = state || {};
 
-    const submitModify = async (e) => {
+    const dejarObservaciones = async (e) => {
         navigate("/agregarObservacion", {state: {usuario}});
     }
 
