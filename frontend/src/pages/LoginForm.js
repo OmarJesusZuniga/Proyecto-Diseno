@@ -55,6 +55,7 @@ const LoginForm = () => {
                             placeholder='Password'
                             title="Must be numeric and 8 characters long."
                             pattern="^[0-9]{8}$"
+                            maxLength={8} 
                             onChange={(e) => setPass(e.target.value)} 
                             required/>
                         <span className='icon' onClick={() => setShowPass(!showPass)}>
