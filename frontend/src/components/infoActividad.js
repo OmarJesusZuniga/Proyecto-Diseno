@@ -63,7 +63,7 @@ const InfoActividad = ({ actividad, observaciones  }) => {
                 <h5>Completado</h5>
             </div>
 
-            <button onClick={dejarObservaciones}> Observaciones</button>
+            <button onClick={dejarObservaciones}> Observaciones </button>
         </div>
         
     );
