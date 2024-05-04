@@ -1,12 +1,13 @@
 import "../components/listaActividades.css"
 import InfoActividad from "./infoActividad";
 
-const ListaActividades = () => {
+const ListaActividades = ({observaciones}) => {
+    
     return ( 
         <div className="listaActividades">
             <h2>Actividades del Equipo guía</h2>
-            <InfoActividad/>
-            <InfoActividad/>
+            <InfoActividad observaciones={observaciones}/>
+            <InfoActividad observaciones={observaciones}/>
         </div>
     );
 }

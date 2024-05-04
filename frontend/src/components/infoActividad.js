@@ -2,13 +2,13 @@ import "../components/infoActividad.css"
 import { useNavigate , useLocation } from 'react-router-dom';
 
 
-const InfoActividad = ({ actividad }) => {
+const InfoActividad = ({ actividad, observaciones  }) => {
     const navigate = useNavigate();
     const {state} = useLocation();
     const {usuario} = state || {};
 
-    const submitModify = async (e) => {
-        navigate("/agregarObservacion", {state: {usuario}});
+    const dejarObservaciones = () => {
+        observaciones(true); // This will set the state to show observations
     }
 
     return(
@@ -63,7 +63,7 @@ const InfoActividad = ({ actividad }) => {
                 <h5>Completado</h5>
             </div>
 
-            <button onClick={submitModify}> Observaciones</button>
+            <button onClick={dejarObservaciones}> Observaciones</button>
         </div>
         
     );

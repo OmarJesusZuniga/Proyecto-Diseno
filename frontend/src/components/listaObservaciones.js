@@ -3,8 +3,8 @@ import "../components/listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
 
-const ListaObservaciones = () => {
-    const [observaciones, setObservaciones] = useState([]);
+const ListaObservaciones = ({professor, campus, observaciones}) => {
+    const [listaDeObservaciones, setObservaciones] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,10 +23,10 @@ const ListaObservaciones = () => {
     return ( 
         <div className="listaObservaciones">
             <h2>Observaciones de la actividad</h2>
-            {observaciones && observaciones.map((observacion, index) => (
+            {listaDeObservaciones && listaDeObservaciones.map((observacion, index) => (
                 
                 professor.campus.includes(campus) && (
-                    <InfoObservacion equipo={equipo} key={index} professor={professor} usuario={usuario}/>
+                    <InfoObservacion professor={professor} campus={campus} observaciones={observaciones}/>
                 )
             ))}
         </div>

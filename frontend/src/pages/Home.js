@@ -5,6 +5,7 @@ import ListaActividades from "../components/listaActividades";
 import ListaEstudiantes from "../components/listaEstudiantes";
 import ListaProfesores from "../components/listaProfesores";
 import AgregarEstudiante from "../components/agregarEstudiante";
+import ListaObservaciones from "../components/listaObservaciones";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
@@ -23,7 +24,8 @@ const Home = (req, res) => {
     const [estudiantesLista, setEstudiantesLista] = useState(false);
     const [siguienteActividad, setSiguienteActividad] = useState(false);
     const [agregarEstudiante, setAgregEstu] = useState(false);
-    
+    const [mostrarObservaciones, setMostrarObservaciones] = useState(false);
+    const [mostrarActividades, setActividades] = useState(false);
 
     //Equipos guia y equipo seleccionado
 
@@ -93,8 +95,9 @@ const Home = (req, res) => {
                     {todosLosProfes && <ListaProfesores campus={usuario.campus} usuario={usuario} equipo={equipoSeleccionado}/>}
                     {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado}/>}
                     {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} sAE={setAgregEstu}/>}
-                    {siguienteActividad && <><ListaActividades/></>}
+                    {mostrarObservaciones && <ListaObservaciones usuario={usuario} campus={usuario.campus} observaciones={setMostrarObservaciones}/>}
                     {agregarEstudiante && <AgregarEstudiante campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} sAE={setAgregEstu}/>}
+                    {mostrarActividades && <ListaActividades />}
                 </div>
             </div>
             
