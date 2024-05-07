@@ -1,30 +1,32 @@
-import "../components/infoObservaciones.css"
+import "../components/infoObservaciones.css";
+import moment from 'moment';  // Import moment
 
-const InfoObservaciones = ({observacion , professor, todosFalse, commentIDList }) => {
-
+const InfoObservaciones = ({ observacion, usuario, todosFalse, commentIDList }) => {
     const verComentarios = () => {
         todosFalse();
         commentIDList(true);
     }
 
-    return(
+    // Format the date using moment
+    const formattedDate = moment(observacion.createdAt).format("MM/DD/YY HH:mm");
+
+    return (
         <div className="cartaObservacion">
             <div className="infoEspecifica">
-                <h2>{professor.email} </h2>
+                <h2>{usuario.email}</h2>
                 <div>
                     <h3>Observación: </h3>
                     <h5>{observacion.text}</h5>
                 </div>
-                <button onClick={verComentarios} className="btnObservaciones">Agregar observación</button>
+
                 <div>
                     <h3>Fecha: </h3>
-                    <h5>{observacion.createdAt}</h5>
+                    <h5>{formattedDate}</h5>  {/* Updated to use formattedDate */}
                 </div>
-
-            </div>     
+                <button onClick={verComentarios} className="btnObservaciones">Agregar comentario</button>
+            </div>
         </div>
-        
     );
 }
- 
+
 export default InfoObservaciones;

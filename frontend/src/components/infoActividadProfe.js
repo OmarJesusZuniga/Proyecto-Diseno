@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId, observationIDList, idActivity, functionUpdateActivities, setActividadActual, setEditarEstado, setEstadoAEditar} ) => {
+const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId, idActivity, functionUpdateActivities, setActividadActual, setEditarEstado, setEstadoAEditar} ) => {
 
     const [managers, setManagers] = useState([]);
     const [state, setState] = useState('');
@@ -14,7 +14,6 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
     const [reminders, setReminders] = useState([]);
 
     const dejarObservaciones = async (e) => {
-        observationIDList(actividad.observations)
         idActivity(actividad._id)
         todosFalse();
         sO(true);

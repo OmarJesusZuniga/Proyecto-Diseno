@@ -11,14 +11,16 @@ const AgregarObservacion = ({ usuario, todosFalse, returnPage, idActivity}) => {
         console.log(observacion); 
 
         try {
-            const id = idActivity[0]
-            const response = await axios.post("http://localhost:4000/api/observation/", { text: observacion, professor: usuario, idActivity: id });
+            console.log("idActivity")
+            console.log(idActivity)
+            const response = await axios.post("http://localhost:4000/api/observation/", { text: observacion, professor: usuario, idActivity: idActivity });
             console.log(response)
 
         } catch (error) {
+            console.log("Error agregarObservacion")
             console.error('Error fetching data:', error);
         }
-
+        volver()
     }
 
     const handleInputChange = (e) => {

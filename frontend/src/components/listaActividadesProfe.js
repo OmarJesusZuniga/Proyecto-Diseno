@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 
 
-const ListaActividadesProfe = ({ grupo, todosFalse, sO, observationIDList, agregarActividad, setPlanActual, idActivity, editarActividad, setActividadActual, setEditarEstado, setEstadoAEditar}) => {
+const ListaActividadesProfe = ({ grupo, todosFalse, sO, agregarActividad, setPlanActual, idActivity, editarActividad, setActividadActual, setEditarEstado, setEstadoAEditar}) => {
     const [actividades, setActividad] = useState([]);
     const [planID, setPlan] = useState('')
 
@@ -50,12 +50,11 @@ const ListaActividadesProfe = ({ grupo, todosFalse, sO, observationIDList, agreg
                     actividad={actividad} 
                     todosFalse={todosFalse} 
                     sO = {sO} 
-                    observationIDList={observationIDList}
                     planId={planID}
                     functionUpdateActivities={functionUpdateActivities}
                     setActividadActual={setActividadActual}
                     editarActividad={editarActividad}
-                    idActivty={idActivity}
+                    idActivity={idActivity}
                     setEditarEstado={setEditarEstado}
                     setEstadoAEditar={setEstadoAEditar}
                 />

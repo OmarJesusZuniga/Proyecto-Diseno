@@ -7,7 +7,7 @@ const observationSchema = new Schema ({
         type: String,
         required: true
     }, 
-    profesor: {
+    professor: {
         type: mongoose.Schema.Types.ObjectId, // Id del profesor guia
         ref: 'professor' 
     },

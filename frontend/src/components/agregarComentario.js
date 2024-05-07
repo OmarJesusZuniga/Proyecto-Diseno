@@ -11,7 +11,7 @@ const AgregarComentario = ({ usuario }) => {
 
         try {
 
-            const response = await axios.post("http://localhost:4000/api/observation/", { text: comentario, user: usuario });
+            const response = await axios.post("http://localhost:4000/api/observation/", { text: comentario, professor: usuario });
             console.log(response)
 
         } catch (error) {

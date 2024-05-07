@@ -3,23 +3,24 @@ import "../components/listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
 
-const ListaObservaciones = ({ observationIDList, usuario , sAgregarObservacion, todosFalse, commentIDList }) => {
+const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFalse, commentIDList }) => {
     const [observaciones, setObservaciones] = useState([]);
-
+    console.log("idActivity")
+    console.log(idActivity)
     useEffect(() => {
         const fetchData = async () => {
             
-            const promises = observationIDList.map(id =>
-                axios.get(`http://localhost:4000/api/observation/${id}`)
-            );
-            const responses = await Promise.all(promises);
-            const data = responses.filter(response => response !== null).map(res => res.data);
-            setObservaciones(data);
-            
+            try {
+                const response = await axios.get("http://localhost:4000/api/activity/" + idActivity );
+                
+                setObservaciones(response.data.observations);
+            } catch (error) {
+                console.log(error.message)
+            }            
         };
 
         fetchData();
-    }, [observationIDList]); // Ensure useEffect runs when observationIDList changes
+    }, []); 
 
     const agregarObservacion = () => {
         todosFalse();

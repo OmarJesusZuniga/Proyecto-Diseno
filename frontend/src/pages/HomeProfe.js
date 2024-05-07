@@ -66,7 +66,7 @@ const HomeProfe = () => {
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
-                    {listaObservaciones && <ListaObservaciones usuario={usuario} todosFalse={todoFalse} sAgregarObservacion={setAgregarObservacion} observationIDList={observationIDList} commentIDList={setCommentIDList}/>}
+                    {listaObservaciones && <ListaObservaciones idActivity={activityId} usuario={usuario} todosFalse={todoFalse} sAgregarObservacion={setAgregarObservacion} commentIDList={setCommentIDList}/>}
                     {listaActividadesProfe && <ListaActividadesProfe
                                                                     // Generales
                                                                     grupo={grupo} 
@@ -88,7 +88,7 @@ const HomeProfe = () => {
                                                                     // Activity 
                                                                     idActivity={setActivityID}
                                                                     />}
-                    {agregarObservacion && <AgregarObservacion usuario={usuario}/>}
+                    {agregarObservacion && <AgregarObservacion usuario={usuario} idActivity={activityId} todosFalse={todoFalse} returnPage={setObservaciones} />}
                     {agregarComentario && <AgregarComentario usuario={usuario}/>}
                     
                     {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}

@@ -32,21 +32,26 @@ const createObservation = async (req, res) => {
   if (!text) {
     return res.status(400).json({ error: 'Please fill the text field'})
   }
-
+  console.log("idActivity")
+  console.log(idActivity)
   // add to the database
   try {
     const id = professor._id
-    const activity = await Activity.findById(activityId); // Ensure you use the correct field name
+    const activity = await Activity.findById(idActivity); // Ensure you use the correct field name
     if (!activity) {
      return res.status(404).json({ error: 'Activity not found' });
     }
+    console.log("activity")
+    console.log(activity)
     const observation = await Observation.create({ text, id, comments: [] })
-
+    console.log("observation")
+    console.log(observation)
     activity.observations.push(observation._id);
     await activity.save();
 
     res.status(200).json(observation)
   } catch (error) {
+    console.log({ error: error.message })
     res.status(400).json({ error: error.message })
   }
 }
