@@ -3,7 +3,7 @@ import "../components/listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
 
-const ListaObservaciones = ({ observationIDList, usuario , sO, todosFalse }) => {
+const ListaObservaciones = ({ observationIDList, usuario , sAgregarObservacion, todosFalse }) => {
     const [observaciones, setObservaciones] = useState([]);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const ListaObservaciones = ({ observationIDList, usuario , sO, todosFalse }) => 
 
     const agregarObservacion = () => {
         todosFalse();
-        sO(true);
+        sAgregarObservacion(true);
     }
 
     return ( 

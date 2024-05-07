@@ -13,8 +13,7 @@ const observationSchema = new Schema ({
     },
     comments: [{
         type: Schema.Types.ObjectId,
-        ref: 'comment',
-        required: true
+        ref: 'comment'
     }]
 }, { timestamps: true })
 

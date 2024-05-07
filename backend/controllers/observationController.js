@@ -26,7 +26,7 @@ const getObservation = async (req, res) => {
 }
 
 const createObservation = async (req, res) => {
-  const {text} = req.body
+  const {text, professor} = req.body
 
   if (!text) {
     return res.status(400).json({ error: 'Please fill the text field'})
@@ -34,7 +34,8 @@ const createObservation = async (req, res) => {
 
   // add to the database
   try {
-    const observation = await Observation.create({ title, load, reps })
+    const id = professor._id
+    const observation = await Observation.create({ text, id, comments: [] })
     res.status(200).json(observation)
   } catch (error) {
     res.status(400).json({ error: error.message })
