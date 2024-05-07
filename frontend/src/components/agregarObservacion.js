@@ -9,7 +9,7 @@ const AgregarObservacion = ({ usuario }) => {
     const submitModify = async (e) => {
         e.preventDefault(); 
         console.log(observacion); 
-        
+
         try {
 
             const response = await axios.post("http://localhost:4000/api/observation/", { text: observacion, user: usuario });
@@ -25,17 +25,17 @@ const AgregarObservacion = ({ usuario }) => {
     };
 
     return (       
-        <div className="principal">
-            <div className="contenedorListas">
-                <h2>Agregar Observación</h2>
+        <div className="agregarObservacion">
+        
+            <h2>Agregar Observación</h2>
 
-                <h4>Escriba su observación</h4>
-                    <div className="input-box">
-                        <input type="text" onChange={handleInputChange} value={"observacion.text"} required />
-                    </div>
+            <h4>Escriba su observación</h4>
+                <div className="input-box">
+                    <input type="text" onChange={handleInputChange} value={"observacion.text"} required />
+                </div>
 
-                <button onClick={submitModify}>Guardar observación</button>
-            </div>
+            <button onClick={submitModify} className='botonGuardarObservacion'>Guardar observación</button>
+
 
         </div>
         
