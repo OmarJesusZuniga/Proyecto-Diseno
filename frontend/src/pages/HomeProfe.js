@@ -64,6 +64,8 @@ const HomeProfe = () => {
                                                                     usuario={usuario} 
                                                                     todosFalse={todoFalse} 
                                                                     sO ={setObservaciones}
+                                                                    editarActividad ={setEditarActividad}
+                                                                    setActividadActual = {setActividadAEditar}
                                                                     observationIDList = {setObservationIDList}
                                                                     agregarActividad = {setAgregarActividad}
                                                                     setPlanActual={setPlanActual}/>}
