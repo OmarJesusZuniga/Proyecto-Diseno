@@ -11,10 +11,7 @@ const ListaObservaciones = ({ observationIDList, usuario , sAgregarObservacion, 
             
             const promises = observationIDList.map(id =>
                 axios.get(`http://localhost:4000/api/observation/${id}`)
-            ).catch(err => {
-                console.error(`Error fetching observation `, err);
-                return null; // Return null or some error indication for individual failed requests
-            });
+            );
             const responses = await Promise.all(promises);
             const data = responses.filter(response => response !== null).map(res => res.data);
             setObservaciones(data);

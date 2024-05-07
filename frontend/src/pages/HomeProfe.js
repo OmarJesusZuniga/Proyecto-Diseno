@@ -30,31 +30,33 @@ const HomeProfe = () => {
     // Editar Actividada
     const [editarActividad, setEditarActividad] = useState(false);
     const [actividadAEditar, setActividadAEditar] = useState(null);
+    const [grupo, setGrupo] = useState();
+
+    const [observationIDList, setObservationIDList] = useState([]);
+    const [activityId, setActivityID] = useState([]);
+    const [commentIDList, setCommentIDList] = useState([]);
 
     const todoFalse = () => {
+        setProfes(false);
         setActividadesProfe(false);
         setProfes(false);
         setEditarActividad(false);
         setObservaciones(false);
+        setAgregarObservacion(false);
+        setAgregarComentario(false);
         setEstudiantes(false);
         setBienvenida(false);
-        setAgregarObservacion(false);
         setAgregarActividad(false);
-        setObservationIDList(false);
-        setCommentIDList(false);
-        setAgregarActividad(false);
+        setPlanActual(false);
+        setObservationIDList([]);
+        setCommentIDList([]);
     }
-    
-    const [grupo, setGrupo] = useState();
-
-    const [observationIDList, setObservationIDList] = useState(false);
-    const [commentIDList, setCommentIDList] = useState(false);
     
     return (
         <div className="home"> 
             <Navbar  id={usuario.firstname} apellido={usuario.firstLastname}/>
             <div className="horizontal-container">
-                <SideBarProfe usuario={usuario} sP = {setProfes} sA = {setActividadesProfe} sO = {setObservaciones} sE={setEstudiantes} sB ={setBienvenida} id={usuario._id} grupo={setGrupo}/>
+                <SideBarProfe usuario={usuario} sP = {setProfes} sA = {setActividadesProfe} sE={setEstudiantes} todosFalse={todoFalse} id={usuario._id} grupo={setGrupo}/>
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
@@ -68,11 +70,10 @@ const HomeProfe = () => {
                                                                     setActividadActual = {setActividadAEditar}
                                                                     observationIDList = {setObservationIDList}
                                                                     agregarActividad = {setAgregarActividad}
-                                                                    setPlanActual={setPlanActual}/>}
-                    {agregarObservacion && <AgregarObservacion usuario={usuario}/>}
+                                                                    setPlanActual={setPlanActual}
+                                                                    idActivity={setActivityID}/>}
+                    {agregarObservacion && <AgregarObservacion usuario={usuario} todosFalse={todoFalse} returnPage={setObservaciones} idActivity={activityId}/>}
                     {agregarComentario && <AgregarComentario usuario={usuario}/>}
-                    {agregarComentario && <AgregarComentario usuario={usuario}/>}
-                    {commentIDList && <ListaComentarios commentIDList={commentIDList} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} />}
                     
                     {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}
                     {editarActividad && <EditarActividad reset={todoFalse} returnPage={setActividadesProfe} actividad={actividadAEditar} />}

@@ -2,39 +2,47 @@ import './agregarObservacion.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AgregarObservacion = ({ usuario }) => {
+const AgregarObservacion = ({ usuario, todosFalse, returnPage, idActivity}) => {
     const [observacion, setObservacion] = useState("");
 
     
-    const submitModify = async (e) => {
+    const guardarObservacion = async (e) => {
         e.preventDefault(); 
         console.log(observacion); 
 
         try {
-
-            const response = await axios.post("http://localhost:4000/api/observation/", { text: observacion, user: usuario });
+            const id = idActivity[0]
+            const response = await axios.post("http://localhost:4000/api/observation/", { text: observacion, professor: usuario, idActivity: id });
             console.log(response)
 
         } catch (error) {
             console.error('Error fetching data:', error);
         }
+
     }
 
     const handleInputChange = (e) => {
         setObservacion(e.target.value);
     };
 
+    const volver = () => {
+        todosFalse(); 
+        returnPage(true);
+    }
+
     return (       
         <div className="agregarObservacion">
         
+            <div className="btnVolverContainer"> 
+                <button onClick={volver} className='btnVolver'>Volver</button>
+            </div>
+
             <h2>Agregar Observación</h2>
 
             <h4>Escriba su observación</h4>
-                <div className="inputBox">
-                    <input type="text" onChange={handleInputChange} value={"observacion.text"} required />
-                </div>
+                    <textarea className="inputBoxObservacion" onChange={handleInputChange} placeholder={"Observacion"} required />
 
-            <button onClick={submitModify} className='botonGuardarObservacion'>Guardar observación</button>
+            <button onClick={guardarObservacion} className='botonGuardarObservacion'>Guardar observación</button>
 
 
         </div>
