@@ -138,3 +138,16 @@ select:focus {
 .toast-message {
     font-family: "Poppins";
 }
+
+.coleccionDeImagenes img {
+    opacity: 1; 
+    visibility: visible; 
+    position: absolute;
+
+    display: block;
+    width: 324px; 
+    height: auto; 
+    border: 1px solid var(--accent); 
+    margin-top: 10px;
+    transition: opacity 0.5s ease, visibility 0.5s ease; 
+}

@@ -23,6 +23,12 @@ const FileSelector = ({ fileIncluded }) => {
         .catch(e => console.log(e))
     }
 
+    const eliminarImagen = () => {
+        URL.revokeObjectURL(previewUrl); // Release the object URL
+        setFile(null);
+        setPreviewUrl(null);
+    };
+
     return (
         <div className="File-Selector-ImgPDF">
             <input type="file" onChange={cambioArchivo}/>

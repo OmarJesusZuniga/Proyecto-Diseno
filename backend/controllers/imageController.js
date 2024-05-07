@@ -1,5 +1,6 @@
 const Image = require('../models/imageModel.js')
 const mongoose = require('mongoose')
+const path = require('path');
 
 // Get a single image
 const getImage = async (req, res) => {  
@@ -49,9 +50,15 @@ const deleteImage = async (req, res) => {
     res.status(200).json(image)
 }
 
+const getImagePath = async(req, res) => {
+    const uploadsPath = "http://localhost:4000/document";
+    
+    res.status(200).json({path: uploadsPath + "/"})
+}
 
 module.exports = {
     getImage,
     createImage,
-    deleteImage
+    deleteImage,
+    getImagePath
 }
