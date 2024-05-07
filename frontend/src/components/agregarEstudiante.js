@@ -42,23 +42,23 @@ const AgregarEstudiante = ({ campus, sTP, sPL, sEL, sA, sAE}) => {
     
     const agregarEstudiante = async () => {
 
-        const response = await axios.post('http://localhost:4000/api/students/', {
-            studentCard: carne, 
-            firstLastname: apellido, 
-            secondLastname: segundoApellido, 
-            firstname: nombre, 
-            middlename: segundoNombre, 
-            email: email, 
-            phoneNumber: phoneNumber, 
-            campus: campus
-        })
+        // const response = await axios.post('http://localhost:4000/api/students/', {
+        //     studentCard: carne, 
+        //     firstLastname: apellido, 
+        //     secondLastname: segundoApellido, 
+        //     firstname: nombre, 
+        //     middlename: segundoNombre, 
+        //     email: email, 
+        //     phoneNumber: phoneNumber, 
+        //     campus: campus
+        // })
 
 
-        sTP(false);
-        sPL(false);
-        sEL(true);
-        sA(false);
-        sAE(false);
+        // sTP(false);
+        // sPL(false);
+        // sEL(true);
+        // sA(false);
+        // sAE(false);
     }
 
     const volver = () => {

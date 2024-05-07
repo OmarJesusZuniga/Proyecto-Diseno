@@ -5,6 +5,7 @@ import SideBarProfe from "../components/sideBarProfe";
 import ListaEstudiantesProfe from "../components/listaEstudiantesProfe";
 import ListaActividadesProfe from "../components/listaActividadesProfe";
 import ListaObservaciones from "../components/listaObservaciones";
+import agregarActividadPage from "../components/agregarActividad";
 
 const HomeProfe = () => {
     const {state} = useLocation();
@@ -17,6 +18,7 @@ const HomeProfe = () => {
     const [listaObservaciones, setObservaciones] = useState(false)
     const [listaEstudiantes, setEstudiantes] = useState(false)
     const [bienvenida, setBienvenida] = useState(true);
+    const [agregarActividad, setAgregarActividad] = useState(false)
 
     const todoFalse = () => {
         setActividadesProfe(false);
@@ -45,7 +47,9 @@ const HomeProfe = () => {
                                                                     usuario={usuario} 
                                                                     todosFalse={todoFalse} 
                                                                     sO ={setObservaciones}
-                                                                    setActividad = {setActividadSeleccionada}/>}
+                                                                    setActividad = {setActividadSeleccionada}
+                                                                    agregarActividad = {setAgregarActividad}/>}
+                    {agregarActividad && <agregarActividadPage />}
                 </div>
 
             </div>

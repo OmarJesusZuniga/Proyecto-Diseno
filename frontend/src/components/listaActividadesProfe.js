@@ -4,7 +4,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from "react";
 
-const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setActividadSeleccionada}) => {
+const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setActividad, agregarActividad}) => {
 
     const [plan, setPlan] = useState([]);
     const [actividades, setActividad] = useState([]);
@@ -32,6 +32,7 @@ const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setActividadSel
     }, []);
 
     function agregarActividadClick() {
+        todosFalse();
     }    
 
 
