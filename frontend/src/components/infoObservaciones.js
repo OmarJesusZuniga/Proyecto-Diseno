@@ -1,11 +1,8 @@
 import "../components/infoObservaciones.css"
-import {  useNavigate } from 'react-router-dom';
 
-const InfoObservaciones = ({observacion}) => {
-    const navigate = useNavigate();
+const InfoObservaciones = ({observacion , professor}) => {
 
     
-
     return(
         <div className="cartaObservacion">
             <div className="infoEspecifica">

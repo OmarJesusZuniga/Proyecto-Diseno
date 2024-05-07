@@ -56,6 +56,10 @@ const activitiesSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'activityState',
     },
+    observations: [{
+        type: Schema.Types.ObjectId,
+        ref: 'observations',
+    }],
  
 }, { timestamps: true })
 
