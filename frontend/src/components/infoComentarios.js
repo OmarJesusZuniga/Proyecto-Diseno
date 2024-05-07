@@ -8,7 +8,7 @@ const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios 
     }
 
     return(
-        <div className="cartaObservacion">
+        <div className="cartaComentario">
             <div className="infoEspecifica">
                 <h2>{usuario.email} </h2>
                 <div>

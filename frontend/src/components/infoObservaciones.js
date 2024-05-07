@@ -15,7 +15,7 @@ const InfoObservaciones = ({observacion , professor, todosFalse, commentIDList }
                     <h3>Observación: </h3>
                     <h5>{observacion.text}</h5>
                 </div>
-                <button onClick={verComentarios} className="btnCommentarios">Agregar observación</button>
+                <button onClick={verComentarios} className="btnObservaciones">Agregar observación</button>
                 <div>
                     <h3>Fecha: </h3>
                     <h5>{observacion.createdAt}</h5>
