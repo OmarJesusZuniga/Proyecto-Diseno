@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors');
+const path = require('path');
 
 
 mongoose.set("strictQuery", true)
@@ -49,6 +50,8 @@ app.use('/api/representants', representantRoutes)
 app.use('/api/guideTeam', guideTeamRoutes)
 app.use('/api/image', imageRoutes)
 app.use('/api/logIn', logInRoutes)
+
+app.use('/document', express.static(path.join(__dirname, 'document')));
 
 
 // connect to db

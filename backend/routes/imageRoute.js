@@ -3,7 +3,8 @@ const upload = require('../controllers/imageUploadController'); // adjust the pa
 const {
     getImage,
     createImage,
-    deleteImage
+    deleteImage,
+    getImagePath
 } = require('../controllers/imageController')
 
 const router = express.Router()
@@ -13,6 +14,8 @@ router.get('/:id', getImage)
 
 // POST a new image
 router.post('/', upload.single('file'), createImage);
+
+router.post('/getPath', getImagePath);
 
 // DELETE a image
 router.delete('/:id', deleteImage)
