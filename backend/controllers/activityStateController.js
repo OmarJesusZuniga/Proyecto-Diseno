@@ -16,7 +16,7 @@ const getActivityState = async (req, res) => {
     return res.status(404).json({error: errorMessage})
   }
 
-  const state = await ActivityState.findById(id);
+  const state = await ActivityState.findById(id).populate("imageCollection");
 
   if (!state) {
     return res.status(404).json({error: errorMessage})

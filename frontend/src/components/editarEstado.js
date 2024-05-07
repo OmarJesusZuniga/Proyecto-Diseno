@@ -71,6 +71,9 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
 
                 const response2 = await axios.get('http://localhost:4000/api/activityState/' + estado);
                 setEstadoActividad(response2.data)
+                setLink(response2.data.recordingLink)
+                setImageCollection(response2.data.imageCollection)
+                type.current.value = response2.data.type
 
                 const response3 = await axios.post("http://localhost:4000/api/image/getPath/");
                 setPath(response3.data.path)
@@ -99,8 +102,6 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
                 imageCollection : imageCollection.map(img => img._id),
                 recordingLink : link
             });
-
-            setLink(estadoActividad.recordingLink)
 
         } catch (error) {
             toast.error("Error al añadir la actividad!", {
