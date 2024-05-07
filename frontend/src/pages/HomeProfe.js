@@ -6,7 +6,6 @@ import ListaEstudiantesProfe from "../components/listaEstudiantesProfe";
 import ListaActividadesProfe from "../components/listaActividadesProfe";
 import ListaObservaciones from "../components/listaObservaciones";
 import ListaComentarios from "../components/listaComentarios";
-import agregarActividadPage from "../components/agregarActividad";
 import AgregarObservacion from "../components/agregarObservacion";
 import AgregarActividad from "../components/agregarActividad";
 
@@ -35,8 +34,8 @@ const HomeProfe = () => {
         setBienvenida(false);
         setAgregarObservacion(false);
         setAgregarActividad(false);
-        observationIDList(false);
-        commentIDList(false);
+        setObservationIDList(false);
+        setCommentIDList(false);
         setAgregarActividad(false);
     }
     
@@ -61,11 +60,10 @@ const HomeProfe = () => {
                                                                     sO ={setObservaciones}
                                                                     observationIDList = {setObservationIDList}
                                                                     agregarActividad = {setAgregarActividad}
-                                                                    setActividadSeleccionada = {setActividadSeleccionada}
+                                                                    // setActividadSeleccionada = {setActividadSeleccionada}
                                                                     setPlanActual={setPlanActual}/>}
                     {agregarObservacion && <AgregarObservacion usuario={usuario} />}
                     {commentIDList && <ListaComentarios commentIDList={commentIDList} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} />}
-                    {agregarActividad && <agregarActividadPage />}
                     
                     {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}
                 </div>

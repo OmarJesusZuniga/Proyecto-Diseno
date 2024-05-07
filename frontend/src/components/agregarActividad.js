@@ -247,7 +247,7 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
                 </select>
                 <button onClick={removeReminder} className='btnAgregar2'>Eliminar</button>
 
-                <button onClick={agregarActividad} className='btnAgregar'>Agregar Estudiante</button>
+                <button onClick={agregarActividad} className='btnAgregar'>Agregar Actividad</button>
             </div>
             </div>
             
