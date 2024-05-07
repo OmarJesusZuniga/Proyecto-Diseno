@@ -8,37 +8,34 @@ const ListaObservaciones = ({ commentIDList, usuario , todosFalse, sAgregarComen
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const promises = commentIDList.map(id =>
-                    axios.get(`http://localhost:4000/api/comment/${id}`)
-                );
-                const responses = await Promise.all(promises);
-                const data = responses.map(res => res.data);
-                setComentarios(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+            
+            const promises = commentIDList.map(id =>
+                axios.get(`http://localhost:4000/api/comment/${id}`)
+            ).catch(err => {
+                console.error(`Error fetching comment `, err);
+                return null; // Return null or some error indication for individual failed requests
+            });
+            const responses = await Promise.all(promises);
+            const data = responses.filter(response => response !== null).map(res => res.data);
+            setComentarios(data);
+            
         };
 
         fetchData();
     }, [commentIDList]); // Ensure useEffect runs when observationIDList changes
 
-    const agregarComentario = () => {
-        todosFalse();
-        sAgregarComentarios(true);
-    }
-
     return ( 
         <div className="listaComentarios">
 
             <h2>Comentarios de la observación</h2>
-            <button onClick={agregarComentario} className="btnAgregarComentario">Agregar comentario</button>
+            
 
-            {comentarios.length > 0 && comentarios.map((observacion, index) => (
+            {comentarios.length > 0 && comentarios.map((comentario) => (
                 <InfoComentario 
-                    observacion={observacion} 
-                    key={index} 
+                    comentario={comentario} 
                     usuario={usuario}
+                    todosFalse={todosFalse}
+                    sAgregarComentarios={sAgregarComentarios}
                 />
             ))}
         </div>

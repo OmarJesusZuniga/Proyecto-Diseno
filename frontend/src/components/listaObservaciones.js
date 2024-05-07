@@ -8,16 +8,17 @@ const ListaObservaciones = ({ observationIDList, usuario , sAgregarObservacion, 
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const promises = observationIDList.map(id =>
-                    axios.get(`http://localhost:4000/api/observation/${id}`)
-                );
-                const responses = await Promise.all(promises);
-                const data = responses.map(res => res.data);
-                setObservaciones(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+            
+            const promises = observationIDList.map(id =>
+                axios.get(`http://localhost:4000/api/observation/${id}`)
+            ).catch(err => {
+                console.error(`Error fetching observation `, err);
+                return null; // Return null or some error indication for individual failed requests
+            });
+            const responses = await Promise.all(promises);
+            const data = responses.filter(response => response !== null).map(res => res.data);
+            setObservaciones(data);
+            
         };
 
         fetchData();
@@ -34,7 +35,7 @@ const ListaObservaciones = ({ observationIDList, usuario , sAgregarObservacion, 
             <h2>Observaciones de la actividad</h2>
             <button onClick={agregarObservacion} className="btnAgregarObservacion">Agregar observación</button>
 
-            {observaciones.length > 0 && observaciones.map((observacion, index) => (
+            {observaciones.length > 0 && observaciones.map((observacion) => (
                 <InfoObservacion 
                     observacion={observacion} 
                     usuario={usuario}
