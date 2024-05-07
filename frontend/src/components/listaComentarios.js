@@ -30,14 +30,14 @@ const ListaObservaciones = ({ commentIDList, usuario , todosFalse, sAgregarComen
             <h2>Comentarios de la observación</h2>
             
 
-            {comentarios.length > 0 && comentarios.map((comentario) => (
+            {/* {comentarios.length > 0 && comentarios.map((comentario) => (
                 <InfoComentario 
                     comentario={comentario} 
                     usuario={usuario}
                     todosFalse={todosFalse}
                     sAgregarComentarios={sAgregarComentarios}
                 />
-            ))}
+            ))} */}
         </div>
     );
 }

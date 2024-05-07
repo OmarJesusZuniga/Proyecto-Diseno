@@ -41,8 +41,8 @@ const HomeProfe = () => {
     
     const [grupo, setGrupo] = useState();
 
-    const [observationIDList, setObservationIDList] = useState([]);
-    const [commentIDList, setCommentIDList] = useState([]);
+    const [observationIDList, setObservationIDList] = useState(false);
+    const [commentIDList, setCommentIDList] = useState(false);
     
     return (
         <div className="home"> 
