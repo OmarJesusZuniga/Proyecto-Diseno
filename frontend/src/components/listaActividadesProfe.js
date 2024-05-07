@@ -4,7 +4,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from "react";
 
-const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setActividad, agregarActividad}) => {
+const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setObservationIDList, agregarActividad}) => {
 
     const [plan, setPlan] = useState([]);
     const [actividades, setActividad] = useState([]);
@@ -43,7 +43,7 @@ const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setActividad, a
                 <button onClick={agregarActividadClick}>Agregar Actividad</button>
             </div>
             {actividades && actividades.map((actividad) => (
-                <InfoActividadProfe actividad={actividad} todosFalse={todosFalse} sO = {sO} setActividadSeleccionada={setActividadSeleccionada}/>
+                <InfoActividadProfe actividad={actividad} todosFalse={todosFalse} sO = {sO} setObservationIDList={setObservationIDList}/>
             ))}
         </div>
     );

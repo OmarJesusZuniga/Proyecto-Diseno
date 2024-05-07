@@ -30,7 +30,7 @@ const HomeProfe = () => {
     
     const [grupo, setGrupo] = useState();
 
-    const [actividad, setActividadSeleccionada] = useState([]);
+    const [observationIDList, setObservationIDList] = useState([]);
     
     return (
         <div className="home"> 
@@ -40,14 +40,13 @@ const HomeProfe = () => {
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
-                    {listaObservaciones && <ListaObservaciones usuario={usuario} todosFalse={todoFalse} sO = {setObservaciones}/>}
+                    {listaObservaciones && <ListaObservaciones usuario={usuario} todosFalse={todoFalse} sO = {setObservaciones} observationIDList={observationIDList}/>}
                     {listaActividadesProfe && <ListaActividadesProfe
                                                                     grupo={grupo} 
-                                                                    listaIdActividad={actividad}
                                                                     usuario={usuario} 
                                                                     todosFalse={todoFalse} 
                                                                     sO ={setObservaciones}
-                                                                    setActividad = {setActividadSeleccionada}
+                                                                    observationIDList = {setObservationIDList}
                                                                     agregarActividad = {setAgregarActividad}/>}
                     {agregarActividad && <agregarActividadPage />}
                 </div>

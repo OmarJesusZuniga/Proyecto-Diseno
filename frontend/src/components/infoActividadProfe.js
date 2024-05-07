@@ -1,10 +1,10 @@
 import "../components/infoActividad.css"
 
-const InfoActividadProfe = ( {actividad, todosFalse, sO , setActividadSeleccionada} ) => {
+const InfoActividadProfe = ( {actividad, todosFalse, sO , setObservationIDList} ) => {
 
     const dejarObservaciones = async (e) => {
         
-        setActividadSeleccionada(actividad.observations)
+        setObservationIDList(actividad.observations)
         todosFalse();
         sO(true);
     }
