@@ -30,7 +30,7 @@ const AgregarObservacion = ({ usuario }) => {
             <h2>Agregar Observación</h2>
 
             <h4>Escriba su observación</h4>
-                <div className="input-box">
+                <div className="inputBox">
                     <input type="text" onChange={handleInputChange} value={"observacion.text"} required />
                 </div>
 

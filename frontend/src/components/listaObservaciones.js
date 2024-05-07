@@ -3,7 +3,7 @@ import "../components/listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
 
-const ListaObservaciones = ({ observationIDList, usuario , sAgregarObservacion, todosFalse }) => {
+const ListaObservaciones = ({ observationIDList, usuario , sAgregarObservacion, todosFalse, commentIDList }) => {
     const [observaciones, setObservaciones] = useState([]);
 
     useEffect(() => {
@@ -37,8 +37,9 @@ const ListaObservaciones = ({ observationIDList, usuario , sAgregarObservacion, 
             {observaciones.length > 0 && observaciones.map((observacion, index) => (
                 <InfoObservacion 
                     observacion={observacion} 
-                    key={index} 
                     usuario={usuario}
+                    todosFalse={todosFalse}
+                    commentIDList={commentIDList}
                 />
             ))}
         </div>
