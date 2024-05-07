@@ -167,7 +167,7 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
                 reminders, 
                 modality: modality.current.value, 
                 link,
-                pdf
+                pdf : pdf.img
             });
 
         } catch (error) {

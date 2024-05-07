@@ -19,7 +19,7 @@ const FileSelector = ({ fileIncluded }) => {
         const formData = new FormData()
         formData.append('file', file)
         axios.post('http://localhost:4000/api/image', formData)
-        .then(res => { fileIncluded(res.data.img) })
+        .then(res => { fileIncluded(res.data) })
         .catch(e => console.log(e))
     }
 

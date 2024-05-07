@@ -154,7 +154,7 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
                 reminders, 
                 modality: modality.current.value, 
                 link,
-                pdf
+                pdf : pdf.img
             });
 
             activityId = response.data._id;
