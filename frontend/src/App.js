@@ -21,8 +21,7 @@ function App() {
           <Route path="/modEstudiante" element={<ModificarEstudiante/>} />
           <Route path="/modProfesor" element={<ModificarProfesor/>} />
           <Route path="/forgotPassword" element={<ForgotPassword/>} /> 
-          <Route path="/file" element={<FilePrueba/>} /> // Borrar
-
+          <Route path="/file" element={<FilePrueba/>} /> 
         </Routes>
       </div>
     </BrowserRouter>

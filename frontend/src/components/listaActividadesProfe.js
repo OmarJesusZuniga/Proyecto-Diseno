@@ -31,9 +31,16 @@ const ListaActividadesProfe = ({ grupo, usuario }) => {
         fetchData();
     }, []);
 
+    function agregarActividadClick() {
+    }    
+
+
     return ( 
         <div className="listaActividades">
-            <h2>Actividades del Equipo guía</h2>
+            <div className="tituloActividades">
+                <h2>Actividades del Equipo guía</h2>
+                <button onClick={agregarActividadClick}>Agregar Actividad</button>
+            </div>
             {actividades && actividades.map((actividad) => (
                 <InfoActividadProfe actividad={actividad}/>
             ))}
