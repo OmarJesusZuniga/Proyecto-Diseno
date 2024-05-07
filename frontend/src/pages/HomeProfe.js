@@ -10,13 +10,25 @@ const HomeProfe = () => {
     const {state} = useLocation();
     const {usuario} = state || {};
 
+
+
     const [listaProfes, setProfes] = useState(true)
     const [listaActividadesProfe, setActividadesProfe] = useState(false)
     const [listaObservaciones, setObservaciones] = useState(false)
     const [listaEstudiantes, setEstudiantes] = useState(false)
     const [bienvenida, setBienvenida] = useState(true);
+
+    const todoFalse = () => {
+        setActividadesProfe(false);
+        setProfes(false);
+        setObservaciones(false);
+        setEstudiantes(false);
+        setBienvenida(false);
+    }
     
     const [grupo, setGrupo] = useState();
+
+    const [actividad, setActividadSeleccionada] = useState([]);
     
     return (
         <div className="home"> 
@@ -26,8 +38,14 @@ const HomeProfe = () => {
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
-                    /*{listaObservaciones && <ListaObservaciones usuario={usuario} />}*/
-                    {listaActividadesProfe && <ListaActividadesProfe grupo={grupo} usuario={usuario} />}
+                    {listaObservaciones && <ListaObservaciones usuario={usuario} todosFalse={todoFalse} sO = {setObservaciones}/>}
+                    {listaActividadesProfe && <ListaActividadesProfe
+                                                                    grupo={grupo} 
+                                                                    listaIdActividad={actividad}
+                                                                    usuario={usuario} 
+                                                                    todosFalse={todoFalse} 
+                                                                    sO ={setObservaciones}
+                                                                    setActividad = {setActividadSeleccionada}/>}
                 </div>
 
             </div>

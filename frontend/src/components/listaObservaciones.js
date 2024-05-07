@@ -3,7 +3,7 @@ import "../components/listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
 
-const ListaObservaciones = ({ observationIDList, usuario }) => {
+const ListaObservaciones = ({ observationIDList, usuario , sO, todosFalse }) => {
     const [observaciones, setObservaciones] = useState([]);
 
     useEffect(() => {
@@ -23,9 +23,17 @@ const ListaObservaciones = ({ observationIDList, usuario }) => {
         fetchData();
     }, [observationIDList]); // Ensure useEffect runs when observationIDList changes
 
+    const agregarObservacion = () => {
+        todosFalse();
+        sO(true);
+    }
+
     return ( 
         <div className="listaObservaciones">
+
             <h2>Observaciones de la actividad</h2>
+            <button onClick={agregarObservacion} className="btnAgregarObservacion">Agregar observación</button>
+
             {observaciones.length > 0 && observaciones.map((observacion, index) => (
                 <InfoObservacion 
                     observacion={observacion} 
