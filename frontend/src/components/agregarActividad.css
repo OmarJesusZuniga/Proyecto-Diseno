@@ -1,0 +1,136 @@
+.agregarEstudiante {
+    display: flex;
+    flex-direction: row; /* Aligns children side by side */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+
+    /* Ensure each child takes equal width */
+    width: 100%; /* Optional, ensures the parent takes full width of its container */
+    margin-left: 50px;
+}
+
+.agregarEstudiante > * {
+    flex: 1; /* Each child will take equal width */
+}
+
+
+.btnVolver  {
+    background-color: var(--secondary) ;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: var(--text);
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    height: auto;
+    
+    margin-bottom: 10px;
+    }
+    
+    .btnVolver:hover {
+    background-color: var(--secondary-hover); /* Change to the desired hover color */
+    }
+
+.btnVolverContainer {
+    align-self: flex-start; /* Align container (and its content) to the start (left) */
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.btnAgregar2, .btnAgregar {
+    background-color: #2962a3;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: #e8eff6;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 30vh;
+    height: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    
+}
+
+.btnAgregar:hover{
+    background-color: #1a4366;
+}
+
+.btnAgregar2 {
+    margin-left: 1vh;
+    width: 15vh;
+}
+
+
+.inputBox {
+    width: 60%;
+    padding: 0.5rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #4a5568;
+    background-color: #edf2f7;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    font-family: "Poppins";
+}
+
+.inputBox:focus {
+    outline: none;
+    border-color: #63b3ed;
+    background-color: #fff;
+}
+
+select {
+    width: 60%;
+    padding: 0.5rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #4a5568;
+    background-color: #edf2f7;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    font-family: "Poppins";
+}
+
+select:focus {
+    outline: none;
+    border-color: #63b3ed;
+    background-color: #fff;
+}

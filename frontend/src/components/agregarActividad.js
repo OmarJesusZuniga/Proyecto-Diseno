@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
-import '../components/agregarEstudiante.css'
+import React, { useRef, useEffect, useState } from 'react';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import '../components/agregarActividad.css'
+import FileSelector from "../components/fileSelector";
 import axios from 'axios';
 
-const AgregarActividad = ({ campus, sTP, sPL, sEL, sA, sAE}) => {
+const AgregarActividad = ({ reset, returnPage, plan}) => {
+    const [enums, setEnums] = useState({ type: [], modality: [] });
+    const [profesores, setProfesores] = useState([]);
+    const selectedManagerAgregar = useRef(null);
+    const selectedManagerEliminar = useRef(null);
+    const selectedReminderAgregar = useRef(null);
+    const selectedReminderEliminar = useRef(null);
+    const [error, setError] = useState(null);
     
     const [week, setWeek] = useState(null);
     const [name, setName] = useState(null);
-    const [type, setType] = useState(null);
+    const type = useRef(null);
     const [programmedDate, setProgrammedDate] = useState(null);
     const [programmedHour, setProgrammedHour] = useState(null);
     const [managers, setManagers] = useState([]);
     const [publishDate, setPublishDate] = useState(null);
     const [reminders, setReminders] = useState([]);
-    const [modality, setModality] = useState(null);
-    const [link, setLink] = useState(null);
+    const modality = useRef(null);
+    const [link, setLink] = useState('');
     const [pdf, setPdf] = useState(null);
 
     const changeWeek = (e) => {
@@ -23,90 +33,224 @@ const AgregarActividad = ({ campus, sTP, sPL, sEL, sA, sAE}) => {
     const changeName = (e) => {
         setName(e.target.value);
     }
-
-    const changeType = (e) => {
-        setType(e.target.value);
-    }
     
     const changeProgrammedDate = (e) => {
         setProgrammedDate(e.target.value);
     }
     
     const changeProgrammedHour = (e) => {
-        setProgrammedHour(e.target.value);
+        const timeValue = e.target.value; 
+        const [hours, minutes] = timeValue.split(':').map(Number); 
+        const totalMinutes = (hours * 60) + minutes;
+        setProgrammedHour(totalMinutes);
     }
 
-    const addManager = (manager) => {
-        setManagers(prevManagers => [...prevManagers, manager]);
+    function findProfessorById(id) {
+        const professor = profesores.find(prof => prof._id === id);
+        if (!professor) {
+            console.log('Error: No matching professor found!');
+            return null;  
+        }
+        return professor;
     }
+
+    const addManager = () => {
+        const prof = findProfessorById(selectedManagerAgregar.current.value);
+        console.log(`Profe add: ${prof._id}`)
+
+        if (prof && !managers.includes(prof)) {
+            setManagers(prevManagers => [...prevManagers, prof]);
+        } else {
+            toast.info("Manager ya añadido o inválido");
+        }
+    }    
+
+    const removeManager = () => {
+        const prof = findProfessorById(selectedManagerEliminar.current.value);
+
+        if (prof && managers.includes(prof)) {
+            setManagers(prevManagers => prevManagers.filter(manager => manager._id !== selectedManagerEliminar.current.value));
+        } else {
+            toast.info("No se pudo eliminar el manager");
+        }
+    };
 
     const changePublishDate = (e) => {
         setPublishDate(e.target.value);
     }
 
-    const addReminder = (reminder) => {
-        setReminders(prevReminders => [...prevReminders, reminder]);
+    const addReminder = () => {
+        if (selectedReminderAgregar.current.value && !reminders.includes(selectedReminderAgregar.current.value)) {
+            setReminders(prevReminders => [...prevReminders, selectedReminderAgregar.current.value]);
+        } else {
+            toast.info("Recordatorio ya añadido o inválido");
+        }
     }
-    
-    const changeModality = (e) => {
-        setModality(e.target.value);
-    }
+
+    const removeReminder = () => {
+        if (reminders.includes(selectedReminderEliminar.current.value)) {
+            setReminders(prevReminders => prevReminders.filter(reminder => reminder !== selectedReminderEliminar.current.value));
+        } else {
+            toast.info("No se pudo eliminar el recordatorio");
+        }
+    };
     
     const changeLink = (e) => {
         setLink(e.target.value);
     }
-    
-    const changePdf = (e) => {
-        setPdf(e.target.value);
-    }
-    
 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.post("http://localhost:4000/api/activity/enums/");
+                setEnums({
+                    type: response.data.type,
+                    modality: response.data.modality
+                });
+
+                const responseProfessors = await axios.get("http://localhost:4000/api/professors/");
+                setProfesores(responseProfessors.data)
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const agregarActividad = async () => {
+        if (publishDate > programmedDate) {
+            toast.warning("La fecha de publicación no puede estar después de la programada!");
+            return;
+        }
+
+        if (modality.current.value === enums.modality[1] && !link) {
+            toast.warning("Si la modalidad es remota, se requiere el link!");
+            return;
+        }
+
+        let activityId; 
+
+        try {
+            const response = await axios.post('http://localhost:4000/api/activity/', {
+                week, 
+                name, 
+                type: type.current.value, 
+                programmedDate, 
+                programmedHour, 
+                managers: managers.map(manager => manager._id), 
+                publishDate, 
+                reminders, 
+                modality: modality.current.value, 
+                link,
+                pdf
+            });
+
+            activityId = response.data._id;
+        } catch (error) {
+            toast.error("Error al añadir la actividad!");
+            return;
+        }
+
+        try {
+            const response = await axios.post('http://localhost:4000/api/plan/addActivity/', {
+                id: plan, 
+                newActivity: activityId
+            });
+        } catch (error) {
+            toast.error("Error al añadir la actividad al plan!");
+            return;
+        }
+
+        toast.success("Actividad añadida correctamente!");
+    }
 
     const volver = () => {
-        sTP(false);
-        sPL(false);
-        sEL(true);
-        sA(false);
-        sAE(false);
+        reset(); 
+        returnPage(true);
     }
     
     return (
-        <div className='agregarEstudiante'>
+        <div >
+            <ToastContainer />
+
             <div className="btnVolverContainer"> 
                 <button onClick={volver} className='btnVolver'>Volver</button>
             </div>
+
+            <div className='agregarEstudiante'>
+            <div>
             <h2>Week</h2>
-            <input onChange={changeWeek} type="text" className="inputBox" placeholder="Input Week"/>
+            <input onChange={changeWeek} type="number" className="inputBox" placeholder="Input Week"/>
 
             <h2>Nombre</h2>
             <input onChange={changeName} type="text" className="inputBox" placeholder="Input Name"/>
 
             <h2>Type</h2>
-            <input onChange={changeType} type="text" className="inputBox" placeholder="Input Type"/>
+            <select ref={type}>
+                {enums.type.map(option => (
+                    <option key={option} value={option}>{option}</option>
+                ))}
+            </select>
 
             <h2>Programmed Date</h2>
             <input onChange={changeProgrammedDate} type="date" className="inputBox" placeholder="Select Date"/>
 
             <h2>Programmed Hour</h2>
             <input onChange={changeProgrammedHour} type="time" className="inputBox" placeholder="Select Hour"/>
-
-            <h2>Managers</h2>
-            {/* This would likely need a different UI element such as a dropdown or a multi-select component */}
             
             <h2>Publish Date</h2>
             <input onChange={changePublishDate} type="date" className="inputBox" placeholder="Select Publish Date"/>
 
-            <h2>Reminders</h2>
-            {/* This would likely need a different UI element such as a list of items with add/remove capabilities */}
-            
             <h2>Modality</h2>
-            <input onChange={changeModality} type="text" className="inputBox" placeholder="Input Modality"/>
+            <select ref={modality}>
+                {enums.modality.map(option => (
+                    <option key={option} value={option}>{option}</option>
+                ))}
+            </select>
 
             <h2>Link</h2>
             <input onChange={changeLink} type="url" className="inputBox" placeholder="Input URL"/>
 
             <h2>PDF</h2>
-            <input onChange={changePdf} type="file" className="inputBox" placeholder="Upload PDF"/>
+            <FileSelector fileIncluded={setPdf}/>
+            </div>
+
+            <div>
+                <h2>Managers</h2>
+                <select ref={selectedManagerAgregar}>
+                    {profesores.map(option => (
+                        <option key={option._id} value={option._id}>{option.firstname} {option.code}</option>
+                    ))}
+                </select>
+                <button onClick={addManager} className='btnAgregar2'>Agregar</button>
+
+                <h2>Managers Seleccionados</h2>
+                <select ref={selectedManagerEliminar}>
+                    {managers.map(option => (
+                        <option key={option._id + "0"} value={option._id}>{option.firstname} {option.code}</option>
+                    ))}
+                </select>
+                <button onClick={removeManager} className='btnAgregar2'>Eliminar</button>
+                
+                <h2>Reminders</h2>
+                <input ref={selectedReminderAgregar} type="date" className="inputBox" placeholder="Select Date"/>
+                <button onClick={addReminder} className='btnAgregar2'>Agregar</button>
+
+                <h2>Reminders Seleccionados</h2>
+                <select ref={selectedReminderEliminar}>
+                    {reminders.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </select>
+                <button onClick={removeReminder} className='btnAgregar2'>Eliminar</button>
+
+                <button onClick={agregarActividad} className='btnAgregar'>Agregar Estudiante</button>
+            </div>
+            </div>
+            
         </div>
     );
 }

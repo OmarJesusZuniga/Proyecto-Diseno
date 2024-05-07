@@ -4,7 +4,8 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from "react";
 
-const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setObservationIDList, agregarActividad}) => {
+
+const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setObservationIDList, agregarActividad, setPlanActual}) => {
 
     const [plan, setPlan] = useState([]);
     const [actividades, setActividad] = useState([]);
@@ -20,7 +21,7 @@ const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setObservationI
                 console.log(response.data)
 
                 const responsePlan = await axios.get("http://localhost:4000/api/plan/" + response.data.plan );
-                console.log(responsePlan.data)
+                setPlanActual(responsePlan.data._id);
 
 
             } catch (error) {
@@ -33,6 +34,7 @@ const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, setObservationI
 
     function agregarActividadClick() {
         todosFalse();
+        agregarActividad(true);
     }    
 
 

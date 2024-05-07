@@ -8,6 +8,7 @@ import ListaObservaciones from "../components/listaObservaciones";
 import ListaComentarios from "../components/listaComentarios";
 import agregarActividadPage from "../components/agregarActividad";
 import AgregarObservacion from "../components/agregarObservacion";
+import AgregarActividad from "../components/agregarActividad";
 
 const HomeProfe = () => {
     const {state} = useLocation();
@@ -22,7 +23,9 @@ const HomeProfe = () => {
     const [agregarComentario, setAgregarComentario] = useState(false)
     const [listaEstudiantes, setEstudiantes] = useState(false)
     const [bienvenida, setBienvenida] = useState(true);
+    // Agregar Actividad
     const [agregarActividad, setAgregarActividad] = useState(false)
+    const [planActual, setPlanActual] = useState(null)
 
     const todoFalse = () => {
         setActividadesProfe(false);
@@ -34,6 +37,7 @@ const HomeProfe = () => {
         setAgregarActividad(false);
         observationIDList(false);
         commentIDList(false);
+        setAgregarActividad(false);
     }
     
     const [grupo, setGrupo] = useState();
@@ -56,10 +60,14 @@ const HomeProfe = () => {
                                                                     todosFalse={todoFalse} 
                                                                     sO ={setObservaciones}
                                                                     observationIDList = {setObservationIDList}
-                                                                    agregarActividad = {setAgregarActividad}/>}
+                                                                    agregarActividad = {setAgregarActividad}
+                                                                    setActividadSeleccionada = {setActividadSeleccionada}
+                                                                    setPlanActual={setPlanActual}/>}
                     {agregarObservacion && <AgregarObservacion usuario={usuario} />}
                     {commentIDList && <ListaComentarios commentIDList={commentIDList} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} />}
                     {agregarActividad && <agregarActividadPage />}
+                    
+                    {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}
                 </div>
 
             </div>

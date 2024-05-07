@@ -2,7 +2,7 @@ import "../components/fileSelector.css"
 import { useState } from "react";
 import axios from 'axios'
 
-const FileSelector = () => { 
+const FileSelector = ({ fileIncluded }) => { 
     const [file, setFile] = useState(null); 
     const [previewUrl, setPreviewUrl] = useState(null);
 
@@ -19,7 +19,7 @@ const FileSelector = () => {
         const formData = new FormData()
         formData.append('file', file)
         axios.post('http://localhost:4000/api/image', formData)
-        .then(res => {})
+        .then(res => { fileIncluded(res.data.img) })
         .catch(e => console.log(e))
     }
 

@@ -4,7 +4,9 @@ const {
   getPlan,
   createPlan,
   deletePlan,
-  updatePlan
+  updatePlan,
+  addActivity,
+  removeActivity
 } = require('../controllers/planController')
 
 const router = express.Router()
@@ -17,6 +19,10 @@ router.get('/:id', getPlan)
 
 // POST a new Plan
 router.post('/', createPlan)
+
+router.post('/addActivity', addActivity)
+
+router.post('/removeActivity', removeActivity)
 
 // DELETE a Plan
 router.delete('/:id', deletePlan)

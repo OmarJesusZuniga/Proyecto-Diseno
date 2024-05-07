@@ -80,10 +80,40 @@ const updatePlan = async (req, res) => {
   res.status(200).json(plan)
 }
 
+const addActivity = async (req, res) => {
+  const { id, newActivity } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid ID format' });
+  }
+
+  try {
+    const plan = await Plan.findOneAndUpdate(
+      { _id: id },
+      { $push: { activities: newActivity } },
+      { new: true } 
+    );
+
+    if (!plan) {
+      return res.status(404).json({ error: 'No such plan found' });
+    }
+
+    res.status(200).json(plan);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+const removeActivity = async (req, res) => {
+
+}
+
 module.exports = {
   getPlans,
   getPlan,
   createPlan,
   deletePlan,
-  updatePlan
+  updatePlan,
+  addActivity,
+  removeActivity
 }

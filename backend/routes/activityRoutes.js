@@ -4,7 +4,8 @@ const {
   getActivity,
   createActivity,
   deleteActivity,
-  updateActivity
+  updateActivity,
+  typeEnums
 } = require('../controllers/activityController')
 
 const router = express.Router()
@@ -14,6 +15,8 @@ router.get('/', getActivities)
 
 // GET a single Plan
 router.get('/:id', getActivity)
+
+router.post('/enums', typeEnums)
 
 // POST a new Plan
 router.post('/', createActivity)

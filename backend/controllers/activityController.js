@@ -29,36 +29,20 @@ const getActivity = async (req, res) => {
 
 const createActivity = async (req, res) => {
   const {
-    week, name, type, programmedDate, programmedHour, managers, publishDate, reminders, modality, link
+    week, name, type, programmedDate, programmedHour, managers, publishDate, reminders, modality, link, pdf
   } = req.body;
 
   let emptyFields = [];
 
   // Validate required fields
-  if (!week) {
-    emptyFields.push('week');
-  }
-  if (!name) {
-    emptyFields.push('name');
-  }
-  if (!type) {
-    emptyFields.push('type');
-  }
-  if (!programmedDate) {
-    emptyFields.push('programmedDate');
-  }
-  if (!programmedHour) {
-    emptyFields.push('programmedHour');
-  }
-  if (!managers || managers.length === 0) { // Ensure there is at least one manager
-    emptyFields.push('managers');
-  }
-  if (!publishDate) {
-    emptyFields.push('publishDate');
-  }
-  if (!modality) {
-    emptyFields.push('modality');
-  }
+  if (!week) { emptyFields.push('week'); }
+  if (!name) { emptyFields.push('name'); }
+  if (!type) { emptyFields.push('type'); }
+  if (!programmedDate) { emptyFields.push('programmedDate'); }
+  if (!programmedHour) { emptyFields.push('programmedHour'); }
+  if (!managers || managers.length === 0) { emptyFields.push('managers'); }
+  if (!publishDate) { emptyFields.push('publishDate'); }
+  if (!modality) { emptyFields.push('modality'); }
 
   // Respond if there are empty required fields
   if (emptyFields.length > 0) {
@@ -67,37 +51,21 @@ const createActivity = async (req, res) => {
 
   // Add to the database
   try {
-
-    const newState = await ActivityState.create({
-      type: 'Notificada'
-    })
-
+    const newState = await ActivityState.create({ type: 'Notificada' });
     if (!newState) {
-      return res.status(404).json({error: 'Could not create State for Activity'})
+      return res.status(404).json({error: 'Could not create State for Activity'});
     }
 
     const state = newState._id;
-
     const activity = await Activity.create({
-      week,
-      name,
-      type,
-      programmedDate,
-      programmedHour,
-      managers,
-      publishDate,
-      reminders,
-      modality,
-      link,
-      state
+      week, name, type, programmedDate, programmedHour, managers, publishDate, reminders, modality, link, state, pdf
     });
-    res.status(200).json(activity);
+    return res.status(200).json(activity);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
-
-  res.status(400).json({result: "finish"})
 };
+
 
 const deleteActivity = async (req, res) => {
   const { id } = req.params
@@ -133,10 +101,22 @@ const updateActivity = async (req, res) => {
   res.status(200).json(activity)
 }
 
+const typeEnums = async (req,res) => {
+  const typeEnums = Activity.schema.path('type').enumValues;
+  const modalityEnums = Activity.schema.path('modality').enumValues;
+
+
+  res.status(200).json({
+    type: typeEnums,
+    modality: modalityEnums
+  })
+}
+
 module.exports = {
   getActivities,
   getActivity,
   createActivity,
   deleteActivity,
-  updateActivity
+  updateActivity,
+  typeEnums
 }
