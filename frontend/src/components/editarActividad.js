@@ -164,6 +164,14 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
         toast.success("Actividad añadida correctamente!");
     }
 
+    const changeDateFormat = (date) => {
+        const dateObj = new Date(date);
+        const formattedDate = dateObj.toISOString().split('T')[0]; // Converts to 'YYYY-MM-DD'
+        return formattedDate;
+    };      
+
+    
+
     const volver = () => {
         reset(); 
         returnPage(true);
@@ -193,13 +201,13 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
             </select>
 
             <h2>Programmed Date</h2>
-            <input value={actividad.programmedDate} onChange={changeProgrammedDate} type="date" className="inputBox" placeholder="Select Date"/>
+            <input value={changeDateFormat(actividad.programmedDate)} onChange={changeProgrammedDate} type="date" className="inputBox" placeholder="Select Date"/>
 
             <h2>Programmed Hour</h2>
             <input value={actividad.programmedHour} onChange={changeProgrammedHour} type="time" className="inputBox" placeholder="Select Hour"/>
             
             <h2>Publish Date</h2>
-            <input value={actividad.publishDate} onChange={changePublishDate} type="date" className="inputBox" placeholder="Select Publish Date"/>
+            <input value={changeDateFormat(actividad.publishDate)} onChange={changePublishDate} type="date" className="inputBox" placeholder="Select Publish Date"/>
 
             <h2>Modality</h2>
             <select ref={modality}>
