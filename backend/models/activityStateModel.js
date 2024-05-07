@@ -14,11 +14,6 @@ const activityStateSchema = new Schema ({
         ref: 'image',
         required: true
     }],  
-    evidence: { // Una imagen de los participantes...
-        type: Schema.Types.ObjectId,
-        ref: 'image',
-        required: false
-    },  
     recordingLink: {
         type: String, 
         required: false

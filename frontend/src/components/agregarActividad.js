@@ -58,7 +58,9 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
         if (prof && !managers.includes(prof)) {
             setManagers(prevManagers => [...prevManagers, prof]);
         } else {
-            toast.info("Manager ya añadido o inválido");
+            toast.info("Manager ya añadido o inválido", {
+                className: "toast-message"
+            });
         }
     }    
 
@@ -68,7 +70,9 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
         if (prof && managers.includes(prof)) {
             setManagers(prevManagers => prevManagers.filter(manager => manager._id !== selectedManagerEliminar.current.value));
         } else {
-            toast.info("No se pudo eliminar el manager");
+            toast.info("No se pudo eliminar el manager", {
+                className: "toast-message"
+            });
         }
     };
 
@@ -80,7 +84,9 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
         if (selectedReminderAgregar.current.value && !reminders.includes(selectedReminderAgregar.current.value)) {
             setReminders(prevReminders => [...prevReminders, selectedReminderAgregar.current.value]);
         } else {
-            toast.info("Recordatorio ya añadido o inválido");
+            toast.info("Recordatorio ya añadido o inválido", {
+                className: "toast-message"
+            });
         }
     }
 
@@ -88,7 +94,9 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
         if (reminders.includes(selectedReminderEliminar.current.value)) {
             setReminders(prevReminders => prevReminders.filter(reminder => reminder !== selectedReminderEliminar.current.value));
         } else {
-            toast.info("No se pudo eliminar el recordatorio");
+            toast.info("No se pudo eliminar el recordatorio", {
+                className: "toast-message"
+            });
         }
     };
     
@@ -119,12 +127,16 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
 
     const agregarActividad = async () => {
         if (publishDate > programmedDate) {
-            toast.warning("La fecha de publicación no puede estar después de la programada!");
+            toast.warning("La fecha de publicación no puede estar después de la programada!", {
+                className: "toast-message"
+            });
             return;
         }
 
         if (modality.current.value === enums.modality[1] && !link) {
-            toast.warning("Si la modalidad es remota, se requiere el link!");
+            toast.warning("Si la modalidad es remota, se requiere el link!", {
+                className: "toast-message"
+            });
             return;
         }
 
@@ -147,7 +159,9 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
 
             activityId = response.data._id;
         } catch (error) {
-            toast.error("Error al añadir la actividad!");
+            toast.error("Error al añadir la actividad!", {
+                className: "toast-message"
+            });
             return;
         }
 
@@ -157,11 +171,15 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
                 newActivity: activityId
             });
         } catch (error) {
-            toast.error("Error al añadir la actividad al plan!");
+            toast.error("Error al añadir la actividad al plan!", {
+                className: "toast-message"
+            });
             return;
         }
 
-        toast.success("Actividad añadida correctamente!");
+        toast.success("Actividad añadida correctamente!", {
+            className: "toast-message"
+        });
     }
 
     const volver = () => {

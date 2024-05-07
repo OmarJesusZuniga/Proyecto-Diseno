@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId, setObservationIDList, idActivity, functionUpdateActivities, setActividadActual} ) => {
+const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId, idActivity, setObservationIDList, idActivity, functionUpdateActivities, setActividadActual} ) => {
 
     const [managers, setManagers] = useState([]);
     const [state, setState] = useState('');
@@ -18,6 +18,12 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
         idActivity(actividad._id)
         todosFalse();
         sO(true);
+    }
+
+    const editarEstadoActividad = async (e) => {
+        todosFalse();
+        setEditarEstado(true);
+        setEstadoAEditar(actividad.state);
     }
 
     const editarActividadFunction = async (e) => {
@@ -135,6 +141,7 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
             </div>
 
             <button onClick={dejarObservaciones}> Observaciones </button>
+            <button onClick={editarEstadoActividad}> Modificar Estado </button>
             <button onClick={editarActividadFunction}> Editar </button>
             <button onClick={eliminarActividadFunction}> Eliminar </button>
 

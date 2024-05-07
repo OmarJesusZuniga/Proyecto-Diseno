@@ -53,12 +53,13 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
 
     const addManager = () => {
         const prof = findProfessorById(selectedManagerAgregar.current.value);
-        console.log(`Profe add: ${prof._id}`)
 
         if (prof && !managers.includes(prof)) {
             setManagers(prevManagers => [...prevManagers, prof]);
         } else {
-            toast.info("Manager ya añadido o inválido");
+            toast.info("Manager ya añadido o inválido", {
+                className: "toast-message"
+            });
         }
     }    
 
@@ -68,7 +69,9 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
         if (prof && managers.includes(prof)) {
             setManagers(prevManagers => prevManagers.filter(manager => manager._id !== selectedManagerEliminar.current.value));
         } else {
-            toast.info("No se pudo eliminar el manager");
+            toast.info("No se pudo eliminar el manager", {
+                className: "toast-message"
+            });
         }
     };
 
@@ -80,7 +83,9 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
         if (selectedReminderAgregar.current.value && !reminders.includes(selectedReminderAgregar.current.value)) {
             setReminders(prevReminders => [...prevReminders, selectedReminderAgregar.current.value]);
         } else {
-            toast.info("Recordatorio ya añadido o inválido");
+            toast.info("Recordatorio ya añadido o inválido", {
+                className: "toast-message"
+            });
         }
     }
 
@@ -88,7 +93,9 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
         if (reminders.includes(selectedReminderEliminar.current.value)) {
             setReminders(prevReminders => prevReminders.filter(reminder => reminder !== selectedReminderEliminar.current.value));
         } else {
-            toast.info("No se pudo eliminar el recordatorio");
+            toast.info("No se pudo eliminar el recordatorio", {
+                className: "toast-message"
+            });
         }
     };
     
@@ -109,6 +116,22 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
                 const responseProfessors = await axios.get("http://localhost:4000/api/professors/");
                 setProfesores(responseProfessors.data)
 
+                const filteredPeople = responseProfessors.data.filter(person => actividad.managers.includes(person._id));
+
+                setManagers(filteredPeople);
+                
+                setReminders(changeDateFormatMultiple(actividad.reminders));
+
+                setWeek(actividad.week)
+                setName(actividad.name) 
+                // type 
+                setProgrammedDate(changeDateFormat(actividad.programmedDate))
+                setProgrammedHour(actividad.programmedHour)
+                setPublishDate(changeDateFormat(actividad.publishDate))
+                // modality
+                setLink(actividad.link)
+                // setPdf()
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -119,49 +142,44 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
 
     const agregarActividad = async () => {
         if (publishDate > programmedDate) {
-            toast.warning("La fecha de publicación no puede estar después de la programada!");
+            toast.warning("La fecha de publicación no puede estar después de la programada!", {
+                className: "toast-message"
+            });
             return;
         }
 
         if (modality.current.value === enums.modality[1] && !link) {
-            toast.warning("Si la modalidad es remota, se requiere el link!");
+            toast.warning("Si la modalidad es remota, se requiere el link!", {
+                className: "toast-message"
+            });
             return;
         }
 
-        let activityId; 
+        try {
+            const response = await axios.patch('http://localhost:4000/api/activity/' + actividad._id, {
+                week, 
+                name, 
+                type: type.current.value, 
+                programmedDate, 
+                programmedHour, 
+                managers: managers.map(manager => manager._id), 
+                publishDate, 
+                reminders, 
+                modality: modality.current.value, 
+                link,
+                pdf
+            });
 
-        // try {
-        //     const response = await axios.post('http://localhost:4000/api/activity/', {
-        //         week, 
-        //         name, 
-        //         type: type.current.value, 
-        //         programmedDate, 
-        //         programmedHour, 
-        //         managers: managers.map(manager => manager._id), 
-        //         publishDate, 
-        //         reminders, 
-        //         modality: modality.current.value, 
-        //         link,
-        //         pdf
-        //     });
+        } catch (error) {
+            toast.error("Error al añadir la actividad!", {
+                className: "toast-message"
+            });
+            return;
+        }
 
-        //     activityId = response.data._id;
-        // } catch (error) {
-        //     toast.error("Error al añadir la actividad!");
-        //     return;
-        // }
-
-        // try {
-        //     const response = await axios.post('http://localhost:4000/api/plan/addActivity/', {
-        //         id: plan, 
-        //         newActivity: activityId
-        //     });
-        // } catch (error) {
-        //     toast.error("Error al añadir la actividad al plan!");
-        //     return;
-        // }
-
-        toast.success("Actividad añadida correctamente!");
+        toast.success("Actividad modificada correctamente!", {
+            className: "toast-message"
+        });
     }
 
     const changeDateFormat = (date) => {
@@ -170,6 +188,12 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
         return formattedDate;
     };      
 
+    const changeDateFormatMultiple = (dates) => {
+        return dates.map(date => {
+            const dateObj = new Date(date);
+            return dateObj.toISOString().split('T')[0]; // Converts to 'YYYY-MM-DD'
+        });
+    };
     
 
     const volver = () => {
@@ -188,10 +212,10 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
             <div className='agregarEstudiante'>
             <div>
             <h2>Week</h2>
-            <input value={actividad.week} onChange={changeWeek} type="number" className="inputBox" placeholder="Input Week"/>
+            <input value={week} onChange={changeWeek} type="number" className="inputBox" placeholder="Input Week"/>
 
             <h2>Nombre</h2>
-            <input value={actividad.name} onChange={changeName} type="text" className="inputBox" placeholder="Input Name"/>
+            <input value={name} onChange={changeName} type="text" className="inputBox" placeholder="Input Name"/>
 
             <h2>Type</h2>
             <select ref={type}>
@@ -201,13 +225,13 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
             </select>
 
             <h2>Programmed Date</h2>
-            <input value={changeDateFormat(actividad.programmedDate)} onChange={changeProgrammedDate} type="date" className="inputBox" placeholder="Select Date"/>
+            <input value={programmedDate} onChange={changeProgrammedDate} type="date" className="inputBox" placeholder="Select Date"/>
 
             <h2>Programmed Hour</h2>
-            <input value={actividad.programmedHour} onChange={changeProgrammedHour} type="time" className="inputBox" placeholder="Select Hour"/>
+            <input value={programmedHour} onChange={changeProgrammedHour} type="time" className="inputBox" placeholder="Select Hour"/>
             
             <h2>Publish Date</h2>
-            <input value={changeDateFormat(actividad.publishDate)} onChange={changePublishDate} type="date" className="inputBox" placeholder="Select Publish Date"/>
+            <input value={publishDate} onChange={changePublishDate} type="date" className="inputBox" placeholder="Select Publish Date"/>
 
             <h2>Modality</h2>
             <select ref={modality}>
@@ -217,7 +241,7 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
             </select>
 
             <h2>Link</h2>
-            <input value={actividad.link} onChange={changeLink} type="url" className="inputBox" placeholder="Input URL"/>
+            <input value={link} onChange={changeLink} type="url" className="inputBox" placeholder="Input URL"/>
 
             <h2>PDF</h2>
             <FileSelector fileIncluded={setPdf}/>

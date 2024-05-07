@@ -4,7 +4,8 @@ const {
   getActivityState,
   createActivityState,
   deleteActivityState,
-  updateActivityState
+  updateActivityState,
+  getEnums
 } = require('../controllers/activityStateController')
 
 const router = express.Router()
@@ -16,6 +17,8 @@ router.get('/', getActivityStates)
 router.get('/:id', getActivityState)
 
 router.post('/', createActivityState)
+
+router.post('/getEnums', getEnums)
 
 // DELETE a Plan
 router.delete('/:id', deleteActivityState)

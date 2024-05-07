@@ -16,7 +16,7 @@ const getActivityState = async (req, res) => {
     return res.status(404).json({error: errorMessage})
   }
 
-  const state = await ActivityState.findById(id).populate('activities');
+  const state = await ActivityState.findById(id);
 
   if (!state) {
     return res.status(404).json({error: errorMessage})
@@ -71,10 +71,19 @@ const updateActivityState = async (req, res) => {
   res.status(200).json(state)
 }
 
+const getEnums = async (req, res) => {
+  const typeEnums = ActivityState.schema.path('type').enumValues;
+
+  res.status(200).json({
+    type: typeEnums
+  })
+}
+
 module.exports = {
   getActivityStates,
   getActivityState,
   createActivityState,
   deleteActivityState,
-  updateActivityState
+  updateActivityState,
+  getEnums
 }

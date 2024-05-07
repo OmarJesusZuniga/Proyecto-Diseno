@@ -134,3 +134,7 @@ select:focus {
     border-color: #63b3ed;
     background-color: #fff;
 }
+
+.toast-message {
+    font-family: "Poppins";
+}

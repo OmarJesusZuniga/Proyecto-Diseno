@@ -10,6 +10,7 @@ import AgregarObservacion from "../components/agregarObservacion";
 import AgregarActividad from "../components/agregarActividad";
 import AgregarComentario from "../components/agregarComentario";
 import EditarActividad from "../components/editarActividad";
+import EditarEstado from "../components/editarEstado"
 
 const HomeProfe = () => {
     const {state} = useLocation();
@@ -35,6 +36,10 @@ const HomeProfe = () => {
     const [observationIDList, setObservationIDList] = useState([]);
     const [activityId, setActivityID] = useState([]);
     const [commentIDList, setCommentIDList] = useState([]);
+    // Modificar Estado 
+    const [editarEstado, setEditarEstado] = useState(false);
+    const [estadoAEditar, setEstadoAEditar] = useState(null);
+
 
     const todoFalse = () => {
         setProfes(false);
@@ -50,6 +55,7 @@ const HomeProfe = () => {
         setPlanActual(false);
         setObservationIDList([]);
         setCommentIDList([]);
+        setEditarEstado(false);
     }
     
     return (
@@ -62,21 +68,32 @@ const HomeProfe = () => {
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
                     {listaObservaciones && <ListaObservaciones usuario={usuario} todosFalse={todoFalse} sAgregarObservacion={setAgregarObservacion} observationIDList={observationIDList} commentIDList={setCommentIDList}/>}
                     {listaActividadesProfe && <ListaActividadesProfe
+                                                                    // Generales
                                                                     grupo={grupo} 
                                                                     usuario={usuario} 
+                                                                    // 
                                                                     todosFalse={todoFalse} 
                                                                     sO ={setObservaciones}
+                                                                    // Actividades
                                                                     editarActividad ={setEditarActividad}
                                                                     setActividadActual = {setActividadAEditar}
+                                                                    // Observaciones
                                                                     observationIDList = {setObservationIDList}
+                                                                    // Agregar Actividad
                                                                     agregarActividad = {setAgregarActividad}
                                                                     setPlanActual={setPlanActual}
-                                                                    idActivity={setActivityID}/>}
-                    {agregarObservacion && <AgregarObservacion usuario={usuario} todosFalse={todoFalse} returnPage={setObservaciones} idActivity={activityId}/>}
+                                                                    // Editar Estado
+                                                                    setEditarEstado={setEditarEstado}
+                                                                    setEstadoAEditar={setEstadoAEditar}
+                                                                    // Activity 
+                                                                    idActivity={setActivityID}
+                                                                    />}
+                    {agregarObservacion && <AgregarObservacion usuario={usuario}/>}
                     {agregarComentario && <AgregarComentario usuario={usuario}/>}
                     
                     {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}
                     {editarActividad && <EditarActividad reset={todoFalse} returnPage={setActividadesProfe} actividad={actividadAEditar} />}
+                    {editarEstado && <EditarEstado reset={todoFalse} returnPage={setActividadesProfe} estado={estadoAEditar}/>}
                 </div>
 
             </div>
