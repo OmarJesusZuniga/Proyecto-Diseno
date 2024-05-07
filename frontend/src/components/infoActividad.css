@@ -48,3 +48,8 @@
     align-items: left; 
     border: 2px solid var(--background-accent);
 }
+
+.cartaActividad button {
+    margin-right: 15px;
+    margin-top: 20px;
+}

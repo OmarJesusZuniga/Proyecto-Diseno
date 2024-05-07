@@ -105,8 +105,29 @@ const addActivity = async (req, res) => {
 }
 
 const removeActivity = async (req, res) => {
+  const { id, activityId } = req.body;  // Assuming activities are uniquely identified by `activityId`
 
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid ID format' });
+  }
+
+  try {
+    const plan = await Plan.findOneAndUpdate(
+      { _id: id },
+      { $pull: { activities: activityId } },  // Adjust this to match your schema
+      { new: true }
+    );
+
+    if (!plan) {
+      return res.status(404).json({ error: 'No such plan found' });
+    }
+
+    res.status(200).json(plan);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
+
 
 module.exports = {
   getPlans,

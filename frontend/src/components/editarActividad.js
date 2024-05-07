@@ -5,7 +5,7 @@ import '../components/agregarActividad.css'
 import FileSelector from "../components/fileSelector";
 import axios from 'axios';
 
-const AgregarActividad = ({ reset, returnPage, plan}) => {
+const EditarActividad = ({ reset, returnPage, actividad}) => {
     const [enums, setEnums] = useState({ type: [], modality: [] });
     const [profesores, setProfesores] = useState([]);
     const selectedManagerAgregar = useRef(null);
@@ -130,36 +130,36 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
 
         let activityId; 
 
-        try {
-            const response = await axios.post('http://localhost:4000/api/activity/', {
-                week, 
-                name, 
-                type: type.current.value, 
-                programmedDate, 
-                programmedHour, 
-                managers: managers.map(manager => manager._id), 
-                publishDate, 
-                reminders, 
-                modality: modality.current.value, 
-                link,
-                pdf
-            });
+        // try {
+        //     const response = await axios.post('http://localhost:4000/api/activity/', {
+        //         week, 
+        //         name, 
+        //         type: type.current.value, 
+        //         programmedDate, 
+        //         programmedHour, 
+        //         managers: managers.map(manager => manager._id), 
+        //         publishDate, 
+        //         reminders, 
+        //         modality: modality.current.value, 
+        //         link,
+        //         pdf
+        //     });
 
-            activityId = response.data._id;
-        } catch (error) {
-            toast.error("Error al añadir la actividad!");
-            return;
-        }
+        //     activityId = response.data._id;
+        // } catch (error) {
+        //     toast.error("Error al añadir la actividad!");
+        //     return;
+        // }
 
-        try {
-            const response = await axios.post('http://localhost:4000/api/plan/addActivity/', {
-                id: plan, 
-                newActivity: activityId
-            });
-        } catch (error) {
-            toast.error("Error al añadir la actividad al plan!");
-            return;
-        }
+        // try {
+        //     const response = await axios.post('http://localhost:4000/api/plan/addActivity/', {
+        //         id: plan, 
+        //         newActivity: activityId
+        //     });
+        // } catch (error) {
+        //     toast.error("Error al añadir la actividad al plan!");
+        //     return;
+        // }
 
         toast.success("Actividad añadida correctamente!");
     }
@@ -180,10 +180,10 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
             <div className='agregarEstudiante'>
             <div>
             <h2>Week</h2>
-            <input onChange={changeWeek} type="number" className="inputBox" placeholder="Input Week"/>
+            <input value={actividad.week} onChange={changeWeek} type="number" className="inputBox" placeholder="Input Week"/>
 
             <h2>Nombre</h2>
-            <input onChange={changeName} type="text" className="inputBox" placeholder="Input Name"/>
+            <input value={actividad.name} onChange={changeName} type="text" className="inputBox" placeholder="Input Name"/>
 
             <h2>Type</h2>
             <select ref={type}>
@@ -193,13 +193,13 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
             </select>
 
             <h2>Programmed Date</h2>
-            <input onChange={changeProgrammedDate} type="date" className="inputBox" placeholder="Select Date"/>
+            <input value={actividad.programmedDate} onChange={changeProgrammedDate} type="date" className="inputBox" placeholder="Select Date"/>
 
             <h2>Programmed Hour</h2>
-            <input onChange={changeProgrammedHour} type="time" className="inputBox" placeholder="Select Hour"/>
+            <input value={actividad.programmedHour} onChange={changeProgrammedHour} type="time" className="inputBox" placeholder="Select Hour"/>
             
             <h2>Publish Date</h2>
-            <input onChange={changePublishDate} type="date" className="inputBox" placeholder="Select Publish Date"/>
+            <input value={actividad.publishDate} onChange={changePublishDate} type="date" className="inputBox" placeholder="Select Publish Date"/>
 
             <h2>Modality</h2>
             <select ref={modality}>
@@ -209,7 +209,7 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
             </select>
 
             <h2>Link</h2>
-            <input onChange={changeLink} type="url" className="inputBox" placeholder="Input URL"/>
+            <input value={actividad.link} onChange={changeLink} type="url" className="inputBox" placeholder="Input URL"/>
 
             <h2>PDF</h2>
             <FileSelector fileIncluded={setPdf}/>
@@ -244,7 +244,7 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
                 </select>
                 <button onClick={removeReminder} className='btnAgregar2'>Eliminar</button>
 
-                <button onClick={agregarActividad} className='btnAgregar'>Agregar Actividad</button>
+                <button onClick={agregarActividad} className='btnAgregar'>Editar Actividad</button>
             </div>
             </div>
             
@@ -252,4 +252,4 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
     );
 }
 
-export default AgregarActividad;
+export default EditarActividad;

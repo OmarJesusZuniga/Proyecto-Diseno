@@ -22,7 +22,7 @@ const activitiesSchema = new Schema ({
         required: true
     },
     programmedHour: {
-        type: Number, 
+        type: String, 
         required: true
     },
     managers: [{ // Cambio a lista de Id profes
@@ -58,7 +58,7 @@ const activitiesSchema = new Schema ({
     },
     observations: [{
         type: Schema.Types.ObjectId,
-        ref: 'observations',
+        ref: 'observation',
     }],
  
 }, { timestamps: true })

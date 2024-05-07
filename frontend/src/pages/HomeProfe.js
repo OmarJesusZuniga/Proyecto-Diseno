@@ -9,6 +9,7 @@ import ListaComentarios from "../components/listaComentarios";
 import AgregarObservacion from "../components/agregarObservacion";
 import AgregarActividad from "../components/agregarActividad";
 import AgregarComentario from "../components/agregarComentario";
+import EditarActividad from "../components/editarActividad";
 
 const HomeProfe = () => {
     const {state} = useLocation();
@@ -25,11 +26,15 @@ const HomeProfe = () => {
     const [bienvenida, setBienvenida] = useState(true);
     // Agregar Actividad
     const [agregarActividad, setAgregarActividad] = useState(false)
-    const [planActual, setPlanActual] = useState(null)
+    const [planActual, setPlanActual] = useState(null);
+    // Editar Actividada
+    const [editarActividad, setEditarActividad] = useState(false);
+    const [actividadAEditar, setActividadAEditar] = useState(null);
 
     const todoFalse = () => {
         setActividadesProfe(false);
         setProfes(false);
+        setEditarActividad(false);
         setObservaciones(false);
         setEstudiantes(false);
         setBienvenida(false);
@@ -64,9 +69,11 @@ const HomeProfe = () => {
                                                                     setPlanActual={setPlanActual}/>}
                     {agregarObservacion && <AgregarObservacion usuario={usuario}/>}
                     {agregarComentario && <AgregarComentario usuario={usuario}/>}
+                    {agregarComentario && <AgregarComentario usuario={usuario}/>}
                     {commentIDList && <ListaComentarios commentIDList={commentIDList} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} />}
                     
                     {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}
+                    {editarActividad && <EditarActividad reset={todoFalse} returnPage={setActividadesProfe} actividad={actividadAEditar} />}
                 </div>
 
             </div>
