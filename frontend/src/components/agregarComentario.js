@@ -8,7 +8,6 @@ const AgregarComentario = ({ usuario }) => {
     
     const submitModify = async (e) => {
         e.preventDefault(); 
-        console.log(observacion); 
 
         try {
 

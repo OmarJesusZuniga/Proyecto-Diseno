@@ -8,22 +8,20 @@ const ListaObservaciones = ({ commentIDList, usuario , todosFalse, sAgregarComen
 
     useEffect(() => {
         const fetchData = async () => {
-            
             const promises = commentIDList.map(id =>
-                axios.get(`http://localhost:4000/api/comment/${id}`)
-            ).catch(err => {
-                console.error(`Error fetching comment `, err);
-                return null; // Return null or some error indication for individual failed requests
-            });
+                axios.get(`http://localhost:4000/api/comment/${id}`).catch(err => {
+                    console.error(`Error fetching comment for ID ${id}:`, err);
+                    return null; // Return null or some error indication for individual failed requests
+                })
+            );
             const responses = await Promise.all(promises);
             const data = responses.filter(response => response !== null).map(res => res.data);
             setComentarios(data);
-            
         };
-
+    
         fetchData();
-    }, [commentIDList]); // Ensure useEffect runs when observationIDList changes
-
+    }, [commentIDList]); // Ensure useEffect runs when commentIDList changes
+    
     return ( 
         <div className="listaComentarios">
 

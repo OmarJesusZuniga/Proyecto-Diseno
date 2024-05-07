@@ -8,6 +8,7 @@ import ListaObservaciones from "../components/listaObservaciones";
 import ListaComentarios from "../components/listaComentarios";
 import AgregarObservacion from "../components/agregarObservacion";
 import AgregarActividad from "../components/agregarActividad";
+import AgregarComentario from "../components/agregarComentario";
 
 const HomeProfe = () => {
     const {state} = useLocation();
@@ -60,9 +61,9 @@ const HomeProfe = () => {
                                                                     sO ={setObservaciones}
                                                                     observationIDList = {setObservationIDList}
                                                                     agregarActividad = {setAgregarActividad}
-                                                                    // setActividadSeleccionada = {setActividadSeleccionada}
                                                                     setPlanActual={setPlanActual}/>}
-                    {agregarObservacion && <AgregarObservacion usuario={usuario} />}
+                    {agregarObservacion && <AgregarObservacion usuario={usuario}/>}
+                    {agregarComentario && <AgregarComentario usuario={usuario}/>}
                     {commentIDList && <ListaComentarios commentIDList={commentIDList} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} />}
                     
                     {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}
