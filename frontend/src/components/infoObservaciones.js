@@ -1,5 +1,5 @@
 import "../components/infoObservaciones.css";
-import moment from 'moment';  // Import moment
+import moment from 'moment';  
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
@@ -32,7 +32,6 @@ const InfoObservaciones = ({ observacion, todosFalse, observationId, listaComent
         fetchData();
     }, []); 
 
-    // Format the date using moment
     const formattedDate = moment(observacion.createdAt).format("MM/DD/YY HH:mm");
 
     return (

@@ -1,4 +1,5 @@
 import "../components/infoObservaciones.css"
+import moment from 'moment';  
 
 const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios }) => {
 
@@ -6,6 +7,8 @@ const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios 
         todosFalse();
         sAgregarComentarios(true);
     }
+
+    const formattedDate = moment(comentario.createdAt).format("MM/DD/YY HH:mm");
 
     return(
         <div className="cartaComentario">
@@ -18,7 +21,7 @@ const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios 
                 
                 <div>
                     <h3>Fecha: </h3>
-                    <h5>{comentario.createdAt}</h5>
+                    <h5>{formattedDate}</h5>
                 </div>
                 <button onClick={agregarComentario} className="btnCommentarios">Agregar comentario</button>
             </div>     
