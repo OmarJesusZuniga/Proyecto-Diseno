@@ -3,6 +3,8 @@ import './LoginForm.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -21,7 +23,13 @@ const LoginForm = () => {
     async function submitX(e){
         e.preventDefault();
 
-            
+        if (pass.length < 7) {
+            toast.error("La contraseña no es de 8 dígitos.", {
+                className: "toast-message"
+            });
+            return
+        }
+
         try {
             const response = await axios.post('http://localhost:4000/api/logIn/namepass/get/', {
                 name: user,
@@ -34,17 +42,30 @@ const LoginForm = () => {
                 const route = Status === "Professor" ? '/homeProfe' : '/home/';
                 navigate(route, { state: { usuario } });
             } else {
+                toast.error("Credenciales inválidas", {
+                    className: "toast-message"
+                });
                 navigate('/')
             }
         } catch (error){
-            
+            toast.error("Credenciales inválidas", {
+                className: "toast-message"
+            });
             console.log(error)
             navigate('/')
         }
     }
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        if (/^\d{0,8}$/.test(value)) {
+            setPass(value);
+        }
+    };
     
     return (
         <div className="wrapper">
+            <ToastContainer />
             <form action='POST'>
                 <h1>Login</h1>
                 <div className="input-box">
@@ -52,16 +73,16 @@ const LoginForm = () => {
                 </div>
                 <div className="input-box">
                     <input type={showPass ? "text" : "password"}
-                            placeholder='Password'
-                            title="Must be numeric and 8 characters long."
-                            pattern="^[0-9]{8}$"
-                            maxLength={8} 
-                            onChange={(e) => setPass(e.target.value)} 
-                            required/>
-                        <span className='icon' onClick={() => setShowPass(!showPass)}>
-                            {showPass ? <FaEyeSlash /> : <FaEye />}
-                        </span>
-                                      
+                        placeholder='Password'
+                        title="Must be numeric and 8 characters long."
+                        pattern="^[0-9]{8}$"
+                        maxLength={8} 
+                        value={pass}
+                        onChange={handleChange} 
+                        required />
+                    <span className='icon' onClick={() => setShowPass(!showPass)}>
+                        {showPass ? <FaEyeSlash /> : <FaEye />}
+                    </span>
                 </div>
                 <div className='botonOlvidar'>
                     <button onClick={forgot}>¿Olvidó su contraseña? </button>
