@@ -24,7 +24,7 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
     const [reminders, setReminders] = useState([]);
     const modality = useRef(null);
     const [link, setLink] = useState('');
-    const [pdf, setPdf] = useState(null);
+    const [pdf, setPdf] = useState({img: ''});
 
     const changeWeek = (e) => {
         setWeek(e.target.value);
@@ -103,7 +103,6 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
         setLink(e.target.value);
     }
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -131,6 +130,9 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
                 // modality
                 setLink(actividad.link)
                 // setPdf()
+
+                type.current.value = actividad.type
+                modality.current.value = actividad.modality
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -171,9 +173,10 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
             });
 
         } catch (error) {
-            toast.error("Error al añadir la actividad!", {
+            toast.error("Error al modificar la actividad!", {
                 className: "toast-message"
             });
+            console.error(error);
             return;
         }
 
@@ -195,7 +198,6 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
         });
     };
     
-
     const volver = () => {
         reset(); 
         returnPage(true);

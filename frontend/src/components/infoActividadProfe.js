@@ -5,13 +5,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId, idActivity, functionUpdateActivities, setActividadActual, setEditarEstado, setEstadoAEditar} ) => {
-
     const [managers, setManagers] = useState([]);
     const [state, setState] = useState('');
+    const [path, setPath] = useState('');
 
     const [programmedDate, setProgrammedDate] = useState('');
     const [publicationDate, setPublicationDate] = useState('');
     const [reminders, setReminders] = useState([]);
+
+    const [viewImages, setViewImages] = useState([]);
 
     const dejarObservaciones = async (e) => {
         idActivity(actividad._id)
@@ -72,6 +74,9 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
                 });
                 setReminders(legibleDates)
 
+                const response3 = await axios.post("http://localhost:4000/api/image/getPath/");
+                setPath(response3.data.path)
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -79,6 +84,39 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
 
         fetchData();
     }, []);
+
+    const addViewImages = (img) => {
+        setViewImages(prevImage => [...prevImage, img]);
+    }    
+
+    const resetViewImages = (img) => {
+        setViewImages([]);
+    };
+
+    const viewImagesFunction = async () => {
+        resetViewImages(); 
+        const promises = state.imageCollection.map(img => {
+            return axios.get(`http://localhost:4000/api/image/${img}`)
+                .then(response => response.data)
+                .catch(error => console.error('Error posting image:', img, error));
+        });
+
+        try {
+            const images = await Promise.all(promises);
+            images.forEach(image => {
+                if (image) { 
+                    addViewImages(path + image.img);
+                }
+            });
+
+            console.log(viewImages)
+
+        } catch (error) {
+            console.error('Error handling images:', error);
+        }
+
+    }
+
 
     return(
         <div className="cartaActividad">
@@ -134,9 +172,18 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
             </div>
             }
 
-            <div>
+            <div className="cartaActividad-Multiple">
                 <h4>Estado: </h4>
                 <h5>{state.type}</h5>
+                {state.recordingLink && <h4>Link de Grabacion: </h4>}
+                <h5>{state.recordingLink}</h5>
+                <div className="previewImagenes">
+                    {viewImages.map(img => (
+                        <img src={img} className="img-estado"/>
+                    ))}
+                </div>
+                {(viewImages.length === 0) && <button onClick={viewImagesFunction}>Ver Imagenes</button>}
+                {(viewImages.length !== 0) && <button onClick={resetViewImages}>Minimizar Imagenes</button>}
             </div>
 
             <button onClick={dejarObservaciones}> Observaciones </button>
@@ -145,7 +192,6 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
             <button onClick={eliminarActividadFunction}> Eliminar </button>
 
         </div>
-        
     );
 }
  
