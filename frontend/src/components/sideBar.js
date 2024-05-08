@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../components/sideBar.css'; // You can define your sidebar styles in this file
 import axios from 'axios';
 
 const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
 
+
     useEffect(() => {
-        const fetchTeams = () => {
+        const fetchTeams = async () => {
             axios.post('http://localhost:4000/api/guideTeam/assistant/get', {id: id})
                 .then(response => {
                     sE(response.data);
                     sES(response.data[0]);
-                    dejarPrimera();
+                    
+                    
                     
                 })
                 .catch(err => {
@@ -22,14 +24,11 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
     }, []);
 
     const changeEquipo = (e) => {
-        sE(e.target.value);
         s1(false);
         s2(false);
         s3(false);
         s4(false);
         sAE(false);
-        dejarPrimera();
-
     }
 
 
@@ -39,6 +38,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s3(false);
         s4(false);
         sAE(false);
+        
     }
     const dejarSegunda = () =>{
         s1(false);
@@ -46,6 +46,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s3(false);
         s4(false);
         sAE(false);
+        
     }
     const dejarTercera = () =>{
         s1(false);
@@ -53,6 +54,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s3(true);
         s4(false);
         sAE(false);
+        
     }
     const dejarCuarta = () => {
         s1(false);
@@ -60,6 +62,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s3(false);
         s4(true);
         sAE(false);
+        
     }
 
 

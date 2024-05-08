@@ -1,0 +1,29 @@
+.estudiantesYprofes {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Center the content horizontally */
+}
+
+.profesGuias,
+.estudiantesGuias {
+    flex: 1; /* Each div takes equal space */
+    color: antiquewhite;
+    border: 1px solid white;
+}
+
+.profesGuias h2{
+    margin-left: 5px;
+}
+
+.estudiantesGuias h2{
+    margin-left: 5px;
+}
+
+.profesGuias {
+    margin-right: 5px; /* Adjust margin for spacing */
+}
+
+.estudiantesGuias {
+    margin-left: 5px; /* Adjust margin for spacing */
+}
+

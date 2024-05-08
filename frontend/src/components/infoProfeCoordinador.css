@@ -1,0 +1,17 @@
+.cartaProfeCoord{
+    width: 60%;
+    background-color: var(--background-slide);
+    border-radius: 15px;
+    padding: 10px;
+    flex:1;
+    margin-right: 200px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartaProfeCoord:hover{
+    box-shadow: 0 4px 8px rgb(0, 0, 0); /* Add shadow on hover */
+    cursor: pointer;
+}
+

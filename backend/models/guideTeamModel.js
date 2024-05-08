@@ -27,8 +27,7 @@ const guideTeamSchema = new Schema ({
     },
     professors: [{ // NUEVO
         type: mongoose.Schema.Types.ObjectId, // Array de Id profesores
-        ref: 'professor',
-        required: true
+        ref: 'professor'
     }]
 }, {timestamps:true})
 

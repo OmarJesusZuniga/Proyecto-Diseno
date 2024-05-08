@@ -5,7 +5,9 @@ const {
     getGuideTeamsAssis,
     createGuideTeam,
     deleteGuideTeam,
-    updateGuideTeam
+    updateGuideTeam,
+    addProfeGuideTeam,
+    removeProfeGuide
 } = require('../controllers/guideTeamController')
 
 const router = express.Router()
@@ -28,5 +30,12 @@ router.delete('/:id', deleteGuideTeam)
 
 // Update a campus
 router.patch('/:id', updateGuideTeam)
+
+// agregar profe a equipo guia
+router.post('/addProfe/', addProfeGuideTeam);
+
+
+// remover profe de equipo guia
+router.post('/removeProfe/',removeProfeGuide);
 
 module.exports = router

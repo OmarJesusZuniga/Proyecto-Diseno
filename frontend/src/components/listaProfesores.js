@@ -3,9 +3,22 @@ import "../components/listaProfesores.css";
 import InfoProfesor from "./infoProfesor";
 import axios from 'axios';
 
-const ListaProfesores = ({ campus , usuario, equipo }) => {
+const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar}) => {
     const [professors, setProfessors] = useState([]);
-
+    useEffect(() => {
+        const fetchTeams = () => {
+            axios.post('http://localhost:4000/api/guideTeam/assistant/get', {id: id})
+                .then(response => {
+                    sE(response.data);
+                })
+                .catch(err => {
+                    console.error('Error fetching data:', err);
+                });
+        };
+    
+        fetchTeams();
+    }, []);
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -26,9 +39,12 @@ const ListaProfesores = ({ campus , usuario, equipo }) => {
             <h2>Profesores de la sede </h2>
             {professors && professors.map((professor, index) => (
                 
-                professor.campus.includes(campus) && (
-                    <InfoProfesor equipo={equipo} key={index} professor={professor} usuario={usuario}/>
-                )
+                (professor.campus === campus) && <InfoProfesor 
+                                                  equipo={equipo} 
+                                                  key={index} 
+                                                  professor={professor} 
+                                                  usuario={usuario}
+                                                  limpiar={limpiar}/>
             ))}
         </div>
     );

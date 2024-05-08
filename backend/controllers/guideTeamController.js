@@ -43,15 +43,16 @@ const getGuideTeamsAssis = async (req, res) => {
 
   const teams = await GuideTeam.find({ adminAssistants: id })
     .populate('professors')
-    .populate('students');
-  console.log(teams)
+    .populate('students')
+    .populate('guideProfessor');
+
   
   
 
   if (teams.length === 0) {
     return res.status(404).json({ error: 'No guide teams found for this assitant' });
   }
-
+  
   res.status(200).json(teams)
 
 }
@@ -151,11 +152,58 @@ const updateGuideTeam = async (req, res) => {
   res.status(200).json(guideTeam)
 }
 
+
+const addProfeGuideTeam = async (req, res) => {
+  const { guideTeamId, professorId } = req.body;
+
+  try {
+      const guideTeam = await GuideTeam.findById(guideTeamId);
+      if (!guideTeam) {
+          return res.status(404).json({ error: 'Guide team not found' });
+      }
+
+      if (!guideTeam.professors.includes(professorId)) {
+          guideTeam.professors.push(professorId);
+          await guideTeam.save();
+      }
+
+      res.status(200).json(guideTeam);
+  } catch (error) {
+      console.error('Error adding professor to guide team:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+
+const removeProfeGuide = async (req, res) => {
+  const { guideTeamId, professorId } = req.body;
+
+  try {
+      const guideTeam = await GuideTeam.findByIdAndUpdate(
+          guideTeamId,
+          { $pull: { professors: professorId } },
+          { new: true }
+      );
+
+      if (!guideTeam) {
+          return res.status(404).json({ error: 'Guide team not found' });
+      }
+      
+      res.status(200).json(guideTeam);
+  } catch (error) {
+      console.error('Error removing professor from guide team:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+
 module.exports = {
   getGuideTeams,
   getGuideTeamsAssis,
   getGuideTeam,
   createGuideTeam,
   deleteGuideTeam,
-  updateGuideTeam
+  updateGuideTeam,
+  addProfeGuideTeam,
+  removeProfeGuide
 }

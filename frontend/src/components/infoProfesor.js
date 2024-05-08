@@ -1,19 +1,42 @@
+
 import "../components/infoProfesor.css"
 import {  useNavigate } from 'react-router-dom';
+import axios from "axios";
 
-const InfoProfesor = ({professor , usuario, equipo}) => {
+const InfoProfesor = ({professor , usuario, equipo, limpiar}) => {
     const navigate = useNavigate();
     
     const submitModify = async (e) => {
         navigate("/modProfesor", {state: {usuario, professor}});
     }
     const registroProfesor = async (e) => {
-        navigate("/home/", {state: {usuario}});
+
+        let hayProfeDeCampus = false;
+
+        for (let i=0; i<equipo.professors.length; i++){
+            if (equipo.professors[i].campus === usuario.campus){
+                
+                hayProfeDeCampus = true;
+            }
+        }
+        if(hayProfeDeCampus){
+            
+            alert('Ya hay un profesor de este campus en el equipo guia')
+        } else {
+            axios.post('http://localhost:4000/api/guideTeam/addProfe/', {guideTeamId: equipo._id, professorId: professor._id})
+            .then(response => {
+                limpiar();
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error('Error adding professor:', error);
+            });
+        }
     }
 
 
     return(
-        <form>
+        
             <div className="cartaProfesor">
 
                 <h2>{professor.firstname} {professor.firstLastname}</h2>
@@ -37,15 +60,19 @@ const InfoProfesor = ({professor , usuario, equipo}) => {
 
                 <div className="botonesProfesor">
                     <button onClick={submitModify}>Modificar informacion</button>
-                    {equipo.professors.map((professorM) => {
-                        if(professorM._id === professor._id){
-                            <button onClick={registroProfesor}>Registrar al equipo</button>
+                    {equipo.professors.length > 0 && equipo.professors.map((professorM) => {
+                        if (!(professorM._id === professor._id)) {
+                        return (
+                            <button key={professorM._id} onClick={registroProfesor}>Registrar al equipo</button>
+                        );
                         }
+                        return null; // or any other JSX you want to render if the condition is not met
                     })}
+                    {equipo.professors.length === 0 && <button key={professor._id} onClick={registroProfesor}>Registrar al equipo</button>}
                 </div>
 
             </div>
-            </form>
+            
         
     );
 }

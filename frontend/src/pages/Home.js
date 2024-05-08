@@ -23,6 +23,16 @@ const Home = (req, res) => {
     const [estudiantesLista, setEstudiantesLista] = useState(false);
     const [siguienteActividad, setSiguienteActividad] = useState(false);
     const [agregarEstudiante, setAgregEstu] = useState(false);
+
+    const [cambiosDeEquipo, setCambios] = useState('');
+
+    const limpiarPantalla = () => {
+        setTodosLosProfes(false);
+        setProfesLista(false);
+        setEstudiantesLista(false);
+        setSiguienteActividad(false);
+        setAgregEstu(false);
+    }
     
 
     //Equipos guia y equipo seleccionado
@@ -85,12 +95,19 @@ const Home = (req, res) => {
                 sE={setEquipos} 
                 sES={setEquipoSeleccionado} 
                 id={usuario._id}
-                equipos={equipos}/>
+                equipos={equipos}
+                cambios = {cambiosDeEquipo}/>
 
 
                 {/* <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/> */}
                 <div className="contenedorListas">
-                    {todosLosProfes && <ListaProfesores campus={usuario.campus} usuario={usuario} equipo={equipoSeleccionado}/>}
+                    {todosLosProfes && <ListaProfesores 
+                                        campus={usuario.campus} 
+                                        usuario={usuario} 
+                                        equipo={equipoSeleccionado}
+                                        id={usuario._id}
+                                        sE={setEquipos}
+                                        limpiar = {limpiarPantalla}/>}
                     {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado}/>}
                     {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} sAE={setAgregEstu}/>}
                     {siguienteActividad && <><ListaActividades/></>}

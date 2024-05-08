@@ -35,10 +35,10 @@ const professorSchema = new Schema ({
         type: Number,
         required: true
     },
-    campus: [{ // NUEVO
+    campus: { // NUEVO
         type: mongoose.Schema.Types.ObjectId, // Array de Id campus
         ref: 'campus'
-    }],
+    },
     password: {
         type: Number,
         required: true
