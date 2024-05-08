@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SideBarProfe from "../components/sideBarProfe";
 import ListaEstudiantesProfe from "../components/listaEstudiantesProfe";
 import ListaActividadesProfe from "../components/listaActividadesProfe";
