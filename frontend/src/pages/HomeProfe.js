@@ -72,6 +72,7 @@ const HomeProfe = () => {
                                                                 sAgregarObservacion={setAgregarObservacion} 
                                                                 observationId={setObservationId} 
                                                                 listaComentarios={setComentarios}
+                                                                returnPage={setActividadesProfe}
                                                                 />}
                     {listaActividadesProfe && <ListaActividadesProfe
                                                                     // Generales
@@ -96,7 +97,7 @@ const HomeProfe = () => {
                                                                     />}
                     {agregarObservacion && <AgregarObservacion usuario={usuario} idActivity={activityId} todosFalse={todoFalse} returnPage={setObservaciones} />}
                     {agregarComentario && <AgregarComentario usuario={usuario} idObservation={observationId} todosFalse={todoFalse} returnPage={setComentarios} />}
-                    {listaComentarios && <ListaComentarios idObservation={observationId} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} />}
+                    {listaComentarios && <ListaComentarios idObservation={observationId} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} returnPage={setObservaciones} />}
                     {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}
                     {editarActividad && <EditarActividad reset={todoFalse} returnPage={setActividadesProfe} actividad={actividadAEditar} />}
                     {editarEstado && <EditarEstado reset={todoFalse} returnPage={setActividadesProfe} estado={estadoAEditar}/>}

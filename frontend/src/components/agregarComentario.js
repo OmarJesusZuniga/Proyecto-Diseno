@@ -1,4 +1,4 @@
-import './agregarObservacion.css';
+import './agregarComentario.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -21,8 +21,7 @@ const AgregarComentario = ({ usuario, idObservation, todosFalse, returnPage }) =
             console.log("Error agregarComentario")
             console.error('Error fetching data:', error);
         }
-        //volver()
-        
+        volver()
        
     }
 
@@ -39,10 +38,11 @@ const AgregarComentario = ({ usuario, idObservation, todosFalse, returnPage }) =
         <div className="agregarComentario">
         
             <h2>Agregar Comentario</h2>
+            <button onClick={volver} className='botonVolverComentario'>Volver</button>
 
             <h4>Escriba su comentario</h4>
                 
-            <textarea className="inputBox" onChange={handleInputChange} placeholder={"comentario"} required />
+            <textarea className="textBoxComentario" onChange={handleInputChange} placeholder={"comentario"} required />
                 
 
             <button onClick={submitModify} className='botonGuardarComentario'>Guardar comentario</button>

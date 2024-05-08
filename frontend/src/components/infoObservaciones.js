@@ -45,9 +45,9 @@ const InfoObservaciones = ({ observacion, todosFalse, observationId, listaComent
 
                 <div>
                     <h3>Fecha: </h3>
-                    <h5>{formattedDate}</h5>  {/* Updated to use formattedDate */}
+                    <h5>{formattedDate}</h5>
                 </div>
-                <button onClick={verComentarios} className="btnObservaciones">Agregar comentario</button>
+                <button onClick={verComentarios} className="btnObservaciones">Comentarios</button>
             </div>
         </div>
     );

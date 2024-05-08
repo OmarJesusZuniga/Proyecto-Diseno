@@ -3,7 +3,7 @@ import "../components/listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
 
-const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFalse, observationId, listaComentarios }) => {
+const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFalse, observationId, listaComentarios , returnPage}) => {
     const [observaciones, setObservaciones] = useState([]);
     console.log("idActivity")
     console.log(idActivity)
@@ -28,11 +28,19 @@ const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFa
         sAgregarObservacion(true);
     }
 
+    const volver = () => {
+        todosFalse(); 
+        returnPage(true);
+    }
+
     return ( 
         <div className="listaObservaciones">
 
             <h2>Observaciones de la actividad</h2>
-            <button onClick={agregarObservacion} className="btnAgregarObservacion">Agregar observación</button>
+            <div className="botonesListaObservaciones">
+                <button onClick={volver}>Volver</button>
+                <button onClick={agregarObservacion}>Agregar observación</button>
+            </div>
 
             {observaciones && observaciones.map((observacion) => (
                 <InfoObservacion 

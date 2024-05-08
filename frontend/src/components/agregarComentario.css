@@ -1,8 +1,63 @@
 .agregarComentario {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     justify-content: center; /* Center items horizontally */
+}
+
+.agregarComentario > * {
+    flex: 1; /* Each child will take equal width */
+}
+
+.agregarComentario h2{
+    color: #e2e8f0;
+    font-size: var(--font-size-h3);
+    font-weight: 600;
+}
+
+.agregarComentario h3{
+    font-size: var(--font-size-h4);
+    font-weight: 500;
+    color: var(--accent-secondary)
+}
+
+.agregarComentario h4{
+    font-size: var(--font-size-h4);
+    font-weight: 500;
+    color: var(--text-secondary)
+}
+
+.botonVolverComentario{
+    background-color: #2962a3;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: #e8eff6;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 30vh;
+    height: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    
+}
+
+.botonVolverComentario:hover{
+    background-color: #1a4366;
 }
 
 .botonGuardarComentario{
@@ -39,22 +94,25 @@
 }
 
 
-.inputBox {
-    width: 60%;
-    padding: 0.5rem;
-    margin-bottom: 10px;
-    margin-top: 10px;
+.textBoxComentario {
+    width: 80%; 
+    min-height: 100px;
+    padding: 1rem; 
+    margin-bottom: 10px; 
+    margin-top: 10px; 
     border: 1px solid #e2e8f0;
-    border-radius: 0.375rem;
-    box-sizing: border-box;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #4a5568;
+    border-radius: 0.375rem; 
+    box-sizing: border-box; 
+    font-size: 1rem; 
+    line-height: 1.5; 
+    color: #4a5568; 
     background-color: #edf2f7;
+    resize: vertical;
+    overflow: auto; 
     transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.inputBox:focus {
+.textBoxComentario:focus {
     outline: none;
     border-color: #63b3ed;
     background-color: #fff;

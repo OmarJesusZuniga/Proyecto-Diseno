@@ -3,12 +3,17 @@ import "./listaComentarios.css"
 import InfoComentario from "./infoComentarios";
 import axios from 'axios';
 
-const ListaObservaciones = ({ idObservation, usuario , todosFalse, sAgregarComentarios }) => {
+const ListaObservaciones = ({ idObservation, usuario , todosFalse, sAgregarComentarios , returnPage}) => {
     const [comentarios, setComentarios] = useState([]);
 
     const agregarComentario = () => {
         todosFalse();
         sAgregarComentarios(true);
+    }
+
+    const volver = () => {
+        todosFalse(); 
+        returnPage(true);
     }
 
     useEffect(() => {
@@ -28,7 +33,10 @@ const ListaObservaciones = ({ idObservation, usuario , todosFalse, sAgregarComen
         <div className="listaComentarios">
             
             <h2>Comentarios de la observación</h2>
-            <button onClick={agregarComentario} className="btnCommentarios">Agregar comentario</button>
+            <div className="botonesListaComentarios">
+                <button onClick={volver}>Volver</button>
+                <button onClick={agregarComentario} className="btnAgregarComentario">Agregar comentario</button>
+            </div>
 
             {comentarios.length > 0 && comentarios.map((comentario) => (
                 <InfoComentario 

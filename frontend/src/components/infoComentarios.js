@@ -1,4 +1,4 @@
-import "../components/infoObservaciones.css"
+import "../components/infoComentarios.css"
 import moment from 'moment';  
 
 const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios }) => {
@@ -15,7 +15,7 @@ const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios 
             <div className="infoEspecifica">
                 <h2>{usuario.email} </h2>
                 <div>
-                    <h3>Observación: </h3>
+                    <h3>Comentario: </h3>
                     <h5>{comentario.text}</h5>
                 </div>
                 
