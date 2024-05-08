@@ -43,7 +43,7 @@ const createObservation = async (req, res) => {
     }
     console.log("activity")
     console.log(activity)
-    const observation = await Observation.create({ text, id, comments: [] })
+    const observation = await Observation.create({ text: text, professor: id, comments: [] })
     console.log("observation")
     console.log(observation)
     activity.observations.push(observation._id);

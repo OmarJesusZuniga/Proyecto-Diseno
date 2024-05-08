@@ -15,12 +15,12 @@ const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios 
                     <h3>Observación: </h3>
                     <h5>{comentario.text}</h5>
                 </div>
-                <button onClick={agregarComentario} className="btnCommentarios">Agregar comentario</button>
+                
                 <div>
                     <h3>Fecha: </h3>
                     <h5>{comentario.createdAt}</h5>
                 </div>
-
+                <button onClick={agregarComentario} className="btnCommentarios">Agregar comentario</button>
             </div>     
         </div>
         

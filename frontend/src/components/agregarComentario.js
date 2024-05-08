@@ -2,21 +2,33 @@ import './agregarObservacion.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AgregarComentario = ({ usuario }) => {
+const AgregarComentario = ({ usuario, idObservation, todosFalse, returnPage }) => {
     const [comentario, setComentario] = useState("");
 
     
     const submitModify = async (e) => {
+        
         e.preventDefault(); 
+        console.log(comentario); 
 
         try {
-
-            const response = await axios.post("http://localhost:4000/api/observation/", { text: comentario, professor: usuario });
+            console.log("idObservation")
+            console.log(idObservation)
+            const response = await axios.post("http://localhost:4000/api/comment/", { text: comentario, professor: usuario, idObservation: idObservation });
             console.log(response)
 
         } catch (error) {
+            console.log("Error agregarComentario")
             console.error('Error fetching data:', error);
         }
+        //volver()
+        
+       
+    }
+
+    const volver = () => {
+        todosFalse(); 
+        returnPage(true);
     }
 
     const handleInputChange = (e) => {
@@ -29,11 +41,11 @@ const AgregarComentario = ({ usuario }) => {
             <h2>Agregar Comentario</h2>
 
             <h4>Escriba su comentario</h4>
-                <div className="inputBox">
-                    <input type="text" onChange={handleInputChange} value={"comentario.text"} required />
-                </div>
+                
+            <textarea className="inputBox" onChange={handleInputChange} placeholder={"comentario"} required />
+                
 
-            <button onClick={submitModify} className='botonGuardarComentario'>Guardar observación</button>
+            <button onClick={submitModify} className='botonGuardarComentario'>Guardar comentario</button>
 
 
         </div>

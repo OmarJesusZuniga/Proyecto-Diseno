@@ -3,39 +3,41 @@ import "./listaComentarios.css"
 import InfoComentario from "./infoComentarios";
 import axios from 'axios';
 
-const ListaObservaciones = ({ commentIDList, usuario , todosFalse, sAgregarComentarios }) => {
+const ListaObservaciones = ({ idObservation, usuario , todosFalse, sAgregarComentarios }) => {
     const [comentarios, setComentarios] = useState([]);
+
+    const agregarComentario = () => {
+        todosFalse();
+        sAgregarComentarios(true);
+    }
 
     useEffect(() => {
         const fetchData = async () => {
-            const promises = commentIDList.map(id =>
-                axios.get(`http://localhost:4000/api/comment/${id}`).catch(err => {
-                    console.error(`Error fetching comment for ID ${id}:`, err);
-                    return null; // Return null or some error indication for individual failed requests
-                })
-            );
-            const responses = await Promise.all(promises);
-            const data = responses.filter(response => response !== null).map(res => res.data);
-            setComentarios(data);
+            try {
+                const response = await axios.get("http://localhost:4000/api/observation/" + idObservation );
+                setComentarios(response.data.comments);
+            } catch (error) {
+                console.log({ error: error.message })
+            }
         };
     
         fetchData();
-    }, [commentIDList]); // Ensure useEffect runs when commentIDList changes
+    }, []); 
     
     return ( 
         <div className="listaComentarios">
-
-            <h2>Comentarios de la observación</h2>
             
+            <h2>Comentarios de la observación</h2>
+            <button onClick={agregarComentario} className="btnCommentarios">Agregar comentario</button>
 
-            {/* {comentarios.length > 0 && comentarios.map((comentario) => (
+            {comentarios.length > 0 && comentarios.map((comentario) => (
                 <InfoComentario 
                     comentario={comentario} 
                     usuario={usuario}
                     todosFalse={todosFalse}
                     sAgregarComentarios={sAgregarComentarios}
                 />
-            ))} */}
+            ))}
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideBarProfe from "../components/sideBarProfe";
 import ListaEstudiantesProfe from "../components/listaEstudiantesProfe";
 import ListaActividadesProfe from "../components/listaActividadesProfe";
@@ -21,6 +21,7 @@ const HomeProfe = () => {
     const [listaProfes, setProfes] = useState(true)
     const [listaActividadesProfe, setActividadesProfe] = useState(false)
     const [listaObservaciones, setObservaciones] = useState(false)
+    const [listaComentarios, setComentarios] = useState(false)
     const [agregarObservacion, setAgregarObservacion] = useState(false)
     const [agregarComentario, setAgregarComentario] = useState(false)
     const [listaEstudiantes, setEstudiantes] = useState(false)
@@ -35,11 +36,10 @@ const HomeProfe = () => {
 
     const [observationIDList, setObservationIDList] = useState([]);
     const [activityId, setActivityID] = useState([]);
-    const [commentIDList, setCommentIDList] = useState([]);
+    const [observationId, setObservationId] = useState([]);
     // Modificar Estado 
     const [editarEstado, setEditarEstado] = useState(false);
     const [estadoAEditar, setEstadoAEditar] = useState(null);
-
 
     const todoFalse = () => {
         setProfes(false);
@@ -53,9 +53,8 @@ const HomeProfe = () => {
         setBienvenida(false);
         setAgregarActividad(false);
         setPlanActual(false);
-        setObservationIDList([]);
-        setCommentIDList([]);
         setEditarEstado(false);
+        setComentarios(false);
     }
     
     return (
@@ -66,7 +65,14 @@ const HomeProfe = () => {
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
-                    {listaObservaciones && <ListaObservaciones idActivity={activityId} usuario={usuario} todosFalse={todoFalse} sAgregarObservacion={setAgregarObservacion} commentIDList={setCommentIDList}/>}
+                    {listaObservaciones && <ListaObservaciones 
+                                                                idActivity={activityId} 
+                                                                usuario={usuario} 
+                                                                todosFalse={todoFalse} 
+                                                                sAgregarObservacion={setAgregarObservacion} 
+                                                                observationId={setObservationId} 
+                                                                listaComentarios={setComentarios}
+                                                                />}
                     {listaActividadesProfe && <ListaActividadesProfe
                                                                     // Generales
                                                                     grupo={grupo} 
@@ -89,8 +95,8 @@ const HomeProfe = () => {
                                                                     idActivity={setActivityID}
                                                                     />}
                     {agregarObservacion && <AgregarObservacion usuario={usuario} idActivity={activityId} todosFalse={todoFalse} returnPage={setObservaciones} />}
-                    {agregarComentario && <AgregarComentario usuario={usuario}/>}
-                    
+                    {agregarComentario && <AgregarComentario usuario={usuario} idObservation={observationId} todosFalse={todoFalse} returnPage={setComentarios} />}
+                    {listaComentarios && <ListaComentarios idObservation={observationId} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} />}
                     {agregarActividad && <AgregarActividad reset={todoFalse} returnPage={setActividadesProfe} plan={planActual}/>}
                     {editarActividad && <EditarActividad reset={todoFalse} returnPage={setActividadesProfe} actividad={actividadAEditar} />}
                     {editarEstado && <EditarEstado reset={todoFalse} returnPage={setActividadesProfe} estado={estadoAEditar}/>}

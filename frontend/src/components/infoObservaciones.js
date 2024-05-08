@@ -1,11 +1,36 @@
 import "../components/infoObservaciones.css";
 import moment from 'moment';  // Import moment
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
-const InfoObservaciones = ({ observacion, usuario, todosFalse, commentIDList }) => {
+const InfoObservaciones = ({ observacion, todosFalse, observationId, listaComentarios }) => {
     const verComentarios = () => {
+        console.log("observacion._id")
+        console.log(observacion._id)
         todosFalse();
-        commentIDList(true);
+        
+        observationId(observacion._id);
+        listaComentarios(true);
     }
+
+    const [professor, setProfessor] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            
+            try {
+                const professorId = observacion.professor;
+                const response = await axios.get("http://localhost:4000/api/professors/" + professorId );
+                
+                setProfessor(response.data);
+
+            } catch (error) {
+                console.log(error.message)
+            }            
+        };
+
+        fetchData();
+    }, []); 
 
     // Format the date using moment
     const formattedDate = moment(observacion.createdAt).format("MM/DD/YY HH:mm");
@@ -13,7 +38,7 @@ const InfoObservaciones = ({ observacion, usuario, todosFalse, commentIDList }) 
     return (
         <div className="cartaObservacion">
             <div className="infoEspecifica">
-                <h2>{usuario.email}</h2>
+                <h2>{professor.email}</h2>
                 <div>
                     <h3>Observación: </h3>
                     <h5>{observacion.text}</h5>

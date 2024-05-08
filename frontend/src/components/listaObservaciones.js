@@ -3,7 +3,7 @@ import "../components/listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
 
-const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFalse, commentIDList }) => {
+const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFalse, observationId, listaComentarios }) => {
     const [observaciones, setObservaciones] = useState([]);
     console.log("idActivity")
     console.log(idActivity)
@@ -14,6 +14,7 @@ const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFa
                 const response = await axios.get("http://localhost:4000/api/activity/" + idActivity );
                 
                 setObservaciones(response.data.observations);
+
             } catch (error) {
                 console.log(error.message)
             }            
@@ -33,12 +34,12 @@ const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFa
             <h2>Observaciones de la actividad</h2>
             <button onClick={agregarObservacion} className="btnAgregarObservacion">Agregar observación</button>
 
-            {observaciones.length > 0 && observaciones.map((observacion) => (
+            {observaciones && observaciones.map((observacion) => (
                 <InfoObservacion 
                     observacion={observacion} 
-                    usuario={usuario}
                     todosFalse={todosFalse}
-                    commentIDList={commentIDList}
+                    observationId={observationId}
+                    listaComentarios={listaComentarios}
                 />
             ))}
         </div>
