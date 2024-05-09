@@ -40,6 +40,8 @@ const LoginForm = () => {
             if (Status === "Professor" || Status === "Admin Assistant") {
                 const usuario = Data[0];
                 const route = Status === "Professor" ? '/homeProfe' : '/home/';
+                Status === "Professor" ? usuario.type = 1 : usuario.type = 0;
+                console.log(usuario)
                 navigate(route, { state: { usuario } });
             } else {
                 toast.error("Credenciales inválidas", {
