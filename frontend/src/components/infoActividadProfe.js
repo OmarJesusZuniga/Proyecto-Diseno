@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId, idActivity, functionUpdateActivities, setActividadActual, setEditarEstado, setEstadoAEditar} ) => {
+const InfoActividadProfe = ( {actividad, isAdmin, todosFalse, sO, editarActividad, planId, idActivity, functionUpdateActivities, setActividadActual, setEditarEstado, setEstadoAEditar} ) => {
     const [managers, setManagers] = useState([]);
     const [state, setState] = useState('');
     const [path, setPath] = useState('');
@@ -168,7 +168,9 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
             {actividad.pdf && 
             <div>
                 <h4>Afiche: </h4>
-                <h5>{actividad.pdf}</h5>
+                <h5>
+                    <a href={path + actividad.pdf} target="_blank">View PDF</a>
+                </h5>
             </div>
             }
 
@@ -187,9 +189,9 @@ const InfoActividadProfe = ( {actividad, todosFalse, sO, editarActividad, planId
             </div>
 
             <button onClick={dejarObservaciones}> Observaciones </button>
-            <button onClick={editarEstadoActividad}> Modificar Estado </button>
-            <button onClick={editarActividadFunction}> Editar </button>
-            <button onClick={eliminarActividadFunction}> Eliminar </button>
+            { isAdmin && <button onClick={editarEstadoActividad}> Modificar Estado </button>}
+            { isAdmin && <button onClick={editarActividadFunction}> Editar </button>}
+            { isAdmin && <button onClick={eliminarActividadFunction}> Eliminar </button>}
 
         </div>
     );

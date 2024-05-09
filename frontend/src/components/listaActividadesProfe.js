@@ -5,9 +5,10 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 
 
-const ListaActividadesProfe = ({ grupo, todosFalse, sO, agregarActividad, setPlanActual, idActivity, editarActividad, setActividadActual, setEditarEstado, setEstadoAEditar}) => {
+const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, agregarActividad, setPlanActual, idActivity, editarActividad, setActividadActual, setEditarEstado, setEstadoAEditar}) => {
     const [actividades, setActividad] = useState([]);
     const [planID, setPlan] = useState('')
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const [updateActivities, setUpdateActivities] = useState(false)
 
@@ -21,6 +22,8 @@ const ListaActividadesProfe = ({ grupo, todosFalse, sO, agregarActividad, setPla
                 setPlan(responsePlan.data._id)
 
                 setActividad(responsePlan.data.activities)
+
+                setIsAdmin(responsePlan.data.professor === usuario._id)
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -57,6 +60,7 @@ const ListaActividadesProfe = ({ grupo, todosFalse, sO, agregarActividad, setPla
                     idActivity={idActivity}
                     setEditarEstado={setEditarEstado}
                     setEstadoAEditar={setEstadoAEditar}
+                    isAdmin={isAdmin}
                 />
             ))}
         </div>
