@@ -23,7 +23,7 @@ const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios 
                     <h3>Fecha: </h3>
                     <h5>{formattedDate}</h5>
                 </div>
-                <button onClick={agregarComentario} className="btnCommentarios">Agregar comentario</button>
+                
             </div>     
         </div>
         
