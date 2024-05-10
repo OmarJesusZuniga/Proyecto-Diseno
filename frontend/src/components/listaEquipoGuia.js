@@ -4,7 +4,7 @@ import '../components/listaEquipoGuia.css'
 import ListaProfGuia from './listaProfGuia';
 import ListaEstuGuia from './listaEstuGuia';
 
-const ListaEquipoGuia = ({equipo}) => {
+const ListaEquipoGuia = ({equipo, setCambios}) => {
     
     return (
         <div className='listaProfesores'>
@@ -14,7 +14,7 @@ const ListaEquipoGuia = ({equipo}) => {
             <div className="estudiantesYprofes">
                 <div className="profesGuias">
                     <h2>Profesores del Equipo</h2>
-                    <ListaProfGuia profes={equipo.professors} equipo={equipo}/>
+                    <ListaProfGuia profes={equipo.professors} equipo={equipo} setCambios = {setCambios}/>
                 </div>
                 <div className="estudiantesGuias">
                     <h2>Estudiantes del equipo</h2>

@@ -2,8 +2,19 @@ import React, { useEffect, useState } from 'react';
 import '../components/sideBar.css'; // You can define your sidebar styles in this file
 import axios from 'axios';
 
-const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
+const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccionado, idEquipoSeleccionado}) => {
 
+    useEffect(() => {
+
+        if (idEquipoSeleccionado === null){
+            
+        } else {
+            const getTeam = async () => {
+
+            }
+        }
+
+    })
 
     useEffect(() => {
         const fetchTeams = async () => {
@@ -11,6 +22,9 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
                 .then(response => {
                     sE(response.data);
                     sES(response.data[0]);
+                    setIdEquipoSeleccionado(response.data[0]._id);
+                    sC(false);
+                    dejarPrimera();
                     
                     
                     
@@ -21,6 +35,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         };
     
         fetchTeams();
+        
     }, []);
 
     const changeEquipo = (e) => {
@@ -28,7 +43,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s2(false);
         s3(false);
         s4(false);
-        sAE(false);
+        
     }
 
 
@@ -37,7 +52,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s2(false);
         s3(false);
         s4(false);
-        sAE(false);
+        
         
     }
     const dejarSegunda = () =>{
@@ -45,7 +60,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s2(true);
         s3(false);
         s4(false);
-        sAE(false);
+        
         
     }
     const dejarTercera = () =>{
@@ -53,7 +68,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s2(false);
         s3(true);
         s4(false);
-        sAE(false);
+        
         
     }
     const dejarCuarta = () => {
@@ -61,7 +76,7 @@ const Sidebar = ({s1, s2, s3, s4, sAE, sE, sES, id, equipos}) => {
         s2(false);
         s3(false);
         s4(true);
-        sAE(false);
+        
         
     }
 

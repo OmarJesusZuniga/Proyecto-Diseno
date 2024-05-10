@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import ListaActividades from "../components/listaActividades";
 import ListaEstudiantes from "../components/listaEstudiantes";
 import ListaProfesores from "../components/listaProfesores";
-import AgregarEstudiante from "../components/agregarEstudiante";
+
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
@@ -22,16 +22,18 @@ const Home = (req, res) => {
     const [profesLista, setProfesLista] = useState(false);
     const [estudiantesLista, setEstudiantesLista] = useState(false);
     const [siguienteActividad, setSiguienteActividad] = useState(false);
-    const [agregarEstudiante, setAgregEstu] = useState(false);
+    
 
     const [cambiosDeEquipo, setCambios] = useState('');
+    const [cargando, setCargando] = useState(true);
+    const [idEquipoSeleccionado, setIdEquipoSeleccionado] = useState(null);
 
     const limpiarPantalla = () => {
         setTodosLosProfes(false);
         setProfesLista(false);
         setEstudiantesLista(false);
         setSiguienteActividad(false);
-        setAgregEstu(false);
+        
     }
     
 
@@ -81,6 +83,8 @@ const Home = (req, res) => {
         }
     }
 
+    
+
 
     return (
         <div className="home"> 
@@ -90,17 +94,20 @@ const Home = (req, res) => {
                 s1={setTodosLosProfes} 
                 s2={setProfesLista} 
                 s3={setEstudiantesLista} 
-                s4={setSiguienteActividad} 
-                sAE={setAgregEstu} 
+                s4={setSiguienteActividad}  
                 sE={setEquipos} 
-                sES={setEquipoSeleccionado} 
+                sES={setEquipoSeleccionado}
+                sC ={setCargando}
                 id={usuario._id}
                 equipos={equipos}
-                cambios = {cambiosDeEquipo}/>
+                cambios = {cambiosDeEquipo}
+                setIdEquipoSeleccionado={setIdEquipoSeleccionado}
+                idEquipoSeleccionado={idEquipoSeleccionado}/>
 
 
                 {/* <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/> */}
                 <div className="contenedorListas">
+                    {cargando && <h2>Cargando</h2>}
                     {todosLosProfes && <ListaProfesores 
                                         campus={usuario.campus} 
                                         usuario={usuario} 
@@ -108,10 +115,9 @@ const Home = (req, res) => {
                                         id={usuario._id}
                                         sE={setEquipos}
                                         limpiar = {limpiarPantalla}/>}
-                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado}/>}
-                    {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} sAE={setAgregEstu}/>}
+                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios}/>}
+                    {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} />}
                     {siguienteActividad && <><ListaActividades/></>}
-                    {agregarEstudiante && <AgregarEstudiante campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} sAE={setAgregEstu}/>}
                 </div>
             </div>
             

@@ -2,10 +2,26 @@
 import "../components/infoProfesor.css"
 import {  useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { useEffect, useState } from "react";
 
-const InfoProfesor = ({professor , usuario, equipo, limpiar}) => {
+const InfoProfesor = ({equipo, professor , usuario, limpiar}) => {
     const navigate = useNavigate();
     
+    const [estoyEnEquipo, setEE] = useState(false);
+
+    useEffect(() => {
+        equipo.professors.map((prof) => {
+            if (prof._id === professor._id){
+                setEE(true);
+            }
+        })
+
+        if (equipo.guideProfessor._id === professor._id){
+            setEE(true);
+        }
+
+    }, []);
+
     const submitModify = async (e) => {
         navigate("/modProfesor", {state: {usuario, professor}});
     }
@@ -60,15 +76,7 @@ const InfoProfesor = ({professor , usuario, equipo, limpiar}) => {
 
                 <div className="botonesProfesor">
                     <button onClick={submitModify}>Modificar informacion</button>
-                    {equipo.professors.length > 0 && equipo.professors.map((professorM) => {
-                        if (!(professorM._id === professor._id)) {
-                        return (
-                            <button key={professorM._id} onClick={registroProfesor}>Registrar al equipo</button>
-                        );
-                        }
-                        return null; // or any other JSX you want to render if the condition is not met
-                    })}
-                    {equipo.professors.length === 0 && <button key={professor._id} onClick={registroProfesor}>Registrar al equipo</button>}
+                    {!estoyEnEquipo && <button onClick={registroProfesor}>Registrar al equipo</button>}
                 </div>
 
             </div>

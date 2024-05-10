@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-const InfoProfeGuia = ({profe, equipoId}) => {
+const InfoProfeGuia = ({profe, equipoId, setCambios}) => {
 
 
     const darDeBaja = async () => {
@@ -9,6 +9,7 @@ const InfoProfeGuia = ({profe, equipoId}) => {
         axios.post("http://localhost:4000/api/guideTeam/removeProfe/", {guideTeamId: equipoId, professorId: profe._id})
         .then(response => {
             console.log(response.data);
+            setCambios('cambio');
         })
         .catch(error => {
             console.error('Error removing professor:', error);

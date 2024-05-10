@@ -5,19 +5,8 @@ import axios from 'axios';
 
 const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar}) => {
     const [professors, setProfessors] = useState([]);
-    useEffect(() => {
-        const fetchTeams = () => {
-            axios.post('http://localhost:4000/api/guideTeam/assistant/get', {id: id})
-                .then(response => {
-                    sE(response.data);
-                })
-                .catch(err => {
-                    console.error('Error fetching data:', err);
-                });
-        };
+    console.log(equipo);
     
-        fetchTeams();
-    }, []);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -33,6 +22,7 @@ const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar}) => {
         fetchData();
     }, []);
 
+    
     
     return ( 
         <div className="listaProfesores">
