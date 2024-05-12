@@ -1,4 +1,4 @@
-import React, {  useState, useEffect } from 'react';
+import React, {  useState } from 'react';
 import './LoginForm.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {  useNavigate } from 'react-router-dom';
@@ -12,12 +12,9 @@ const LoginForm = () => {
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
     const [showPass, setShowPass] = useState(false);    
-    const [selectedOption, setSelectedOption] = useState(null);
-    const options = ['Asistente Administrativa', 'Profesor'];
-
 
     const forgot = async (e) => {
-        navigate("/forgotPassword", {state :{selectedOption, user, pass}});
+        navigate("/forgotPassword");
     }
 
     async function submitX(e){

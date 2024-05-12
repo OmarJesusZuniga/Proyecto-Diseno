@@ -2,12 +2,10 @@ import React, {  useState } from 'react';
 import './forgotPassword.css';
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 const ForgotPassword = () => {
-
-    const {state} = useLocation();
-    const {selectedOption, user, pass} = state || {};
-
 
     const navigate = useNavigate();
 
@@ -15,10 +13,13 @@ const ForgotPassword = () => {
 
     const enviar = async (e) => {
         e.preventDefault()
-        axios.post('http://localhost:4000/api/logIn', {email})
+        axios.post('http://localhost:4000/api/logIn/forgot/', {email})
         .then(res => {
             if(res.data.Status === "Not") {
-                navigate("/forgotPassword")
+                toast.error("El correo no existe en el sistema.", {
+                    className: "toast-message"
+                });
+                return
             }
             else {
                 navigate('/')
@@ -27,57 +28,14 @@ const ForgotPassword = () => {
         
     }
 
-    async function submit(e){
-        e.preventDefault();
-        
-        if (selectedOption === 'Asistente Administrativa'){
-            try{
-                const response = await axios.post('http://localhost:4000/api/adminAssistants/namepass/get/', {
-                    name: user,
-                    password: pass
-                })
-    
-                const dataArray = response.data
-                
-                if (dataArray.length === 0 ){
-                    navigate('/');
-                } else{
-                    const usuario = dataArray[0]
-                    navigate('/home/', {state: {usuario}});
-                }
-                
-                
-            }catch{
-                navigate('/')
-            }
-        } else if (selectedOption === 'Profesor'){
-            try {
-
-                const response = await axios.post('http://localhost:4000/api/professors/namepass/get/', {
-                    user: user,
-                    password: pass
-                })
-
-                const dataArray = response.data;
-                if(dataArray.length === 0){
-                    navigate('/')
-                } else {
-                    const usuario = dataArray[0];
-                    navigate('/homeProfe', {state: {usuario}})
-                }
-
-
-            } catch {
-                navigate('/')
-            }
-        }
-
-
+    const volver = async (e) => {
+        navigate('/');
     }
 
-
     return (
+        
         <div className="forgot-password">
+            <ToastContainer />
             <form action='POST'>
                 <h1>Forgot Password</h1>
                 <div className="input-box">
@@ -86,6 +44,7 @@ const ForgotPassword = () => {
   
                 <div className='botonEnviar'>
                     <button onClick={enviar}>Enviar </button>
+                    <button onClick={volver}>Volver </button>
                 </div>
 
             </form> 
