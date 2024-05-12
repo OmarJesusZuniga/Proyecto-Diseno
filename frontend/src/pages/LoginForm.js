@@ -41,6 +41,14 @@ const LoginForm = () => {
                 const usuario = Data[0];
                 const route = Status === "Professor" ? '/homeProfe' : '/home/';
                 Status === "Professor" ? usuario.type = 1 : usuario.type = 0;
+                if (Status === "Admin Assistant"){
+                    if (usuario.campus === '662733740d5b97c9626be5ab'){
+                        usuario.adminMadre = true;
+                    } else {
+                        usuario.adminMadre = false;
+                    }
+                }
+
                 console.log(usuario)
                 navigate(route, { state: { usuario } });
             } else {

@@ -228,6 +228,46 @@ const removeProfeGuide = async (req, res) => {
   }
 }
 
+const addGuideProfessor = async (req, res) => {
+  const { guideTeamId, professorId } = req.params;
+
+  try {
+    const guideTeam = await GuideTeam.findById(guideTeamId);
+    if (!guideTeam) {
+      return res.status(404).json({ error: 'Guide team not found' });
+    }
+
+    // Update the guide team document to include the guide professor's ID
+    guideTeam.guideProfessor = professorId;
+    await guideTeam.save();
+
+    res.status(200).json(guideTeam);
+  } catch (error) {
+    console.error('Error adding guide professor to guide team:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+const removeGuideProfessor = async (req, res) => {
+  const { guideTeamId } = req.params;
+
+  try {
+    const guideTeam = await GuideTeam.findById(guideTeamId);
+    if (!guideTeam) {
+      return res.status(404).json({ error: 'Guide team not found' });
+    }
+
+    // Remove the guide professor's ID from the guide team document
+    guideTeam.guideProfessor = null; // Or set to undefined, depending on your schema
+    await guideTeam.save();
+
+    res.status(200).json(guideTeam);
+  } catch (error) {
+    console.error('Error removing guide professor from guide team:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 
 module.exports = {
   getGuideTeams,
@@ -238,5 +278,7 @@ module.exports = {
   updateGuideTeam,
   addProfeGuideTeam,
   removeProfeGuide,
-  getGuideTeamsByProfessorId
+  getGuideTeamsByProfessorId,
+  addGuideProfessor,
+  removeGuideProfessor
 }

@@ -12,6 +12,7 @@ import {  useNavigate } from 'react-router-dom';
 // Para el excel
 import * as XLSX from "xlsx";
 import ListaEquipoGuia from "../components/listaEquipoGuia";
+import AddProfe from "../components/addProfe";
 
 const Home = (req, res) => {
     const {state} = useLocation();
@@ -22,6 +23,7 @@ const Home = (req, res) => {
     const [profesLista, setProfesLista] = useState(false);
     const [estudiantesLista, setEstudiantesLista] = useState(false);
     const [siguienteActividad, setSiguienteActividad] = useState(false);
+    const [addProfe, setAddprofe] = useState(false);
     
 
     const [cambiosDeEquipo, setCambios] = useState('');
@@ -84,8 +86,6 @@ const Home = (req, res) => {
         }
     }
 
-    
-
 
     return (
         <div className="home"> 
@@ -106,7 +106,8 @@ const Home = (req, res) => {
                 idEquipoSeleccionado={idEquipoSeleccionado}
                 limpiarPantalla={limpiarPantalla}
                 cambiosDeEquipo={cambiosDeEquipo}
-                setCambios={setCambios}/>
+                setCambios={setCambios}
+                sAP={setAddprofe}/>
 
 
                 {/* <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/> */}
@@ -119,10 +120,12 @@ const Home = (req, res) => {
                                         id={usuario._id}
                                         sE={setEquipos}
                                         limpiar = {limpiarPantalla}
-                                        setCambios = {setCambios}/>}
-                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe}/>}
+                                        setCambios = {setCambios}
+                                        adminMadre={usuario.adminMadre}/>}
+                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe} adminMadre={usuario.adminMadre} />}
                     {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} />}
                     {siguienteActividad && <><ListaActividades/></>}
+                    {addProfe && <AddProfe campus={usuario.campus} setCambios={setCambios}/>}
                 </div>
             </div>
             

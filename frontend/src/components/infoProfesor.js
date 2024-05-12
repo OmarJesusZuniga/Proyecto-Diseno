@@ -4,10 +4,11 @@ import {  useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios}) => {
+const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios, adminMadre}) => {
     const navigate = useNavigate();
     
     const [estoyEnEquipo, setEE] = useState(false);
+    const [hayPorfCoord, setCoord] = useState(true);
 
     useEffect(() => {
         equipo.professors.map((prof) => {
@@ -16,8 +17,13 @@ const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios}) => {
             }
         })
 
-        if (equipo.guideProfessor._id === professor._id){
-            setEE(true);
+        
+        if (equipo.guideProfessor === null){
+            setCoord(false);
+        } else{
+            if (equipo.guideProfessor._id === professor._id){
+                setEE(true);
+            }
         }
 
     }, []);
@@ -50,6 +56,17 @@ const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios}) => {
         }
     }
 
+    const addCoordinador = async () => {
+        axios.patch('http://localhost:4000/api/guideTeam/addGuideProf/'+equipo._id+'/'+professor._id)
+        .then(response => {
+            limpiar();
+            setCambios('cambio');
+        })
+        .catch(error => {
+            console.error('Error adding professor:', error);
+        });
+    }
+
 
     return(
         
@@ -77,6 +94,7 @@ const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios}) => {
                 <div className="botonesProfesor">
                     <button onClick={submitModify}>Modificar informacion</button>
                     {!estoyEnEquipo && <button onClick={registroProfesor}>Registrar al equipo</button>}
+                    {adminMadre && !hayPorfCoord && <button onClick={addCoordinador}>Denominar Coordinador</button>}
                 </div>
 
             </div>

@@ -56,13 +56,11 @@ const getProfessorUserPass = async (req, res) => {
 const createProfessor = async (req, res) => {
     const {code, firstLastname, secondLastname, firstname, middlename, email, officeNumber, phoneNumber, campus, image, password} = req.body
     console.log(req.body)
-    if (!mongoose.Types.ObjectId.isValid(officeNumber)) {
-        return res.status(400).json({error: "Invalid office number id."})
-    }
+    
 
-    if (image && !mongoose.Types.ObjectId.isValid(image)) {
-        return res.status(400).json({error: "Invalid image id."})
-    }
+    // if (image && !mongoose.Types.ObjectId.isValid(image)) {
+    //     return res.status(400).json({error: "Invalid image id."})
+    // }
 
     try {
         const professor = await Professor.create({code, firstLastname, secondLastname, firstname, middlename, email, officeNumber, phoneNumber, campus, password})
@@ -119,11 +117,32 @@ const updateProfessor = async (req, res) => {
     res.status(200).json(professor)
 }
 
+const getLastProfessorByCampus = async (req, res) => {
+    const { campusId } = req.params;
+  
+    try {
+      // Find professors with the specified campus ID, sorted by creation timestamp in descending order
+      const lastProfessor = await Professor.findOne({ campus: campusId })
+        .sort({ createdAt: -1 })
+        .exec();
+  
+      if (!lastProfessor) {
+        return res.status(404).json({ error: 'No professor found for the specified campus' });
+      }
+  
+      res.status(200).json(lastProfessor);
+    } catch (error) {
+      console.error('Error fetching last professor by campus:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+
 module.exports = {
     getProfessors,
     getProfessor,
     getProfessorUserPass,
     createProfessor,
     deleteProfessor,
-    updateProfessor
+    updateProfessor,
+    getLastProfessorByCampus
 }

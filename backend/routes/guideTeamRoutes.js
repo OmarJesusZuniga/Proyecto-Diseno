@@ -8,7 +8,9 @@ const {
     updateGuideTeam,
     addProfeGuideTeam,
     removeProfeGuide,
-    getGuideTeamsByProfessorId
+    getGuideTeamsByProfessorId,
+    addGuideProfessor,
+    removeGuideProfessor
 } = require('../controllers/guideTeamController')
 
 const router = express.Router()
@@ -40,5 +42,11 @@ router.post('/addProfe/', addProfeGuideTeam);
 
 // remover profe de equipo guia
 router.post('/removeProfe/',removeProfeGuide);
+
+//add profe coordinador al equipo
+router.patch('/addGuideProf/:guideTeamId/:professorId',addGuideProfessor);
+
+//remove profe coordinador del equipo
+router.patch('/revomeGuideProf/:guideTeamId', removeGuideProfessor);
 
 module.exports = router

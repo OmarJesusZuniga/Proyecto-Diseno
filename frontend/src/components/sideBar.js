@@ -3,7 +3,7 @@ import '../components/sideBar.css'; // You can define your sidebar styles in thi
 import axios from 'axios';
 
 const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccionado, idEquipoSeleccionado, limpiarPantalla,
-    cambiosDeEquipo, setCambios
+    cambiosDeEquipo, setCambios, sAP
 }) => {
 
     useEffect(() => {
@@ -58,6 +58,7 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         s2(false);
         s3(false);
         s4(false);
+        sAP(false);
         setIdEquipoSeleccionado(e.target.value);
         setCambios('cambio');        
     }
@@ -68,7 +69,7 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         s2(false);
         s3(false);
         s4(false);
-        
+        sAP(false);
         
     }
     const dejarSegunda = () =>{
@@ -76,7 +77,7 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         s2(true);
         s3(false);
         s4(false);
-        
+        sAP(false);
         
     }
     const dejarTercera = () =>{
@@ -84,7 +85,7 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         s2(false);
         s3(true);
         s4(false);
-        
+        sAP(false);
         
     }
     const dejarCuarta = () => {
@@ -92,8 +93,16 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         s2(false);
         s3(false);
         s4(true);
+        sAP(false);
         
-        
+    }
+
+    const addProfeTab = () => {
+        s1(false);
+        s2(false);
+        s3(false);
+        s4(false);
+        sAP(true);
     }
 
 
@@ -117,6 +126,7 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
                 <h2>Profesores guía</h2>
                 <button onClick={dejarPrimera} className="botonAzul">Ver todos los profesores</button>
                 <button onClick={dejarSegunda}>Ver lista</button>
+                <button onClick={addProfeTab} className="botonAzul">Añadir un profesor</button>
             </div>
         </li>
         <li>
