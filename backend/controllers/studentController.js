@@ -1,12 +1,26 @@
 const Student = require('../models/studentModel.js')
+const Campus = require('../models/campusModel.js')
 const mongoose = require('mongoose')
 
 // Get all
 const getStudents = async (req, res) => {
-    const students = await Student.find({}).sort({})
+    try {
+        const students = await Student.find({}).sort({});
 
-    
-    res.status(200).json(students)
+        const studentsCampusCode = await Promise.all(students.map(async (student) => {
+            const campus = await Campus.findById(student.campus);
+            const campusCode = campus ? campus.code : "Unknown";  // Handle case if campus is not found
+            return {
+                ...student._doc,  // Spread the existing student object
+                campusCode       // Add the new field with campus code
+            };
+        }));
+
+        res.status(200).json(studentsCampusCode);
+    } catch (error) {
+        console.error('Error fetching students:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 // Get a single student
