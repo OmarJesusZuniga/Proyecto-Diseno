@@ -41,6 +41,7 @@ const Home = (req, res) => {
 
     const [equipoSeleccionado, setEquipoSeleccionado] = useState(null)
     const [equipos, setEquipos] = useState([])
+    const isProfe = false;
 
 
     
@@ -102,7 +103,10 @@ const Home = (req, res) => {
                 equipos={equipos}
                 cambios = {cambiosDeEquipo}
                 setIdEquipoSeleccionado={setIdEquipoSeleccionado}
-                idEquipoSeleccionado={idEquipoSeleccionado}/>
+                idEquipoSeleccionado={idEquipoSeleccionado}
+                limpiarPantalla={limpiarPantalla}
+                cambiosDeEquipo={cambiosDeEquipo}
+                setCambios={setCambios}/>
 
 
                 {/* <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/> */}
@@ -114,8 +118,9 @@ const Home = (req, res) => {
                                         equipo={equipoSeleccionado}
                                         id={usuario._id}
                                         sE={setEquipos}
-                                        limpiar = {limpiarPantalla}/>}
-                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios}/>}
+                                        limpiar = {limpiarPantalla}
+                                        setCambios = {setCambios}/>}
+                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe}/>}
                     {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} />}
                     {siguienteActividad && <><ListaActividades/></>}
                 </div>

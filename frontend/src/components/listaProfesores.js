@@ -3,9 +3,9 @@ import "../components/listaProfesores.css";
 import InfoProfesor from "./infoProfesor";
 import axios from 'axios';
 
-const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar}) => {
+const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar, setCambios}) => {
     const [professors, setProfessors] = useState([]);
-    console.log(equipo);
+    
     
     
     useEffect(() => {
@@ -34,7 +34,8 @@ const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar}) => {
                                                   key={index} 
                                                   professor={professor} 
                                                   usuario={usuario}
-                                                  limpiar={limpiar}/>
+                                                  limpiar={limpiar}
+                                                  setCambios = {setCambios}/>
             ))}
         </div>
     );

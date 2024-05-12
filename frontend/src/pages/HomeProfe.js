@@ -11,6 +11,8 @@ import AgregarActividad from "../components/agregarActividad";
 import AgregarComentario from "../components/agregarComentario";
 import EditarActividad from "../components/editarActividad";
 import EditarEstado from "../components/editarEstado"
+import ListaEquipoGuia from "../components/listaEquipoGuia";
+
 
 const HomeProfe = () => {
     const {state} = useLocation();
@@ -18,7 +20,7 @@ const HomeProfe = () => {
 
 
 
-    const [listaProfes, setProfes] = useState(true)
+    const [listaProfes, setProfes] = useState(false)
     const [listaActividadesProfe, setActividadesProfe] = useState(false)
     const [listaObservaciones, setObservaciones] = useState(false)
     const [listaComentarios, setComentarios] = useState(false)
@@ -41,6 +43,14 @@ const HomeProfe = () => {
     const [editarEstado, setEditarEstado] = useState(false);
     const [estadoAEditar, setEstadoAEditar] = useState(null);
 
+    const [equipoSeleccionado, setEquipoSeleccionado] = useState(null)
+    const [equipos, setEquipos] = useState([])
+    const [cambiosDeEquipo, setCambios] = useState('');
+    const [cargando, setCargando] = useState(true);
+    const [idEquipoSeleccionado, setIdEquipoSeleccionado] = useState(null);
+    const isProfe = true;
+    
+
     const todoFalse = () => {
         setProfes(false);
         setActividadesProfe(false);
@@ -61,8 +71,26 @@ const HomeProfe = () => {
         <div className="home"> 
             <Navbar  id={usuario.firstname} apellido={usuario.firstLastname}/>
             <div className="horizontal-container">
-                <SideBarProfe usuario={usuario} sP = {setProfes} sA = {setActividadesProfe} sE={setEstudiantes} todosFalse={todoFalse} id={usuario._id} grupo={setGrupo}/>
+                <SideBarProfe usuario={usuario} 
+                              sP = {setProfes} 
+                              sA = {setActividadesProfe} 
+                              sE={setEstudiantes} 
+                              todosFalse={todoFalse} 
+                              id={usuario._id} 
+                              grupo={setGrupo}
+                              equipos={equipos}
+                              cambios = {cambiosDeEquipo}
+                              setIdEquipoSeleccionado={setIdEquipoSeleccionado}
+                              idEquipoSeleccionado={idEquipoSeleccionado}
+                              limpiarPantalla={todoFalse}
+                              cambiosDeEquipo={cambiosDeEquipo}
+                              setCambios={setCambios}
+                              sES={setEquipoSeleccionado}
+                              sEquipos={setEquipos}
+                              sC ={setCargando}/>
                 <div className="contenedorListas">
+                    {cargando && <h2>Cargando</h2>}
+                    {listaProfes && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe}/>}
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
                     {listaObservaciones && <ListaObservaciones 
@@ -76,7 +104,7 @@ const HomeProfe = () => {
                                                                 />}
                     {listaActividadesProfe && <ListaActividadesProfe
                                                                     // Generales
-                                                                    grupo={grupo} 
+                                                                   grupo={idEquipoSeleccionado} 
                                                                     usuario={usuario} 
                                                                     // 
                                                                     todosFalse={todoFalse} 

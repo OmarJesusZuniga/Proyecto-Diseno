@@ -4,7 +4,7 @@ import {  useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const InfoProfesor = ({equipo, professor , usuario, limpiar}) => {
+const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios}) => {
     const navigate = useNavigate();
     
     const [estoyEnEquipo, setEE] = useState(false);
@@ -42,7 +42,7 @@ const InfoProfesor = ({equipo, professor , usuario, limpiar}) => {
             axios.post('http://localhost:4000/api/guideTeam/addProfe/', {guideTeamId: equipo._id, professorId: professor._id})
             .then(response => {
                 limpiar();
-                console.log(response.data);
+                setCambios('cambio');
             })
             .catch(error => {
                 console.error('Error adding professor:', error);

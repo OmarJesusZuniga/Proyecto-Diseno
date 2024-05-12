@@ -4,8 +4,9 @@ import '../components/listaEquipoGuia.css'
 import ListaProfGuia from './listaProfGuia';
 import ListaEstuGuia from './listaEstuGuia';
 
-const ListaEquipoGuia = ({equipo, setCambios}) => {
+const ListaEquipoGuia = ({equipo, setCambios, isProfe}) => {
     
+
     return (
         <div className='listaProfesores'>
             <h2>Equipo Guía Primer Ingreso 20{equipo.generation}</h2>
@@ -14,7 +15,7 @@ const ListaEquipoGuia = ({equipo, setCambios}) => {
             <div className="estudiantesYprofes">
                 <div className="profesGuias">
                     <h2>Profesores del Equipo</h2>
-                    <ListaProfGuia profes={equipo.professors} equipo={equipo} setCambios = {setCambios}/>
+                    <ListaProfGuia profes={equipo.professors} equipo={equipo} setCambios = {setCambios} isProfe={isProfe}/>
                 </div>
                 <div className="estudiantesGuias">
                     <h2>Estudiantes del equipo</h2>

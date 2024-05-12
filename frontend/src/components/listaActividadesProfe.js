@@ -11,6 +11,7 @@ const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, agregarActivida
     const [isAdmin, setIsAdmin] = useState(false)
 
     const [updateActivities, setUpdateActivities] = useState(false)
+    
 
     useEffect(() => {
         const fetchData = async () => {

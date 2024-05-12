@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../components/sideBar.css'; // You can define your sidebar styles in this file
 import axios from 'axios';
 
-const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccionado, idEquipoSeleccionado}) => {
+const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccionado, idEquipoSeleccionado, limpiarPantalla,
+    cambiosDeEquipo, setCambios
+}) => {
 
     useEffect(() => {
 
@@ -10,11 +12,24 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
             
         } else {
             const getTeam = async () => {
-
+                limpiarPantalla();
+                sC(true);
+                axios.get('http://localhost:4000/api/guideTeam/'+idEquipoSeleccionado)
+                    .then(response => {
+                        sES(response.data);
+                        setIdEquipoSeleccionado(response.data._id);
+                        sC(false);
+                        setCambios('');
+                        dejarPrimera();
+                    })
+                    .catch(err => {
+                        console.error('Error fetching data:', err);
+                    });
             }
+            getTeam();
         }
-
-    })
+        
+    }, [cambiosDeEquipo])
 
     useEffect(() => {
         const fetchTeams = async () => {
@@ -43,7 +58,8 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         s2(false);
         s3(false);
         s4(false);
-        
+        setIdEquipoSeleccionado(e.target.value);
+        setCambios('cambio');        
     }
 
 
@@ -90,7 +106,7 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
                 <select onChange={changeEquipo}>
                 {equipos.map((equipo) => (
                     <option key={equipo._id} value={equipo._id}>
-                        Equipo guía 20{equipo.generation}
+                        20{equipo.generation}
                     </option>
                 ))}
                 </select>

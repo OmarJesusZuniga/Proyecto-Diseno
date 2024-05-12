@@ -57,6 +57,35 @@ const getGuideTeamsAssis = async (req, res) => {
 
 }
 
+//get teams by professor id
+const getGuideTeamsByProfessorId = async (req, res) => {
+  const { id } = req.body;
+  console.log(id);
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'Invalid professor ID' });
+  }
+
+  try {
+    const professor = await Professor.findById(id);
+    if (!professor) {
+      return res.status(404).json({ error: 'Professor not found' });
+    }
+
+    const guideTeams = await GuideTeam.find({ professors: id }).populate('professors')
+      .populate('professors')
+      .populate('students')
+      .populate('guideProfessor');
+    if (guideTeams.length === 0) {
+      return res.status(404).json({ error: 'No guide teams found for this professor' });
+    }
+
+    res.status(200).json(guideTeams);
+  } catch (error) {
+    console.error('Error fetching guide teams by professor ID:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 const getGuideTeam = async (req, res) => {
   const { id } = req.params
 
@@ -65,6 +94,9 @@ const getGuideTeam = async (req, res) => {
   }
 
   const guideTeam = await GuideTeam.findById(id)
+  .populate('professors')
+  .populate('students')
+  .populate('guideProfessor');
 
   if (!guideTeam) {
     return res.status(404).json({error: 'No such guide team'})
@@ -205,5 +237,6 @@ module.exports = {
   deleteGuideTeam,
   updateGuideTeam,
   addProfeGuideTeam,
-  removeProfeGuide
+  removeProfeGuide,
+  getGuideTeamsByProfessorId
 }
