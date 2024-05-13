@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Professor = require('../models/professorModel.js')
 const AdminAssistant = require('../models/adminAssistantModel.js')
 
-const forgotPassword = async (req, res) => {
+const forgotPasswordY = async (req, res) => {
     const { email } = req.body;
 
     const query = { email };
@@ -32,13 +32,18 @@ const forgotPassword = async (req, res) => {
     }
 };
 
-const forgotPasswordX = async (req, res) => {
-    const { email } = req.body;
-    const query = { email };
+const forgotPassword = async (req, res) => {
+    const { name } = req.body;
 
+    const query = {
+        email: name
+    };
+    console.log("Received email:", email);
     try {
         let queryResult = await Professor.find(query);
+        console.log("Professor query result:", queryResult);
         if (queryResult.length > 0) {
+            console.log("Professor found, sending email...");
             var transporter = nodemailer.createTransport({
                 service: "gmail",
                 port: 465,
@@ -49,30 +54,34 @@ const forgotPasswordX = async (req, res) => {
                 auth: {
                     user: 'poogr40@gmail.com',
                     pass: 'septtczjgleebadu'
-                }, 
+                },
                 tls: {
                     rejectUnauthorized: true
                 }
             });
-            
+
             var mailOptions = {
                 from: 'poogr40@gmail.com',
                 to: email,
                 subject: 'Password recovery - Datahub',
-                text: "Please, enter to the next link to reset you password: " `\n http://localhost:5173/ResetPassword`
+                text: `Please, enter to the next link to reset your password: \n http://localhost:5173/ResetPassword/${email}/`
             };
-            transporter.sendMail(mailOptions, function(error, info){
+            transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
-                    res.status(500).json({error: 'Email not sent', detail: 'EMAIL_NOT_SEND'});
+                    console.error("Error sending email:", error);
+                    res.status(500).json({ error: 'Email not sent', detail: 'EMAIL_NOT_SEND' });
                 } else {
-                    res.json({message: 'User exist', id: id})
+                    console.log("Email sent successfully:", info);
+                    return res.send({ Status: "Success" });
                 }
             });
-            return res.send({Status: "Success"});
 
         } else {
+            console.log("Professor not found, checking Admin Assistant...");
             queryResult = await AdminAssistant.find(query);
+            console.log("Admin Assistant query result:", queryResult);
             if (queryResult.length > 0) {
+                console.log("Admin Assistant found, sending email...");
                 var transporter = nodemailer.createTransport({
                     service: "gmail",
                     port: 465,
@@ -83,39 +92,40 @@ const forgotPasswordX = async (req, res) => {
                     auth: {
                         user: 'poogr40@gmail.com',
                         pass: 'septtczjgleebadu'
-                    }, 
+                    },
                     tls: {
                         rejectUnauthorized: true
                     }
                 });
-                
+
                 var mailOptions = {
                     from: 'poogr40@gmail.com',
                     to: email,
                     subject: 'Password recovery - Datahub',
-                    text: "Please, enter to the next link to reset you password: " `\n http://localhost:5173/ResetPassword`
+                    text: `Please, enter to the next link to reset your password: \n http://localhost:5173/ResetPassword/${email}/`
                 };
-                transporter.sendMail(mailOptions, function(error, info){
+                transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
-                        res.status(500).json({error: 'Email not sent', detail: 'EMAIL_NOT_SEND'});
+                        console.error("Error sending email:", error);
+                        res.status(500).json({ error: 'Email not sent', detail: 'EMAIL_NOT_SEND' });
                     } else {
-                        res.json({message: 'User exist', id: id})
+                        console.log("Email sent successfully:", info);
+                        return res.send({ Status: "Success" });
                     }
                 });
-                return res.send({Status: "Success"});
-                
+
             } else {
-                console.log('')
-                return res.send({Status: "Not"});
+                console.log("Admin Assistant not found.");
+                return res.send({ Status: "Not" });
             }
         }
-        
-        } catch (error) {
-            console.error("Error fetching data:", error.message);
-            return res.send({Status: "Not"});
-    }
 
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+        return res.send({ Status: "Not" });
+    }
 };
+
 
 const loginUser = async (req, res) => {
     const { name, password } = req.body;

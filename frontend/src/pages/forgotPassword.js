@@ -12,20 +12,24 @@ const ForgotPassword = () => {
     const [email, setEmail] = useState("");
 
     const enviar = async (e) => {
-        e.preventDefault()
-        axios.post('http://localhost:4000/api/logIn/forgot/', {email})
-        .then(res => {
-            if(res.data.Status === "Not") {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:4000/api/logIn/forgot', { 
+                name: email 
+            });
+            if (response.data.Status === "Not") {
                 toast.error("El correo no existe en el sistema.", {
                     className: "toast-message"
                 });
-                return
+            } else {
+                navigate('/');
             }
-            else {
-                navigate('/')
-            }
-        }).catch(err => console.log(err))
-        
+        } catch (err) {
+            console.error("Error submitting form:", err);
+            toast.error("An error occurred. Please try again.", {
+                className: "toast-message"
+            });
+        }
     }
 
     const volver = async (e) => {
@@ -43,8 +47,8 @@ const ForgotPassword = () => {
                 </div>
   
                 <div className='botonEnviar'>
-                    <button onClick={enviar}>Enviar </button>
                     <button onClick={volver}>Volver </button>
+                    <button onClick={enviar}>Enviar </button>
                 </div>
 
             </form> 
