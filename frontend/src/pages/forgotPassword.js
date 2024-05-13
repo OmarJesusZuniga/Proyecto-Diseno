@@ -22,7 +22,8 @@ const ForgotPassword = () => {
                     className: "toast-message"
                 });
             } else {
-                navigate('/');
+                const { name } = response.data;
+                navigate(`/ResetPassword/${name}`);
             }
         } catch (err) {
             console.error("Error submitting form:", err);

@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home from './pages/Home';
 import LoginForm from './pages/LoginForm';
 import ForgotPassword from './pages/forgotPassword';
+import ResetPassword from './pages/resetPassword';
 import ModificarEstudiante from './pages/modificarEstudiante';
 import ModificarProfesor from './pages/modificarProfesor';
 import HomeProfe from './pages/HomeProfe';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/modEstudiante" element={<ModificarEstudiante/>} />
           <Route path="/modProfesor" element={<ModificarProfesor/>} />
           <Route path="/forgotPassword" element={<ForgotPassword/>} /> 
+          <Route path="/ResetPassword/:id" element={<ResetPassword/>} />
           <Route path="/file" element={<FilePrueba/>} /> 
         </Routes>
       </div>
