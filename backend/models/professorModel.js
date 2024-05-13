@@ -42,7 +42,13 @@ const professorSchema = new Schema ({
     password: {
         type: Number,
         required: true
+    },
+    image: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'image'
     }
+    
+
 }, {timestamps:true})
 
 module.exports = mongoose.model('professor', professorSchema)

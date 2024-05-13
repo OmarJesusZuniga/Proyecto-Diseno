@@ -58,17 +58,28 @@ const createProfessor = async (req, res) => {
     console.log(req.body)
     
 
-    // if (image && !mongoose.Types.ObjectId.isValid(image)) {
-    //     return res.status(400).json({error: "Invalid image id."})
-    // }
+    if (image === ''){
+        try {
+            const professor = await Professor.create({code, firstLastname, secondLastname, firstname, middlename, email, officeNumber, phoneNumber, campus, password})
+            res.status(200).json(professor)
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({error: "Please fill in all the required fields."})
+        }
+    } else {
+        if (image && !mongoose.Types.ObjectId.isValid(image)) {
+            return res.status(400).json({error: "Invalid image id."})
+        }
+        try {
+            const professor = await Professor.create({code, firstLastname, secondLastname, firstname, middlename, email, officeNumber, phoneNumber, campus, password, image})
+            res.status(200).json(professor)
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({error: "Please fill in all the required fields."})
+        }
+    }
 
-    try {
-        const professor = await Professor.create({code, firstLastname, secondLastname, firstname, middlename, email, officeNumber, phoneNumber, campus, password})
-        res.status(200).json(professor)
-    } catch (err) {
-        console.log(err)
-        res.status(400).json({error: "Please fill in all the required fields."})
-    }  
+      
 }
 
 // Delete a professor

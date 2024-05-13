@@ -9,7 +9,7 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
     const [enums, setEnums] = useState({ type: [] })
     const [estadoActividad, setEstadoActividad] = useState('')
     const [path, setPath] = useState('');
-    const [previewURL, setPreviewUrl] = useState('')
+    const [previewURL, setPreviewUrl] = useState('');
 
     const type = useRef(null);
     const [link, setLink] = useState('');

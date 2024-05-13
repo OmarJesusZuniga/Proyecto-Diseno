@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import FileSelector from "../components/fileSelector";
 
 const AddProfe = ({campus, setCambios}) => {
     
@@ -12,7 +13,30 @@ const AddProfe = ({campus, setCambios}) => {
     const [segundoApellido, setSegunAPellido] = useState();
     const [correo, setCorreo] = useState();
     const [contraseña, setContra] = useState();
+    const [actualImage, setActualImage] = useState('')
+    const [previewURL, setPreviewUrl] = useState('')
+    const [path, setPath] = useState('');
 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response3 = await axios.post("http://localhost:4000/api/image/getPath/");
+                setPath(response3.data.path)
+            } catch(e) {
+                console.log(e);
+            }
+        }
+        fetchData();
+    }, [])
+
+    useEffect( () => {
+        if(actualImage === ''){
+
+        } else{
+            setPreviewUrl(path + actualImage.img);
+        }
+    }, [actualImage]);
 
     function handleNombre (e){
         setNombre(e.target.value)
@@ -87,7 +111,8 @@ const AddProfe = ({campus, setCambios}) => {
         const numOficina = parseInt(officePhone.replace(/\D/g, ''));
         const numTel = parseInt(phoneNum.replace(/\D/g, ''))
 
-        await axios.post('http://localhost:4000/api/professors/',{
+        if (actualImage === ''){
+            await axios.post('http://localhost:4000/api/professors/',{
             code: newCode,
             firstLastname: apellido, 
             secondLastname: segundoApellido, 
@@ -98,12 +123,32 @@ const AddProfe = ({campus, setCambios}) => {
             phoneNumber: numTel, 
             campus: campus,  
             password: contraseña
-        })
-        .then(respons => {
-            setCambios('cambio');
-        })
+            })
+            .then(respons => {
+                setCambios('cambio');
+            })
+        } else {
+            await axios.post('http://localhost:4000/api/professors/',{
+            code: newCode,
+            firstLastname: apellido, 
+            secondLastname: segundoApellido, 
+            firstname: nombre, 
+            middlename: apellido, 
+            email: correo, 
+            officeNumber: numOficina, 
+            phoneNumber: numTel, 
+            campus: campus,  
+            password: contraseña,
+            image: actualImage._id
+            })
+            .then(respons => {
+                setCambios('cambio');
+            })
+        }
 
     }
+
+
     
     return (
         <div className="principal">
@@ -145,16 +190,14 @@ const AddProfe = ({campus, setCambios}) => {
 
                 <h4>Añada imagen (opcional)</h4>
                 <div className="input-box">
-                    <input type="file" onChange={handleChange} />
+                <FileSelector fileIncluded={setActualImage}/>
+                {previewURL === '' ? <img src={previewURL} alt="Preview" /> : <p>Loading image...</p>}
                 </div>
-                <div className="image-container">
-                    {file && <img src={file} />}
+                
+                <div className="input-box">
+                
                 </div>
-
                 <button onClick={addProfe}>Agregar Profesor</button>
-
-            
-
         </div>
     );
 }

@@ -13,8 +13,7 @@ const guideTeamSchema = new Schema ({
     },
     students: [{ // NUEVO
         type: mongoose.Schema.Types.ObjectId, // Array de Id estudiantes
-        ref: 'student',
-        required: true
+        ref: 'student'
     }],
     adminAssistants: [{ // NUEVO
         type: mongoose.Schema.Types.ObjectId, // Array de Id asistentes adiministrativas

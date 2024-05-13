@@ -46,7 +46,7 @@ const LoginForm = () => {
                     }
                 }
 
-                console.log(usuario)
+                
                 navigate(route, { state: { usuario } });
             } else {
                 toast.error("Credenciales inválidas", {
