@@ -1,4 +1,4 @@
-import React, {  useState, useEffect } from 'react';
+import React, {  useState } from 'react';
 import './resetPassword.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {  useNavigate , useParams } from 'react-router-dom';
@@ -12,21 +12,6 @@ const ResetPassword = () => {
     const [pass, setPass] = useState("");
     const [showPass, setShowPass] = useState(false);    
 
-    const handleChange = (e) => {
-        const value = e.target.value;
-        if (/^\d{0,8}$/.test(value)) {
-            setPass(value);
-        }
-    }
-
-    useEffect(() => {
-        const fetchData = async () => {
-            console.log(name)
-        };
-
-        fetchData();
-    }, []);
-
     const actualizar = async (e) => {
         e.preventDefault();
 
@@ -38,10 +23,10 @@ const ResetPassword = () => {
         }
 
         console.log(name)
+        console.log(pass)
 
         try {
             const response = await axios.post(`http://localhost:4000/api/logIn/updatePassword/${name}`, { 
-                name: name,
                 password: pass 
             });
             if (response.data.Status === "Not") {
@@ -58,6 +43,13 @@ const ResetPassword = () => {
             });
         }
     }
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        if (/^\d{0,8}$/.test(value)) {
+            setPass(value);
+        }
+    };
 
     return (
         

@@ -99,9 +99,6 @@ const updatePassword = async (req, res) => {
     const { name } = req.params;
     const { password } = req.body;
 
-    console.log(name);
-    console.log(password);
-
     try {
         let professor = await Professor.findOne({ email: name });
         console.log(professor)
