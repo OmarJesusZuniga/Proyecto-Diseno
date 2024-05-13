@@ -134,7 +134,7 @@ const loginUser = async (req, res) => {
     };
 
     const queryAssistant = {
-        firstname: name,
+        email: name,
         password: parseInt(password)
     }
 
