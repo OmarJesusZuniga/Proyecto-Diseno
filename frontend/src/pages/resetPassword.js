@@ -7,18 +7,10 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const ResetPassword = () => {
-
     const navigate = useNavigate();
     const { name } = useParams();
     const [pass, setPass] = useState("");
     const [showPass, setShowPass] = useState(false);    
-
-    const handleChange = (e) => {
-        const value = e.target.value;
-        if (/^\d{0,8}$/.test(value)) {
-            setPass(value);
-        }
-    }
 
     const actualizar = async (e) => {
         e.preventDefault();
@@ -30,9 +22,11 @@ const ResetPassword = () => {
             return
         }
 
+        console.log(name)
+        console.log(pass)
+
         try {
-            const response = await axios.post('http://localhost:4000/api/logIn/updatePassword', { 
-                name: name,
+            const response = await axios.post(`http://localhost:4000/api/logIn/updatePassword/${name}`, { 
                 password: pass 
             });
             if (response.data.Status === "Not") {
@@ -50,12 +44,19 @@ const ResetPassword = () => {
         }
     }
 
+    const handleChange = (e) => {
+        const value = e.target.value;
+        if (/^\d{0,8}$/.test(value)) {
+            setPass(value);
+        }
+    };
+
     return (
         
         <div className="Reset-password">
             <ToastContainer />
             <form action='POST'>
-                <h1>Reset Password</h1>
+                <h1>Reset Password \ {name} \</h1>
                 <div className="input-box">
                 <input type={showPass ? "text" : "password"}
                         placeholder='Password'

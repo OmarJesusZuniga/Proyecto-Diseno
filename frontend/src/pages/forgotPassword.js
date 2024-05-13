@@ -13,17 +13,20 @@ const ForgotPassword = () => {
 
     const enviar = async (e) => {
         e.preventDefault();
+        console.log("Entro a enviar")
         try {
             const response = await axios.post('http://localhost:4000/api/logIn/forgot', { 
                 name: email 
             });
+
             if (response.data.Status === "Not") {
                 toast.error("El correo no existe en el sistema.", {
                     className: "toast-message"
                 });
             } else {
-                const { name } = response.data;
-                navigate(`/ResetPassword/${name}`);
+                toast.success("Correo publicado correctamente!", {
+                    className: "toast-message"
+                });
             }
         } catch (err) {
             console.error("Error submitting form:", err);
