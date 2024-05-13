@@ -22,7 +22,7 @@ function App() {
           <Route path="/modEstudiante" element={<ModificarEstudiante/>} />
           <Route path="/modProfesor" element={<ModificarProfesor/>} />
           <Route path="/forgotPassword" element={<ForgotPassword/>} /> 
-          <Route path="/ResetPassword/:id" element={<ResetPassword/>} />
+          <Route path="/ResetPassword/:name" element={<ResetPassword/>} />
           <Route path="/file" element={<FilePrueba/>} /> 
         </Routes>
       </div>

@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, {  useState, useEffect } from 'react';
 import './resetPassword.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {  useNavigate , useParams } from 'react-router-dom';
@@ -7,7 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const ResetPassword = () => {
-
     const navigate = useNavigate();
     const { name } = useParams();
     const [pass, setPass] = useState("");
@@ -19,6 +18,14 @@ const ResetPassword = () => {
             setPass(value);
         }
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log(name)
+        };
+
+        fetchData();
+    }, []);
 
     const actualizar = async (e) => {
         e.preventDefault();
@@ -57,7 +64,7 @@ const ResetPassword = () => {
         <div className="Reset-password">
             <ToastContainer />
             <form action='POST'>
-                <h1>Reset Password</h1>
+                <h1>Reset Password \ {name} \</h1>
                 <div className="input-box">
                 <input type={showPass ? "text" : "password"}
                         placeholder='Password'

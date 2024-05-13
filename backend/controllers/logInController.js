@@ -39,9 +39,9 @@ const forgotPassword = async (req, res) => {
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.error("Error sending email:", error);
-                    res.status(500).json({ error: 'Email not sent', detail: 'EMAIL_NOT_SEND' });
+                    return res.status(500).json({ error: "Email not sent", detail: "EMAIL_NOT_SEND" });
                 } else {
-                    return res.send({ Status: "Success" }, name);
+                    return res.status(200).json({ Status: "Success", name: name});
                 }
             });
 
@@ -73,12 +73,13 @@ const forgotPassword = async (req, res) => {
                     subject: 'Password recovery',
                     text: `Please, enter to the next link to reset your password: \n http://localhost:3000/ResetPassword/${name}`
                 };
+
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
                         console.error("Error sending email:", error);
-                        res.status(500).json({ error: 'Email not sent', detail: 'EMAIL_NOT_SEND' });
+                        return res.status(500).json({ error: "Email not sent", detail: "EMAIL_NOT_SEND" });
                     } else {
-                        return res.send({ Status: "Success" }, name);
+                        return res.status(200).json({ Status: "Success", name: name});
                     }
                 });
 
