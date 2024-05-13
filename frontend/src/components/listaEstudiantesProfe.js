@@ -9,21 +9,40 @@ const ListaEstudiantesProfe = ({campus, usuario}) => {
 
 
     const [estudiantes, setEstudiantes] = useState([]);
+    const [sortOption, setSortOption] = useState('');
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchEstudiantes = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/students/');
-                setEstudiantes(response.data)
-                
+                const response = await axios.get(`http://localhost:4000/api/students?sort=${sortOption}`);
+                setEstudiantes(response.data);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Failed to fetch students:', error);
             }
         };
 
-        fetchData();
-    }, []);
+        if (sortOption) { // Only fetch if a sort option is selected
+            fetchEstudiantes();
+        }
+    }, [sortOption]); 
 
+    const handleSortChange = (event) => {
+        const value = event.target.value;
+        switch (value) {
+            case 'team2':
+                setSortOption('firstname');
+                break;
+            case 'team3':
+                setSortOption('studentCard');
+                break;
+            case 'team4':
+                setSortOption('campus');
+                break;
+            default:
+                setSortOption('');
+                break;
+        }
+    };
 
 
     return (
@@ -31,7 +50,7 @@ const ListaEstudiantesProfe = ({campus, usuario}) => {
             <div className="listaEstudiantes">
             <h2>Estudiantes de la sede</h2>
             <div className="dropdown">
-                <select>
+                <select onChange={handleSortChange}>
                     <option value="team1">Ordenar por....</option>
                     <option value="team2">Orden alfabético</option>
                     <option value="team3">Carné</option>

@@ -2,19 +2,33 @@ const Student = require('../models/studentModel.js')
 const Campus = require('../models/campusModel.js')
 const mongoose = require('mongoose')
 
-// Get all
+// Get all ordered
 const getStudents = async (req, res) => {
+    const sortField = req.query.sort; 
+
+    const validSortFields = {
+        firstname: 'asc',   
+        studentCard: 'asc', 
+        campusCode: 'asc'   
+    };
+
+    const sortCriteria = validSortFields[sortField] ? {[sortField]: validSortFields[sortField]} : {firstname: 'asc'};
+
     try {
-        const students = await Student.find({}).sort({});
+        const students = await Student.find({}).sort(sortCriteria);
 
         const studentsCampusCode = await Promise.all(students.map(async (student) => {
             const campus = await Campus.findById(student.campus);
-            const campusCode = campus ? campus.code : "Unknown";  // Handle case if campus is not found
+            const campusCode = campus ? campus.code : "Unknown"; 
             return {
-                ...student._doc,  // Spread the existing student object
-                campusCode       // Add the new field with campus code
+                ...student._doc,  
+                campusCode        
             };
         }));
+
+        if (sortField === 'campusCode') {
+            studentsCampusCode.sort((a, b) => a.campusCode.localeCompare(b.campusCode));
+        }
 
         res.status(200).json(studentsCampusCode);
     } catch (error) {
@@ -22,6 +36,7 @@ const getStudents = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
 
 // Get a single student
 const getStudent = async (req, res) => {
