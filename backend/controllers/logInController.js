@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Professor = require('../models/professorModel.js')
 const AdminAssistant = require('../models/adminAssistantModel.js')
+var nodemailer = require('nodemailer');
 
 const forgotPasswordY = async (req, res) => {
     const { email } = req.body;
@@ -38,12 +39,10 @@ const forgotPassword = async (req, res) => {
     const query = {
         email: name
     };
-    console.log("Received email:", email);
+
     try {
         let queryResult = await Professor.find(query);
-        console.log("Professor query result:", queryResult);
         if (queryResult.length > 0) {
-            console.log("Professor found, sending email...");
             var transporter = nodemailer.createTransport({
                 service: "gmail",
                 port: 465,
@@ -62,10 +61,11 @@ const forgotPassword = async (req, res) => {
 
             var mailOptions = {
                 from: 'poogr40@gmail.com',
-                to: email,
+                to: name,
                 subject: 'Password recovery - Datahub',
-                text: `Please, enter to the next link to reset your password: \n http://localhost:5173/ResetPassword/${email}/`
+                text: `Please, enter to the next link to reset your password: \n http://localhost:5173/ResetPassword/${name}/`
             };
+            
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.error("Error sending email:", error);
