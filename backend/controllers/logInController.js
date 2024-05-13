@@ -3,36 +3,6 @@ const Professor = require('../models/professorModel.js')
 const AdminAssistant = require('../models/adminAssistantModel.js')
 var nodemailer = require('nodemailer');
 
-const forgotPasswordY = async (req, res) => {
-    const { email } = req.body;
-
-    const query = { email };
-
-    let userType = null;
-
-    try {
-        let queryResult = await Professor.find(query);
-
-        if (queryResult.length > 0) {
-            userType = 'Professor';
-        } else {
-            queryResult = await AdminAssistant.find(query);
-            if (queryResult.length > 0) {
-                userType = 'Admin Assistant';
-            }
-        }
-    } catch (error) {
-        console.error("Error fetching data:", error.message);
-    }
-
-    if (userType) {
-        console.log("hola")
-        return res.send({Status: "Success"});
-    } else {
-        return res.send({Status: "Not"});
-    }
-};
-
 const forgotPassword = async (req, res) => {
     const { name } = req.body;
 
@@ -62,8 +32,8 @@ const forgotPassword = async (req, res) => {
             var mailOptions = {
                 from: 'poogr40@gmail.com',
                 to: name,
-                subject: 'Password recovery - Datahub',
-                text: `Please, enter to the next link to reset your password: \n http://localhost:5173/ResetPassword/${name}/`
+                subject: 'Password recovery',
+                text: `Please, enter to the next link to reset your password: \n http://localhost:3000/ResetPassword/${name}`
             };
             
             transporter.sendMail(mailOptions, function (error, info) {
@@ -72,7 +42,7 @@ const forgotPassword = async (req, res) => {
                     res.status(500).json({ error: 'Email not sent', detail: 'EMAIL_NOT_SEND' });
                 } else {
                     console.log("Email sent successfully:", info);
-                    return res.send({ Status: "Success" });
+                    return res.send({ Status: "Success" }, name);
                 }
             });
 
@@ -100,9 +70,9 @@ const forgotPassword = async (req, res) => {
 
                 var mailOptions = {
                     from: 'poogr40@gmail.com',
-                    to: email,
-                    subject: 'Password recovery - Datahub',
-                    text: `Please, enter to the next link to reset your password: \n http://localhost:5173/ResetPassword/${email}/`
+                    to: name,
+                    subject: 'Password recovery',
+                    text: `Please, enter to the next link to reset your password: \n http://localhost:3000/ResetPassword/${name}`
                 };
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
@@ -110,22 +80,74 @@ const forgotPassword = async (req, res) => {
                         res.status(500).json({ error: 'Email not sent', detail: 'EMAIL_NOT_SEND' });
                     } else {
                         console.log("Email sent successfully:", info);
-                        return res.send({ Status: "Success" });
+                        return res.send({ Status: "Success" }, name);
                     }
                 });
 
             } else {
                 console.log("Admin Assistant not found.");
-                return res.send({ Status: "Not" });
+                return res.send({ Status: "Not" }, name);
             }
         }
 
     } catch (error) {
         console.error("Error fetching data:", error.message);
-        return res.send({ Status: "Not" });
+        return res.send({ Status: "Not" }, name);
     }
 };
 
+const updatePassword = async (req, res) => {
+    const { name, password } = req.body;
+    const query = {
+        email: name,
+        password: parseInt(password)
+    };
+
+    const queryAssistant = {
+        firstname: name,
+        password: parseInt(password)
+    }
+
+    try {
+        let queryResult = await Professor.find(query);
+
+        if (queryResult.length > 0) {
+
+            const professor = await Professor.findOneAndUpdate({email: email}, {
+                ...req.body
+            })
+
+            if (!professor) {
+                return res.send({ Status: "Not" });
+            }        
+            else {
+                return res.send({ Status: "Success" });
+            }
+            
+
+        } else {
+            queryResult = await AdminAssistant.find(queryAssistant);
+            if (queryResult.length > 0) {
+
+                const adminAssistant = await AdminAssistant.findOneAndUpdate({firstname: firstname}, {
+                    ...req.body
+                })
+            
+                if (!adminAssistant) {
+                    return res.send({ Status: "Not" });
+                } else {
+                    return res.send({ Status: "Success" });
+                }
+            } else {
+                console.log('')
+                return res.send({ Status: "Not" });
+            }
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+        return res.send({ Status: "Not" });
+    }
+}
 
 const loginUser = async (req, res) => {
     const { name, password } = req.body;
@@ -177,4 +199,4 @@ const loginUser = async (req, res) => {
 
 
 
-module.exports = { forgotPassword, loginUser };
+module.exports = { forgotPassword, loginUser, updatePassword };
