@@ -28,7 +28,7 @@ router.post('/', getGuideTeams)
 router.get('/:id', getGuideTeam)
 
 // Post a campus
-// router.post('/', createGuideTeam)
+router.post('/createTeam', createGuideTeam);
 
 // Delete a campus
 router.delete('/:id', deleteGuideTeam)

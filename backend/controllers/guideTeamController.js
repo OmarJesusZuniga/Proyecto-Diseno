@@ -1,5 +1,6 @@
 const adminAssistant = require('../models/adminAssistantModel')
 const GuideTeam = require('../models/guideTeamModel')
+const Plan = require('../models/planModel')
 const Professor = require('../models/professorModel')
 const mongoose = require('mongoose')
 
@@ -107,7 +108,7 @@ const getGuideTeam = async (req, res) => {
 
 const createGuideTeam = async (req, res) => {
   const {
-    generation, students, representants, adminAssistants, plan, professors
+    generation, guideProfessor, students, adminAssistants, plan, professors
   } = req.body;
 
   let emptyFields = [];
@@ -116,18 +117,14 @@ const createGuideTeam = async (req, res) => {
   if (!generation) {
     emptyFields.push('generation');
   }
-  if (!students || students.length === 0) {
-    emptyFields.push('students');
-  }
+  
   if (!adminAssistants || adminAssistants.length === 0) { // Ensure there is at least one manager
     emptyFields.push('managers');
   }
   if (!plan) {
     emptyFields.push('plan');
   }
-  if (!professors || professors.length === 0) {
-    emptyFields.push('professors');
-  }
+  
 
   // Respond if there are empty required fields
   if (emptyFields.length > 0) {
@@ -137,7 +134,7 @@ const createGuideTeam = async (req, res) => {
   // Add to the database
   try {
     const guideTeam = await GuideTeam.create({
-        generation, students, representants, adminAssistants, plan, professors
+        generation, guideProfessor, students, adminAssistants, plan, professors
     });
     res.status(200).json(guideTeam);
   } catch (error) {
@@ -240,6 +237,14 @@ const addGuideProfessor = async (req, res) => {
     // Update the guide team document to include the guide professor's ID
     guideTeam.guideProfessor = professorId;
     await guideTeam.save();
+
+    const plan = await Plan.findById(guideTeam.plan);
+    if (!plan) {
+      return res.status(404).json({ error: 'Plan not found' });
+    }
+
+    plan.professor = professorId;
+    await plan.save();
 
     res.status(200).json(guideTeam);
   } catch (error) {

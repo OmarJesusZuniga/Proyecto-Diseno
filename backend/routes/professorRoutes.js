@@ -6,7 +6,8 @@ const {
     createProfessor,
     deleteProfessor,
     updateProfessor,
-    getLastProfessorByCampus
+    getLastProfessorByCampus,
+    getProfessorsByCampus
 } = require('../controllers/professorController')
 
 const router = express.Router()
@@ -32,5 +33,7 @@ router.patch('/:id', updateProfessor)
 
 // get last profe de un campus
 router.get('/lastProf/:campusId', getLastProfessorByCampus)
+
+router.get('/profesByCampus/:campusId', getProfessorsByCampus)
  
 module.exports = router

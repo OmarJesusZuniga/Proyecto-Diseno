@@ -105,7 +105,8 @@ const Home = (req, res) => {
                 limpiarPantalla={limpiarPantalla}
                 cambiosDeEquipo={cambiosDeEquipo}
                 setCambios={setCambios}
-                sAP={setAddprofe}/>
+                sAP={setAddprofe}
+                usuario={usuario}/>
 
 
                 {/* <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/> */}

@@ -3,7 +3,7 @@ import '../components/sideBar.css'; // You can define your sidebar styles in thi
 import axios from 'axios';
 
 const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccionado, idEquipoSeleccionado, limpiarPantalla,
-    cambiosDeEquipo, setCambios, sAP
+    cambiosDeEquipo, setCambios, sAP, usuario
 }) => {
 
     useEffect(() => {
@@ -14,6 +14,10 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
             const getTeam = async () => {
                 limpiarPantalla();
                 sC(true);
+                axios.post('http://localhost:4000/api/guideTeam/assistant/get', {id: id})
+                .then(response => {
+                    sE(response.data);
+                })
                 axios.get('http://localhost:4000/api/guideTeam/'+idEquipoSeleccionado)
                     .then(response => {
                         sES(response.data);
@@ -105,6 +109,25 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         sAP(true);
     }
 
+    async function crearEquipo() {
+        
+        const currentYear = new Date().getFullYear();
+        const lastTwoDigits = currentYear % 100;
+
+        axios.get('http://localhost:4000/api/professors/profesByCampus/'+usuario.campus)
+        .then(response => {
+            axios.post('http://localhost:4000/api/plan/', {profesorId: response.data[0]._id})
+            .then(response2 => {
+                axios.post('http://localhost:4000/api/guideTeam/createTeam', {
+                    generation: lastTwoDigits, guideProfessor: response.data[0]._id, students: [], adminAssistants:[usuario._id], plan: response2.data._id, professors:[]
+                })
+                .then(response => {
+                    setCambios('cambio');
+                })
+            })
+        })
+    } 
+
 
   return (
     <div className="sidebar">
@@ -119,6 +142,10 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
                     </option>
                 ))}
                 </select>
+                
+            </div>
+            <div className="section">
+            <button onClick ={crearEquipo} className="botonAzul">Crear Equipo</button>
             </div>
         </li>
         <li>

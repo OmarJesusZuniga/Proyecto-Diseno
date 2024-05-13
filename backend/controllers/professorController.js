@@ -138,6 +138,23 @@ const getLastProfessorByCampus = async (req, res) => {
     }
   };
 
+  const getProfessorsByCampus = async (req, res) => {
+    const { campusId } = req.params;
+
+    try {
+        const professors = await Professor.find({ campus: campusId });
+        
+        if (!professors || professors.length === 0) {
+            return res.status(404).json({ error: 'No professors found for the specified campus' });
+        }
+
+        res.status(200).json(professors);
+    } catch (error) {
+        console.error('Error fetching professors by campus:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 module.exports = {
     getProfessors,
     getProfessor,
@@ -145,5 +162,6 @@ module.exports = {
     createProfessor,
     deleteProfessor,
     updateProfessor,
-    getLastProfessorByCampus
+    getLastProfessorByCampus,
+    getProfessorsByCampus
 }
