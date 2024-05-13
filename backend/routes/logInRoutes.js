@@ -13,6 +13,6 @@ router.post('/forgot', forgotPassword)
 
 router.post('/namepass/get/', loginUser)
 
-router.patch('/updatePassword', updatePassword)
+router.patch('/updatePassword/:id', updatePassword)
 
 module.exports = router

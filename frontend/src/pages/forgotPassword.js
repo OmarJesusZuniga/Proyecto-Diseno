@@ -22,8 +22,9 @@ const ForgotPassword = () => {
                     className: "toast-message"
                 });
             } else {
+                console.error(name);
                 const { name } = response.data;
-                navigate(`/ResetPassword/${name}`);
+                navigate(`/ResetPassword/${name}`, {state: {name}});
             }
         } catch (err) {
             console.error("Error submitting form:", err);

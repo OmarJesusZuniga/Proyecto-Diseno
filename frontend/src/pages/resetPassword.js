@@ -30,8 +30,10 @@ const ResetPassword = () => {
             return
         }
 
+        console.log(name)
+
         try {
-            const response = await axios.post('http://localhost:4000/api/logIn/updatePassword', { 
+            const response = await axios.post(`http://localhost:4000/api/logIn/updatePassword/${name}`, { 
                 name: name,
                 password: pass 
             });

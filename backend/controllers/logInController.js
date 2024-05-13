@@ -41,7 +41,6 @@ const forgotPassword = async (req, res) => {
                     console.error("Error sending email:", error);
                     res.status(500).json({ error: 'Email not sent', detail: 'EMAIL_NOT_SEND' });
                 } else {
-                    console.log("Email sent successfully:", info);
                     return res.send({ Status: "Success" }, name);
                 }
             });
@@ -79,7 +78,6 @@ const forgotPassword = async (req, res) => {
                         console.error("Error sending email:", error);
                         res.status(500).json({ error: 'Email not sent', detail: 'EMAIL_NOT_SEND' });
                     } else {
-                        console.log("Email sent successfully:", info);
                         return res.send({ Status: "Success" }, name);
                     }
                 });
@@ -97,57 +95,38 @@ const forgotPassword = async (req, res) => {
 };
 
 const updatePassword = async (req, res) => {
-    const { name, password } = req.body;
-    const query = {
-        email: name,
-        password: parseInt(password)
-    };
+    const { name } = req.params;
+    const { password } = req.body;
 
-    const queryAssistant = {
-        firstname: name,
-        password: parseInt(password)
-    }
+    console.log(name);
+    console.log(password);
 
     try {
-        let queryResult = await Professor.find(query);
+        let professor = await Professor.findOne({ email: name });
+        console.log(professor)
+        if (professor) {
+            professor.password = password;
+            await professor.save(); 
 
-        if (queryResult.length > 0) {
-
-            const professor = await Professor.findOneAndUpdate({email: email}, {
-                ...req.body
-            })
-
-            if (!professor) {
-                return res.send({ Status: "Not" });
-            }        
-            else {
-                return res.send({ Status: "Success" });
-            }
-            
-
+            return res.send({ Status: "Success" });
         } else {
-            queryResult = await AdminAssistant.find(queryAssistant);
-            if (queryResult.length > 0) {
+            let adminAssistant = await AdminAssistant.findOne({ firstname: name });
+            console.log(adminAssistant)
+            if (adminAssistant) {
+                adminAssistant.password = password; 
+                await adminAssistant.save(); 
 
-                const adminAssistant = await AdminAssistant.findOneAndUpdate({firstname: firstname}, {
-                    ...req.body
-                })
-            
-                if (!adminAssistant) {
-                    return res.send({ Status: "Not" });
-                } else {
-                    return res.send({ Status: "Success" });
-                }
+                return res.send({ Status: "Success" });
             } else {
-                console.log('')
                 return res.send({ Status: "Not" });
             }
         }
     } catch (error) {
-        console.error("Error fetching data:", error.message);
-        return res.send({ Status: "Not" });
+        console.error("Error updating password:", error.message);
+        return res.send({ Status: "Error" });
     }
-}
+};
+
 
 const loginUser = async (req, res) => {
     const { name, password } = req.body;
