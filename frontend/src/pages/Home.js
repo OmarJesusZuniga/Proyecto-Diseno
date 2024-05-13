@@ -23,8 +23,7 @@ const Home = (req, res) => {
     const [profesLista, setProfesLista] = useState(false);
     const [estudiantesLista, setEstudiantesLista] = useState(false);
     const [siguienteActividad, setSiguienteActividad] = useState(false);
-    const [addProfe, setAddprofe] = useState(false);
-    
+    const [addProfe, setAddprofe] = useState(false);    
 
     const [cambiosDeEquipo, setCambios] = useState('');
     const [cargando, setCargando] = useState(true);
@@ -35,7 +34,6 @@ const Home = (req, res) => {
         setProfesLista(false);
         setEstudiantesLista(false);
         setSiguienteActividad(false);
-        
     }
     
 

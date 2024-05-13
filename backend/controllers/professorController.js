@@ -102,21 +102,11 @@ const deleteProfessor = async (req, res) => {
 // Update a professor
 const updateProfessor = async (req, res) => {
     const {id} = req.params
-    const { officeNumber } = req.params
-    const { image } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such professor"})
     }
 
-    if (officeNumber && !mongoose.Types.ObjectId.isValid(officeNumber)) {
-        return res.status(404).json({error: "Invalid office number."})
-    }
-
-    if (image && !mongoose.Types.ObjectId.isValid(image)) {
-        return res.status(404).json({error: "Invalid image id."})
-    }
-    
     const professor = await Professor.findOneAndUpdate({_id: id}, {
         ...req.body
     })
