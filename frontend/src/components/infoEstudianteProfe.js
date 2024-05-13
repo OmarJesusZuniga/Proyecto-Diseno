@@ -1,8 +1,15 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import {  useNavigate } from 'react-router-dom';
 import "../components/infoEstudiante.css"
 
-const InfoEstudianteProfe = ({estudiante , campus}) => {
+const InfoEstudianteProfe = ({estudiante , usuario, campus}) => {
+    const navigate = useNavigate();
+
+
+    const submitModify = async (e) => {
+        navigate("/modEstudiante", {state: {usuario, estudiante}});
+    }
+
     return (
         <div className="cartaEstudiante">
             <div className="infoEspecifica">
@@ -25,8 +32,8 @@ const InfoEstudianteProfe = ({estudiante , campus}) => {
             </div>
             {
                 campus.includes(estudiante.campus) && 
-                <div className="botonesEstudiante" type="submit">
-                    <Link to="/modEstudiante" className="botonesEstudiante-button">Modificar información</Link>
+                <div className="botonesProfesor">
+                    <button onClick={submitModify}> Modificar informacion</button>
                 </div>
             }        
         </div>

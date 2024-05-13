@@ -86,7 +86,7 @@ const ModificarProfesor = () => {
                 className: "toast-message"
             });
         } catch (error) {
-            toast.error("Error al modificar la actividad!", {
+            toast.error("Error al modificar el profesor!", {
                 className: "toast-message"
             });
             console.error(error);
@@ -107,13 +107,14 @@ const ModificarProfesor = () => {
             <form >
                 <Navbar id={usuario.firstname} apellido={usuario.firstLastname}/>
                 <h2>Información profesor</h2>
+                <button type="button" onClick={volver}>Volver</button>
                 <h4>Escriba el primer nombre</h4>
                 <div className="input-box">
                     <input type="text" onChange={changeFirstName} placeholder='Nombre' value={firstname} required />
                 </div>
                 <h4>Escriba el segundo nombre </h4>
                 <div className="input-box">
-                    <input type="text" onChange={changeMiddleName} placeholder='Segundo Nombre' value={middlename} required />
+                    <input type="text" onChange={changeMiddleName} placeholder='Segundo Nombre' value={middlename} />
                 </div>
                 <h4>Escriba el apellido</h4>
                 <div className="input-box">
@@ -143,8 +144,7 @@ const ModificarProfesor = () => {
                     {file && <img src={file} alt="Profile Preview"/>}
                 </div>
 
-                <button type="button" onClick={volver}>Volver</button>
-                <button type="submit" onClick={submitModify}>Guardar Cambios</button>
+                <button type="button" onClick={submitModify}>Guardar Cambios</button>
 
             </form>
 

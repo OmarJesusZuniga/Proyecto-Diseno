@@ -5,7 +5,7 @@ import "../components/listaEstudiantes.css"
 import InfoEstudianteProfe from './infoEstudianteProfe';
 
 
-const ListaEstudiantesProfe = ({campus}) => {
+const ListaEstudiantesProfe = ({campus, usuario}) => {
 
 
     const [estudiantes, setEstudiantes] = useState([]);
@@ -39,7 +39,7 @@ const ListaEstudiantesProfe = ({campus}) => {
                 </select>
             </div>
             {estudiantes && estudiantes.map((estudiante) => (
-                <InfoEstudianteProfe key={estudiante.id} estudiante={estudiante} campus={campus}/>
+                <InfoEstudianteProfe key={estudiante.id} estudiante={estudiante} usuario={usuario} campus={campus}/>
             ))}
         </div>
         </div>

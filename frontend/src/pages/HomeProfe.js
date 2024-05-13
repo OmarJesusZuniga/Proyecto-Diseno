@@ -92,7 +92,7 @@ const HomeProfe = () => {
                     {cargando && <h2>Cargando</h2>}
                     {listaProfes && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe} adminMadre={false}/>}
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
-                    {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus}/> }
+                    {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus} usuario={usuario}/> }
                     {listaObservaciones && <ListaObservaciones 
                                                                 idActivity={activityId} 
                                                                 usuario={usuario} 
