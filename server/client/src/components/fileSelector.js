@@ -1,4 +1,4 @@
-import "../components/fileSelector.css"
+import "./fileSelector.css"
 import { useState } from "react";
 import axios from 'axios'
 

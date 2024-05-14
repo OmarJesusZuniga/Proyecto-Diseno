@@ -1,10 +1,10 @@
-import React from 'react';
-import '../components/infoEstuGuia.css'
+import "./infoEstudiante.css"
 
-const InfoEstuGuia = ({estudiante}) => {
-    return (
-        <div className="cartaProfesor">
-            
+const InfoEstudiante = ({estudiante}) => {
+
+    return(
+        <div className="cartaEstudiante">
+            <div className="infoEspecifica">
                 <h2>{estudiante.firstname} {estudiante.firstLastname} {estudiante.secondLastname}</h2>
                 <div>
                     <h3>Carné: </h3>
@@ -21,9 +21,10 @@ const InfoEstuGuia = ({estudiante}) => {
                     <h5>{estudiante.phoneNumber}</h5>
                 </div>
 
-                
+            </div>     
         </div>
+        
     );
 }
-
-export default InfoEstuGuia;
+ 
+export default InfoEstudiante;

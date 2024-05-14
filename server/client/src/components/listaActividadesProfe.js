@@ -1,4 +1,4 @@
-import "../components/listaActividades.css"
+import "./listaActividades.css"
 import InfoActividadProfe from "./infoActividadProfe";
 import React from 'react';
 import axios from 'axios';

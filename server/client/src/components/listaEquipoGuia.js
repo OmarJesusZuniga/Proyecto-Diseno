@@ -1,6 +1,6 @@
 import React from 'react';
 import InfoProfeCoordinador from './infoProfeCoordinador';
-import '../components/listaEquipoGuia.css'
+import './listaEquipoGuia.css'
 import ListaProfGuia from './listaProfGuia';
 import ListaEstuGuia from './listaEstuGuia';
 

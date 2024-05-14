@@ -1,4 +1,4 @@
-import "../components/infoActividad.css"
+import "./infoActividad.css"
 import { useNavigate , useLocation } from 'react-router-dom';
 
 

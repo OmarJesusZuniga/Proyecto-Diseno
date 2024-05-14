@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../components/listaProfesores.css";
+import "./listaProfesores.css";
 import InfoProfesor from "./infoProfesor";
 import axios from 'axios';
 

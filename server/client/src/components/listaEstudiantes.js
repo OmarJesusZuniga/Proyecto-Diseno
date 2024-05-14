@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../components/listaEstudiantes.css";
+import "./listaEstudiantes.css";
 import InfoEstudiante from "./infoEstudiante";
 import axios from 'axios';
 import * as XLSX from 'xlsx';

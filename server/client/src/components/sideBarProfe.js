@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/sideBar.css';
+import './sideBar.css';
 import axios from 'axios';
 import { useState, useEffect } from "react";
 

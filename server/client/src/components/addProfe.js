@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import FileSelector from "../components/fileSelector";
+import FileSelector from "./fileSelector";
 
 const AddProfe = ({campus, setCambios}) => {
     

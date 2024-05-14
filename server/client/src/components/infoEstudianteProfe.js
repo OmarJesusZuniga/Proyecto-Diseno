@@ -1,6 +1,6 @@
 import React from 'react';
 import {  useNavigate } from 'react-router-dom';
-import "../components/infoEstudiante.css"
+import "./infoEstudiante.css"
 
 const InfoEstudianteProfe = ({estudiante , usuario, campus}) => {
     const navigate = useNavigate();

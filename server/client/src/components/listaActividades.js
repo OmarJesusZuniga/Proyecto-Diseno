@@ -1,4 +1,4 @@
-import "../components/listaActividades.css"
+import "./listaActividades.css"
 import InfoActividad from "./infoActividad";
 
 const ListaActividades = () => {

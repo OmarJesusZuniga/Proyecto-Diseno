@@ -1,4 +1,4 @@
-import "../components/infoObservaciones.css";
+import "./infoObservaciones.css";
 import moment from 'moment';  
 import React, { useEffect, useState } from "react";
 import axios from 'axios';

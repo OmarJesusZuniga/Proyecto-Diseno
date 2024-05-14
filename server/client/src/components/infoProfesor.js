@@ -1,5 +1,5 @@
 
-import "../components/infoProfesor.css"
+import "./infoProfesor.css"
 import {  useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useEffect, useState } from "react";

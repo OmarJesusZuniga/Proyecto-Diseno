@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../components/listaObservaciones.css"
+import "./listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
 

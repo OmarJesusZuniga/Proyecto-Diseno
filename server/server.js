@@ -53,6 +53,12 @@ app.use('/api/logIn', logInRoutes)
 
 app.use('/document', express.static(path.join(__dirname, 'document')));
 
+app.use(express.static(path.join(__dirname, '/client/src')))
+
+//
+app.get('*', (req, res) => 
+  res.sendFile(path.join(__dirname, '/client/src/App.js'))
+);
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)

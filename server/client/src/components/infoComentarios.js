@@ -1,4 +1,4 @@
-import "../components/infoComentarios.css"
+import "./infoComentarios.css"
 import moment from 'moment';  
 
 const InfoComentarios = ({comentario , usuario, todosFalse, sAgregarComentarios }) => {

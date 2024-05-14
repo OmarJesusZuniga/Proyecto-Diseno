@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import '../components/NavBar.css'; // You can define your sidebar styles in this file
+import './NavBar.css'; // You can define your sidebar styles in this file
 
 const Navbar = ({id, apellido}) => {
     return (

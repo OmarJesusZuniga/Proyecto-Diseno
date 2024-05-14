@@ -1,5 +1,5 @@
 import axios from 'axios';
-import '../components/infoProfeCoordinador.css'
+import './infoProfeCoordinador.css'
 import React from 'react';
 
 const InfoProfeCoordinador = ({prof, adminMadre, equipoId, setCambios}) => {

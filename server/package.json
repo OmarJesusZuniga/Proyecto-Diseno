@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build":"npm install --prefix ./client && npm run start --prefix ./client && npm install"
   },
   "keywords": [],
   "author": "",

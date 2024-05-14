@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../components/sideBar.css'; // You can define your sidebar styles in this file
+import './sideBar.css'; // You can define your sidebar styles in this file
 import axios from 'axios';
 
 const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccionado, idEquipoSeleccionado, limpiarPantalla,
