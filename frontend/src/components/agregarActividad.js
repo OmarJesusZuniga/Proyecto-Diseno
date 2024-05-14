@@ -108,13 +108,13 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post("http://localhost:4000/api/activity/enums/");
+                const response = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/activity/enums/");
                 setEnums({
                     type: response.data.type,
                     modality: response.data.modality
                 });
 
-                const responseProfessors = await axios.get("http://localhost:4000/api/professors/");
+                const responseProfessors = await axios.get("https://proyecto-diseno-ol06.onrender.com/api/professors/");
                 setProfesores(responseProfessors.data)
 
             } catch (error) {
@@ -143,7 +143,7 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
         let activityId; 
 
         try {
-            const response = await axios.post('http://localhost:4000/api/activity/', {
+            const response = await axios.post('https://proyecto-diseno-ol06.onrender.com/api/activity/', {
                 week, 
                 name, 
                 type: type.current.value, 
@@ -166,7 +166,7 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
         }
 
         try {
-            const response = await axios.post('http://localhost:4000/api/plan/addActivity/', {
+            const response = await axios.post('https://proyecto-diseno-ol06.onrender.com/api/plan/addActivity/', {
                 id: plan, 
                 newActivity: activityId
             });

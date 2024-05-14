@@ -28,7 +28,7 @@ const LoginForm = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:4000/api/logIn/namepass/get/', {
+            const response = await axios.post('https://proyecto-diseno-ol06.onrender.com/api/logIn/namepass/get/', {
                 name: user,
                 password: pass
             })

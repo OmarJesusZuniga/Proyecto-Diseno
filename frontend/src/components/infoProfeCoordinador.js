@@ -6,7 +6,7 @@ const InfoProfeCoordinador = ({prof, adminMadre, equipoId, setCambios}) => {
     
     const eliminarProf = async () => {
         
-        axios.patch('http://localhost:4000/api/guideTeam/revomeGuideProf/'+equipoId)
+        axios.patch('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/revomeGuideProf/'+equipoId)
         .then(response => {
             setCambios('cambio');
         })

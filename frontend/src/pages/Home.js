@@ -62,7 +62,7 @@ const Home = (req, res) => {
                 parsedData.forEach( async (student) => {
                     const { studentCard, firstLastname, secondLastname, firstname, middlename, email, phoneNumber, campus } = student;
                     try{
-                        const response = await axios.post('http://localhost:4000/api/students/', {
+                        const response = await axios.post('https://proyecto-diseno-ol06.onrender.com/api/students/', {
                             studentCard: studentCard, 
                             firstLastname: firstLastname, 
                             secondLastname: secondLastname, 

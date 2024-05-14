@@ -14,11 +14,11 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
             const getTeam = async () => {
                 limpiarPantalla();
                 sC(true);
-                axios.post('http://localhost:4000/api/guideTeam/assistant/get', {id: id})
+                axios.post('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/assistant/get', {id: id})
                 .then(response => {
                     sE(response.data);
                 })
-                axios.get('http://localhost:4000/api/guideTeam/'+idEquipoSeleccionado)
+                axios.get('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/'+idEquipoSeleccionado)
                     .then(response => {
                         sES(response.data);
                         setIdEquipoSeleccionado(response.data._id);
@@ -37,7 +37,7 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
 
     useEffect(() => {
         const fetchTeams = async () => {
-            axios.post('http://localhost:4000/api/guideTeam/assistant/get', {id: id})
+            axios.post('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/assistant/get', {id: id})
                 .then(response => {
                     sE(response.data);
                     sES(response.data[0]);
@@ -114,11 +114,11 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         const currentYear = new Date().getFullYear();
         const lastTwoDigits = currentYear % 100;
 
-        axios.get('http://localhost:4000/api/professors/profesByCampus/'+usuario.campus)
+        axios.get('https://proyecto-diseno-ol06.onrender.com/api/professors/profesByCampus/'+usuario.campus)
         .then(response => {
-            axios.post('http://localhost:4000/api/plan/', {profesorId: response.data[0]._id})
+            axios.post('https://proyecto-diseno-ol06.onrender.com/api/plan/', {profesorId: response.data[0]._id})
             .then(response2 => {
-                axios.post('http://localhost:4000/api/guideTeam/createTeam', {
+                axios.post('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/createTeam', {
                     generation: lastTwoDigits, guideProfessor: response.data[0]._id, students: [], adminAssistants:[usuario._id], plan: response2.data._id, professors:[]
                 })
                 .then(response => {

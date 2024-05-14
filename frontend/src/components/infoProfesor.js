@@ -45,7 +45,7 @@ const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios, adminMa
             
             alert('Ya hay un profesor de este campus en el equipo guia')
         } else {
-            axios.post('http://localhost:4000/api/guideTeam/addProfe/', {guideTeamId: equipo._id, professorId: professor._id})
+            axios.post('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/addProfe/', {guideTeamId: equipo._id, professorId: professor._id})
             .then(response => {
                 limpiar();
                 setCambios('cambio');
@@ -57,7 +57,7 @@ const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios, adminMa
     }
 
     const addCoordinador = async () => {
-        axios.patch('http://localhost:4000/api/guideTeam/addGuideProf/'+equipo._id+'/'+professor._id)
+        axios.patch('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/addGuideProf/'+equipo._id+'/'+professor._id)
         .then(response => {
             limpiar();
             setCambios('cambio');

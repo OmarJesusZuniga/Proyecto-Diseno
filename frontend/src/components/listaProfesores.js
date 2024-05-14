@@ -11,7 +11,7 @@ const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar, setCambios
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/professors/');
+                const response = await axios.get('https://proyecto-diseno-ol06.onrender.com/api/professors/');
                 setProfessors(response.data);
                 
             } catch (error) {

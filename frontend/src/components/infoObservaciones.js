@@ -20,7 +20,7 @@ const InfoObservaciones = ({ observacion, todosFalse, observationId, listaComent
             
             try {
                 const professorId = observacion.professor;
-                const response = await axios.get("http://localhost:4000/api/professors/" + professorId );
+                const response = await axios.get("https://proyecto-diseno-ol06.onrender.com/api/professors/" + professorId );
                 
                 setProfessor(response.data);
 

@@ -36,12 +36,12 @@ const InfoActividadProfe = ( {actividad, isAdmin, todosFalse, sO, editarActivida
     const eliminarActividadFunction = async (e) => {
         
         try {
-            const response = await axios.post("http://localhost:4000/api/plan/removeActivity", {
+            const response = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/plan/removeActivity", {
                 id: planId, 
                 activityId: actividad._id
             });
 
-            const response2 = await axios.delete("http://localhost:4000/api/activity/" + actividad._id );
+            const response2 = await axios.delete("https://proyecto-diseno-ol06.onrender.com/api/activity/" + actividad._id );
 
         } catch (error) {
             toast.error("Error removiendo actividad!");
@@ -55,7 +55,7 @@ const InfoActividadProfe = ( {actividad, isAdmin, todosFalse, sO, editarActivida
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/activity/" + actividad._id );
+                const response = await axios.get("https://proyecto-diseno-ol06.onrender.com/api/activity/" + actividad._id );
 
                 setManagers(response.data.managers)
                 setState(response.data.state)
@@ -74,7 +74,7 @@ const InfoActividadProfe = ( {actividad, isAdmin, todosFalse, sO, editarActivida
                 });
                 setReminders(legibleDates)
 
-                const response3 = await axios.post("http://localhost:4000/api/image/getPath/");
+                const response3 = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/image/getPath/");
                 setPath(response3.data.path)
 
             } catch (error) {
@@ -96,7 +96,7 @@ const InfoActividadProfe = ( {actividad, isAdmin, todosFalse, sO, editarActivida
     const viewImagesFunction = async () => {
         resetViewImages(); 
         const promises = state.imageCollection.map(img => {
-            return axios.get(`http://localhost:4000/api/image/${img}`)
+            return axios.get(`https://proyecto-diseno-ol06.onrender.com/api/image/${img}`)
                 .then(response => response.data)
                 .catch(error => console.error('Error posting image:', img, error));
         });
