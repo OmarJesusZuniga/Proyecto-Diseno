@@ -3,6 +3,7 @@ import "../components/infoProfesor.css"
 import {  useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios, adminMadre}) => {
     const navigate = useNavigate();
@@ -43,7 +44,9 @@ const InfoProfesor = ({equipo, professor , usuario, limpiar, setCambios, adminMa
         }
         if(hayProfeDeCampus){
             
-            alert('Ya hay un profesor de este campus en el equipo guia')
+            toast.error("Ya hay un profesor de esta sede registrado.", {
+                className: "toast-message"
+            });
         } else {
             axios.post('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/addProfe/', {guideTeamId: equipo._id, professorId: professor._id})
             .then(response => {

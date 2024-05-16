@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../components/sideBar.css'; // You can define your sidebar styles in this file
 import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import * as XLSX from "xlsx";
 
 const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccionado, idEquipoSeleccionado, limpiarPantalla,
     cambiosDeEquipo, setCambios, sAP, usuario
@@ -113,24 +115,74 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
         
         const currentYear = new Date().getFullYear();
         const lastTwoDigits = currentYear % 100;
+        let hayEquipo = false;
 
-        axios.get('https://proyecto-diseno-ol06.onrender.com/api/professors/profesByCampus/'+usuario.campus)
-        .then(response => {
+        equipos.map(equipo => {
+            if(equipo.generation === lastTwoDigits){
+                hayEquipo = true;
+            }
+        })
+        
+        if(hayEquipo){
+            toast.error("Ya existe un equipo para este año.", {
+                className: "toast-message"
+            });
+            
+        } else{
+            axios.get('https://proyecto-diseno-ol06.onrender.com/api/professors/profesByCampus/'+usuario.campus)
+            .then(response => {
             axios.post('https://proyecto-diseno-ol06.onrender.com/api/plan/', {profesorId: response.data[0]._id})
-            .then(response2 => {
-                axios.post('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/createTeam', {
+                .then(response2 => {
+                    axios.post('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/createTeam', {
                     generation: lastTwoDigits, guideProfessor: response.data[0]._id, students: [], adminAssistants:[usuario._id], plan: response2.data._id, professors:[]
-                })
-                .then(response => {
+                    })
+                    .then(response => {
                     setCambios('cambio');
+                    })
                 })
             })
-        })
+        }
     } 
+    const [data, setData] = useState([])
+    const handleFileUpload = (e) => {
+        try {
+            const reader = new FileReader();
+            reader.readAsBinaryString(e.target.files[0]);
+            reader.onload = (e) => {
+                const data = e.target.result;
+                const workbook = XLSX.read(data, { type: "binary" });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+                const parsedData = XLSX.utils.sheet_to_json(sheet);
+                parsedData.forEach( async (student) => {
+                    const { studentCard, firstLastname, secondLastname, firstname, middlename, email, phoneNumber, campus } = student;
+                    try{
+                        const response = await axios.post('https://proyecto-diseno-ol06.onrender.com/api/students/', {
+                            studentCard: studentCard, 
+                            firstLastname: firstLastname, 
+                            secondLastname: secondLastname, 
+                            firstname: firstname, 
+                            middlename: middlename, 
+                            email: email, 
+                            phoneNumber: phoneNumber, 
+                            campus: campus
+                        })
+                        
+                    }catch (error) {
+                        console.error(error.message);
+                    }
+                });
+                setData(parsedData);
+            }
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
 
 
   return (
     <div className="sidebar">
+        <ToastContainer />
       <ul>
         <li>
             <div className="dropdown">
@@ -160,6 +212,8 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
             <div className="section">
                 <h2>Estudiantes</h2>
                 <button onClick={dejarTercera}className="botonAzul">Ver lista</button>
+                <h2>Seleccione el archivo para agregar estudiantes</h2>
+                <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/>
             </div>
         </li>
         <li>

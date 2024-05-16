@@ -72,13 +72,17 @@ const getGuideTeamsByProfessorId = async (req, res) => {
       return res.status(404).json({ error: 'Professor not found' });
     }
 
-    const guideTeams = await GuideTeam.find({ professors: id }).populate('professors')
-      .populate('professors')
-      .populate('students')
-      .populate('guideProfessor');
+    const guideTeams = await GuideTeam.find({
+      $or: [
+          { guideProfessor: id }, 
+          { professors: { $in: [id] } } 
+      ]
+    }).populate('professors').populate('students').populate('guideProfessor')
     if (guideTeams.length === 0) {
-      return res.status(404).json({ error: 'No guide teams found for this professor' });
+      res.status(400).json({error: 'Error retrievieng teams'})
+      
     }
+    
 
     res.status(200).json(guideTeams);
   } catch (error) {

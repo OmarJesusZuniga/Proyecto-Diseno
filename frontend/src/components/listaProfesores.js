@@ -3,6 +3,7 @@ import "../components/listaProfesores.css";
 import InfoProfesor from "./infoProfesor";
 import axios from 'axios';
 
+
 const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar, setCambios, adminMadre}) => {
     const [professors, setProfessors] = useState([]);
     

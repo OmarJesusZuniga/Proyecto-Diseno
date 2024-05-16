@@ -23,10 +23,10 @@ const ListaEquipoGuia = ({equipo, setCambios, isProfe, adminMadre}) => {
                         <h2>Profesores del Equipo</h2>
                         <ListaProfGuia profes={equipo.professors} equipo={equipo} setCambios = {setCambios} isProfe={isProfe}/>
                     </div>
-                    <div className="estudiantesGuias">
+                    {/* <div className="estudiantesGuias">
                         <h2>Estudiantes del equipo</h2>
                         <ListaEstuGuia estudiantes={equipo.students}/>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );
