@@ -6,7 +6,7 @@ const InfoProfeGuia = ({profe, equipoId, setCambios, isProfe}) => {
 
     const darDeBaja = async () => {
 
-        axios.post("https://proyecto-diseno-ol06.onrender.com/api/guideTeam/removeProfe/", {guideTeamId: equipoId, professorId: profe._id})
+        axios.post("http://localhost:4000/api/guideTeam/removeProfe/", {guideTeamId: equipoId, professorId: profe._id})
         .then(response => {
             console.log(response.data);
             setCambios('cambio');

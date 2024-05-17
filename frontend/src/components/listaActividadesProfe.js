@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 
 
-const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, agregarActividad, setPlanActual, idActivity, editarActividad, setActividadActual, setEditarEstado, setEstadoAEditar}) => {
+const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, agregarActividad, setPlanActual, idActivity, editarActividad, setActividadActual, setEditarEstado, setEstadoAEditar, adminAsis}) => {
     const [actividades, setActividad] = useState([]);
     const [planID, setPlan] = useState('')
     const [isAdmin, setIsAdmin] = useState(false)
@@ -16,9 +16,9 @@ const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, agregarActivida
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("https://proyecto-diseno-ol06.onrender.com/api/guideTeam/" + grupo );
+                const response = await axios.get("http://localhost:4000/api/guideTeam/" + grupo );
 
-                const responsePlan = await axios.get("https://proyecto-diseno-ol06.onrender.com/api/plan/" + response.data.plan );
+                const responsePlan = await axios.get("http://localhost:4000/api/plan/" + response.data.plan );
                 setPlanActual(responsePlan.data._id);
                 setPlan(responsePlan.data._id)
 
@@ -62,8 +62,10 @@ const ListaActividadesProfe = ({ grupo, usuario, todosFalse, sO, agregarActivida
                     setEditarEstado={setEditarEstado}
                     setEstadoAEditar={setEstadoAEditar}
                     isAdmin={isAdmin}
+                    adminAsis={adminAsis}
                 />
             ))}
+            
         </div>
     );
 }

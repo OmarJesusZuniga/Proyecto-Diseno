@@ -21,7 +21,7 @@ const AddProfe = ({campus, setCambios}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response3 = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/image/getPath/");
+                const response3 = await axios.post("http://localhost:4000/api/image/getPath/");
                 setPath(response3.data.path)
             } catch(e) {
                 console.log(e);
@@ -95,7 +95,7 @@ const AddProfe = ({campus, setCambios}) => {
 
     async function addProfe() {
 
-        const ultimoProfe = await axios.get('https://proyecto-diseno-ol06.onrender.com/api/professors/lastProf/'+campus)
+        const ultimoProfe = await axios.get('http://localhost:4000/api/professors/lastProf/'+campus)
         const code = ultimoProfe.data.code;
 
         
@@ -112,7 +112,7 @@ const AddProfe = ({campus, setCambios}) => {
         const numTel = parseInt(phoneNum.replace(/\D/g, ''))
 
         if (actualImage === ''){
-            await axios.post('https://proyecto-diseno-ol06.onrender.com/api/professors/',{
+            await axios.post('http://localhost:4000/api/professors/',{
             code: newCode,
             firstLastname: apellido, 
             secondLastname: segundoApellido, 
@@ -128,7 +128,7 @@ const AddProfe = ({campus, setCambios}) => {
                 setCambios('cambio');
             })
         } else {
-            await axios.post('https://proyecto-diseno-ol06.onrender.com/api/professors/',{
+            await axios.post('http://localhost:4000/api/professors/',{
             code: newCode,
             firstLastname: apellido, 
             secondLastname: segundoApellido, 

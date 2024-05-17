@@ -16,7 +16,7 @@ const SideBarProfe = ({sA, sE, sP, id, todosFalse, grupo, equipos, cambios, setI
             const getTeam = async () => {
                 limpiarPantalla();
                 sC(true);
-                axios.get('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/'+idEquipoSeleccionado)
+                axios.get('http://localhost:4000/api/guideTeam/'+idEquipoSeleccionado)
                     .then(response => {
                         sES(response.data);
                         setIdEquipoSeleccionado(response.data._id);
@@ -36,7 +36,7 @@ const SideBarProfe = ({sA, sE, sP, id, todosFalse, grupo, equipos, cambios, setI
 
     useEffect(() => {
         const fetchTeams = async () => {
-            axios.post('https://proyecto-diseno-ol06.onrender.com/api/guideTeam/profe/get', {id: id})
+            axios.post('http://localhost:4000/api/guideTeam/profe/get', {id: id})
                 .then(response => {
                     sEquipos(response.data);
                     sES(response.data[0]);

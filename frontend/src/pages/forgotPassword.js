@@ -15,7 +15,7 @@ const ForgotPassword = () => {
         e.preventDefault();
         console.log("Entro a enviar")
         try {
-            const response = await axios.post('https://proyecto-diseno-ol06.onrender.com/api/logIn/forgot', { 
+            const response = await axios.post('http://localhost:4000/api/logIn/forgot', { 
                 name: email 
             });
 

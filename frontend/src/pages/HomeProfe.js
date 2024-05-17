@@ -104,7 +104,7 @@ const HomeProfe = () => {
                                                                 />}
                     {listaActividadesProfe && <ListaActividadesProfe
                                                                     // Generales
-                                                                   grupo={idEquipoSeleccionado} 
+                                                                    grupo={idEquipoSeleccionado} 
                                                                     usuario={usuario} 
                                                                     // 
                                                                     todosFalse={todoFalse} 
@@ -122,7 +122,7 @@ const HomeProfe = () => {
                                                                     setEstadoAEditar={setEstadoAEditar}
                                                                     // Activity 
                                                                     idActivity={setActivityID}
-                                                                    />}
+                                                                    adminAsis={false}/>}
                     {agregarObservacion && <AgregarObservacion usuario={usuario} idActivity={activityId} todosFalse={todoFalse} returnPage={setObservaciones} />}
                     {agregarComentario && <AgregarComentario usuario={usuario} idObservation={observationId} todosFalse={todoFalse} returnPage={setComentarios} />}
                     {listaComentarios && <ListaComentarios idObservation={observationId} usuario={usuario} todosFalse={todoFalse} sAgregarComentarios={setAgregarComentario} returnPage={setObservaciones} />}

@@ -42,7 +42,7 @@ const AgregarEstudiante = ({ campus, sTP, sPL, sEL, sA, sAE}) => {
     
     const agregarEstudiante = async () => {
 
-        const response = await axios.post('https://proyecto-diseno-ol06.onrender.com/api/students/', {
+        const response = await axios.post('http://localhost:4000/api/students/', {
             studentCard: carne, 
             firstLastname: apellido, 
             secondLastname: segundoApellido, 

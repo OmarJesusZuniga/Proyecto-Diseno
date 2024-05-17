@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import ListaActividades from "../components/listaActividades";
 import ListaEstudiantes from "../components/listaEstudiantes";
 import ListaProfesores from "../components/listaProfesores";
+import ListaActividadesProfe from "../components/listaActividadesProfe";
 
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
@@ -28,6 +29,17 @@ const Home = (req, res) => {
     const [cambiosDeEquipo, setCambios] = useState('');
     const [cargando, setCargando] = useState(true);
     const [idEquipoSeleccionado, setIdEquipoSeleccionado] = useState(null);
+
+
+    const [editarActividad, setEditarActividad] = useState(false);
+    const [listaObservaciones, setObservaciones] = useState(false)
+    const [actividadAEditar, setActividadAEditar] = useState(null);
+    const [observationIDList, setObservationIDList] = useState([]);
+    const [agregarActividad, setAgregarActividad] = useState(false)
+    const [planActual, setPlanActual] = useState(null);
+    const [editarEstado, setEditarEstado] = useState(false);
+    const [estadoAEditar, setEstadoAEditar] = useState(null);
+    const [activityId, setActivityID] = useState([]);
 
     const limpiarPantalla = () => {
         setTodosLosProfes(false);
@@ -90,7 +102,20 @@ const Home = (req, res) => {
                                         adminMadre={usuario.adminMadre}/>}
                     {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe} adminMadre={usuario.adminMadre} />}
                     {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} />}
-                    {siguienteActividad && <><ListaActividades/></>}
+                    {siguienteActividad && <ListaActividadesProfe
+                                            grupo={idEquipoSeleccionado} 
+                                            usuario={usuario}
+                                            todosFalse={limpiarPantalla}
+                                            sO={setObservaciones}
+                                            editarActividad={setEditarActividad}
+                                            setActividadActual={setActividadAEditar}
+                                            observationIDList={setObservationIDList}
+                                            agregarActividad={setAgregarActividad}
+                                            setPlanActual={setPlanActual}
+                                            setEditarEstado={setEditarEstado}
+                                            setEstadoAEditar={setEstadoAEditar}
+                                            idActivity={setActivityID}
+                                            adminAsis={true}/>}
                     {addProfe && <AddProfe campus={usuario.campus} setCambios={setCambios}/>}
                 </div>
             </div>

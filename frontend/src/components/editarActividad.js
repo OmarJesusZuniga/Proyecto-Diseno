@@ -106,13 +106,13 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/activity/enums/");
+                const response = await axios.post("http://localhost:4000/api/activity/enums/");
                 setEnums({
                     type: response.data.type,
                     modality: response.data.modality
                 });
 
-                const responseProfessors = await axios.get("https://proyecto-diseno-ol06.onrender.com/api/professors/");
+                const responseProfessors = await axios.get("http://localhost:4000/api/professors/");
                 setProfesores(responseProfessors.data)
 
                 const filteredPeople = responseProfessors.data.filter(person => actividad.managers.includes(person._id));
@@ -158,7 +158,7 @@ const EditarActividad = ({ reset, returnPage, actividad}) => {
         }
 
         try {
-            const response = await axios.patch('https://proyecto-diseno-ol06.onrender.com/api/activity/' + actividad._id, {
+            const response = await axios.patch('http://localhost:4000/api/activity/' + actividad._id, {
                 week, 
                 name, 
                 type: type.current.value, 

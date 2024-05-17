@@ -11,7 +11,7 @@ const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://proyecto-diseno-ol06.onrender.com/api/students/');
+                const response = await axios.get('http://localhost:4000/api/students/');
                 const datosEstudiantes = response.data;
                 setEstudiantes(datosEstudiantes);
             } catch (error) {
@@ -24,7 +24,7 @@ const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA }) => {
     useEffect(() => {
         const fetchEstudiantes = async () => {
             try {
-                const response = await axios.get(`https://proyecto-diseno-ol06.onrender.com/api/students?sort=${sortOption}`);
+                const response = await axios.get(`http://localhost:4000/api/students?sort=${sortOption}`);
                 setEstudiantes(response.data);
             } catch (error) {
                 console.error('Failed to fetch students:', error);
