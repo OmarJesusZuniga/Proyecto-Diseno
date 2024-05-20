@@ -19,7 +19,7 @@ const ListaObservaciones = ({ idObservation, usuario , todosFalse, sAgregarComen
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/observation/" + idObservation );
+                const response = await axios.get("https://proyecto-diseno-ol06.onrender.com/api/observation/" + idObservation );
                 setComentarios(response.data.comments);
             } catch (error) {
                 console.log({ error: error.message })

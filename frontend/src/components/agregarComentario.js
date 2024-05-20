@@ -14,7 +14,7 @@ const AgregarComentario = ({ usuario, idObservation, todosFalse, returnPage }) =
         try {
             console.log("idObservation")
             console.log(idObservation)
-            const response = await axios.post("http://localhost:4000/api/comment/", { text: comentario, professor: usuario, idObservation: idObservation });
+            const response = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/comment/", { text: comentario, professor: usuario, idObservation: idObservation });
             console.log(response)
 
         } catch (error) {

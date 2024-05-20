@@ -11,7 +11,7 @@ const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFa
         const fetchData = async () => {
             
             try {
-                const response = await axios.get("http://localhost:4000/api/activity/" + idActivity );
+                const response = await axios.get("https://proyecto-diseno-ol06.onrender.com/api/activity/" + idActivity );
                 
                 setObservaciones(response.data.observations);
 
