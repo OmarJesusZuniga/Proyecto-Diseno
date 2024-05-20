@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-const InfoProfeGuia = ({profe, equipoId, setCambios, isProfe}) => {
+const InfoProfeGuia = ({profe, equipoId, setCambios, isProfe, campusUsuario}) => {
 
 
     const darDeBaja = async () => {
@@ -39,7 +39,7 @@ const InfoProfeGuia = ({profe, equipoId, setCambios, isProfe}) => {
             </div>
 
             <div className="botonesProfesor">
-                {!isProfe && <button onClick={darDeBaja}>Dar de baja</button>}
+                {!isProfe && campusUsuario===profe.campus &&<button onClick={darDeBaja}>Dar de baja</button>}
             </div>
 
         </div>

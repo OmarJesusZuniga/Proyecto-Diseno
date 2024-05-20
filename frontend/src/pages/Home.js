@@ -100,7 +100,7 @@ const Home = (req, res) => {
                                         limpiar = {limpiarPantalla}
                                         setCambios = {setCambios}
                                         adminMadre={usuario.adminMadre}/>}
-                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe} adminMadre={usuario.adminMadre} />}
+                    {profesLista && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe} adminMadre={usuario.adminMadre} campusUsuario={usuario.campus}/>}
                     {estudiantesLista && <ListaEstudiantes campus={usuario.campus} sTP ={setTodosLosProfes} sPL={setProfesLista} sEL={setEstudiantesLista} sA={setSiguienteActividad} />}
                     {siguienteActividad && <ListaActividadesProfe
                                             grupo={idEquipoSeleccionado} 

@@ -90,7 +90,7 @@ const HomeProfe = () => {
                               sC ={setCargando}/>
                 <div className="contenedorListas">
                     {cargando && <h2>Cargando</h2>}
-                    {listaProfes && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe} adminMadre={false}/>}
+                    {listaProfes && <ListaEquipoGuia equipo={equipoSeleccionado} setCambios = {setCambios} isProfe={isProfe} adminMadre={false} campusUsuario={usuario.campus}/>}
                     {bienvenida && <div className="contenido"><h1>Bienvenido, profesor</h1></div>}
                     {listaEstudiantes && <ListaEstudiantesProfe campus={usuario.campus} usuario={usuario}/> }
                     {listaObservaciones && <ListaObservaciones 
