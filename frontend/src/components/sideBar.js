@@ -213,7 +213,7 @@ const Sidebar = ({s1, s2, s3, s4,  sE, sES, id, equipos, sC, setIdEquipoSeleccio
                 <h2>Estudiantes</h2>
                 <button onClick={dejarTercera}className="botonAzul">Ver lista</button>
                 <h2>Seleccione el archivo para agregar estudiantes</h2>
-                <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/>
+                <input className="AgregarXLSX" type="file" accept=".xlsx, .xls" onChange={handleFileUpload}/>
             </div>
         </li>
         <li>

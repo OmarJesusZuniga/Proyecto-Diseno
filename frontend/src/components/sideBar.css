@@ -125,3 +125,14 @@
 }
 
 /* Add media queries and other responsive design elements as needed */
+
+.AgregarXLSX {
+  background-color: var(--text);
+  padding: 5px 10px; 
+
+  font-family: "Poppins";
+  font-weight: 400;
+
+  width: 250px;
+  height: auto;
+}
