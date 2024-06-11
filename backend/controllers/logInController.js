@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Professor = require('../models/professorModel.js')
 const AdminAssistant = require('../models/adminAssistantModel.js')
+const Student = require('../models/studentModel.js')
 var nodemailer = require('nodemailer');
 
 const forgotPassword = async (req, res) => {
@@ -84,8 +85,45 @@ const forgotPassword = async (req, res) => {
                 });
 
             } else {
-                console.log("Admin Assistant not found.");
-                return res.send({ Status: "Not" }, name);
+                queryResult = await Student.find(query);
+                console.log("Student query result:", queryResult);
+                if (queryResult.length > 0) {
+                    console.log("Student found, sending email...");
+                    var transporter = nodemailer.createTransport({
+                        service: "gmail",
+                        port: 465,
+                        secure: true,
+                        logger: true,
+                        debug: true,
+                        secureConnection: false,
+                        auth: {
+                            user: 'poogr40@gmail.com',
+                            pass: 'septtczjgleebadu'
+                        },
+                        tls: {
+                            rejectUnauthorized: true
+                        }
+                    });
+
+                    var mailOptions = {
+                        from: 'poogr40@gmail.com',
+                        to: name,
+                        subject: 'Password recovery',
+                        text: `Please, enter to the next link to reset your password: \n http://localhost:3000/ResetPassword/${name}`
+                    };
+
+                    transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.error("Error sending email:", error);
+                            return res.status(500).json({ error: "Email not sent", detail: "EMAIL_NOT_SEND" });
+                        } else {
+                            return res.status(200).json({ Status: "Success", name: name});
+                        }
+                    });              
+                } else {
+                    console.log("Admin Assistant not found.");
+                    return res.send({ Status: "Not" }, name);
+                }
             }
         }
 
@@ -101,22 +139,28 @@ const updatePassword = async (req, res) => {
 
     try {
         let professor = await Professor.findOne({ email: name });
-        console.log(professor)
+        console.log(professor);
         if (professor) {
             professor.password = password;
-            await professor.save(); 
-
+            await professor.save();
             return res.send({ Status: "Success" });
         } else {
             let adminAssistant = await AdminAssistant.findOne({ firstname: name });
-            console.log(adminAssistant)
+            console.log(adminAssistant);
             if (adminAssistant) {
-                adminAssistant.password = password; 
-                await adminAssistant.save(); 
-
+                adminAssistant.password = password;
+                await adminAssistant.save();
                 return res.send({ Status: "Success" });
             } else {
-                return res.send({ Status: "Not" });
+                let student = await Student.findOne({ email: name });
+                console.log(student);
+                if (student) {
+                    student.password = password;
+                    await student.save();
+                    return res.send({ Status: "Success" });
+                } else {
+                    return res.send({ Status: "Not" });
+                }
             }
         }
     } catch (error) {
@@ -124,6 +168,7 @@ const updatePassword = async (req, res) => {
         return res.send({ Status: "Error" });
     }
 };
+
 
 
 const loginUser = async (req, res) => {
@@ -137,6 +182,11 @@ const loginUser = async (req, res) => {
         email: name,
         password: parseInt(password)
     }
+
+    const queryStudent = {
+        email: name,
+        password: parseInt(password)
+    };
 
 
     let userType = null;
@@ -159,10 +209,19 @@ const loginUser = async (req, res) => {
                     Data: queryResult
                 });
             } else {
-                console.log('')
-                return res.status(404).json({
+                queryResult = await Student.find(queryStudent);
+                if (queryResult.length > 0) {
+                    userType = 'Student';
+                    return res.status(200).json({
+                        Status: userType,
+                        Data: queryResult
+                    });
+                } else {
+                    console.log('')
+                    return res.status(404).json({
                     Status: "Not Found"
                 });
+                }
             }
         }
     } catch (error) {

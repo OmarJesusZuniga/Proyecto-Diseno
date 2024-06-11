@@ -33,8 +33,30 @@ const LoginForm = () => {
                 password: pass
             })
             const { Status, Data } = response.data;
-    
-            if (Status === "Professor" || Status === "Admin Assistant") {
+            
+            
+            if (Status === "Professor" || Status === "Admin Assistant" || Status === "Student") {
+                const usuario = Data[0];
+                let route;
+
+                if (Status === "Professor") {
+                    route = '/homeProfe';
+                    usuario.type = 1;
+                } else if (Status === "Admin Assistant") {
+                    route = '/home/';
+                    usuario.type = 0;
+                    if (usuario.campus === '662733740d5b97c9626be5ab'){
+                        usuario.adminMadre = true;
+                    }
+                } else if (Status === "Student") {
+                    route = '/homeStudent';
+                    usuario.type = 2;
+                }
+
+                navigate(route, { state: { usuario } });
+            }
+            
+            /*if (Status === "Professor" || Status === "Admin Assistant") {
                 const usuario = Data[0];
                 const route = Status === "Professor" ? '/homeProfe' : '/home/';
                 Status === "Professor" ? usuario.type = 1 : usuario.type = 0;
@@ -48,7 +70,7 @@ const LoginForm = () => {
 
                 
                 navigate(route, { state: { usuario } });
-            } else {
+            }*/ else {
                 toast.error("Credenciales inválidas", {
                     className: "toast-message"
                 });

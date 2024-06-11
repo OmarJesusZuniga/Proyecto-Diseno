@@ -6,6 +6,10 @@ const studentSchema = new Schema ({
     studentCard: {
         type: Number,
         required: true
+    },
+    password: {
+        type: Number,
+        required: true
     }, 
     firstLastname: {
         type: String,
