@@ -1,10 +1,8 @@
 import React from 'react';
 import '../components/sideBar.css';
-import axios from 'axios';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const SideBarStudent = ({perfil, todosFalse, calendario, buzon}) => {
-
 
     useEffect(() => {
         
