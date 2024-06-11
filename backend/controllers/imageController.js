@@ -51,7 +51,7 @@ const deleteImage = async (req, res) => {
 }
 
 const getImagePath = async(req, res) => {
-    const uploadsPath = "https://proyecto-diseno-ol06.onrender.com/document";
+    const uploadsPath = "http://localhost:4000/document";
     
     res.status(200).json({path: uploadsPath + "/"})
 }

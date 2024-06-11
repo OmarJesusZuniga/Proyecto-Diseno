@@ -64,18 +64,18 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/activityState/getEnums/");
+                const response = await axios.post("http://localhost:4000/api/activityState/getEnums/");
                 setEnums({
                     type: response.data.type,
                 });
 
-                const response2 = await axios.get('https://proyecto-diseno-ol06.onrender.com/api/activityState/' + estado);
+                const response2 = await axios.get('http://localhost:4000/api/activityState/' + estado);
                 setEstadoActividad(response2.data)
                 setLink(response2.data.recordingLink)
                 setImageCollection(response2.data.imageCollection)
                 type.current.value = response2.data.type
 
-                const response3 = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/image/getPath/");
+                const response3 = await axios.post("http://localhost:4000/api/image/getPath/");
                 setPath(response3.data.path)
 
             } catch (error) {
@@ -97,7 +97,7 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
 
     const editarEstado = async () => {
         try {
-            const response = await axios.patch('https://proyecto-diseno-ol06.onrender.com/api/activitystate/' + estado, {
+            const response = await axios.patch('http://localhost:4000/api/activitystate/' + estado, {
                 type : type.current.value,
                 imageCollection : imageCollection.map(img => img._id),
                 recordingLink : link

@@ -13,7 +13,7 @@ const AgregarObservacion = ({ usuario, todosFalse, returnPage, idActivity}) => {
         try {
             console.log("idActivity")
             console.log(idActivity)
-            const response = await axios.post("https://proyecto-diseno-ol06.onrender.com/api/observation/", { text: observacion, professor: usuario, idActivity: idActivity });
+            const response = await axios.post("http://localhost:4000/api/observation/", { text: observacion, professor: usuario, idActivity: idActivity });
             console.log(response)
 
         } catch (error) {

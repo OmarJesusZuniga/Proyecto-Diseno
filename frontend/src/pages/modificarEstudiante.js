@@ -47,7 +47,7 @@ const ModificarEstudiante = () => {
     const submitModify = async (e) => {
  
         try {
-            const response = await axios.patch('https://proyecto-diseno-ol06.onrender.com/api/students/' + estudiante._id, {
+            const response = await axios.patch('http://localhost:4000/api/students/' + estudiante._id, {
                 firstname, 
                 middlename, 
                 firstLastname,

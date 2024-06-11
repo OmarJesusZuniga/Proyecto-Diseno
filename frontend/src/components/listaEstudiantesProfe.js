@@ -14,7 +14,7 @@ const ListaEstudiantesProfe = ({campus, usuario}) => {
     useEffect(() => {
         const fetchEstudiantes = async () => {
             try {
-                const response = await axios.get(`https://proyecto-diseno-ol06.onrender.com/api/students?sort=${sortOption}`);
+                const response = await axios.get(`http://localhost:4000/api/students?sort=${sortOption}`);
                 setEstudiantes(response.data);
             } catch (error) {
                 console.error('Failed to fetch students:', error);

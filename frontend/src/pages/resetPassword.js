@@ -26,7 +26,7 @@ const ResetPassword = () => {
         console.log(pass)
 
         try {
-            const response = await axios.post(`https://proyecto-diseno-ol06.onrender.com/api/logIn/updatePassword/${name}`, { 
+            const response = await axios.post(`http://localhost:4000/api/logIn/updatePassword/${name}`, { 
                 password: pass 
             });
             if (response.data.Status === "Not") {

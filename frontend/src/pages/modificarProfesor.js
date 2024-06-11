@@ -72,7 +72,7 @@ const ModificarProfesor = () => {
 
 
         try {
-            const response = await axios.patch('https://proyecto-diseno-ol06.onrender.com/api/professors/' + professor._id, {
+            const response = await axios.patch('http://localhost:4000/api/professors/' + professor._id, {
                 firstname, 
                 middlename, 
                 firstLastname,
