@@ -13,6 +13,7 @@ import ModificarProfesor from './pages/modificarProfesor';
 import HomeProfe from './pages/HomeProfe';
 import HomeStudent from './pages/HomeStudent';
 import GlobalTime from './components/globalTime';
+import StudentModificarInfo from './pages/studentModificarInfo';
 
 import FilePrueba from './pages/borrar'; // Borrar
 
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/home/" element={<Home/>}/>
           <Route exact path="/homeProfe" element={<HomeProfe/>}/>
           <Route exact path="/homeStudent" element={<HomeStudent/>}/>
+          <Route path="/studentModInfo" element={<StudentModificarInfo/>} />
           <Route path="/modEstudiante" element={<ModificarEstudiante/>} />
           <Route path="/modProfesor" element={<ModificarProfesor/>} />
           <Route path="/forgotPassword" element={<ForgotPassword/>} /> 

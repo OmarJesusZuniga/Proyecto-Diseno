@@ -38,7 +38,12 @@ const studentSchema = new Schema ({
     campus: {
         type: mongoose.Schema.Types.ObjectId, // Id del campus
         ref: 'campus' 
+    },
+    image: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'image'
     }
+    
 }, {timestamps:true} )
 
 module.exports = mongoose.model('student', studentSchema)
