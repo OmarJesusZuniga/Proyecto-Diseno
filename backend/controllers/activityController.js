@@ -51,7 +51,7 @@ const createActivity = async (req, res) => {
 
   // Add to the database
   try {
-    const newState = await ActivityState.create({ type: 'Notificada' });
+    const newState = await ActivityState.create({ type: 'Planeada' });
     if (!newState) {
       return res.status(404).json({error: 'Could not create State for Activity'});
     }

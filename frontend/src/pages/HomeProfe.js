@@ -62,7 +62,6 @@ const HomeProfe = () => {
         setEstudiantes(false);
         setBienvenida(false);
         setAgregarActividad(false);
-        setPlanActual(false);
         setEditarEstado(false);
         setComentarios(false);
     }

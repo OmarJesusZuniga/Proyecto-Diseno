@@ -122,6 +122,9 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
             }
         };
 
+        console.log("Pruebas de uso")
+        console.log(plan)
+
         fetchData();
     }, []);
 
@@ -154,7 +157,7 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
                 reminders, 
                 modality: modality.current.value, 
                 link,
-                pdf : pdf.img
+                pdf : pdf ? pdf.img : null
             });
 
             activityId = response.data._id;
@@ -162,8 +165,13 @@ const AgregarActividad = ({ reset, returnPage, plan}) => {
             toast.error("Error al añadir la actividad!", {
                 className: "toast-message"
             });
+            console.log(error);
             return;
         }
+        
+        console.log("Pruebas de uso")
+        console.log(activityId)
+        console.log(plan)
 
         try {
             const response = await axios.post('http://localhost:4000/api/plan/addActivity/', {

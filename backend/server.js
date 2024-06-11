@@ -21,6 +21,7 @@ const representantRoutes = require('./routes/representantRoutes')
 const guideTeamRoutes = require('./routes/guideTeamRoutes')
 const imageRoutes = require('./routes/imageRoute')
 const logInRoutes = require('./routes/logInRoutes')
+const systemDateRoutes = require('./routes/systemDateRoutes')
 
 // express app
 const app = express()
@@ -50,6 +51,7 @@ app.use('/api/representants', representantRoutes)
 app.use('/api/guideTeam', guideTeamRoutes)
 app.use('/api/image', imageRoutes)
 app.use('/api/logIn', logInRoutes)
+app.use('/api/systemDate', systemDateRoutes)
 
 app.use('/document', express.static(path.join(__dirname, 'document')));
 

@@ -17,7 +17,11 @@ const activityStateSchema = new Schema ({
     recordingLink: {
         type: String, 
         required: false
-    }
+    },
+    cancelationReason: {
+        type: String, 
+        required: false
+    },
 }, {timestamps:true})
 
 module.exports = mongoose.model('activityState', activityStateSchema)

@@ -177,8 +177,18 @@ const InfoActividadProfe = ( {actividad, isAdmin, todosFalse, sO, editarActivida
             <div className="cartaActividad-Multiple">
                 <h4>Estado: </h4>
                 <h5>{state.type}</h5>
-                {state.recordingLink && <h4>Link de Grabacion: </h4>}
-                <h5>{state.recordingLink}</h5>
+                {state.recordingLink && (
+                <>
+                    <h4>Link de Grabacion: </h4>
+                    <h5>{state.recordingLink}</h5>
+                </>
+                )}
+                {state.cancelationReason && (
+                <>
+                    <h4>Justificación de Cancelacion: </h4>
+                    <h5>{state.cancelationReason}</h5>
+                </>
+                )}
                 <div className="previewImagenes">
                     {viewImages.map(img => (
                         <img src={img} className="img-estado"/>

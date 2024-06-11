@@ -10,9 +10,12 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
     const [estadoActividad, setEstadoActividad] = useState('')
     const [path, setPath] = useState('');
     const [previewURL, setPreviewUrl] = useState('');
+    const [tipoDeEstado, setTipoDeEstado] = useState('')
+    const [isCancel, setIsCancel] = useState(false)
 
     const type = useRef(null);
     const [link, setLink] = useState('');
+    const [reason, setReason] = useState('');
     const [imageCollection, setImageCollection] = useState([])
     const [imageToAdd, setImageToAdd] = useState('')
     const [actualImage, setActualImage] = useState('')
@@ -24,7 +27,15 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
         setLink(e.target.value);
     }
 
+    const changeReason = (e) => {
+        setReason(e.target.value);
+    }
+
     const addImage = () => {
+        console.log(imageToAdd.img)
+        if (imageToAdd.img === undefined) {
+            return;
+        }
         if (imageToAdd && !imageCollection.includes(imageToAdd)) {
             setImageCollection(prevImage => [...prevImage, imageToAdd]);
 
@@ -74,6 +85,7 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
                 setLink(response2.data.recordingLink)
                 setImageCollection(response2.data.imageCollection)
                 type.current.value = response2.data.type
+                setTipoDeEstado(response2.data.type)
 
                 const response3 = await axios.post("http://localhost:4000/api/image/getPath/");
                 setPath(response3.data.path)
@@ -100,7 +112,8 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
             const response = await axios.patch('http://localhost:4000/api/activitystate/' + estado, {
                 type : type.current.value,
                 imageCollection : imageCollection.map(img => img._id),
-                recordingLink : link
+                recordingLink : link,
+                cancelationReason: reason
             });
 
         } catch (error) {
@@ -120,6 +133,10 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
         returnPage(true);
     }
     
+    useEffect(() => {
+        setIsCancel(tipoDeEstado === 'Cancelada');
+    }, [tipoDeEstado])
+
     return (
         <div >
             <ToastContainer />
@@ -132,14 +149,21 @@ const EditarEstado = ({ reset, returnPage, estado}) => {
             <div>
 
             <h2>Tipo</h2>
-            <select ref={type}>
+            <select ref={type} onChange={(e) => setTipoDeEstado(e.target.value)}>
                 {enums.type.map(option => (
                     <option key={option} value={option}>{option}</option>
                 ))}
             </select>
 
-            <h2>Recording Link</h2>
+            <h2>Link de Grabacion</h2>
             <input value={link} onChange={changeLink} type="text" className="inputBox" placeholder="Input Link"/>
+            
+            {isCancel && (
+                <>
+                    <h2>Justificación de Cancelacion</h2>
+                    <input onChange={changeReason} type="text" className="inputBox" placeholder="Cancellation Reason"/>
+                </>
+            )}
 
             <br></br>
             <button onClick={editarEstado} className='btnAgregar'>Editar Estado</button>

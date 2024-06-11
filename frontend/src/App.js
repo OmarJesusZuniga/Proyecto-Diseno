@@ -12,6 +12,7 @@ import ModificarEstudiante from './pages/modificarEstudiante';
 import ModificarProfesor from './pages/modificarProfesor';
 import HomeProfe from './pages/HomeProfe';
 import HomeStudent from './pages/HomeStudent';
+import GlobalTime from './components/globalTime';
 
 import FilePrueba from './pages/borrar'; // Borrar
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/forgotPassword" element={<ForgotPassword/>} /> 
           <Route path="/ResetPassword/:name" element={<ResetPassword/>} />
           <Route path="/file" element={<FilePrueba/>} /> 
+          <Route path="/globalTime" element={<GlobalTime/>} />
         </Routes>
       </div>
     </BrowserRouter>
