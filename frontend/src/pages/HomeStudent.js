@@ -38,9 +38,9 @@ const HomeStudent = () => {
                         buzon = {setVerBuzonNotificaciones}/>
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, estudiante</h1></div>}
-                    {perfilEstudiante && <PerfilEstudiante/>}
-                    {verCalendario && <CalendarioEstudiante/>}
-                    {verBuzonNotificaciones && <BuzonNotificaciones/>}
+                    {perfilEstudiante && <PerfilEstudiante usuario={usuario}/>}
+                    {verCalendario && <CalendarioEstudiante usuario={usuario}/>}
+                    {verBuzonNotificaciones && <BuzonNotificaciones usuario={usuario}/>}
                 </div>
             </div>
 

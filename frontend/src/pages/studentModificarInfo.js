@@ -1,4 +1,4 @@
-import './modificarEstudiante.css';
+import './studentModificarInfo.css';
 import Navbar from "../components/Navbar";
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -61,7 +61,7 @@ const StudentModificarInfo = () => {
     }
 
     return (       
-        <div className="principal">
+        <div className="principalStudentModInfo">
             <ToastContainer />
             <form >
                 <Navbar id={usuario.firstname} apellido={usuario.firstLastname}/>

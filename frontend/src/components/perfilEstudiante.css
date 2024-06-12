@@ -1,0 +1,89 @@
+.principal h2 {
+    color: #fff;
+    font-size: 4rem;
+    margin-top: 0;
+    font-family: "Roboto";
+    text-align: center;
+}
+
+.principal h3 {
+    color: #fff;
+    font-size: 28px;
+    font-family: "Roboto";
+    margin-left: 80px;
+}
+
+.principal h4 {
+    color: #fff;
+    font-size: 22px;
+    font-family: "Roboto";
+    margin-left: 0px;
+}
+
+.principal .data-label {
+    position: relative;
+    width: 30%;
+    height: 70px;
+    margin: 40px 0;
+    margin-top: 40px;
+    margin-left: 80px;
+}
+
+.principal .data-box {
+    /* Sub Container */
+
+    box-sizing: border-box;
+    margin-left: 80px;
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    padding: 14px;
+    gap: 10px;
+
+    width: 310px;
+    height: 55px;
+
+    /* Black/08 */
+    background: #141414;
+    /* Black/15 */
+    border: 1px solid #262626;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.principal button {
+    margin-left: 160px;
+    background-color: var(--secondary) ;
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: var(--text);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none #6B7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  height: auto;
+}
+
+.principal button:hover {
+    background-color: var(--secondary-hover);
+}
