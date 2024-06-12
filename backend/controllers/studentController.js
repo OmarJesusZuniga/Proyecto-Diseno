@@ -85,7 +85,7 @@ const deleteStudent = async (req, res) => {
 }
 
 // Update a student
-const updateStudent = async (req, res) => {
+/*const updateStudent = async (req, res) => {
     const {id} = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -101,7 +101,24 @@ const updateStudent = async (req, res) => {
     }
 
     res.status(200).json(student)
+}*/
+
+const updateStudent = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such student" });
+    }
+    
+    const updatedStudent = await Student.findOneAndUpdate({_id: id}, {...req.body}, { new: true });
+
+    if (!updatedStudent) {
+        return res.status(404).json({ error: "No such student" });
+    }
+
+    res.status(200).json(updatedStudent);
 }
+
 
 module.exports = {
     getStudents,
