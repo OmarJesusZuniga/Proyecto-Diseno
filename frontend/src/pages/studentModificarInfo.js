@@ -24,7 +24,10 @@ const StudentModificarInfo = () => {
     }
 
     const changePassword = (e) => {
-        setPassword(e.target.value);
+        const value = e.target.value;
+        if (/^\d{0,8}$/.test(value)) {
+            setPassword(value);
+        }
     }
 
     function handleChange(e) {
@@ -82,9 +85,8 @@ const StudentModificarInfo = () => {
                 </div>
                 <h4>Escriba su nueva contraseña</h4>
                 <div className="input-box">
-                    <input type="text" onChange={changePassword} placeholder='Contraseña' value={password} required />
+                    <input type="text" onChange={changePassword} placeholder='Contraseña' value={password} pattern="^[0-9]{8}$" maxLength={8}  required />
                 </div>
-                
                 <div className="image-container">
                     {file && <img src={file} alt="Profile Preview"/>}
                 </div>

@@ -11,6 +11,7 @@ const PerfilEstudiante = ({ usuario }) => {
         middlename: '',
         firstLastname: '',
         secondLastname: '',
+        studentCard: '',
         email: '',
         phoneNumber: '',
         password: ''
@@ -24,6 +25,7 @@ const PerfilEstudiante = ({ usuario }) => {
                 middlename: usuario.middlename || '',
                 firstLastname: usuario.firstLastname || '',
                 secondLastname: usuario.secondLastname || '',
+                studentCard: usuario.studentCard || '',
                 email: usuario.email || '',
                 phoneNumber: usuario.phoneNumber || '',
                 password: usuario.password || ''
@@ -60,6 +62,12 @@ const PerfilEstudiante = ({ usuario }) => {
                 <h3>Segundo apellido </h3>
                 <div className="data-box">
                     <h4>{userData.secondLastname}</h4>
+                </div>
+            </div>
+            <div className="data-label">
+                <h3>Carné </h3>
+                <div className="data-box">
+                    <h4>{userData.studentCard}</h4>
                 </div>
             </div>
             <div className="data-label">
