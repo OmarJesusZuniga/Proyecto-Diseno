@@ -24,6 +24,35 @@ const logInRoutes = require('./routes/logInRoutes')
 const systemDateRoutes = require('./routes/systemDateRoutes')
 const observerRoutes = require('./routes/observerRoutes')
 
+// Observer Pattern performance
+const { Observer } = require('./controllers/observer');
+
+// const time = 5; // 5 minutes
+const observer = new Observer();
+let isProcessing = false;
+
+// Define the repeated action as a function
+async function processObserver() {
+  console.log("Processing");
+  if (!isProcessing) {
+    isProcessing = true;
+    try {
+      await observer.notify();
+    } catch (error) {
+      console.error('Failed to process observer notifications:', error);
+    }
+    isProcessing = false;
+  }
+}
+
+// Call the function immediately
+processObserver();
+
+/*
+// Set up the interval to run the function repeatedly
+setInterval(processObserver, time * 60 * 1000);
+*/
+
 // express app
 const app = express()
 
