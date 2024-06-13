@@ -19,6 +19,10 @@ const InfoNotificaciones = ({notificacion}) => {
                     <h5>{formattedDate}</h5>
                 </div>
                 
+                <div className="checkbox">
+                    <h3>Marcar como leido</h3>
+                    <input type="checkbox" />
+                </div>
             </div>     
         </div>
     );
