@@ -10,7 +10,8 @@ const {
     removeProfeGuide,
     getGuideTeamsByProfessorId,
     addGuideProfessor,
-    removeGuideProfessor
+    removeGuideProfessor,
+    getGuideTeamsByStudentId
 } = require('../controllers/guideTeamController')
 
 const router = express.Router()
@@ -22,7 +23,7 @@ router.post('/profe/get', getGuideTeamsByProfessorId);
 // Get all por professor
 router.post('/', getGuideTeams)
 
-
+router.get('/api/guide-teams/student/:id', getGuideTeamsByStudentId)
 
 // Get one
 router.get('/:id', getGuideTeam)

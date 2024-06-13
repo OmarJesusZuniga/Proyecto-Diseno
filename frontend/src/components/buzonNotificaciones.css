@@ -1,0 +1,21 @@
+.listaComentarios{
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100px;
+}
+
+.buzonNotificaciones h2 {
+    margin-top: 0;
+    font-family: "Poppins";
+    color: var(--text);
+    font-size: var(--font-size-h2);
+}
+
+
+
+
+.filter {
+    width: auto;
+}
