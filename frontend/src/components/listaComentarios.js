@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import "./listaComentarios.css"
-import InfoComentario from "./infoComentarios";
-import axios from 'axios';
 
-const ListaObservaciones = ({ idObservation, usuario , todosFalse, sAgregarComentarios , returnPage}) => {
+import React, { useEffect, useState } from "react";
+import "./listaComentarios.css";
+import InfoComentario from "./infoComentarios";
+import ObservationFacade from '../PatronFacade/ObservacionFacade';
+
+const ListaObservaciones = ({ idObservation, usuario, todosFalse, sAgregarComentarios, returnPage }) => {
     const [comentarios, setComentarios] = useState([]);
 
     const agregarComentario = () => {
@@ -12,26 +13,25 @@ const ListaObservaciones = ({ idObservation, usuario , todosFalse, sAgregarComen
     }
 
     const volver = () => {
-        todosFalse(); 
+        todosFalse();
         returnPage(true);
     }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/observation/" + idObservation );
-                setComentarios(response.data.comments);
+                const data = await ObservationFacade.fetchObservation(idObservation);
+                setComentarios(data.comments);
             } catch (error) {
-                console.log({ error: error.message })
+                console.log({ error: error.message });
             }
         };
-    
+
         fetchData();
-    }, []); 
-    
-    return ( 
+    }, [idObservation]);
+
+    return (
         <div className="listaComentarios">
-            
             <h2>Comentarios de la observación</h2>
             <div className="botonesListaComentarios">
                 <button onClick={volver}>Volver</button>
@@ -39,8 +39,9 @@ const ListaObservaciones = ({ idObservation, usuario , todosFalse, sAgregarComen
             </div>
 
             {comentarios.length > 0 && comentarios.map((comentario) => (
-                <InfoComentario 
-                    comentario={comentario} 
+                <InfoComentario
+                    key={comentario._id}
+                    comentario={comentario}
                     usuario={usuario}
                     todosFalse={todosFalse}
                     sAgregarComentarios={sAgregarComentarios}

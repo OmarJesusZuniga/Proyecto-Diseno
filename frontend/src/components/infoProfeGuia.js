@@ -1,26 +1,21 @@
-import axios from 'axios';
+
 import React from 'react';
+import GuideProfessorFacade from '../PatronFacade/ProfeGuiaFacade';
 
-const InfoProfeGuia = ({profe, equipoId, setCambios, isProfe, campusUsuario}) => {
-
-
+const InfoProfeGuia = ({ profe, equipoId, setCambios, isProfe, campusUsuario }) => {
     const darDeBaja = async () => {
-
-        axios.post("http://localhost:4000/api/guideTeam/removeProfe/", {guideTeamId: equipoId, professorId: profe._id})
-        .then(response => {
-            console.log(response.data);
+        try {
+            await GuideProfessorFacade.removeGuideProfessor(equipoId, profe._id);
             setCambios('cambio');
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error removing professor:', error);
-        });
-    }
-
+        }
+    };
 
     return (
         <div className='cartaProfesor'>
             <h2>{profe.firstname} {profe.firstLastname}</h2>
-    
+
             <div>
                 <h3>Teléfono-Celular: </h3>
                 <h5>{profe.phoneNumber}</h5>
@@ -39,9 +34,8 @@ const InfoProfeGuia = ({profe, equipoId, setCambios, isProfe, campusUsuario}) =>
             </div>
 
             <div className="botonesProfesor">
-                {!isProfe && campusUsuario===profe.campus &&<button onClick={darDeBaja}>Dar de baja</button>}
+                {!isProfe && campusUsuario === profe.campus && <button onClick={darDeBaja}>Dar de baja</button>}
             </div>
-
         </div>
     );
 }

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+
+import React, { useState, useEffect } from "react";
 import "../components/listaEstudiantes.css";
 import InfoEstudiante from "./infoEstudiante";
-import axios from 'axios';
 import * as XLSX from 'xlsx';
+import StudentFacade from '../PatronFacade/EstudianteFacade';
 
 const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA }) => {
     const [estudiantes, setEstudiantes] = useState([]);
@@ -11,8 +12,7 @@ const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/students/');
-                const datosEstudiantes = response.data;
+                const datosEstudiantes = await StudentFacade.fetchStudents();
                 setEstudiantes(datosEstudiantes);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -21,11 +21,12 @@ const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA }) => {
 
         fetchData();
     }, []);
+
     useEffect(() => {
         const fetchEstudiantes = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/students?sort=${sortOption}`);
-                setEstudiantes(response.data);
+                const sortedEstudiantes = await StudentFacade.fetchSortedStudents(sortOption);
+                setEstudiantes(sortedEstudiantes);
             } catch (error) {
                 console.error('Failed to fetch students:', error);
             }
@@ -34,7 +35,7 @@ const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA }) => {
         if (sortOption) { // Only fetch if a sort option is selected
             fetchEstudiantes();
         }
-    }, [sortOption]); 
+    }, [sortOption]);
 
     const handleSortChange = (event) => {
         const value = event.target.value;
@@ -80,7 +81,7 @@ const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA }) => {
         XLSX.writeFile(workbook, 'Estudiantes.xlsx');
     };
 
-    return ( 
+    return (
         <div className="listaEstudiantes">
             <h2>Estudiantes de la sede</h2>
             <div className="dropdown">
@@ -94,7 +95,7 @@ const ListaEstudiantes = ({ campus, sTP, sPL, sEL, sA }) => {
             <button className="dropdown" onClick={createAndDownloadExcel}>Descargar Excel</button>
             {estudiantes && estudiantes.map((estudiante) => (
                 (estudiante.campus === campus) && (
-                    <InfoEstudiante key={estudiante.id} estudiante={estudiante} />
+                    <InfoEstudiante key={estudiante._id} estudiante={estudiante} />
                 )
             ))}
         </div>

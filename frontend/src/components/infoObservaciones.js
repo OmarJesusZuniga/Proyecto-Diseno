@@ -1,36 +1,30 @@
+
 import "../components/infoObservaciones.css";
 import moment from 'moment';  
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import ProfessorFacade from '../PatronFacade/ProfeFacade';
 
 const InfoObservaciones = ({ observacion, todosFalse, observationId, listaComentarios }) => {
+    const [professor, setProfessor] = useState([]);
+
     const verComentarios = () => {
-        console.log("observacion._id")
-        console.log(observacion._id)
         todosFalse();
-        
         observationId(observacion._id);
         listaComentarios(true);
     }
 
-    const [professor, setProfessor] = useState([]);
-
     useEffect(() => {
         const fetchData = async () => {
-            
             try {
-                const professorId = observacion.professor;
-                const response = await axios.get("http://localhost:4000/api/professors/" + professorId );
-                
-                setProfessor(response.data);
-
+                const professorData = await ProfessorFacade.fetchProfessor(observacion.professor);
+                setProfessor(professorData);
             } catch (error) {
-                console.log(error.message)
+                console.log(error.message);
             }            
         };
 
         fetchData();
-    }, []); 
+    }, [observacion.professor]);
 
     const formattedDate = moment(observacion.createdAt).format("MM/DD/YY HH:mm");
 

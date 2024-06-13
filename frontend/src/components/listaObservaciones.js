@@ -1,7 +1,9 @@
+
 import React, { useEffect, useState } from "react";
 import "../components/listaObservaciones.css"
 import InfoObservacion from "./infoObservaciones";
 import axios from 'axios';
+import ActivityFacade from '../PatronFacade/ActividadFacade';
 
 const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFalse, observationId, listaComentarios , returnPage}) => {
     const [observaciones, setObservaciones] = useState([]);
@@ -11,7 +13,7 @@ const ListaObservaciones = ({ idActivity, usuario , sAgregarObservacion, todosFa
         const fetchData = async () => {
             
             try {
-                const response = await axios.get("http://localhost:4000/api/activity/" + idActivity );
+                const response = await ActivityFacade.fetchActivity(idActivity);
                 
                 setObservaciones(response.data.observations);
 

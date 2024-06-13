@@ -1,27 +1,23 @@
-import axios from 'axios';
-import '../components/infoProfeCoordinador.css'
+
+import '../components/infoProfeCoordinador.css';
 import React from 'react';
+import ProfessorFacade from '../PatronFacade/ProfeFacade';
 
-const InfoProfeCoordinador = ({prof, adminMadre, equipoId, setCambios}) => {
-    
+const InfoProfeCoordinador = ({ prof, adminMadre, equipoId, setCambios }) => {
     const eliminarProf = async () => {
-        
-        axios.patch('http://localhost:4000/api/guideTeam/revomeGuideProf/'+equipoId)
-        .then(response => {
+        try {
+            await ProfessorFacade.removeGuideProfessor(equipoId);
             setCambios('cambio');
-        })
-        .catch(error => {
+        } catch (error) {
             console.log(error);
-        })
+        }
+    };
 
-    }
-    if (prof === null){
-        return(
-            <div className="cartaProfeCoord">
-
-            </div>
+    if (prof === null) {
+        return (
+            <div className="cartaProfeCoord"></div>
         );
-    }else{
+    } else {
         return (
             <div className='cartaProfeCoord'>
                 <h2>Nombre: {prof.firstname} {prof.middlename} {prof.firstLastname} {prof.secondLastname}</h2>
@@ -34,7 +30,6 @@ const InfoProfeCoordinador = ({prof, adminMadre, equipoId, setCambios}) => {
             </div>
         );
     }
-    
 }
 
 export default InfoProfeCoordinador;

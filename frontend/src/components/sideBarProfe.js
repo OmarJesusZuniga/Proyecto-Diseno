@@ -1,83 +1,68 @@
-import React from 'react';
-import '../components/sideBar.css';
-import axios from 'axios';
-import { useState, useEffect } from "react";
 
-const SideBarProfe = ({sA, sE, sP, id, todosFalse, grupo, equipos, cambios, setIdEquipoSeleccionado, idEquipoSeleccionado,
-                        limpiarPantalla, cambiosDeEquipo, setCambios, sES, sEquipos, sC
-}) => {
-    //const [equipos, setEquipo] = useState([]);
+import React, { useEffect } from 'react';
+import '../components/sideBar.css';
+import SideBarProfeFacade from '../PatronFacade/SideBarProfeFacade';
+
+const SideBarProfe = ({ sA, sE, sP, id, todosFalse, equipos, cambiosDeEquipo, setIdEquipoSeleccionado, idEquipoSeleccionado, limpiarPantalla, setCambios, sES, sEquipos, sC }) => {
 
     useEffect(() => {
-
-        if (idEquipoSeleccionado === null){
-            
-        } else {
+        if (idEquipoSeleccionado !== null) {
             const getTeam = async () => {
                 limpiarPantalla();
                 sC(true);
-                axios.get('http://localhost:4000/api/guideTeam/'+idEquipoSeleccionado)
-                    .then(response => {
-                        sES(response.data);
-                        setIdEquipoSeleccionado(response.data._id);
-                        sC(false);
-                        setCambios('');
-                        dejarProfes()
-                    })
-                    .catch(err => {
-                        console.error('Error fetching data:', err);
-                    });
-            }
+                try {
+                    const guideTeam = await SideBarProfeFacade.fetchGuideTeam(idEquipoSeleccionado);
+                    sES(guideTeam);
+                    setIdEquipoSeleccionado(guideTeam._id);
+                    sC(false);
+                    setCambios('');
+                    dejarProfes();
+                } catch (err) {
+                    console.error('Error fetching data:', err);
+                }
+            };
             getTeam();
         }
-        
-    }, [cambiosDeEquipo])
-
+    }, [cambiosDeEquipo, idEquipoSeleccionado, limpiarPantalla, sC, sES, setCambios, setIdEquipoSeleccionado]);
 
     useEffect(() => {
         const fetchTeams = async () => {
-            axios.post('http://localhost:4000/api/guideTeam/profe/get', {id: id})
-                .then(response => {
-                    sEquipos(response.data);
-                    sES(response.data[0]);
-                    setIdEquipoSeleccionado(response.data[0]._id);
-                    sC(false);
-                    dejarProfes();
-                    
-                    
-                    
-                })
-                .catch(err => {
-                    console.error('Error fetching data:', err);
-                });
+            try {
+                const professorTeams = await SideBarProfeFacade.fetchProfessorTeams(id);
+                sEquipos(professorTeams);
+                sES(professorTeams[0]);
+                setIdEquipoSeleccionado(professorTeams[0]._id);
+                sC(false);
+                dejarProfes();
+            } catch (err) {
+                console.error('Error fetching data:', err);
+            }
         };
-    
+
         fetchTeams();
-        
-    }, []);
+    }, [id, sC, sES, sEquipos, setIdEquipoSeleccionado]);
 
     const changeEquipo = (event) => {
-        limpiarPantalla()
+        limpiarPantalla();
         setIdEquipoSeleccionado(event.target.value);
         setCambios('cambio');
     };
 
     const dejarProfes = () => {
-        todosFalse();;
+        todosFalse();
         sP(true);
-    }
+    };
 
     const dejarEstudiantes = () => {
         todosFalse();
         sE(true);
-    }
+    };
 
     const dejarActividades = () => {
         todosFalse();
         sA(true);
-        
-    }
-    
+    };
+
     return (
         <div className='sidebar'>
             <ul>
@@ -85,11 +70,11 @@ const SideBarProfe = ({sA, sE, sP, id, todosFalse, grupo, equipos, cambios, setI
                     <div className="dropdown">
                         <h2>Equipo Guía</h2>
                         <select onChange={changeEquipo}>
-                        {equipos.map((equipo) => (
-                            <option key={equipo._id} value={equipo._id}>
-                                20{equipo.generation}
-                            </option>
-                        ))}
+                            {equipos.map((equipo) => (
+                                <option key={equipo._id} value={equipo._id}>
+                                    20{equipo.generation}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </li>
@@ -100,16 +85,16 @@ const SideBarProfe = ({sA, sE, sP, id, todosFalse, grupo, equipos, cambios, setI
                     </div>
                 </li>
                 <li>
-                   <div className="section">
-                       <h2>Estudiantes</h2>
-                       <button onClick={dejarEstudiantes} className="botonAzul">Ver lista</button>
-                   </div>
+                    <div className="section">
+                        <h2>Estudiantes</h2>
+                        <button onClick={dejarEstudiantes} className="botonAzul">Ver lista</button>
+                    </div>
                 </li>
                 <li>
-                   <div className="section">
-                       <h2>Actividades</h2>
-                       <button onClick={dejarActividades} className="botonAzul">Ver actividades</button>
-                   </div>
+                    <div className="section">
+                        <h2>Actividades</h2>
+                        <button onClick={dejarActividades} className="botonAzul">Ver actividades</button>
+                    </div>
                 </li>
             </ul>
         </div>

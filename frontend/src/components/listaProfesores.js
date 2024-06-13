@@ -1,20 +1,17 @@
+
 import React, { useEffect, useState } from "react";
 import "../components/listaProfesores.css";
 import InfoProfesor from "./infoProfesor";
-import axios from 'axios';
+import ProfessorFacade from '../PatronFacade/ProfeFacade';
 
-
-const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar, setCambios, adminMadre}) => {
+const ListaProfesores = ({ campus, usuario, equipo, id, sE, limpiar, setCambios, adminMadre }) => {
     const [professors, setProfessors] = useState([]);
-    
-    
     
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/professors/');
-                setProfessors(response.data);
-                
+                const data = await ProfessorFacade.fetchProfessors();
+                setProfessors(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -23,21 +20,21 @@ const ListaProfesores = ({ campus , usuario, equipo, id, sE, limpiar, setCambios
         fetchData();
     }, []);
 
-    
-    
-    return ( 
+    return (
         <div className="listaProfesores">
-            <h2>Profesores de la sede </h2>
+            <h2>Profesores de la sede</h2>
             {professors && professors.map((professor, index) => (
-                
-                (professor.campus === campus) && <InfoProfesor 
-                                                  equipo={equipo} 
-                                                  key={index} 
-                                                  professor={professor} 
-                                                  usuario={usuario}
-                                                  limpiar={limpiar}
-                                                  setCambios = {setCambios}
-                                                  adminMadre={adminMadre}/>
+                (professor.campus === campus) && (
+                    <InfoProfesor
+                        equipo={equipo}
+                        key={index}
+                        professor={professor}
+                        usuario={usuario}
+                        limpiar={limpiar}
+                        setCambios={setCambios}
+                        adminMadre={adminMadre}
+                    />
+                )
             ))}
         </div>
     );
