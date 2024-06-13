@@ -24,9 +24,10 @@ class Observer {
             if (state && (state.type === 'Planeada') && (currentDate >= publicationDate)) {
                 // Llamar a Visitor para enviar la notificacion [ANUNCIO DE ACTIVIDAD]
                 this.concreteVisitor.visitAnouncement(element); 
+
                 // Cambiar estado a Notificada
-                // element.state = "Notificada";
-                // await element.save();
+                state.type = "Notificada";
+                await state.save();
             }
 
             if (state && (state.type === 'Notificada')) {
@@ -43,9 +44,9 @@ class Observer {
                     }
                 }
 
-                // if (element.isModified('reminders')) {
-                //     await element.save();
-                // }
+                if (element.isModified('reminders')) {
+                    await element.save();
+                }
             }
         }
     }
