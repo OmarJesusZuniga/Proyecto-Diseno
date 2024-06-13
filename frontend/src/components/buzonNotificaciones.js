@@ -5,11 +5,23 @@ import axios from 'axios';
 
 const BuzonNotificaciones = ({ idStudent, todosFalse, returnPage }) => {
     const [notificaciones, setNotificaciones] = useState([]);
+    const [filter, setFilter] = useState("todas");
 
     const volver = () => {
         todosFalse(); 
         returnPage(true);
     }
+
+    const handleFilterChange = (event) => {
+        setFilter(event.target.value);
+    };
+
+    const filteredNotifications = notificaciones.filter(notificacion => {
+        if (filter === "todas") return true;
+        if (filter === "leidas") return notificacion.state === 1;
+        if (filter === "no leidas") return notificacion.state === 0;
+        return true;
+    });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,11 +48,18 @@ const BuzonNotificaciones = ({ idStudent, todosFalse, returnPage }) => {
             
             <h2>Buzón de notificaciones</h2>
 
-            {notificaciones.length > 0 && notificaciones.map((notificacion) => (
+            <select value={filter} onChange={handleFilterChange} className="filter">
+                <option value="todas">Todas</option>
+                <option value="leidas">Leídas</option>
+                <option value="no leidas">No leídas</option>
+            </select>
+
+            {filteredNotifications.length > 0 ? filteredNotifications.map((notificacion) => (
                 <InfoNotificaciones 
+                    key={notificacion.id}
                     notificacion={notificacion} 
                 />
-            ))}
+            )) : <h2>No hay notificaciones que coincidan con el filtro.</h2>}
 
             <div className="botonesListaComentarios">
                 <button onClick={volver}>Volver</button>
