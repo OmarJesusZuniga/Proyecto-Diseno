@@ -8,50 +8,65 @@ class Observer {
         this.concreteVisitor = new ConcreteVisitor();
     }
 
-    async notify() {
-        const activities = await Activity.find({}).sort({createdAt: 1});
+    async notify() { // Notify 
+        const activities = await this.fetchSortedActivities();
+        const yesterday = this.getYesterdaysDate();
 
-        const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() - 1); 
-
-        for (let i = 0; i < activities.length; i++) {
-            const publicationDate = activities[i].publishDate; // Fecha de Publicacion
-
-            const element = activities[i];
-            const stateId = element.state.toString();
-            const state = await ActivityState.findById(stateId);
-
-            if (state && (state.type === 'Planeada') && (currentDate >= publicationDate)) {
-                // Llamar a Visitor para enviar la notificacion [ANUNCIO DE ACTIVIDAD]
-                this.concreteVisitor.visitAnouncement(element); 
-
-                // Cambiar estado a Notificada
-                state.type = "Notificada";
-                await state.save();
-            }
-
-            if (state && (state.type === 'Notificada')) {
-                for (let j = 0; j < element.reminders.length; j++) {
-                    const reminderDate = element.reminders[j];
-
-                    if (reminderDate >= currentDate) {
-                        // Llamar a Visitor para enviar la notificacion [RECORDATORIO DE ACTIVIDAD]
-                        this.concreteVisitor.visitReminder(element);
-
-                        // Eliminar el recordatorio de la lista
-                        element.reminders.splice(j, 1);
-                        j--;
-                    }
-                }
-
-                if (element.isModified('reminders')) {
-                    await element.save();
-                }
-            }
+        for (const activity of activities) {
+            await this.processActivity(activity, yesterday);
         }
     }
 
+    // Avoiding deep nesting
+
+    async fetchSortedActivities() {
+        return await Activity.find({}).sort({createdAt: 1});
+    }
+
+    getYesterdaysDate() {
+        const date = new Date();
+        date.setDate(date.getDate() - 1);
+        return date;
+    }
+
+    async processActivity(activity, referenceDate) {
+        const state = await this.fetchActivityState(activity);
+        
+        if (!state) return;
+
+        if (state.type === 'Planeada' && referenceDate >= activity.publishDate) {
+            this.concreteVisitor.visitAnouncement(activity);
+            await this.updateActivityState(state, 'Notificada');
+        } else if (state.type === 'Notificada') {
+            await this.processReminders(activity, referenceDate);
+        }
+    }
+
+    async fetchActivityState(activity) {
+        return await ActivityState.findById(activity.state.toString());
+    }
+
+    async updateActivityState(state, newState) {
+        state.type = newState;
+        await state.save();
+    }
+
+    async processReminders(activity, currentDate) {
+        for (let i = 0; i < activity.reminders.length; i++) {
+            const reminderDate = activity.reminders[i];
+            if (reminderDate >= currentDate) {
+                this.concreteVisitor.visitReminder(activity);
+                activity.reminders.splice(i, 1);
+                i--;
+            }
+        }
+
+        if (activity.isModified('reminders')) {
+            await activity.save();
+        }
+    }
 }
+
 
 module.exports = {
     Observer
