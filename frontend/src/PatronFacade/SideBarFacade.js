@@ -34,7 +34,7 @@ const SideBarFacade = {
 
     async createPlan(professorId) {
         try {
-            const response = await axios.post('http://localhost:4000/api/plan/', { profesorId });
+            const response = await axios.post('http://localhost:4000/api/plan/', { professorId });
             return response.data;
         } catch (e) {
             console.error(e);

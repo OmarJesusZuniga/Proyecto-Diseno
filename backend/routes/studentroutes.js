@@ -4,7 +4,8 @@ const {
     getStudent,
     createStudent,
     deleteStudent,
-    updateStudent
+    updateStudent,
+    getNotifications
 } = require('../controllers/studentController')
 
 const router = express.Router()
@@ -14,6 +15,9 @@ router.get('/', getStudents)
 
 // Get one
 router.get('/:id', getStudent)
+
+// Get all notifications from one
+router.get('/mail/:id', getNotifications)
 
 // Post a student
 router.post('/', createStudent)

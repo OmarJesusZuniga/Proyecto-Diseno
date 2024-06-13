@@ -1,4 +1,5 @@
 const Student = require('../models/studentModel.js')
+const Notification = require('../models/notificationModel.js')
 const Campus = require('../models/campusModel.js')
 const mongoose = require('mongoose')
 
@@ -119,11 +120,26 @@ const updateStudent = async (req, res) => {
     res.status(200).json(updatedStudent);
 }
 
+//Get all notifications
+const getNotifications = async (req, res) => {
+    //const { id } = req.params;
+
+    try {
+        const notifications = await Notification.find({});
+
+        res.status(200).json(notifications);
+    } catch (error) {
+        console.error('Error fetching notifications:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 
 module.exports = {
     getStudents,
     getStudent,
     createStudent,
     deleteStudent,
-    updateStudent
+    updateStudent,
+    getNotifications
 }
