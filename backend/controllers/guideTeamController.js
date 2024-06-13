@@ -277,6 +277,33 @@ const removeGuideProfessor = async (req, res) => {
   }
 };
 
+const getGuideTeamsByStudentId = async (req, res) => {
+  const { id } = req.params;  // Assuming the student's ID is passed through the route parameter
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'Invalid student ID' });
+  }
+
+  try {
+      const guideTeams = await GuideTeam.find({ students: id })
+          .populate('professors')
+          .populate('students')
+          .populate('guideProfessor')
+          .populate('adminAssistants')
+          .populate('plan');
+
+      if (guideTeams.length === 0) {
+          return res.status(404).json({ error: 'No guide teams found for this student' });
+      }
+
+      res.status(200).json(guideTeams);
+  } catch (error) {
+      console.error('Error fetching guide teams by student ID:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 
 module.exports = {
   getGuideTeams,
@@ -289,5 +316,6 @@ module.exports = {
   removeProfeGuide,
   getGuideTeamsByProfessorId,
   addGuideProfessor,
-  removeGuideProfessor
+  removeGuideProfessor,
+  getGuideTeamsByStudentId
 }

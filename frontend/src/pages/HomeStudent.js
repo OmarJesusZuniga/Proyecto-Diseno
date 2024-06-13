@@ -1,24 +1,36 @@
 import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import SideBarStudent from "../components/sideBarStudent";
 import PerfilEstudiante from "../components/perfilEstudiante";
 import CalendarioEstudiante from "../components/calendarioEstudiante";
 import BuzonNotificaciones from "../components/buzonNotificaciones";
 
 const HomeStudent = () => {
-    const {state} = useLocation();
-    const {usuario} = state || {};
+    const { state } = useLocation();
+    const { usuario } = state || {};
 
     const [bienvenida, setBienvenida] = useState(true);
-    //verPerfilEstudiante
-    const [perfilEstudiante, setPerfilEstudiante] = useState(false)
+    const [perfilEstudiante, setPerfilEstudiante] = useState(false);
+    const [verCalendario, setVerCalendario] = useState(false);
+    const [verBuzonNotificaciones, setVerBuzonNotificaciones] = useState(false);
+    const [equipo, setEquipo] = useState(null);
 
-    //verCalendario
-    const [verCalendario, setVerCalendario] = useState(false)
+    useEffect(() => {
+        const fetchGuideTeam = async () => {
+            if (usuario && usuario._id) {
+                try {
+                    const response = await axios.get(`http://localhost:4000/api/guide-teams/student/${usuario._id}`);
+                    setEquipo(response.data);
+                } catch (error) {
+                    console.error('Failed to fetch guide teams:', error);
+                }
+            }
+        };
 
-    //verBuzonNotificaciones
-    const [verBuzonNotificaciones, setVerBuzonNotificaciones] = useState(false)
+        fetchGuideTeam();
+    }, [usuario]);
 
     const todoFalse = () => {
         setPerfilEstudiante(false);
@@ -29,23 +41,21 @@ const HomeStudent = () => {
 
     return (
         <div className="home">
-            <Navbar  id={usuario.firstname} apellido={usuario.firstLastname}/>
+            <Navbar id={usuario.firstname} apellido={usuario.firstLastname}/>
             <div className="horizontal-container">
-                <SideBarStudent usuario={usuario} 
-                        perfil = {setPerfilEstudiante}
-                        todosFalse={todoFalse}
-                        calendario = {setVerCalendario}
-                        buzon = {setVerBuzonNotificaciones}/>
+                <SideBarStudent usuario={usuario}
+                                perfil={setPerfilEstudiante}
+                                todosFalse={todoFalse}
+                                calendario={setVerCalendario}
+                                buzon={setVerBuzonNotificaciones}/>
                 <div className="contenedorListas">
                     {bienvenida && <div className="contenido"><h1>Bienvenido, estudiante</h1></div>}
                     {perfilEstudiante && <PerfilEstudiante usuario={usuario}/>}
-                    {verCalendario && <CalendarioEstudiante usuario={usuario}/>}
+                    {verCalendario && <CalendarioEstudiante grupo={equipo} usuario={usuario}/>}
                     {verBuzonNotificaciones && <BuzonNotificaciones usuario={usuario}/>}
                 </div>
             </div>
-
         </div>
-
     );
 }
 
