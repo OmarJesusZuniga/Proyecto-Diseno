@@ -24,6 +24,7 @@ const GuideTeamFacade = {
 
     async fetchGuideTeam(grupoId) {
         try {
+            console.log('hola');
             const response = await axios.get(`http://localhost:4000/api/guideTeam/${grupoId}`);
             return response.data;
         } catch (e) {

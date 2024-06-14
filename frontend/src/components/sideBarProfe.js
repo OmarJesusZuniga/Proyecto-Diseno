@@ -1,37 +1,42 @@
-
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import '../components/sideBar.css';
 import SideBarProfeFacade from '../PatronFacade/SideBarProfeFacade';
 
 const SideBarProfe = ({ sA, sE, sP, id, todosFalse, equipos, cambiosDeEquipo, setIdEquipoSeleccionado, idEquipoSeleccionado, limpiarPantalla, setCambios, sES, sEquipos, sC }) => {
 
+    // Refactored function to fetch team
+    const fetchTeam = useCallback(async (teamId) => {
+        limpiarPantalla();
+        sC(true);
+        try {
+            const guideTeam = await SideBarProfeFacade.fetchGuideTeam(teamId);
+            sES(guideTeam);
+            setIdEquipoSeleccionado(guideTeam._id);
+            sC(false);
+            setCambios('');
+            dejarProfes();
+        } catch (err) {
+            console.error('Error fetching data:', err);
+        }
+    }, [limpiarPantalla, sC, sES, setIdEquipoSeleccionado, setCambios]);
+
+    // Effect to fetch the selected team
     useEffect(() => {
         if (idEquipoSeleccionado !== null) {
-            const getTeam = async () => {
-                limpiarPantalla();
-                sC(true);
-                try {
-                    const guideTeam = await SideBarProfeFacade.fetchGuideTeam(idEquipoSeleccionado);
-                    sES(guideTeam);
-                    setIdEquipoSeleccionado(guideTeam._id);
-                    sC(false);
-                    setCambios('');
-                    dejarProfes();
-                } catch (err) {
-                    console.error('Error fetching data:', err);
-                }
-            };
-            getTeam();
+            fetchTeam(idEquipoSeleccionado);
         }
-    }, [cambiosDeEquipo, idEquipoSeleccionado, limpiarPantalla, sC, sES, setCambios, setIdEquipoSeleccionado]);
+    }, [idEquipoSeleccionado]);
 
+    // Effect to fetch teams for the professor
     useEffect(() => {
         const fetchTeams = async () => {
             try {
                 const professorTeams = await SideBarProfeFacade.fetchProfessorTeams(id);
                 sEquipos(professorTeams);
-                sES(professorTeams[0]);
-                setIdEquipoSeleccionado(professorTeams[0]._id);
+                if (professorTeams.length > 0) {
+                    sES(professorTeams[0]);
+                    setIdEquipoSeleccionado(professorTeams[0]._id);
+                }
                 sC(false);
                 dejarProfes();
             } catch (err) {
