@@ -8,19 +8,18 @@ const CalendarioEstudiante = ({ grupo, usuario }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            if (grupo) {
-                try {
-                    const planData = await GuideTeamFacade.fetchPlan(grupo[0].plan);
-                    console.log("Fetched plan data:", planData);
-                    setActividad(planData.activities);
-                } catch (error) {
-                    console.error('Error fetching plan data:', error);
-                }
-            } else {
-                console.log("Plan ID is missing or undefined!");
+            try {
+                const guideTeamData = await GuideTeamFacade.fetchGuideTeam(grupo);
+                const planData = await GuideTeamFacade.fetchPlan(guideTeamData.plan);
+
+                setActividad(planData.activities);
+                console.log(grupo);
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
         };
-    
+
         fetchData();
     }, [grupo, usuario._id]);
 

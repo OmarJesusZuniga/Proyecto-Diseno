@@ -23,7 +23,7 @@ router.post('/profe/get', getGuideTeamsByProfessorId);
 // Get all por professor
 router.post('/', getGuideTeams)
 
-router.get('/api/guide-teams/student/:id', getGuideTeamsByStudentId)
+router.post('/student/get', getGuideTeamsByStudentId)
 
 // Get one
 router.get('/:id', getGuideTeam)

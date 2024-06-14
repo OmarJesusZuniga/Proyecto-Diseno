@@ -35,6 +35,7 @@ const GuideTeamFacade = {
 
     async fetchPlan(planId) {
         try {
+            console.log(planId);
             const response = await axios.get(`http://localhost:4000/api/plan/${planId}`);
             return response.data;
         } catch (e) {

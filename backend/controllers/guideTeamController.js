@@ -2,6 +2,7 @@ const adminAssistant = require('../models/adminAssistantModel')
 const GuideTeam = require('../models/guideTeamModel')
 const Plan = require('../models/planModel')
 const Professor = require('../models/professorModel')
+const Student = require('../models/studentModel')
 const mongoose = require('mongoose')
 
 const getGuideTeams = async (req, res) => {
@@ -278,32 +279,28 @@ const removeGuideProfessor = async (req, res) => {
 };
 
 const getGuideTeamsByStudentId = async (req, res) => {
-  const { id } = req.params;  // Assuming the student's ID is passed through the route parameter
+  const { id } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'Invalid student ID' });
+    console.log('Invalid ID format');  // Log for invalid ID format
+    return res.status(404).json({ error: 'Invalid student ID' });
   }
 
   try {
-      const guideTeams = await GuideTeam.find({ students: id })
-          .populate('professors')
-          .populate('students')
-          .populate('guideProfessor')
-          .populate('adminAssistants')
-          .populate('plan');
+    const guideTeams = await GuideTeam.find({ students: { $in: [id] } })
+    .populate('professors').populate('students').populate('guideProfessor');
 
-      if (guideTeams.length === 0) {
-          return res.status(404).json({ error: 'No guide teams found for this student' });
-      }
+    if (guideTeams.length === 0) {
+      console.log('No guide teams found');  // Log when no teams found
+      return res.status(404).json({ error: 'No guide teams found for this student' });
+    }
 
-      res.status(200).json(guideTeams);
+    res.status(200).json(guideTeams);
   } catch (error) {
-      console.error('Error fetching guide teams by student ID:', error);
-      res.status(500).json({ error: 'Internal server error' });
+    console.error(`Error fetching guide teams by student ID: ${error}`);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
-
-
 
 module.exports = {
   getGuideTeams,
