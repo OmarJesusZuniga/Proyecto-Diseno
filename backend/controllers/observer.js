@@ -67,7 +67,18 @@ class Observer {
     }
 }
 
+const notify = async (req, res) => {
+    try {
+        const observer = new Observer();
+        await observer.notify();
+        res.status(200).send('Notifications have been sent successfully');
+    } catch (error) {
+        console.error('Error during notification process:', error);
+        res.status(500).send('An error occurred during the notification process');
+    }
+}
 
 module.exports = {
-    Observer
+    Observer,
+    notify
 }

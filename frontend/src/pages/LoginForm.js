@@ -54,6 +54,15 @@ const LoginForm = () => {
                 }
 
                 navigate(route, { state: { usuario } });
+                
+                try {
+                    console.log("Notifying observer")
+                    const response = await axios.post('http://localhost:4000/api/observer');
+                    return response.data;
+                } catch (e) {
+                    console.error(e);
+                    throw e;
+                }
             }
             
             /*if (Status === "Professor" || Status === "Admin Assistant") {

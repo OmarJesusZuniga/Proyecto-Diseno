@@ -35,6 +35,7 @@ const GlobalTime = () => {
     const actualizarNuevaFecha = async () => {
         try {
             await DateFacade.updateSystemDate(fechaNueva);
+            await DateFacade.notifyObeserver();
             setFecha(fechaNueva);
         } catch (err) {
             console.log(err);
@@ -44,6 +45,7 @@ const GlobalTime = () => {
     const resetearFecha = async () => {
         try {
             await DateFacade.resetSystemDate();
+            await DateFacade.notifyObeserver();
             const date = new Date();
             date.setDate(date.getDate() - 1); // Esto parece innecesario, se podría eliminar.
             setFecha(date);
