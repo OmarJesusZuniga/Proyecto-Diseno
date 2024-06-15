@@ -1,20 +1,42 @@
 import "../components/calendarioEstudiante.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { generateDate, months } from "./calendar";
+import GuideTeamFacade from '../PatronFacade/EquipoGuiaFacade';
 import cn from "./cn";
 
-const CalendarioEstudiante = () => {
-
-    const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
+const CalendarioEstudiante = ({ grupo, usuario }) => {
+    const [actividades, setActividad] = useState([]);  
     const currentDate = dayjs();
     const [today, setToday] = useState(currentDate);
-    console.log(today.year());
-    console.log(today.month());
     const [selectDate, setSelectDate] = useState(currentDate);
+    const [fechasActividades, setFechasActividades] = useState([]);
+    
+    console.log(fechasActividades);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            if (grupo) {
+                try {
+                    const planData = await GuideTeamFacade.fetchPlan(grupo[0].plan);
+                    setActividad(planData.activities);
+                    const fechas = planData.activities.map(activity => activity.programmedDate);
+                    setFechasActividades(fechas);
 
+                } catch (error) {
+                    console.error('Error fetching plan data:', error);
+                }
+            } else {
+                console.log("Plan ID is missing or undefined!");
+            }
+        };
+    
+        fetchData();
+    }, [grupo, usuario._id]);
+
+    const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
+    
     return (
         <div className="clase-calendario">
             <div className="tituloActividades">
@@ -56,9 +78,21 @@ const CalendarioEstudiante = () => {
                 <h1 className="font-semibold">
                     Actividades de {selectDate.format('dddd, MMMM D, YYYY')}
                 </h1>
-                <p className="no-meetings">
-                    No hay actividades del día.
-                </p>
+                {actividades.some(activity => 
+                    dayjs(activity.programmedDate).format('YYYY-MM-DD') === selectDate.format('YYYY-MM-DD')
+                ) ? (
+                    actividades.filter(activity => 
+                        dayjs(activity.programmedDate).format('YYYY-MM-DD') === selectDate.format('YYYY-MM-DD')
+                    ).map((activity, index) => (
+                        <div key={index}>
+                            <p>{activity.name}</p>
+                            <p>{activity.description}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No hay actividades para este día.</p>
+                )}
+
             </div>
         </div>
     );
