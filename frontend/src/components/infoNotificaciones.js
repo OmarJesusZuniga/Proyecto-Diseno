@@ -86,8 +86,8 @@ const InfoNotificaciones = ({notificacion, idStudent, setFetch}) => {
                 </div>
                 
                 <div className="checkbox">
-                    <h3>{isRead ? 'Desmarcar como leído' : 'Marcar como leído'}</h3>
-                    <input type="checkbox" onChange={handleNotificationState} />
+                    <h3>{isRead ? 'Desmarcar como leído: ' : 'Marcar como leído: '}</h3>
+                    <input className="box" type="checkbox" onChange={handleNotificationState} />
                 </div>
 
                 <div className="botonesListaComentarios">
