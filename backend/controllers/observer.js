@@ -1,5 +1,6 @@
 const Activity = require('../models/activityModel')
 const ActivityState = require('../models/activityStateModel')
+const systemDate = require('../models/systemDate.js')
 const { ConcreteVisitor } = require('../controllers/visitor')
 const mongoose = require('mongoose')
 
@@ -9,11 +10,15 @@ class Observer {
     }
 
     async notify() { // Notify 
+
+        console.log("Notifying observer 101")
+
         const activities = await this.fetchSortedActivities();
-        const yesterday = this.getYesterdaysDate();
+        const date = await this.getCurrentDate();
+        const currentDate = new Date(date[0].date);
 
         for (const activity of activities) {
-            await this.processActivity(activity, yesterday);
+            await this.processActivity(activity, currentDate);
         }
     }
 
@@ -23,10 +28,8 @@ class Observer {
         return await Activity.find({}).sort({createdAt: 1});
     }
 
-    getYesterdaysDate() {
-        const date = new Date();
-        date.setDate(date.getDate() - 1);
-        return date;
+    async getCurrentDate() {
+        return await systemDate.find({}).sort({});
     }
 
     async processActivity(activity, referenceDate) {
@@ -34,7 +37,8 @@ class Observer {
         
         if (!state) return;
 
-        if (state.type === 'Planeada' && referenceDate >= activity.publishDate) {
+        if ((state.type === 'Planeada') && (referenceDate <= activity.publishDate)) {
+            console.log("Entro")
             this.concreteVisitor.visitAnouncement(activity);
             await this.updateActivityState(state, 'Notificada');
         } else if (state.type === 'Notificada') {
@@ -52,9 +56,15 @@ class Observer {
     }
 
     async processReminders(activity, currentDate) {
+        console.log("Processing reminders")
         for (let i = 0; i < activity.reminders.length; i++) {
             const reminderDate = activity.reminders[i];
-            if (reminderDate >= currentDate) {
+
+            console.log("Reminder date: ", reminderDate)
+            console.log("Current date: ", currentDate)
+            console.log("Comparison: ", reminderDate <= currentDate)
+
+            if (reminderDate <= currentDate) {
                 this.concreteVisitor.visitReminder(activity);
                 activity.reminders.splice(i, 1);
                 i--;
@@ -68,6 +78,7 @@ class Observer {
 }
 
 const notify = async (req, res) => {
+    console.log("Notifying observer")
     try {
         const observer = new Observer();
         await observer.notify();
