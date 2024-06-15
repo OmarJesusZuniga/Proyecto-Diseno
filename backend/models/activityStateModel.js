@@ -22,6 +22,10 @@ const activityStateSchema = new Schema ({
         type: String, 
         required: false
     },
+    cancelationNotification: {
+        type: Boolean,
+        required: false
+    }
 }, {timestamps:true})
 
 module.exports = mongoose.model('activityState', activityStateSchema)

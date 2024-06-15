@@ -10,9 +10,7 @@ class Observer {
     }
 
     async notify() { // Notify 
-
-        console.log("Notifying observer 101")
-
+        console.log("Notifying...")
         const activities = await this.fetchSortedActivities();
         const date = await this.getCurrentDate();
         const currentDate = new Date(date[0].date);
@@ -38,11 +36,12 @@ class Observer {
         if (!state) return;
 
         if ((state.type === 'Planeada') && (referenceDate <= activity.publishDate)) {
-            console.log("Entro")
             this.concreteVisitor.visitAnouncement(activity);
             await this.updateActivityState(state, 'Notificada');
         } else if (state.type === 'Notificada') {
             await this.processReminders(activity, referenceDate);
+        } else if (state.type === "Cancelada") {
+            await this.processCancellation(activity, state, referenceDate);
         }
     }
 
@@ -56,13 +55,8 @@ class Observer {
     }
 
     async processReminders(activity, currentDate) {
-        console.log("Processing reminders")
         for (let i = 0; i < activity.reminders.length; i++) {
             const reminderDate = activity.reminders[i];
-
-            console.log("Reminder date: ", reminderDate)
-            console.log("Current date: ", currentDate)
-            console.log("Comparison: ", reminderDate <= currentDate)
 
             if (reminderDate <= currentDate) {
                 this.concreteVisitor.visitReminder(activity);
@@ -73,6 +67,19 @@ class Observer {
 
         if (activity.isModified('reminders')) {
             await activity.save();
+        }
+    }
+
+    async processCancellation(activity, state, currentDate) {
+        if (state.cancelationNotification) {
+            return; 
+        }
+
+        if (state.updatedAt <= currentDate) {
+            state.cancelationNotification = true;
+            await state.save();
+
+            this.concreteVisitor.visitCancellation(activity);
         }
     }
 }
