@@ -1,0 +1,104 @@
+/* calendar.css */
+.clase-calendario {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+    height: 600px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.calendar-box {
+    width: 500px; /* Tailwind w-96 */
+    height: 500px; /* Tailwind h-96 */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.month-navigation {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    color:#fff
+}
+
+.icon:hover {
+    transform: scale(1.05);
+}
+
+.days-grid, .dates-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 days a week */
+}
+
+.day-label, .date-cell {
+    text-align: center;
+    height: 56px; /* Tailwind h-14 */
+    display: grid;
+    place-content: center;
+    font-size: smaller;
+    color: #6b7280; /* Tailwind text-gray-500 */
+}
+
+.day-label {
+    user-select: none;
+}
+
+.date-cell {
+    padding: 8px; /* Tailwind p-2 */
+    border-top: 1px solid #e5e7eb; /* Tailwind border-t */
+}
+
+.date-number {
+    height: 40px;
+    width: 40px;
+    display: grid;
+    place-content: center;
+    border-radius: 9999px; /* Tailwind rounded-full */
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.date-number:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.current-month {
+    color: #fff;
+}
+
+.non-current-month {
+    color: #9ca3af; /* Tailwind text-gray-400 */
+}
+
+.today {
+    background-color: #dc2626; /* Tailwind bg-red-600 */
+    color: #dc2626;
+}
+
+.selected-date {
+    background-color: #000;
+    color: #fff;
+}
+
+.header ,.schedule-box {
+    color: #fff;
+}

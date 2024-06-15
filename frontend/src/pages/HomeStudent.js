@@ -21,9 +21,7 @@ const HomeStudent = () => {
         const fetchGuideTeam = async () => {
             if (usuario && usuario._id) {
                 try {
-                    console.log(usuario._id)
                     const response = await axios.post('http://localhost:4000/api/guideTeam/student/get', { id: usuario._id });
-                    console.log(response.data)
                     setEquipo(response.data);
                 } catch (error) {
                     console.error('Failed to fetch guide teams:', error);
