@@ -51,7 +51,6 @@ const BuzonNotificaciones = ({ idStudent }) => {
     return ( 
         <div className="listaNotificaciones">
             
-            <h2>Buzón de notificaciones</h2>
 
             <select value={filter} onChange={handleFilterChange} className="filter">
                 <option value="todas">Todas</option>
