@@ -13,6 +13,7 @@ const BuzonNotificaciones = ({ idStudent }) => {
 
     const handleFilterChange = (event) => {
         setFilter(event.target.value);
+        
     };
 
     const filteredNotifications = notificaciones.filter(notificacion => {
@@ -23,6 +24,8 @@ const BuzonNotificaciones = ({ idStudent }) => {
             return notificacion.students.some(student => student.studentId === idStudent && student.state === 0);
         return true;
     });
+
+    const [fetch, setFetch] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,13 +38,15 @@ const BuzonNotificaciones = ({ idStudent }) => {
 
                 console.log(sortedNotifications);
 
+                setFetch('');
+
             } catch (error) {
                 console.log(error.message)
             }            
         };
 
         fetchData();
-    }, []); 
+    }, [fetch]); 
 
     return ( 
         <div className="listaNotificaciones">
@@ -59,6 +64,7 @@ const BuzonNotificaciones = ({ idStudent }) => {
                     key={notificacion.id}
                     notificacion={notificacion} 
                     idStudent={idStudent}
+                    setFetch={setFetch}
                 />
             )) : <h2>No hay notificaciones que coincidan con el filtro.</h2>}
 

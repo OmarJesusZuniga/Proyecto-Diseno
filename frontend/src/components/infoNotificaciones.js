@@ -3,7 +3,7 @@ import moment from 'moment';
 import axios from 'axios'; 
 import React, { useEffect, useState } from "react";
 
-const InfoNotificaciones = ({notificacion, idStudent}) => {
+const InfoNotificaciones = ({notificacion, idStudent, setFetch}) => {
     const initialIsRead = notificacion.students.some(student => 
         student.studentId === idStudent && student.state === 1
     );
@@ -34,6 +34,8 @@ const InfoNotificaciones = ({notificacion, idStudent}) => {
                 studentId: idStudent  
             });
             setIsRead(!isRead);
+
+            setFetch('cambio');
 
             // Log or handle the response as needed
             console.log('Update successful:', response.data);
