@@ -7,8 +7,23 @@ const InfoNotificaciones = ({notificacion, idStudent}) => {
     const initialIsRead = notificacion.students.some(student => 
         student.studentId === idStudent && student.state === 1
     );
+
+    useEffect(() => {
+        senderName();
+    }, []);
+
+    const senderName = async() => {
+        try {
+            const response = await axios.get("http://localhost:4000/api/professors/" + notificacion.sender);
+            const professor = response.data;
+            setSender(professor.firstname + ' ' + professor.firstLastname);
+        } catch (error) {
+            console.error('Error fetching sender name:', error);
+        }
+    }
     
     const [isRead, setIsRead] = useState(initialIsRead); 
+    const [sender, setSender] = useState('');
     const formattedDate = moment(notificacion.date).format("MM/DD/YY HH:mm");
 
     const handleNotificationState = async(event) => {
@@ -19,7 +34,7 @@ const InfoNotificaciones = ({notificacion, idStudent}) => {
                 studentId: idStudent  
             });
             setIsRead(!isRead);
-    
+
             // Log or handle the response as needed
             console.log('Update successful:', response.data);
         } catch (error) {
@@ -57,7 +72,7 @@ const InfoNotificaciones = ({notificacion, idStudent}) => {
     return (
         <div className="cartaComentario">
             <div className="infoEspecifica">
-                <h2>{notificacion.sender} </h2>
+                <h2>Enviado por: {sender} </h2>
                 <div>
                     <h3>Texto: </h3>
                     <h5>{notificacion.text}</h5>
@@ -69,7 +84,6 @@ const InfoNotificaciones = ({notificacion, idStudent}) => {
                 </div>
                 
                 <div className="checkbox">
-                    <h3>{isRead ? 'Mensaje leído' : 'Mensaje no leído'}</h3>
                     <h3>{isRead ? 'Desmarcar como leído' : 'Marcar como leído'}</h3>
                     <input type="checkbox" onChange={handleNotificationState} />
                 </div>

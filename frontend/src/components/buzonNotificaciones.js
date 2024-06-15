@@ -29,7 +29,6 @@ const BuzonNotificaciones = ({ idStudent }) => {
             try {
                 const response = await axios.get("http://localhost:4000/api/students/mail/" + idStudent );
 
-                
                 const sortedNotifications = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
                 
                 setNotificaciones(sortedNotifications);
