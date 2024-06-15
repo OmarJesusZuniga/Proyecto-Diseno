@@ -46,8 +46,34 @@ class ConcreteVisitor extends Visitor {
         }
     }
 
-    visitReminder(activity) {
-        console.log("Generate reminder notification")
+    async visitReminder(activity) {
+        try {
+            const students = await getStudentsForActivity(activity._id);
+    
+            if (students.length === 0) {
+                console.log("No students found for this activity.");
+                return; // Exit if no students are associated with the activity
+            }
+
+            // Map each student to the required format for the notification
+            const studentEntries = students.map(student => ({
+                studentId: student._id, 
+                state: 0
+            }));
+    
+            const newNotification = new Notification({
+                text: 'Se les recuerda la programación de la actividad llamada: ' + activity.name,
+                sender: mongoose.Types.ObjectId(activity.managers[0]), // example sender ID
+                date: new Date(), // set current date
+                students: studentEntries // Include the mapped students with state = 0
+            });
+    
+            // Save the new notification
+            await newNotification.save();
+            console.log("Generate reminder notification")
+        } catch (error) {
+            console.error('Error during notification creation:', error);
+        }
     }
 }
 
