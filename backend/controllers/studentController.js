@@ -59,9 +59,10 @@ const getStudent = async (req, res) => {
 // Create new
 const createStudent = async (req, res) => {
     const {studentCard, firstLastname, secondLastname, firstname, middlename, email, phoneNumber, campus} = req.body
+    const password = studentCard;
 
     try {
-        const student = await Student.create({studentCard, firstLastname, secondLastname, firstname, middlename, email, phoneNumber, campus})
+        const student = await Student.create({studentCard, firstLastname, secondLastname, firstname, middlename, email, phoneNumber, campus, password})
         res.status(200).json(student)
     } catch (err) {
         res.status(400).json({error: "Please fill in all the required fields."})
