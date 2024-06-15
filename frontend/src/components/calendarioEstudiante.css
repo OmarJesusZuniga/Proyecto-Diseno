@@ -102,3 +102,7 @@
 .header ,.schedule-box {
     color: #fff;
 }
+
+.has-activity {
+    color: gold; /* Adjust color as needed */
+}

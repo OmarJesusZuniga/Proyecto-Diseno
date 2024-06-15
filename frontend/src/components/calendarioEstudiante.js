@@ -6,23 +6,19 @@ import { generateDate, months } from "./calendar";
 import GuideTeamFacade from '../PatronFacade/EquipoGuiaFacade';
 import cn from "./cn";
 
+
 const CalendarioEstudiante = ({ grupo, usuario }) => {
     const [actividades, setActividad] = useState([]);  
     const currentDate = dayjs();
     const [today, setToday] = useState(currentDate);
     const [selectDate, setSelectDate] = useState(currentDate);
-    const [fechasActividades, setFechasActividades] = useState([]);
     
-    console.log(fechasActividades);
-
     useEffect(() => {
         const fetchData = async () => {
             if (grupo) {
                 try {
                     const planData = await GuideTeamFacade.fetchPlan(grupo[0].plan);
                     setActividad(planData.activities);
-                    const fechas = planData.activities.map(activity => activity.programmedDate);
-                    setFechasActividades(fechas);
 
                 } catch (error) {
                     console.error('Error fetching plan data:', error);
@@ -63,15 +59,23 @@ const CalendarioEstudiante = ({ grupo, usuario }) => {
                     ))}
                 </div>
                 <div className="dates-grid">
-                    {generateDate(today.month(), today.year()).map(({ date, currentMonth, today: isToday }, index) => (
-                        <div key={index} className="date-cell">
-                            <h1 className={`date-number ${cn(currentMonth ? "" : "non-current-month", isToday ? "today" : "")} 
-                                    ${selectDate.isSame(date, 'day') ? "selected-date" : ""}`}
-                                onClick={() => setSelectDate(date)}>
-                                {date.date()}
-                            </h1>
-                        </div>
-                    ))}
+                    {generateDate(today.month(), today.year()).map(({ date, currentMonth, today: isToday }, index) => {
+                        const isActiveDay = actividades.some(activity => 
+                            dayjs(activity.programmedDate).format('YYYY-MM-DD') === date.format('YYYY-MM-DD')
+                        );
+                        return (
+                            <div key={index} className="date-cell">
+                                <h1 className={`date-number ${cn(
+                                    currentMonth ? "" : "non-current-month", 
+                                    isToday ? "today" : "", 
+                                    selectDate.isSame(date, 'day') ? "selected-date" : "",
+                                    isActiveDay ? "activity-day" : ""
+                                )}`} onClick={() => setSelectDate(date)}>
+                                    {date.date()}
+                                </h1>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
             <div className="schedule-box">
@@ -86,7 +90,6 @@ const CalendarioEstudiante = ({ grupo, usuario }) => {
                     ).map((activity, index) => (
                         <div key={index}>
                             <p>{activity.name}</p>
-                            <p>{activity.description}</p>
                         </div>
                     ))
                 ) : (
