@@ -47,7 +47,6 @@ const GlobalTime = () => {
             await DateFacade.resetSystemDate();
             await DateFacade.notifyObeserver();
             const date = new Date();
-            date.setDate(date.getDate() - 1); // Esto parece innecesario, se podría eliminar.
             setFecha(date);
         } catch (err) {
             console.log(err);
