@@ -54,7 +54,7 @@ const HomeStudent = () => {
                     {bienvenida && <div className="contenido"><h1>Bienvenido, estudiante</h1></div>}
                     {perfilEstudiante && <PerfilEstudiante usuario={usuario}/>}
                     {verCalendario && <CalendarioEstudiante grupo={equipo} usuario={usuario}/>}
-                    {verBuzonNotificaciones && <BuzonNotificaciones usuario={usuario}/>}
+                    {verBuzonNotificaciones && <BuzonNotificaciones idStudent={usuario._id}/>}
                 </div>
             </div>
         </div>
