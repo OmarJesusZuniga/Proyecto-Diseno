@@ -48,7 +48,8 @@ const AgregarEstudiante = ({ campus, sTP, sPL, sEL, sA, sAE }) => {
             middlename: segundoNombre,
             email: email,
             phoneNumber: phoneNumber,
-            campus: campus
+            campus: campus,
+            password: carne
         };
 
         try {
