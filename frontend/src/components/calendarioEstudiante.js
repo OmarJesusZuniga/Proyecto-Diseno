@@ -45,7 +45,7 @@ const CalendarioEstudiante = ({ grupo, usuario }) => {
                     </h1>
                     <div className="month-navigation">
                         <GrFormPrevious className="icon" onClick={() => setToday(today.subtract(1, 'month'))} />
-                        <h1 className="icon" onClick={() => setToday(currentDate)}>
+                        <h1 className="icon" onClick={() => {setToday(currentDate); setSelectDate(currentDate); }}>
                             Today
                         </h1>
                         <GrFormNext className="icon" onClick={() => setToday(today.add(1, 'month'))} />
@@ -59,7 +59,8 @@ const CalendarioEstudiante = ({ grupo, usuario }) => {
                     ))}
                 </div>
                 <div className="dates-grid">
-                    {generateDate(today.month(), today.year()).map(({ date, currentMonth, today: isToday }, index) => {
+                    {generateDate(today.month(), today.year()).map(({ date, currentMonth }, index) => {
+                        const isToday = dayjs().isSame(date, 'day');
                         const isActiveDay = actividades.some(activity => 
                             dayjs(activity.programmedDate).format('YYYY-MM-DD') === date.format('YYYY-MM-DD')
                         );
