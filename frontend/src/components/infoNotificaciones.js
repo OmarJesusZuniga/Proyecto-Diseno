@@ -57,6 +57,8 @@ const InfoNotificaciones = ({notificacion, idStudent, setFetch}) => {
                 notificationId: notificacion._id,  
                 studentId: idStudent  
             });
+
+            setFetch('cambio');
     
             // Log or handle the response as needed
             console.log('Update successful:', response.data);
