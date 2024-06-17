@@ -27,6 +27,10 @@ const notificationSchema = new Schema({
         type: Date,
         required: true
     },
+    programmedDate: {
+        type: Date,
+        required: true
+    },
     students: [studentStateSchema] // Array of tuples as subdocuments
 }, { timestamps: true });
 

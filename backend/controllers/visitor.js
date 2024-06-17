@@ -35,6 +35,7 @@ class ConcreteVisitor extends Visitor {
                 text: 'Se ha notificado la actividad llamada: ' + activity.name,
                 sender: mongoose.Types.ObjectId(activity.managers[0]), // example sender ID
                 date: new Date(), // set current date
+                programmedDate: activity.programmedDate,
                 students: studentEntries // Include the mapped students with state = 0
             });
     
@@ -65,6 +66,7 @@ class ConcreteVisitor extends Visitor {
                 text: 'Se les recuerda la programación de la actividad llamada: ' + activity.name,
                 sender: mongoose.Types.ObjectId(activity.managers[0]), // example sender ID
                 date: new Date(), // set current date
+                programmedDate: activity.programmedDate,
                 students: studentEntries // Include the mapped students with state = 0
             });
     
@@ -95,6 +97,7 @@ class ConcreteVisitor extends Visitor {
                 text: 'Se cancelo la actividad: ' + activity.name,
                 sender: mongoose.Types.ObjectId(activity.managers[0]), // example sender ID
                 date: new Date(), // set current date
+                programmedDate: activity.programmedDate,
                 students: studentEntries // Include the mapped students with state = 0
             });
     

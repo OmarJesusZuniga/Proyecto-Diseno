@@ -24,7 +24,7 @@ const DateFacade = {
 
     async notifyObeserver() {
         try {
-            
+            console.log('omar gordoooooooooooooooooooooooooo')
             const response = await axios.post('http://localhost:4000/api/observer');
             return response.data;
         } catch (e) {

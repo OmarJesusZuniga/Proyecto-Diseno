@@ -25,6 +25,7 @@ const InfoNotificaciones = ({notificacion, idStudent, setFetch}) => {
     const [isRead, setIsRead] = useState(initialIsRead); 
     const [sender, setSender] = useState('');
     const formattedDate = moment(notificacion.date).format("MM/DD/YY HH:mm");
+    const programDate = moment(notificacion.programmedDate).format("MM/DD/YY HH:mm");
 
     const handleNotificationState = async(event) => {
         try {
@@ -81,9 +82,12 @@ const InfoNotificaciones = ({notificacion, idStudent, setFetch}) => {
                     <h3>Texto: </h3>
                     <h5>{notificacion.text}</h5>
                 </div>
-                
                 <div>
-                    <h3>Fecha: </h3>
+                    <h3>Programada para: </h3>
+                    <h5>{programDate}</h5>
+                </div>
+                <div>
+                    <h3>Enviado el día: </h3>
                     <h5>{formattedDate}</h5>
                 </div>
                 
