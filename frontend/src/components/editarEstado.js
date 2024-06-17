@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../components/agregarActividad.css';
 import FileSelector from "../components/fileSelector";
 import ActivityStateFacade from '../PatronFacade/EstadoActividadFacade';
+import DateFacade from '../PatronFacade/DateFacade';
 
 const EditarEstado = ({ reset, returnPage, estado }) => {
     const [enums, setEnums] = useState({ type: [] });
@@ -114,6 +115,7 @@ const EditarEstado = ({ reset, returnPage, estado }) => {
             };
 
             await ActivityStateFacade.updateActivityState(estado, activityStateData);
+            DateFacade.notifyObeserver()
 
         } catch (error) {
             toast.error("Error al modificar el estado de la actividad!", {

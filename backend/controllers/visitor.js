@@ -17,6 +17,7 @@ class Visitor { // Interface
 
 class ConcreteVisitor extends Visitor {
     async visitAnouncement(activity) {
+        console.log("Announcement")
         try {
             const students = await getStudentsForActivity(activity._id);
     

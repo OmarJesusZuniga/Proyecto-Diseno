@@ -35,7 +35,12 @@ class Observer {
         
         if (!state) return;
 
-        if ((state.type === 'Planeada') && (referenceDate <= activity.publishDate)) {
+        console.log("Processing activity: ", activity.name, " with state: ", state.type)
+        console.log((state.type === 'Planeada'))
+        console.log((referenceDate <= activity.publishDate))
+        console.log(referenceDate, activity.publishDate)
+
+        if ((state.type === 'Planeada') && (referenceDate >= activity.publishDate)) {
             this.concreteVisitor.visitAnouncement(activity);
             await this.updateActivityState(state, 'Notificada');
         } else if (state.type === 'Notificada') {
@@ -71,6 +76,7 @@ class Observer {
     }
 
     async processCancellation(activity, state, currentDate) {
+        console.log("Processing cancellation")
         if (state.cancelationNotification) {
             return; 
         }
