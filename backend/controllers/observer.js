@@ -35,11 +35,6 @@ class Observer {
         
         if (!state) return;
 
-        console.log("Processing activity: ", activity.name, " with state: ", state.type)
-        console.log((state.type === 'Planeada'))
-        console.log((referenceDate <= activity.publishDate))
-        console.log(referenceDate, activity.publishDate)
-
         if ((state.type === 'Planeada') && (referenceDate >= activity.publishDate)) {
             this.concreteVisitor.visitAnouncement(activity);
             await this.updateActivityState(state, 'Notificada');
@@ -76,7 +71,6 @@ class Observer {
     }
 
     async processCancellation(activity, state, currentDate) {
-        console.log("Processing cancellation")
         if (state.cancelationNotification) {
             return; 
         }
@@ -91,7 +85,7 @@ class Observer {
 }
 
 const notify = async (req, res) => {
-    console.log("Notifying observer")
+    console.log("Notifying observer...")
     try {
         const observer = new Observer();
         await observer.notify();
